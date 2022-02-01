@@ -1,0 +1,43 @@
+﻿<base:BaseListView x:Class="Aprovi.Views.UI.InvoicesListView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Lista de Facturas"
+        Icon="{StaticResource ImgInvoice}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtBusqueda}"
+        Height="410" Width="580">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <DataGrid x:Name="dgFacturas" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,5,0,0" VerticalAlignment="Top" Height="210" Width="550"
+                  CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="60" Header="Folio">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0}{1}">
+                            <Binding Path="serie"/>
+                            <Binding Path="folio"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="80" Header="Fecha" Binding="{Binding fechaHora,StringFormat=\{0:dd/MM/yyyy\}}" />
+                <DataGridTextColumn Width="170" Header="Cliente" Binding="{Binding razonSocial}" />
+                <DataGridTextColumn Width="80" Header="Total" Binding="{Binding Total, StringFormat=\{0:F\}}"/>
+                <DataGridTextColumn Width="65" Header="Moneda" Binding="{Binding moneda}" />
+                <DataGridTextColumn Width="75" Header="Cancelación" Binding="{Binding FechaCancelacion, StringFormat=\{0:dd/MM/yyyy\}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="10,220,0,0" VerticalAlignment="Top" Width="550"/>
+        <Button x:Name="btnInicio" Content="Inicio" Style="{StaticResource BlockButton}" Margin="15,225,0,0" Tag="{StaticResource ImgGoFirst}"/>
+        <Button x:Name="btnAnterior" Content="Anterior" Style="{StaticResource BlockButton}" Margin="80,225,0,0" Tag="{StaticResource ImgGoPrevious}"/>
+        <Button x:Name="btnSiguiente" Content="Siguiente" Style="{StaticResource BlockButton}" Margin="145,225,0,0" Tag="{StaticResource ImgGoNext}"/>
+        <Button x:Name="btnFinal" Content="Final" Style="{StaticResource BlockButton}" Margin="210,225,0,0" Tag="{StaticResource ImgGoLast}"/>
+        <TextBox x:Name="txtBusqueda" HorizontalAlignment="Left" Height="23" Margin="300,246,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="155"/>
+        <Button x:Name="btnBuscar" Content="Buscar" Style="{StaticResource BlockButton}" Margin="495,225,0,0" Tag="{StaticResource ImgSearch}"/>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="225,300,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnSeleccionar" Content="Seleccionar" Style="{StaticResource BlockButton}" Margin="295,300,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseListView>

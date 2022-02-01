@@ -1,0 +1,152 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading;
+using System.Threading.Tasks;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Data;
+using System.Windows.Documents;
+using System.Windows.Input;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Shapes;
+using Aprovi.Data.Models;
+
+namespace Aprovi.Views.UI
+{
+    /// <summary>
+    /// Interaction logic for StockFlowReportView.xaml
+    /// </summary>
+    public partial class StockFlowReportView : BaseView, IStockFlowReportView
+    {
+        public event Action Quit;
+        public event Action Print;
+        public event Action Preview;
+        public event Action FindItem;
+        public event Action OpenItemsList;
+        public event Action FindClassification;
+        public event Action OpenClassificationsList;
+
+        private Articulo _item;
+        private Clasificacione _classification;
+
+        public StockFlowReportView()
+        {
+            InitializeComponent();
+            BindComponents();
+
+            _classification = new Clasificacione();
+            _item = new Articulo();
+        }
+
+        private void BindComponents()
+        {
+            btnCerrar.Click += btnCerrar_Click;
+            btnVistaPrevia.Click += btnVistaPrevia_Click;
+            btnImprimir.Click += btnImprimir_Click;
+            txtArticulo.LostFocus += TxtArticulo_LostFocus;
+            btnListarArticulos.Click += BtnListarArticulos_Click;
+            txtClasificacion.LostFocus += TxtClasificacion_LostFocus;
+            btnListarClasificaciones.Click += BtnListarClasificaciones_Click;
+        }
+
+        private void BtnListarClasificaciones_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenClassificationsList.isValid())
+                OpenClassificationsList();
+        }
+
+        private void TxtClasificacion_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FindClassification.isValid())
+                FindClassification();
+        }
+
+        private void BtnListarArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenItemsList.isValid())
+                OpenItemsList();
+        }
+
+        private void TxtArticulo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FindItem.isValid())
+                FindItem();
+        }
+
+        private void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (Print.isValid())
+                Print();
+            Mouse.OverrideCursor = null;
+        }
+
+        private void btnVistaPrevia_Click(object sender, RoutedEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Wait;
+            if (Preview.isValid())
+                Preview();
+            Mouse.OverrideCursor = null;
+        }
+
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            if (Quit.isValid())
+                Quit();
+        }
+
+        public void Show(Articulo item)
+        {
+            txtArticulo.Text = item.codigo;
+            _item = item;
+        }
+
+        public void Show(Clasificacione classification)
+        {
+            txtClasificacion.Text = classification.descripcion;
+            _classification = classification;
+        }
+
+        public void ClearItem()
+        {
+            txtArticulo.Clear();
+            _item = new Articulo();
+        }
+
+        public void ClearClassification()
+        {
+            txtClasificacion.Clear();
+            _classification = new Clasificacione();
+        }
+
+
+        public DateTime Start
+        {
+            get { return dpFechaInicio.SelectedDate.GetValueOrDefault(DateTime.Now); }
+        }
+
+        public DateTime End
+        {
+            get { return dpFechaFinal.SelectedDate.GetValueOrDefault(DateTime.Now); }
+        }
+
+        public ReporteDeFlujoPor Filtro
+        {
+            //Si no se seleccionó ninguno, el default es todos
+            get { return rdSoloUnArticulo.IsChecked.GetValueOrDefault() ? ReporteDeFlujoPor.PorUnArticulo : rdSoloUnaClasificacion.IsChecked.GetValueOrDefault() ? ReporteDeFlujoPor.PorClasificacion : ReporteDeFlujoPor.TodosLosArticulos; }
+        }
+
+        public Articulo Item
+        {
+            get { _item.codigo = txtArticulo.Text; return _item; }
+        }
+
+        public Clasificacione Classification
+        {
+            get { _classification.descripcion = txtClasificacion.Text; return _classification; }
+        }
+    }
+}

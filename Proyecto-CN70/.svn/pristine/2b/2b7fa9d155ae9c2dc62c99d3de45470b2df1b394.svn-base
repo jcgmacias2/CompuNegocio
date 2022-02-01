@@ -1,0 +1,66 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.TransfersView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Traspasos"
+        Icon="{StaticResource ImgBillOfSale}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtFolio}"
+        Height="600" Width="750">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Folio :" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFolio" HorizontalAlignment="Left" Height="23" Margin="100,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="btnListarTraspasos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="245,10,0,0" Width="25"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Fecha :" HorizontalAlignment="Left" Margin="570,10,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFecha" Focusable="False" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}"  HorizontalAlignment="Left" Margin="620,10,0,0" VerticalAlignment="Top" Width="100"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Origen :" HorizontalAlignment="Left" Margin="20,40,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEmpresaAsociadaOrigen" HorizontalAlignment="Left" Height="23" Margin="100,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <Label Style="{StaticResource LabelSmall}" x:Name="lblTituloFolioOrigen" FontWeight="Bold" Content="Folio :" HorizontalAlignment="Left" Margin="280,40,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" x:Name="lblFolioOrigen" Content="" HorizontalAlignment="Left" Margin="325,40,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Tipo de cambio :" HorizontalAlignment="Left" Margin="520,40,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTipoDeCambio" HorizontalAlignment="Left" Height="23" Margin="620,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Destino :" HorizontalAlignment="Left" Margin="20,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtEmpresaAsociadaDestino" HorizontalAlignment="Left" Height="23" Margin="100,70,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <Button x:Name="btnListarEmpresaAsociadaDestino" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="245,70,0,0" Width="25"/>
+        <Label Style="{StaticResource LabelSmall}" x:Name="lblTituloFolioDestino" FontWeight="Bold" Content="Folio :" HorizontalAlignment="Left" Margin="280,70,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" x:Name="lblFolioDestino" Content="" HorizontalAlignment="Left" Margin="325,70,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Descripcion :" HorizontalAlignment="Left" Margin="20,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="23" Margin="100,100,0,0" MaxLength="256" TextWrapping="Wrap" VerticalAlignment="Top" Width="500"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Existencia :" HorizontalAlignment="Left" Margin="610,100,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" x:Name="lblExistencia" Content="" HorizontalAlignment="Left" Margin="680,100,0,0" VerticalAlignment="Top"/>
+
+        <GroupBox Header="Artículo" HorizontalAlignment="Left" Margin="20,130,0,0" VerticalAlignment="Top" Height="50" Width="700"/>
+        <TextBox x:Name="txtArticuloCodigo" HorizontalAlignment="Left" Height="23" Margin="25,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <Button x:Name="btnListarArticulos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="125,145,0,0" Width="25"/>
+        <TextBox x:Name="txtArticuloDescripcion" HorizontalAlignment="Left" IsReadOnly="True" IsTabStop="False" Height="23" Margin="150,145,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="210"/>
+        <TextBox x:Name="txtArticuloCantidadEnviados" HorizontalAlignment="Left" Height="23" Margin="360,145,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtArticuloCantidadAceptados" HorizontalAlignment="Left" Height="23" Margin="435,145,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="75"/>
+        <TextBox x:Name="txtArticuloUnidad" HorizontalAlignment="Left" IsReadOnly="True" IsTabStop="False" Height="23" Margin="510,145,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="90"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="ExtraBold" Content="$" HorizontalAlignment="Left" Margin="600,145,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtArticuloCosto" Tag="IgnoreEnterKeyTraversal" HorizontalAlignment="Left" Height="23" Margin="615,145,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="90"  IsReadOnly="True"/>
+        <DataGrid Name="dgDetalle" HorizontalAlignment="Left" Margin="20,185,0,0" VerticalAlignment="Top" Height="250" Width="700" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="130" Header="Código" Binding="{Binding Articulo.codigo}" />
+                <DataGridTextColumn Width="210" Header="Descripción" Binding="{Binding Articulo.descripcion}" />
+                <DataGridTextColumn Width="75" Header="Enviados" Binding="{Binding cantidadEnviada, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="75" Header="Aceptados" Binding="{Binding cantidadAceptada, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="90" Header="Unidad" Binding="{Binding Articulo.UnidadesDeMedida.descripcion}" />
+                <DataGridTextColumn Width="100" Header="Costo Unitario" Binding="{Binding costoUnitario, StringFormat=\{0:F\}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <!--Cuenta-->
+        <Label Style="{StaticResource LabelMediumWarning}" x:Name="lblRechazado" FontWeight="Bold" Content="Rechazado" HorizontalAlignment="Left" Margin="619,440,0,0" VerticalAlignment="Top"/>
+
+        <!--Botones-->
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="205,470,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="275,470,0,0" Tag="{StaticResource ImgNewDocument}"/>
+        <Button x:Name="btnRechazar" Content="Rechazar" Style="{StaticResource BlockButton}" Margin="345,470,0,0" Tag="{StaticResource ImgCancel}"/>
+        <Button x:Name="btnImprimir" Content="Imprimir" Style="{StaticResource BlockButton}" Margin="415,470,0,0" Tag="{StaticResource ImgPrinter}"/>
+        <Button x:Name="btnRegistrar" Content="Registrar" Style="{StaticResource BlockButton}" Margin="485,470,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>

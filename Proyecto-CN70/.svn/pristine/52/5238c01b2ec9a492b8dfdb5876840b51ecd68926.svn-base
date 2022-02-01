@@ -1,0 +1,72 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.ClientPaymentsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Abonos de cliente"
+        Icon="{StaticResource ImgInvoice}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtCliente}"
+        Height="580" Width="800">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Cliente :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtCliente" HorizontalAlignment="Left" Height="23" Margin="75,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140" />
+        <Button x:Name="btnListarClientes" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="217,10,0,0" Width="25" />
+        <Label x:Name="lblClienteRazonSocial" Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Cliente" HorizontalAlignment="Left" Margin="252,10,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Folio :" HorizontalAlignment="Left" Margin="10,40,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtSerie" HorizontalAlignment="Left" Height="23" Margin="75,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="30"/>
+        <TextBox x:Name="txtFolio" HorizontalAlignment="Left" Height="23" Margin="105,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="110" />
+        <Button x:Name="btnListarPagos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="217,40,0,0" Width="25" />
+        <Label Style="{StaticResource LabelSmall}" Content="Fecha :" HorizontalAlignment="Left" Margin="620,40,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFecha"  Style="{StaticResource DatePickerSmall}" HorizontalAlignment="Left" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" Margin="675,40,0,0" VerticalAlignment="Top" Width="110" Focusable="False"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Régimen :" HorizontalAlignment="Left" Margin="10,70,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbRegimenes" HorizontalAlignment="Left" Margin="75,70,0,0" VerticalAlignment="Top" Width="455" Height="23" />
+        <Label Style="{StaticResource LabelSmall}" Content="Tipo de cambio :" HorizontalAlignment="Left" Margin="572,70,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtTipoCambio" HorizontalAlignment="Left" Height="23" Margin="675,70,0,0" IsReadOnly="False" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+        <!-- Detalle de abono -->
+        <GroupBox HorizontalAlignment="Left" Margin="10,100,0,0" VerticalAlignment="Top" Height="60" Width="765"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Folio" HorizontalAlignment="Left" Margin="25,100,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtFolioAbono" HorizontalAlignment="Left" Height="23" Margin="15,130,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="70"  IsReadOnly="True"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Moneda" HorizontalAlignment="Left" Margin="110,100,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbMoneda" HorizontalAlignment="Left" Height="23" Margin="90,130,0,0" VerticalAlignment="Top" Width="90"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Abono" HorizontalAlignment="Left" Margin="220,100,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="ExtraBold" Content="$" HorizontalAlignment="Left" Margin="180,130,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtMonto" HorizontalAlignment="Left" Height="23" Margin="195,130,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="90"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Forma de Pago" HorizontalAlignment="Left" Margin="350,100,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbFormaDePago" HorizontalAlignment="Left" Height="23" Margin="285,130,0,0" VerticalAlignment="Top" Width="220"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Cuenta" HorizontalAlignment="Left" Margin="540,100,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbCuentaBancaria" HorizontalAlignment="Left" Height="23" Margin="505,130,0,0" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="120"/>
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Fecha" HorizontalAlignment="Left" Margin="650,100,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaAbono" Style="{StaticResource DatePickerSmall}" HorizontalAlignment="Left" Height="25" SelectedDate="{x:Static sys:DateTime.Now}" Margin="625,130,0,0" VerticalAlignment="Top" Width="110" Tag="IgnoreEnterKeyTraversal"/>
+        <Button x:Name="btnAddPayment" IsTabStop="False" Focusable="False" Content="+" Style="{StaticResource SmallButton}" Margin="740,130,0,0" Width="25"/>
+        <DataGrid Name="dgFacturas" HorizontalAlignment="Left" Margin="10,165,0,0" VerticalAlignment="Top" Height="250" Width="765" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended" IsReadOnly="True">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="70" Header="Folio" Binding="{Binding Folio}" />
+                <DataGridTextColumn Width="70" Header="Fecha" Binding="{Binding FechaHora, StringFormat=dd/MM/yyyy}" />
+                <DataGridTextColumn Width="230" Header="Cliente" Binding="{Binding Cliente}" />
+                <DataGridTextColumn Width="75" Header="Total" Binding="{Binding Total, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="75" Header="Saldo" Binding="{Binding Saldo, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="75" Header="Moneda" Binding="{Binding Moneda, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="75" Header="Abono" Binding="{Binding Abono.monto, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="75" Header="Moneda" Binding="{Binding Abono.Moneda.descripcion, StringFormat=\{0:F\}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Abono :" HorizontalAlignment="Left" Margin="595,420,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtAbonoTotal" HorizontalAlignment="Left" Height="23" Margin="650,420,0,0" TextWrapping="Wrap" HorizontalContentAlignment="Right" VerticalAlignment="Top" Width="110"/>
+        <Label Style="{StaticResource LabelMediumWarning}" x:Name="lblCancelada" FontWeight="Bold" Content="Cancelado" HorizontalAlignment="Left" Margin="650,450,0,0" VerticalAlignment="Top"/>
+        
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="230,460,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="300,460,0,0" Tag="{StaticResource ImgNewDocument}"/>
+        <Button x:Name="btnCancelar" Content="Cancelar" Style="{StaticResource BlockButton}" Margin="370,460,0,0" Tag="{StaticResource ImgCancel}"/>
+        <Button x:Name="btnImprimir" Content="Imprimir" Style="{StaticResource BlockButton}" Margin="440,460,0,0" Tag="{StaticResource ImgPrinter}"/>
+        <Button x:Name="btnRegistrar" Content="Registrar" Style="{StaticResource BlockButton}" Margin="510,460,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>
+
+
+
+

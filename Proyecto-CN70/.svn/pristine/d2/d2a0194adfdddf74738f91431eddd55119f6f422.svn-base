@@ -1,0 +1,958 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5AF88E15-325B-40CE-96D1-8A37A31205F8}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aprovi.Data</RootNamespace>
+    <AssemblyName>Aprovi.Data</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CompuNegocio.Data.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-x86|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug-x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-x86|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug-x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="Core\BaseRepository.cs" />
+    <Compile Include="Core\Extensions.cs" />
+    <Compile Include="Core\IBaseRepository.cs" />
+    <Compile Include="Core\IUnitOfWork.cs" />
+    <Compile Include="Core\UnitOfWork.cs" />
+    <Compile Include="Core\VFPConnection.cs" />
+    <Compile Include="Models\AbonosDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbonosDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AbonosDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Addenda.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AddendaDeCliente.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Ajuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Articulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Banco.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Bascula.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CambioDivisa.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeCotizacione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeNotaDeDescuento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeOrdenesDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDePago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeTimbreDeAbonosDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeTimbresDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeTimbresDeNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CancelacionesDeTimbresDePago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Certificado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Clasificacione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cliente.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNModel.Context.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNModel.Context.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNModel.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CNModel.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CNModel.edmx</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigosDeArticuloPorCliente.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CodigosDeArticuloPorProveedor.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosPorDetalleDeCotizacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosPorDetalleDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosPorDetalleDeOrdenDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosPorDetalleDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComentariosPorDetalleDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComisionesPorUsuario.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Compra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ComprobantesEnviado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Configuracion.cs" />
+    <Compile Include="Models\Configuracione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Cotizacione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentaPredialPorDetalle.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentasBancaria.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentasDeCorreo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentasGuardian.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\CuentasPrediale.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorCotizacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorOrdenDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorPedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeCotizacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeOrdenDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DetallesDeTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Directorio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Domicilio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Empresa.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EmpresasAsociada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Enumerations.cs" />
+    <Compile Include="Models\Equivalencia.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Estacione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeAbono.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeCotizacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeNotaDeDescuento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeOrdenDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDePago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusDeTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ExtendedDbModel.cs" />
+    <Compile Include="Models\Factura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormasPago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Formato.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\FormatosPorConfiguracion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ImpresorasPorEstacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Impuesto.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ListasDePrecio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\MetodosPago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Moneda.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\NotasDeDescuento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OpcionesCosto.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\OrdenesDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pais.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pantalla.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Parameter.cs" />
+    <Compile Include="Models\Pedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Pedimento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PedimentoPorDetalleDeAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PedimentoPorDetalleDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PedimentoPorDetalleDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PedimentoPorDetalleDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\PedimentoPorDetalleDeTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Permiso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Precio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Privilegio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\ProductosServicio.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Proveedore.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Regimene.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Remisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Reporte.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Seccione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Series.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\SolicitudesDeTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimbresDeAbonosDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimbresDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimbresDeNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TimbresDePago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeComision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeComprobante.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeComprobanteFiscal.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeImpresora.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposDeImpuesto.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposFactor.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\TiposRelacion.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Traspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UnidadesDeMedida.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\UsosCFDI.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Usuario.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwArticulosVendido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwCodigosDeArticuloPorCliente.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwCodigosDeArticuloPorProveedor.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwCotizacionesPorPeriodo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasConPedimento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorAjustesCancelado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorFacturasCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorRemisionesCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasPorTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwExistencia.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwExistenciasConPedimento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwFoliosPorAbono.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwFoliosPorSerie.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListaArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListaFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListaPago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListaParcialidade.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteAntiguedadSaldosFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteAntiguedadSaldosRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteAvaluo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteCostoDeLoVendido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaAjustesEntrada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaAjustesSalida.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaAvaluo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaCuentasPorCobrar.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaCuentasPorPagar.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaNotasDeDescuento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaPedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteEstatusDeLaEmpresaRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteImpuestosPorPeriodo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteInventarioFisico.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwReporteVentasPorArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwResumenPorCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwResumenPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwResumenPorRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSaldoDeudorPorClientePorMoneda.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSaldosPorClientePorMoneda.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSaldosPorProveedorPorMoneda.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasConPedimento.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorAjustesCancelado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorComprasCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorNotasDeCreditoCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasPorTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwTimbresPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwVentasActivasPorCliente.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Repositories\Implementations\AbonosDeCompraRepository.cs" />
+    <Compile Include="Repositories\Implementations\AbonosDeFacturaRepository.cs" />
+    <Compile Include="Repositories\Implementations\AbonosDeRemisionRepository.cs" />
+    <Compile Include="Repositories\Implementations\AjustesRepository.cs" />
+    <Compile Include="Repositories\Implementations\AplicacionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ArticulosRepository.cs" />
+    <Compile Include="Repositories\Implementations\BancosRepository.cs" />
+    <Compile Include="Repositories\Implementations\BasculasRepository.cs" />
+    <Compile Include="Repositories\Implementations\CertificadosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ClasificacionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ClientesRepository.cs" />
+    <Compile Include="Repositories\Implementations\CodigosDeArticuloPorClienteRepository.cs" />
+    <Compile Include="Repositories\Implementations\CodigosDeArticuloPorProveedorRepository.cs" />
+    <Compile Include="Repositories\Implementations\ComprasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ComprobantesEnviadosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ConfiguracionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\EmpresasAsociadasRepository.cs" />
+    <Compile Include="Repositories\Implementations\CuentasBancariasRepository.cs" />
+    <Compile Include="Repositories\Implementations\CuentasDeCorreoRepository.cs" />
+    <Compile Include="Repositories\Implementations\CuentasGuardianRepository.cs" />
+    <Compile Include="Repositories\Implementations\CuentasPredialesRepository.cs" />
+    <Compile Include="Repositories\Implementations\CotizacionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ComisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\NotasDeDescuentoRepository.cs" />
+    <Compile Include="Repositories\Implementations\NotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Implementations\PagosRepository.cs" />
+    <Compile Include="Repositories\Implementations\FormatosRepository.cs" />
+    <Compile Include="Repositories\Implementations\OpcionesCostosRepository.cs" />
+    <Compile Include="Repositories\Implementations\OrdenesDeCompraRepository.cs" />
+    <Compile Include="Repositories\Implementations\SolicitudesDeTraspasoRepository.cs" />
+    <Compile Include="Repositories\Implementations\TraspasosRepository.cs" />
+    <Compile Include="Repositories\Implementations\PedidosRepository.cs" />
+    <Compile Include="Repositories\Implementations\PedimentosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ReportesRepository.cs" />
+    <Compile Include="Repositories\Implementations\SeccionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\DomiciliosRepository.cs" />
+    <Compile Include="Repositories\Implementations\EmpresasRepository.cs" />
+    <Compile Include="Repositories\Implementations\EquivalenciasRepository.cs" />
+    <Compile Include="Repositories\Implementations\EstacionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\FacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\FormasPagoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ImpresorasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ImpuestosRepository.cs" />
+    <Compile Include="Repositories\Implementations\DirectorioRepository.cs" />
+    <Compile Include="Repositories\Implementations\PaisesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ProductosServiciosRepository.cs" />
+    <Compile Include="Repositories\Implementations\RemisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\TimbresDeAbonosDeFacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\TiposDeAjusteRepository.cs" />
+    <Compile Include="Repositories\Implementations\TiposFactorRepository.cs" />
+    <Compile Include="Repositories\Implementations\TiposRelacionRepository.cs" />
+    <Compile Include="Repositories\Implementations\UsosCFDIRepository.cs" />
+    <Compile Include="Repositories\Implementations\VFPDataExtractorRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewCodigosDeArticuloPorClienteRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewCodigosDeArticuloPorProveedorRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorNotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorTraspasosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewListaPagosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteAntiguedadSaldosFacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteAntiguedadSaldosRemisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewListaParcialidadesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewListaFacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteAvaluoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaRemisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaAjustesAvaluoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaComprasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaCuentasPorCobrarRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaCuentasPorPagarRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaFacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaNotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaNotasDeDescuentoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaPedidosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaAjustesSalidaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaAjustesEntradaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteCostoDeLoVendidoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSaldoDeudorPorClientePorMonedaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewCotizacionesPorPeriodoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorTraspasosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteVentasPorArticuloRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewVentasActivasPorClienteRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorAjustesCanceladosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorAjustesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorComprasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorFacturasCanceladasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewEntradasPorRemisionesCanceladasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewFoliosPorAbonos.cs" />
+    <Compile Include="Repositories\Implementations\ViewPedimentosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewArticulosVendidosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewResumenPorCompraRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewResumenPorFacturaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewResumenPorRemisionRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSaldosPorClientePorMonedaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSaldosPorProveedorPorMonedaRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorAjustesCanceladosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorAjustesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorComprasCanceladasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorFacturasRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorRemisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewReporteInventarioFisicoRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSeriesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewSalidasPorNotasDeCreditoCanceladasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAbonosDeFacturaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAbonosDeRemisionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAjustesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBancosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICodigosDeArticuloPorClienteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICodigosDeArticuloPorProveedorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IComprobantesEnviadosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEmpresasAsociadasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICuentasBancariasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICuentasDeCorreoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICuentasGuardianRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICuentasPredialesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICotizacionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IComisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INotasDeDescuentoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\INotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPagosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IFormatosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IOpcionesCostosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IOrdenesDeCompraRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISolicitudesDeTraspasoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITraspasosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPedimentosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IReportesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewCodigosDeArticuloPorClienteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewCodigosDeArticuloPorProveedorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaComprasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaCuentasPorCobrarRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaCuentasPorPagarRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaFacturaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaNotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaRemisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaPedidosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaNotasDeDescuentoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaAvaluoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaAjustesSalidaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteEstatusDeLaEmpresaAjustesEntradaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorNotasDeCreditoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorTraspasosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewListaPagosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteAntiguedadSaldosRemisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteAntiguedadSaldosFacturasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewListaParcialidadesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewListaFacturasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewCotizacionesPorPeriodoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteAvaluoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteCostoDeLoVendidoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSaldoDeudorPorClientePorMonedaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteVentasPorArticuloRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorNotasDeCreditoCanceladasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorTraspasosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewVentasActivasPorClienteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewPedimentosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISeccionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEmpresasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDirectorioRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPaisesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPedidosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProductosServiciosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRemisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITimbresDeAbonosDeFacturaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITiposDeAjustesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITiposFactorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITiposRelacionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUsosCFDIRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IVFPDataExtractorRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorAjustesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorRemisionesCanceladasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorComprasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorFacturasCanceladasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewFoliosPorAbonosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewEntradasPorAjustesCanceladosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewArticulosVendidosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewResumenPorCompraRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewResumenPorFacturaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewResumenPorRemisionRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSaldosPorClientePorMonedaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSaldosPorProveedorPorMonedaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorAjustesCanceladosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorAjustesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorComprasCanceladasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorFacturasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSalidasPorRemisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewReporteInventarioFisicoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewSeriesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ListasDePrecioRepository.cs" />
+    <Compile Include="Repositories\Implementations\MetodosPagoRepository.cs" />
+    <Compile Include="Repositories\Implementations\MonedasRepository.cs" />
+    <Compile Include="Repositories\Implementations\PantallasRepository.cs" />
+    <Compile Include="Repositories\Implementations\PermisosRepository.cs" />
+    <Compile Include="Repositories\Implementations\PreciosRepository.cs" />
+    <Compile Include="Repositories\Implementations\PrivilegiosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ProveedoresRepository.cs" />
+    <Compile Include="Repositories\Implementations\RegimenesRepository.cs" />
+    <Compile Include="Repositories\Implementations\SeriesRepository.cs" />
+    <Compile Include="Repositories\Implementations\TiposDeComprobanteRepository.cs" />
+    <Compile Include="Repositories\Implementations\TiposDeImpuestoRepository.cs" />
+    <Compile Include="Repositories\Implementations\UnidadesDeMedidaRepository.cs" />
+    <Compile Include="Repositories\Implementations\UsuariosRepository.cs" />
+    <Compile Include="Repositories\Implementations\ViewExistenciasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAbonosDeCompraRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IAplicacionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IArticulosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IBasculasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ICertificadosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IClasificacionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IClientesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IComprasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IConfiguracionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IDomiciliosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEquivalenciasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IEstacionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IFacturasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IFormasPagoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IImpresorasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IImpuestosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IListasDePrecioRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMetodosPagoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IMonedasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPantallasRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPermisosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPreciosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPrivilegiosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IProveedoresRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IRegimenesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ISeriesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITiposDeComprobanteRepository.cs" />
+    <Compile Include="Repositories\Interfaces\ITiposDeImpuestoRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUnidadesDeMedidaRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IUsuariosRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IViewExistenciasRepository.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <EntityDeploy Include="Models\CNModel.edmx">
+      <Generator>EntityModelCodeGenerator</Generator>
+      <LastGenOutput>CNModel.Designer.cs</LastGenOutput>
+    </EntityDeploy>
+    <None Include="CompuNegocio.Data.pfx" />
+    <None Include="Models\CNModel.edmx.diagram">
+      <DependentUpon>CNModel.edmx</DependentUpon>
+    </None>
+    <None Include="packages.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.dll</HintPath>
+    </Reference>
+    <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
+      <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.CSharp">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\Microsoft.CSharp.dll</HintPath>
+    </Reference>
+    <Reference Include="System">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.dll</HintPath>
+    </Reference>
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.ComponentModel.DataAnnotations.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Configuration">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Configuration.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Data">
+      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.5\System.Data.dll</HintPath>
+    </Reference>
+    <Reference Include="System.Management" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.XML" />
+    <Reference Include="System.Xml.Linq" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Models\CNModel.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CNModel.edmx</DependentUpon>
+      <LastGenOutput>CNModel.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="Models\CNModel.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>CNModel.edmx</DependentUpon>
+      <LastGenOutput>CNModel.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

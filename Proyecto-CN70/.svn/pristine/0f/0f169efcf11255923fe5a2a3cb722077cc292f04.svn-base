@@ -1,0 +1,58 @@
+﻿using Aprovi.Data.Core;
+using Aprovi.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Data.Entity;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Aprovi.Data.Repositories
+{
+    public class ViewReporteVentasPorArticuloRepository : BaseRepository<VwReporteVentasPorArticulo>, IViewReporteVentasPorArticuloRepository
+    {
+        public ViewReporteVentasPorArticuloRepository(CNEntities context) : base(context) { }
+
+        public List<VwReporteVentasPorArticulo> List(Articulo item, Clasificacione classification, DateTime startDate, DateTime endDate, bool includeInvoices, bool includeBillsOfSale, bool includeCancelled)
+        {
+            try
+            {
+                var data = _dbSet.Where(x => DbFunctions.TruncateTime(x.fecha) >= DbFunctions.TruncateTime(startDate) && DbFunctions.TruncateTime(x.fecha) <= DbFunctions.TruncateTime(endDate) && x.idEstatusDeRemision.Value != (int)StatusDeRemision.Facturada).AsQueryable();
+
+                if (item.isValid() && item.idArticulo.isValid())
+                {
+                    data = data.Where(x => x.idArticulo == item.idArticulo);
+                }
+
+                if (classification.isValid() && classification.idClasificacion.isValid())
+                {
+                    data = data.Where(x => x.idClasificacion == classification.idClasificacion);
+                }
+
+                if (!includeInvoices)
+                {
+                    data = data.Where(x => x.idEstatusDeFactura == null);
+                }
+
+                if (!includeBillsOfSale)
+                {
+                    data = data.Where(x => x.idEstatusDeRemision == null);
+                }
+
+                if (!includeCancelled)
+                {
+                    data = data.Where(x =>
+                        x.idEstatusDeFactura != (int) StatusDeFactura.Cancelada &&
+                        x.idEstatusDeFactura != (int) StatusDeFactura.Anulada &&
+                        x.idEstatusDeRemision != (int) StatusDeRemision.Cancelada);
+                }
+
+                return data.ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+}

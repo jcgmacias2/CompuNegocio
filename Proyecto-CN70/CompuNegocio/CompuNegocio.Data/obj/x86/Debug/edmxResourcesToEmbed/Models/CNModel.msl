@@ -1,0 +1,2466 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="CNModelStoreContainer" CdmEntityContainer="CNEntities">
+    <EntitySetMapping Name="AbonosDeCompras">
+      <EntityTypeMapping TypeName="CNModel.AbonosDeCompra">
+        <MappingFragment StoreEntitySet="AbonosDeCompra">
+          <ScalarProperty Name="idAbonoDeCompra" ColumnName="idAbonoDeCompra" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="referencia" ColumnName="referencia" />
+          <ScalarProperty Name="cancelado" ColumnName="cancelado" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="idFormaPago" ColumnName="idFormaPago" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AbonosDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.AbonosDeFactura">
+        <MappingFragment StoreEntitySet="AbonosDeFactura">
+          <ScalarProperty Name="idPago" ColumnName="idPago" />
+          <ScalarProperty Name="idAbonoDeFactura" ColumnName="idAbonoDeFactura" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idFormaPago" ColumnName="idFormaPago" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idEstatusDeAbono" ColumnName="idEstatusDeAbono" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idCuentaBancaria" ColumnName="idCuentaBancaria" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AbonosDeRemisions">
+      <EntityTypeMapping TypeName="CNModel.AbonosDeRemision">
+        <MappingFragment StoreEntitySet="AbonosDeRemision">
+          <ScalarProperty Name="idAbonoDeRemision" ColumnName="idAbonoDeRemision" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idFormaPago" ColumnName="idFormaPago" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idEstatusDeAbono" ColumnName="idEstatusDeAbono" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Ajustes">
+      <EntityTypeMapping TypeName="CNModel.Ajuste">
+        <MappingFragment StoreEntitySet="Ajustes">
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idTipoDeAjuste" ColumnName="idTipoDeAjuste" />
+          <ScalarProperty Name="idEstatusDeAjuste" ColumnName="idEstatusDeAjuste" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Bancos">
+      <EntityTypeMapping TypeName="CNModel.Banco">
+        <MappingFragment StoreEntitySet="Bancos">
+          <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Basculas">
+      <EntityTypeMapping TypeName="CNModel.Bascula">
+        <MappingFragment StoreEntitySet="Basculas">
+          <ScalarProperty Name="idBasculaEstacion" ColumnName="idBasculaEstacion" />
+          <ScalarProperty Name="puerto" ColumnName="puerto" />
+          <ScalarProperty Name="velocidad" ColumnName="velocidad" />
+          <ScalarProperty Name="tiempoDeLectura" ColumnName="tiempoDeLectura" />
+          <ScalarProperty Name="tiempoDeEscritura" ColumnName="tiempoDeEscritura" />
+          <ScalarProperty Name="bitsDeParada" ColumnName="bitsDeParada" />
+          <ScalarProperty Name="paridad" ColumnName="paridad" />
+          <ScalarProperty Name="bitsDeDatos" ColumnName="bitsDeDatos" />
+          <ScalarProperty Name="finDeLinea" ColumnName="finDeLinea" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeAjustes">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeAjuste">
+        <MappingFragment StoreEntitySet="CancelacionesDeAjustes">
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeCompras">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeCompra">
+        <MappingFragment StoreEntitySet="CancelacionesDeCompras">
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeFactura">
+        <MappingFragment StoreEntitySet="CancelacionesDeFacturas">
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeRemisiones">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeRemisione">
+        <MappingFragment StoreEntitySet="CancelacionesDeRemisiones">
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeTimbreDeAbonosDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeTimbreDeAbonosDeFactura">
+        <MappingFragment StoreEntitySet="CancelacionesDeTimbreDeAbonosDeFactura">
+          <ScalarProperty Name="idCancelacionDeAbonoDeFactura" ColumnName="idCancelacionDeAbonoDeFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="acuse" ColumnName="acuse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeTimbresDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeTimbresDeFactura">
+        <MappingFragment StoreEntitySet="CancelacionesDeTimbresDeFacturas">
+          <ScalarProperty Name="idCancelacionDeTimbreDeFactura" ColumnName="idCancelacionDeTimbreDeFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="acuse" ColumnName="acuse" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Certificados">
+      <EntityTypeMapping TypeName="CNModel.Certificado">
+        <MappingFragment StoreEntitySet="Certificados">
+          <ScalarProperty Name="idCertificado" ColumnName="idCertificado" />
+          <ScalarProperty Name="numero" ColumnName="numero" />
+          <ScalarProperty Name="expedicion" ColumnName="expedicion" />
+          <ScalarProperty Name="vencimiento" ColumnName="vencimiento" />
+          <ScalarProperty Name="certificadoBase64" ColumnName="certificadoBase64" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clasificaciones">
+      <EntityTypeMapping TypeName="CNModel.Clasificacione">
+        <MappingFragment StoreEntitySet="Clasificaciones">
+          <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentaPredialPorDetalles">
+      <EntityTypeMapping TypeName="CNModel.CuentaPredialPorDetalle">
+        <MappingFragment StoreEntitySet="CuentaPredialPorDetalle">
+          <ScalarProperty Name="idCuentaPredialPorDetalle" ColumnName="idCuentaPredialPorDetalle" />
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentasBancarias">
+      <EntityTypeMapping TypeName="CNModel.CuentasBancaria">
+        <MappingFragment StoreEntitySet="CuentasBancarias">
+          <ScalarProperty Name="idCuentaBancaria" ColumnName="idCuentaBancaria" />
+          <ScalarProperty Name="idBanco" ColumnName="idBanco" />
+          <ScalarProperty Name="idMonedas" ColumnName="idMonedas" />
+          <ScalarProperty Name="numeroDeCuenta" ColumnName="numeroDeCuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentasPrediales">
+      <EntityTypeMapping TypeName="CNModel.CuentasPrediale">
+        <MappingFragment StoreEntitySet="CuentasPrediales">
+          <ScalarProperty Name="idCuentaPredial" ColumnName="idCuentaPredial" />
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeAjustes">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeAjuste">
+        <MappingFragment StoreEntitySet="DetallesDeAjuste">
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeCompras">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeCompra">
+        <MappingFragment StoreEntitySet="DetallesDeCompra">
+          <ScalarProperty Name="idDetalleDeCompra" ColumnName="idDetalleDeCompra" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idUnidadDeMedida" ColumnName="idUnidadDeMedida" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeFactura">
+        <MappingFragment StoreEntitySet="DetallesDeFactura">
+          <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeRemisions">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeRemision">
+        <MappingFragment StoreEntitySet="DetallesDeRemision">
+          <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Domicilios">
+      <EntityTypeMapping TypeName="CNModel.Domicilio">
+        <MappingFragment StoreEntitySet="Domicilios">
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="numeroExterior" ColumnName="numeroExterior" />
+          <ScalarProperty Name="numeroInterior" ColumnName="numeroInterior" />
+          <ScalarProperty Name="colonia" ColumnName="colonia" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="idPais" ColumnName="idPais" />
+          <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Empresas">
+      <EntityTypeMapping TypeName="CNModel.Empresa">
+        <MappingFragment StoreEntitySet="Empresas">
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="licencia" ColumnName="licencia" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Equivalencias">
+      <EntityTypeMapping TypeName="CNModel.Equivalencia">
+        <MappingFragment StoreEntitySet="Equivalencias">
+          <ScalarProperty Name="idEquivalencia" ColumnName="idEquivalencia" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idUnidadDeMedida" ColumnName="idUnidadDeMedida" />
+          <ScalarProperty Name="unidades" ColumnName="unidades" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Estaciones">
+      <EntityTypeMapping TypeName="CNModel.Estacione">
+        <MappingFragment StoreEntitySet="Estaciones">
+          <ScalarProperty Name="idEstacion" ColumnName="idEstacion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="equipo" ColumnName="equipo" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeAbonoes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeAbono">
+        <MappingFragment StoreEntitySet="EstatusDeAbono">
+          <ScalarProperty Name="idEstatusDeAbono" ColumnName="idEstatusDeAbono" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeAjustes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeAjuste">
+        <MappingFragment StoreEntitySet="EstatusDeAjuste">
+          <ScalarProperty Name="idEstatusDeAjuste" ColumnName="idEstatusDeAjuste" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeCompras">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeCompra">
+        <MappingFragment StoreEntitySet="EstatusDeCompra">
+          <ScalarProperty Name="idEstatusDeCompra" ColumnName="idEstatusDeCompra" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeFactura">
+        <MappingFragment StoreEntitySet="EstatusDeFactura">
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeRemisions">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeRemision">
+        <MappingFragment StoreEntitySet="EstatusDeRemision">
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormasPagoes">
+      <EntityTypeMapping TypeName="CNModel.FormasPago">
+        <MappingFragment StoreEntitySet="FormasPago">
+          <ScalarProperty Name="idFormaPago" ColumnName="idFormaPago" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="bancarizado" ColumnName="bancarizado" />
+          <ScalarProperty Name="patron" ColumnName="patron" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ImpresorasPorEstacions">
+      <EntityTypeMapping TypeName="CNModel.ImpresorasPorEstacion">
+        <MappingFragment StoreEntitySet="ImpresorasPorEstacion">
+          <ScalarProperty Name="idEstacion" ColumnName="idEstacion" />
+          <ScalarProperty Name="idTipoDeImpresora" ColumnName="idTipoDeImpresora" />
+          <ScalarProperty Name="impresora" ColumnName="impresora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ListasDePrecios">
+      <EntityTypeMapping TypeName="CNModel.ListasDePrecio">
+        <MappingFragment StoreEntitySet="ListasDePrecio">
+          <ScalarProperty Name="idListaDePrecio" ColumnName="idListaDePrecio" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="MetodosPagoes">
+      <EntityTypeMapping TypeName="CNModel.MetodosPago">
+        <MappingFragment StoreEntitySet="MetodosPago">
+          <ScalarProperty Name="idMetodoPago" ColumnName="idMetodoPago" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Monedas">
+      <EntityTypeMapping TypeName="CNModel.Moneda">
+        <MappingFragment StoreEntitySet="Monedas">
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="decimales" ColumnName="decimales" />
+          <ScalarProperty Name="variacion" ColumnName="variacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Paises">
+      <EntityTypeMapping TypeName="CNModel.Pais">
+        <MappingFragment StoreEntitySet="Paises">
+          <ScalarProperty Name="idPais" ColumnName="idPais" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pantallas">
+      <EntityTypeMapping TypeName="CNModel.Pantalla">
+        <MappingFragment StoreEntitySet="Pantallas">
+          <ScalarProperty Name="idPantalla" ColumnName="idPantalla" />
+          <ScalarProperty Name="vista" ColumnName="vista" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Permisos">
+      <EntityTypeMapping TypeName="CNModel.Permiso">
+        <MappingFragment StoreEntitySet="Permisos">
+          <ScalarProperty Name="idPermiso" ColumnName="idPermiso" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Precios">
+      <EntityTypeMapping TypeName="CNModel.Precio">
+        <MappingFragment StoreEntitySet="Precios">
+          <ScalarProperty Name="idListaDePrecio" ColumnName="idListaDePrecio" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="utilidad" ColumnName="utilidad" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Privilegios">
+      <EntityTypeMapping TypeName="CNModel.Privilegio">
+        <MappingFragment StoreEntitySet="Privilegios">
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idPantalla" ColumnName="idPantalla" />
+          <ScalarProperty Name="idPermiso" ColumnName="idPermiso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProductosServicios">
+      <EntityTypeMapping TypeName="CNModel.ProductosServicio">
+        <MappingFragment StoreEntitySet="ProductosServicios">
+          <ScalarProperty Name="idProductoServicio" ColumnName="idProductoServicio" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Regimenes">
+      <EntityTypeMapping TypeName="CNModel.Regimene">
+        <MappingFragment StoreEntitySet="Regimenes">
+          <ScalarProperty Name="idRegimen" ColumnName="idRegimen" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Series">
+      <EntityTypeMapping TypeName="CNModel.Series">
+        <MappingFragment StoreEntitySet="Series">
+          <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+          <ScalarProperty Name="identificador" ColumnName="identificador" />
+          <ScalarProperty Name="folioInicial" ColumnName="folioInicial" />
+          <ScalarProperty Name="folioFinal" ColumnName="folioFinal" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimbresDeAbonosDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.TimbresDeAbonosDeFactura">
+        <MappingFragment StoreEntitySet="TimbresDeAbonosDeFactura">
+          <ScalarProperty Name="idTimbreDeAbonoDeFactura" ColumnName="idTimbreDeAbonoDeFactura" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="noCertificado" ColumnName="noCertificado" />
+          <ScalarProperty Name="sello" ColumnName="sello" />
+          <ScalarProperty Name="cadenaOriginalAbono" ColumnName="cadenaOriginalAbono" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="selloSAT" ColumnName="selloSAT" />
+          <ScalarProperty Name="selloCFD" ColumnName="selloCFD" />
+          <ScalarProperty Name="noCertificadoSAT" ColumnName="noCertificadoSAT" />
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="fechaTimbrado" ColumnName="fechaTimbrado" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="RfcProvCertif" ColumnName="RfcProvCertif" />
+          <ScalarProperty Name="Leyenda" ColumnName="Leyenda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimbresDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.TimbresDeFactura">
+        <MappingFragment StoreEntitySet="TimbresDeFacturas">
+          <ScalarProperty Name="idTimbreDeFactura" ColumnName="idTimbreDeFactura" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="selloSAT" ColumnName="selloSAT" />
+          <ScalarProperty Name="selloCFD" ColumnName="selloCFD" />
+          <ScalarProperty Name="noCertificadoSAT" ColumnName="noCertificadoSAT" />
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="fechaTimbrado" ColumnName="fechaTimbrado" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="RfcProvCertif" ColumnName="RfcProvCertif" />
+          <ScalarProperty Name="Leyenda" ColumnName="Leyenda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeAjustes">
+      <EntityTypeMapping TypeName="CNModel.TiposDeAjuste">
+        <MappingFragment StoreEntitySet="TiposDeAjuste">
+          <ScalarProperty Name="idTipoDeAjuste" ColumnName="idTipoDeAjuste" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeComprobantes">
+      <EntityTypeMapping TypeName="CNModel.TiposDeComprobante">
+        <MappingFragment StoreEntitySet="TiposDeComprobante">
+          <ScalarProperty Name="idTipoDeComprobante" ColumnName="idTipoDeComprobante" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeComprobanteFiscals">
+      <EntityTypeMapping TypeName="CNModel.TiposDeComprobanteFiscal">
+        <MappingFragment StoreEntitySet="TiposDeComprobanteFiscal">
+          <ScalarProperty Name="idTipoDeComprobanteFiscal" ColumnName="idTipoDeComprobanteFiscal" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeImpresoras">
+      <EntityTypeMapping TypeName="CNModel.TiposDeImpresora">
+        <MappingFragment StoreEntitySet="TiposDeImpresora">
+          <ScalarProperty Name="idTipoDeImpresora" ColumnName="idTipoDeImpresora" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeImpuestoes">
+      <EntityTypeMapping TypeName="CNModel.TiposDeImpuesto">
+        <MappingFragment StoreEntitySet="TiposDeImpuesto">
+          <ScalarProperty Name="idTipoDeImpuesto" ColumnName="idTipoDeImpuesto" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposFactors">
+      <EntityTypeMapping TypeName="CNModel.TiposFactor">
+        <MappingFragment StoreEntitySet="TiposFactor">
+          <ScalarProperty Name="idTipoFactor" ColumnName="idTipoFactor" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposRelacions">
+      <EntityTypeMapping TypeName="CNModel.TiposRelacion">
+        <MappingFragment StoreEntitySet="TiposRelacion">
+          <ScalarProperty Name="idTipoRelacion" ColumnName="idTipoRelacion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UnidadesDeMedidas">
+      <EntityTypeMapping TypeName="CNModel.UnidadesDeMedida">
+        <MappingFragment StoreEntitySet="UnidadesDeMedida">
+          <ScalarProperty Name="idUnidadDeMedida" ColumnName="idUnidadDeMedida" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="UsosCFDIs">
+      <EntityTypeMapping TypeName="CNModel.UsosCFDI">
+        <MappingFragment StoreEntitySet="UsosCFDI">
+          <ScalarProperty Name="idUsoCFDI" ColumnName="idUsoCFDI" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorAjustes">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorAjuste">
+        <MappingFragment StoreEntitySet="VwEntradasPorAjustes">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorAjustesCancelados">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorAjustesCancelado">
+        <MappingFragment StoreEntitySet="VwEntradasPorAjustesCancelados">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorCompras">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorCompra">
+        <MappingFragment StoreEntitySet="VwEntradasPorCompras">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeCompra" ColumnName="idDetalleDeCompra" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorFacturasCanceladas">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorFacturasCancelada">
+        <MappingFragment StoreEntitySet="VwEntradasPorFacturasCanceladas">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorRemisionesCanceladas">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorRemisionesCancelada">
+        <MappingFragment StoreEntitySet="VwEntradasPorRemisionesCanceladas">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwExistencias">
+      <EntityTypeMapping TypeName="CNModel.VwExistencia">
+        <MappingFragment StoreEntitySet="VwExistencias">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="totalSalidas" ColumnName="totalSalidas" />
+          <ScalarProperty Name="totalEntradas" ColumnName="totalEntradas" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwFoliosPorAbonos">
+      <EntityTypeMapping TypeName="CNModel.VwFoliosPorAbono">
+        <MappingFragment StoreEntitySet="VwFoliosPorAbonos">
+          <ScalarProperty Name="Origen" ColumnName="Origen" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwResumenPorRemisions">
+      <EntityTypeMapping TypeName="CNModel.VwResumenPorRemision">
+        <MappingFragment StoreEntitySet="VwResumenPorRemision">
+          <ScalarProperty Name="idEstatusCrediticio" ColumnName="idEstatusCrediticio" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSaldosPorClientePorMonedas">
+      <EntityTypeMapping TypeName="CNModel.VwSaldosPorClientePorMoneda">
+        <MappingFragment StoreEntitySet="VwSaldosPorClientePorMoneda">
+          <ScalarProperty Name="menorAntiguedad" ColumnName="menorAntiguedad" />
+          <ScalarProperty Name="mayorAntiguedad" ColumnName="mayorAntiguedad" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSaldosPorProveedorPorMonedas">
+      <EntityTypeMapping TypeName="CNModel.VwSaldosPorProveedorPorMoneda">
+        <MappingFragment StoreEntitySet="VwSaldosPorProveedorPorMoneda">
+          <ScalarProperty Name="menorAntiguedad" ColumnName="menorAntiguedad" />
+          <ScalarProperty Name="mayorAntiguedad" ColumnName="mayorAntiguedad" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="total" ColumnName="total" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorAjustes">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorAjuste">
+        <MappingFragment StoreEntitySet="VwSalidasPorAjustes">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorAjustesCancelados">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorAjustesCancelado">
+        <MappingFragment StoreEntitySet="VwSalidasPorAjustesCancelados">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorArticuloes">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorArticulo">
+        <MappingFragment StoreEntitySet="VwSalidasPorArticulo">
+          <ScalarProperty Name="Traspasos" ColumnName="Traspasos" />
+          <ScalarProperty Name="entradasTraspasos" ColumnName="entradasTraspasos" />
+          <ScalarProperty Name="salidasTraspasos" ColumnName="salidasTraspasos" />
+          <ScalarProperty Name="totalSalidas" ColumnName="totalSalidas" />
+          <ScalarProperty Name="Remisiones" ColumnName="Remisiones" />
+          <ScalarProperty Name="EntradasRemisiones" ColumnName="EntradasRemisiones" />
+          <ScalarProperty Name="SalidasRemisiones" ColumnName="SalidasRemisiones" />
+          <ScalarProperty Name="Ajustes" ColumnName="Ajustes" />
+          <ScalarProperty Name="EntradasAjustes" ColumnName="EntradasAjustes" />
+          <ScalarProperty Name="SalidasAjustes" ColumnName="SalidasAjustes" />
+          <ScalarProperty Name="Facturas" ColumnName="Facturas" />
+          <ScalarProperty Name="EntradasFacturas" ColumnName="EntradasFacturas" />
+          <ScalarProperty Name="SalidasFacturas" ColumnName="SalidasFacturas" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorComprasCanceladas">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorComprasCancelada">
+        <MappingFragment StoreEntitySet="VwSalidasPorComprasCanceladas">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeCompra" ColumnName="idDetalleDeCompra" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorFactura">
+        <MappingFragment StoreEntitySet="VwSalidasPorFacturas">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorRemisiones">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorRemisione">
+        <MappingFragment StoreEntitySet="VwSalidasPorRemisiones">
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwTimbresPorFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwTimbresPorFactura">
+        <MappingFragment StoreEntitySet="VwTimbresPorFacturas">
+          <ScalarProperty Name="Timbres" ColumnName="Timbres" />
+          <ScalarProperty Name="Serie" ColumnName="Serie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComprobantesEnviados">
+      <EntityTypeMapping TypeName="CNModel.ComprobantesEnviado">
+        <MappingFragment StoreEntitySet="ComprobantesEnviados">
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idTipoDeComprobante" ColumnName="idTipoDeComprobante" />
+          <ScalarProperty Name="xml" ColumnName="xml" />
+          <ScalarProperty Name="pdf" ColumnName="pdf" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idComprobanteEnviado" ColumnName="idComprobanteEnviado" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentasDeCorreos">
+      <EntityTypeMapping TypeName="CNModel.CuentasDeCorreo">
+        <MappingFragment StoreEntitySet="CuentasDeCorreo">
+          <ScalarProperty Name="cuenta" ColumnName="cuenta" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idCuentaDeCorreo" ColumnName="idCuentaDeCorreo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CuentasGuardians">
+      <EntityTypeMapping TypeName="CNModel.CuentasGuardian">
+        <MappingFragment StoreEntitySet="CuentasGuardian">
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="puerto" ColumnName="puerto" />
+          <ScalarProperty Name="ssl" ColumnName="ssl" />
+          <ScalarProperty Name="servidor" ColumnName="servidor" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+          <ScalarProperty Name="idCuentaGuardian" ColumnName="idCuentaGuardian" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedimentoPorDetalleDeAjustes">
+      <EntityTypeMapping TypeName="CNModel.PedimentoPorDetalleDeAjuste">
+        <MappingFragment StoreEntitySet="PedimentoPorDetalleDeAjuste">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idDetalleDeAjuste" ColumnName="idDetalleDeAjuste" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedimentoPorDetalleDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.PedimentoPorDetalleDeFactura">
+        <MappingFragment StoreEntitySet="PedimentoPorDetalleDeFactura">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedimentoPorDetalleDeRemisions">
+      <EntityTypeMapping TypeName="CNModel.PedimentoPorDetalleDeRemision">
+        <MappingFragment StoreEntitySet="PedimentoPorDetalleDeRemision">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedimentos">
+      <EntityTypeMapping TypeName="CNModel.Pedimento">
+        <MappingFragment StoreEntitySet="Pedimentos">
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="progresivo" ColumnName="progresivo" />
+          <ScalarProperty Name="añoEnCurso" ColumnName="añoEnCurso" />
+          <ScalarProperty Name="patente" ColumnName="patente" />
+          <ScalarProperty Name="aduana" ColumnName="aduana" />
+          <ScalarProperty Name="añoOperacion" ColumnName="añoOperacion" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PedimentoPorAjustes" TypeName="CNModel.PedimentoPorAjustes" StoreEntitySet="PedimentoPorAjustes">
+      <EndProperty Name="Pedimento">
+        <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+      </EndProperty>
+      <EndProperty Name="Ajuste">
+        <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="ComentariosPorDetalleDeFacturas">
+      <EntityTypeMapping TypeName="CNModel.ComentariosPorDetalleDeFactura">
+        <MappingFragment StoreEntitySet="ComentariosPorDetalleDeFactura">
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComentariosPorDetalleDeRemisions">
+      <EntityTypeMapping TypeName="CNModel.ComentariosPorDetalleDeRemision">
+        <MappingFragment StoreEntitySet="ComentariosPorDetalleDeRemision">
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AddendaDeClientes">
+      <EntityTypeMapping TypeName="CNModel.AddendaDeCliente">
+        <MappingFragment StoreEntitySet="AddendaDeCliente">
+          <ScalarProperty Name="xslt" ColumnName="xslt" />
+          <ScalarProperty Name="idAddenda" ColumnName="idAddenda" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Addendas">
+      <EntityTypeMapping TypeName="CNModel.Addenda">
+        <MappingFragment StoreEntitySet="Addendas">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idAddenda" ColumnName="idAddenda" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Directorios">
+      <EntityTypeMapping TypeName="CNModel.Directorio">
+        <MappingFragment StoreEntitySet="Directorio">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="gln" ColumnName="gln" />
+          <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="direccion" ColumnName="direccion" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idDirectorio" ColumnName="idDirectorio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Secciones">
+      <EntityTypeMapping TypeName="CNModel.Seccione">
+        <MappingFragment StoreEntitySet="Secciones">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idSeccion" ColumnName="idSeccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorRemisions">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorRemision">
+        <MappingFragment StoreEntitySet="DatosExtraPorRemision">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeCotizaciones">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeCotizacione">
+        <MappingFragment StoreEntitySet="CancelacionesDeCotizaciones">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComentariosPorDetalleDeCotizacions">
+      <EntityTypeMapping TypeName="CNModel.ComentariosPorDetalleDeCotizacion">
+        <MappingFragment StoreEntitySet="ComentariosPorDetalleDeCotizacion">
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="idDetalleDeCotizacion" ColumnName="idDetalleDeCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Cotizaciones">
+      <EntityTypeMapping TypeName="CNModel.Cotizacione">
+        <MappingFragment StoreEntitySet="Cotizaciones">
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idEstatusDeCotizacion" ColumnName="idEstatusDeCotizacion" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="numeroDePedido" ColumnName="numeroDePedido" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeCotizacions">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeCotizacion">
+        <MappingFragment StoreEntitySet="DetallesDeCotizacion">
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idDetalleDeCotizacion" ColumnName="idDetalleDeCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeCotizacions">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeCotizacion">
+        <MappingFragment StoreEntitySet="EstatusDeCotizacion">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDeCotizacion" ColumnName="idEstatusDeCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorCotizacions">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorCotizacion">
+        <MappingFragment StoreEntitySet="DatosExtraPorCotizacion">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idCotizacion" ColumnName="idCotizacion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasConPedimentos">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasConPedimento">
+        <MappingFragment StoreEntitySet="VwEntradasConPedimentos">
+          <ScalarProperty Name="numeroDePedimento" ColumnName="numeroDePedimento" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+          <ScalarProperty Name="unidades" ColumnName="unidades" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwExistenciasConPedimentos">
+      <EntityTypeMapping TypeName="CNModel.VwExistenciasConPedimento">
+        <MappingFragment StoreEntitySet="VwExistenciasConPedimentos">
+          <ScalarProperty Name="numeroDePedimento" ColumnName="numeroDePedimento" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="salidas" ColumnName="salidas" />
+          <ScalarProperty Name="entradas" ColumnName="entradas" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasConPedimentos">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasConPedimento">
+        <MappingFragment StoreEntitySet="VwSalidasConPedimentos">
+          <ScalarProperty Name="numeroDePedimento" ColumnName="numeroDePedimento" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+          <ScalarProperty Name="unidades" ColumnName="unidades" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorFacturas">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorFactura">
+        <MappingFragment StoreEntitySet="DatosExtraPorFactura">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Articulos">
+      <EntityTypeMapping TypeName="CNModel.Articulo">
+        <MappingFragment StoreEntitySet="Articulos">
+          <ScalarProperty Name="idTipoDeComision" ColumnName="idTipoDeComision" />
+          <ScalarProperty Name="importado" ColumnName="importado" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idProductoServicio" ColumnName="idProductoServicio" />
+          <ScalarProperty Name="idUnidadDeMedida" ColumnName="idUnidadDeMedida" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComisionesPorUsuarios">
+      <EntityTypeMapping TypeName="CNModel.ComisionesPorUsuario">
+        <MappingFragment StoreEntitySet="ComisionesPorUsuario">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="idTipoDeComision" ColumnName="idTipoDeComision" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TiposDeComisions">
+      <EntityTypeMapping TypeName="CNModel.TiposDeComision">
+        <MappingFragment StoreEntitySet="TiposDeComision">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idTipoDeComision" ColumnName="idTipoDeComision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ClasificacionesPorArticulo" TypeName="CNModel.ClasificacionesPorArticulo" StoreEntitySet="ClasificacionesPorArticulo">
+      <EndProperty Name="Clasificacione">
+        <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+      </EndProperty>
+      <EndProperty Name="Articulo">
+        <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="CancelacionesDePedidos">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDePedido">
+        <MappingFragment StoreEntitySet="CancelacionesDePedidos">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComentariosPorDetalleDePedidoes">
+      <EntityTypeMapping TypeName="CNModel.ComentariosPorDetalleDePedido">
+        <MappingFragment StoreEntitySet="ComentariosPorDetalleDePedido">
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="idDetalleDePedido" ColumnName="idDetalleDePedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDePedidoes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDePedido">
+        <MappingFragment StoreEntitySet="EstatusDePedido">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDePedido" ColumnName="idEstatusDePedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorPedidoes">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorPedido">
+        <MappingFragment StoreEntitySet="DatosExtraPorPedido">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDePedidoes">
+      <EntityTypeMapping TypeName="CNModel.DetallesDePedido">
+        <MappingFragment StoreEntitySet="DetallesDePedido">
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idDetalleDePedido" ColumnName="idDetalleDePedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OpcionesCostos">
+      <EntityTypeMapping TypeName="CNModel.OpcionesCosto">
+        <MappingFragment StoreEntitySet="OpcionesCostos">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idOpcionCosto" ColumnName="idOpcionCosto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwResumenPorFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwResumenPorFactura">
+        <MappingFragment StoreEntitySet="VwResumenPorFactura">
+          <ScalarProperty Name="idEstatusCrediticio" ColumnName="idEstatusCrediticio" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="FacturaSustituta" ColumnName="FacturaSustituta" />
+          <ScalarProperty Name="idComprobanteOriginal" ColumnName="idComprobanteOriginal" />
+          <ScalarProperty Name="idTipoRelacion" ColumnName="idTipoRelacion" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeOrdenesDeCompras">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeOrdenesDeCompra">
+        <MappingFragment StoreEntitySet="CancelacionesDeOrdenesDeCompra">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idOrdenDeCompra" ColumnName="idOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorOrdenDeCompras">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorOrdenDeCompra">
+        <MappingFragment StoreEntitySet="DatosExtraPorOrdenDeCompra">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idOrdenDeCompra" ColumnName="idOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="OrdenesDeCompras">
+      <EntityTypeMapping TypeName="CNModel.OrdenesDeCompra">
+        <MappingFragment StoreEntitySet="OrdenesDeCompra">
+          <ScalarProperty Name="idEstatusDeOrdenDeCompra" ColumnName="idEstatusDeOrdenDeCompra" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idOrdenDeCompra" ColumnName="idOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ComentariosPorDetalleDeOrdenDeCompras">
+      <EntityTypeMapping TypeName="CNModel.ComentariosPorDetalleDeOrdenDeCompra">
+        <MappingFragment StoreEntitySet="ComentariosPorDetalleDeOrdenDeCompra">
+          <ScalarProperty Name="comentario" ColumnName="comentario" />
+          <ScalarProperty Name="idDetalleDeOrdenDeCompra" ColumnName="idDetalleDeOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeOrdenDeCompras">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeOrdenDeCompra">
+        <MappingFragment StoreEntitySet="DetallesDeOrdenDeCompra">
+          <ScalarProperty Name="idUnidadDeMedida" ColumnName="idUnidadDeMedida" />
+          <ScalarProperty Name="idOrdenDeCompra" ColumnName="idOrdenDeCompra" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idDetalleDeOrdenDeCompra" ColumnName="idDetalleDeOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Impuestos">
+      <EntityTypeMapping TypeName="CNModel.Impuesto">
+        <MappingFragment StoreEntitySet="Impuestos">
+          <ScalarProperty Name="idTipoFactor" ColumnName="idTipoFactor" />
+          <ScalarProperty Name="idTipoDeImpuesto" ColumnName="idTipoDeImpuesto" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ImpuestosPorArticulo" TypeName="CNModel.ImpuestosPorArticulo" StoreEntitySet="ImpuestosPorArticulo">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="Articulo">
+        <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeCompra" TypeName="CNModel.ImpuestosPorDetalleDeCompra" StoreEntitySet="ImpuestosPorDetalleDeCompra">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeCompra">
+        <ScalarProperty Name="idDetalleDeCompra" ColumnName="idDetalleDeCompra" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeCotizacion" TypeName="CNModel.ImpuestosPorDetalleDeCotizacion" StoreEntitySet="ImpuestosPorDetalleDeCotizacion">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeCotizacion">
+        <ScalarProperty Name="idDetalleDeCotizacion" ColumnName="idDetalleDeCotizacion" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeFactura" TypeName="CNModel.ImpuestosPorDetalleDeFactura" StoreEntitySet="ImpuestosPorDetalleDeFactura">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeFactura">
+        <ScalarProperty Name="idDetalleDeFactura" ColumnName="idDetalleDeFactura" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeOrdenDeCompra" TypeName="CNModel.ImpuestosPorDetalleDeOrdenDeCompra" StoreEntitySet="ImpuestosPorDetalleDeOrdenDeCompra">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeOrdenDeCompra">
+        <ScalarProperty Name="idDetalleDeOrdenDeCompra" ColumnName="idDetalleDeOrdenDeCompra" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDePedido" TypeName="CNModel.ImpuestosPorDetalleDePedido" StoreEntitySet="ImpuestosPorDetalleDePedido">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDePedido">
+        <ScalarProperty Name="idDetalleDePedido" ColumnName="idDetalleDePedido" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeRemision" TypeName="CNModel.ImpuestosPorDetalleDeRemision" StoreEntitySet="ImpuestosPorDetalleDeRemision">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeRemision">
+        <ScalarProperty Name="idDetalleDeRemision" ColumnName="idDetalleDeRemision" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="VwArticulosVendidos">
+      <EntityTypeMapping TypeName="CNModel.VwArticulosVendido">
+        <MappingFragment StoreEntitySet="VwArticulosVendidos">
+          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+          <ScalarProperty Name="TipoTransaccion" ColumnName="TipoTransaccion" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="Subtotal" ColumnName="Subtotal" />
+          <ScalarProperty Name="Precio" ColumnName="Precio" />
+          <ScalarProperty Name="Cantidad" ColumnName="Cantidad" />
+          <ScalarProperty Name="DescripcionArticulo" ColumnName="DescripcionArticulo" />
+          <ScalarProperty Name="CodigoArticulo" ColumnName="CodigoArticulo" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Usuarios">
+      <EntityTypeMapping TypeName="CNModel.Usuario">
+        <MappingFragment StoreEntitySet="Usuarios">
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="descuento" ColumnName="descuento" />
+          <ScalarProperty Name="nombreCompleto" ColumnName="nombreCompleto" />
+          <ScalarProperty Name="contraseña" ColumnName="contraseña" />
+          <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Facturas">
+      <EntityTypeMapping TypeName="CNModel.Factura">
+        <MappingFragment StoreEntitySet="Facturas">
+          <ScalarProperty Name="idEstatusCrediticio" ColumnName="idEstatusCrediticio" />
+          <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="ordenDeCompra" ColumnName="ordenDeCompra" />
+          <ScalarProperty Name="idTipoRelacion" ColumnName="idTipoRelacion" />
+          <ScalarProperty Name="idComprobanteOriginal" ColumnName="idComprobanteOriginal" />
+          <ScalarProperty Name="idRegimen" ColumnName="idRegimen" />
+          <ScalarProperty Name="idUsoCFDI" ColumnName="idUsoCFDI" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="idMetodoPago" ColumnName="idMetodoPago" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="sello" ColumnName="sello" />
+          <ScalarProperty Name="noCertificado" ColumnName="noCertificado" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwVentasActivasPorClientes">
+      <EntityTypeMapping TypeName="CNModel.VwVentasActivasPorCliente">
+        <MappingFragment StoreEntitySet="VwVentasActivasPorCliente">
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+          <ScalarProperty Name="Abonado" ColumnName="Abonado" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="FechaHora" ColumnName="FechaHora" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+          <ScalarProperty Name="TipoTransaccion" ColumnName="TipoTransaccion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSaldoDeudorPorClientePorMonedas">
+      <EntityTypeMapping TypeName="CNModel.VwSaldoDeudorPorClientePorMoneda">
+        <MappingFragment StoreEntitySet="VwSaldoDeudorPorClientePorMoneda">
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="Saldo" ColumnName="Saldo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Configuraciones">
+      <EntityTypeMapping TypeName="CNModel.Configuracione">
+        <MappingFragment StoreEntitySet="Configuraciones">
+          <ScalarProperty Name="idOpcionCostoDisminuye" ColumnName="idOpcionCostoDisminuye" />
+          <ScalarProperty Name="idOpcionCostoAumenta" ColumnName="idOpcionCostoAumenta" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="contraseñaPAC" ColumnName="contraseñaPAC" />
+          <ScalarProperty Name="usuarioPAC" ColumnName="usuarioPAC" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwListaFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwListaFactura">
+        <MappingFragment StoreEntitySet="VwListaFacturas">
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FechaCancelacion" ColumnName="FechaCancelacion" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="FacturaSustituta" ColumnName="FacturaSustituta" />
+          <ScalarProperty Name="idComprobanteOriginal" ColumnName="idComprobanteOriginal" />
+          <ScalarProperty Name="idTipoRelacion" ColumnName="idTipoRelacion" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Formatos">
+      <EntityTypeMapping TypeName="CNModel.Formato">
+        <MappingFragment StoreEntitySet="Formatos">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="archivo" ColumnName="archivo" />
+          <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+          <ScalarProperty Name="idFormato" ColumnName="idFormato" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Reportes">
+      <EntityTypeMapping TypeName="CNModel.Reporte">
+        <MappingFragment StoreEntitySet="Reportes">
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="FormatosPorConfiguracions">
+      <EntityTypeMapping TypeName="CNModel.FormatosPorConfiguracion">
+        <MappingFragment StoreEntitySet="FormatosPorConfiguracion">
+          <ScalarProperty Name="idFormato" ColumnName="idFormato" />
+          <ScalarProperty Name="idReporte" ColumnName="idReporte" />
+          <ScalarProperty Name="idConfiguracion" ColumnName="idConfiguracion" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDePagos">
+      <EntityTypeMapping TypeName="CNModel.EstatusDePago">
+        <MappingFragment StoreEntitySet="EstatusDePagos">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDePago" ColumnName="idEstatusDePago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimbresDePagos">
+      <EntityTypeMapping TypeName="CNModel.TimbresDePago">
+        <MappingFragment StoreEntitySet="TimbresDePagos">
+          <ScalarProperty Name="leyenda" ColumnName="leyenda" />
+          <ScalarProperty Name="rfcProvCertif" ColumnName="rfcProvCertif" />
+          <ScalarProperty Name="fechaTimbrado" ColumnName="fechaTimbrado" />
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="noCertificadoSAT" ColumnName="noCertificadoSAT" />
+          <ScalarProperty Name="selloCFD" ColumnName="selloCFD" />
+          <ScalarProperty Name="selloSAT" ColumnName="selloSAT" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="sello" ColumnName="sello" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="noCertificado" ColumnName="noCertificado" />
+          <ScalarProperty Name="idTimbreDePago" ColumnName="idTimbreDePago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwListaParcialidades">
+      <EntityTypeMapping TypeName="CNModel.VwListaParcialidade">
+        <MappingFragment StoreEntitySet="VwListaParcialidades">
+          <ScalarProperty Name="TipoDeAbono" ColumnName="TipoDeAbono" />
+          <ScalarProperty Name="idAbonoDeFactura" ColumnName="idAbonoDeFactura" />
+          <ScalarProperty Name="FolioAbonoTexto" ColumnName="FolioAbonoTexto" />
+          <ScalarProperty Name="SerieAbono" ColumnName="SerieAbono" />
+          <ScalarProperty Name="FolioAbono" ColumnName="FolioAbono" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="CodigoCliente" ColumnName="CodigoCliente" />
+          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="FolioFacturaTexto" ColumnName="FolioFacturaTexto" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="FolioFactura" ColumnName="FolioFactura" />
+          <ScalarProperty Name="SerieFactura" ColumnName="SerieFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwListaArticulos">
+      <EntityTypeMapping TypeName="CNModel.VwListaArticulo">
+        <MappingFragment StoreEntitySet="VwListaArticulos">
+          <ScalarProperty Name="Activo" ColumnName="Activo" />
+          <ScalarProperty Name="Existencia" ColumnName="Existencia" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="PrecioUnitario" ColumnName="PrecioUnitario" />
+          <ScalarProperty Name="UnidadDeMedida" ColumnName="UnidadDeMedida" />
+          <ScalarProperty Name="Descripcion" ColumnName="Descripcion" />
+          <ScalarProperty Name="Codigo" ColumnName="Codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteAntiguedadSaldosFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwReporteAntiguedadSaldosFactura">
+        <MappingFragment StoreEntitySet="VwReporteAntiguedadSaldosFacturas">
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
+          <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+          <ScalarProperty Name="idPais" ColumnName="idPais" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="colonia" ColumnName="colonia" />
+          <ScalarProperty Name="numeroInterior" ColumnName="numeroInterior" />
+          <ScalarProperty Name="numeroExterior" ColumnName="numeroExterior" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="contacto" ColumnName="contacto" />
+          <ScalarProperty Name="diasCredito" ColumnName="diasCredito" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="FacturaSustituta" ColumnName="FacturaSustituta" />
+          <ScalarProperty Name="idComprobanteOriginal" ColumnName="idComprobanteOriginal" />
+          <ScalarProperty Name="idTipoRelacion" ColumnName="idTipoRelacion" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteAntiguedadSaldosRemisiones">
+      <EntityTypeMapping TypeName="CNModel.VwReporteAntiguedadSaldosRemisione">
+        <MappingFragment StoreEntitySet="VwReporteAntiguedadSaldosRemisiones">
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="nombreDeUsuario" ColumnName="nombreDeUsuario" />
+          <ScalarProperty Name="codigoPostal" ColumnName="codigoPostal" />
+          <ScalarProperty Name="idPais" ColumnName="idPais" />
+          <ScalarProperty Name="estado" ColumnName="estado" />
+          <ScalarProperty Name="ciudad" ColumnName="ciudad" />
+          <ScalarProperty Name="colonia" ColumnName="colonia" />
+          <ScalarProperty Name="numeroInterior" ColumnName="numeroInterior" />
+          <ScalarProperty Name="numeroExterior" ColumnName="numeroExterior" />
+          <ScalarProperty Name="calle" ColumnName="calle" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="contacto" ColumnName="contacto" />
+          <ScalarProperty Name="diasCredito" ColumnName="diasCredito" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeTraspasoes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeTraspaso">
+        <MappingFragment StoreEntitySet="EstatusDeTraspaso">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDeTraspaso" ColumnName="idEstatusDeTraspaso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDePagos">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDePago">
+        <MappingFragment StoreEntitySet="CancelacionesDePagos">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idPago" ColumnName="idPago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeTimbresDePagos">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeTimbresDePago">
+        <MappingFragment StoreEntitySet="CancelacionesDeTimbresDePagos">
+          <ScalarProperty Name="acuse" ColumnName="acuse" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idCancelacionDeTimbreDePago" ColumnName="idCancelacionDeTimbreDePago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwCotizacionesPorPeriodoes">
+      <EntityTypeMapping TypeName="CNModel.VwCotizacionesPorPeriodo">
+        <MappingFragment StoreEntitySet="VwCotizacionesPorPeriodo">
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Usuario" ColumnName="Usuario" />
+          <ScalarProperty Name="Moneda" ColumnName="Moneda" />
+          <ScalarProperty Name="Total" ColumnName="Total" />
+          <ScalarProperty Name="Hora" ColumnName="Hora" />
+          <ScalarProperty Name="Fecha" ColumnName="Fecha" />
+          <ScalarProperty Name="Cliente" ColumnName="Cliente" />
+          <ScalarProperty Name="Folio" ColumnName="Folio" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeTraspasoes">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeTraspaso">
+        <MappingFragment StoreEntitySet="DetallesDeTraspaso">
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="cantidadAceptada" ColumnName="cantidadAceptada" />
+          <ScalarProperty Name="cantidadEnviada" ColumnName="cantidadEnviada" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idTraspaso" ColumnName="idTraspaso" />
+          <ScalarProperty Name="idDetalleDeTraspaso" ColumnName="idDetalleDeTraspaso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedimentoPorDetalleDeTraspasoes">
+      <EntityTypeMapping TypeName="CNModel.PedimentoPorDetalleDeTraspaso">
+        <MappingFragment StoreEntitySet="PedimentoPorDetalleDeTraspaso">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idDetalleDeTraspaso" ColumnName="idDetalleDeTraspaso" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Traspasos">
+      <EntityTypeMapping TypeName="CNModel.Traspaso">
+        <MappingFragment StoreEntitySet="Traspasos">
+          <ScalarProperty Name="fechaHoraRemoto" ColumnName="fechaHoraRemoto" />
+          <ScalarProperty Name="folioRemoto" ColumnName="folioRemoto" />
+          <ScalarProperty Name="idEmpresaAsociadaDestino" ColumnName="idEmpresaAsociadaDestino" />
+          <ScalarProperty Name="idEmpresaAsociadaOrigen" ColumnName="idEmpresaAsociadaOrigen" />
+          <ScalarProperty Name="idEstatusDeTraspaso" ColumnName="idEstatusDeTraspaso" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idTraspaso" ColumnName="idTraspaso" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EmpresasAsociadas">
+      <EntityTypeMapping TypeName="CNModel.EmpresasAsociada">
+        <MappingFragment StoreEntitySet="EmpresasAsociadas">
+          <ScalarProperty Name="idEmpresaLocal" ColumnName="idEmpresaLocal" />
+          <ScalarProperty Name="activa" ColumnName="activa" />
+          <ScalarProperty Name="contrasena" ColumnName="contrasena" />
+          <ScalarProperty Name="usuario" ColumnName="usuario" />
+          <ScalarProperty Name="baseDeDatos" ColumnName="baseDeDatos" />
+          <ScalarProperty Name="servidor" ColumnName="servidor" />
+          <ScalarProperty Name="nombre" ColumnName="nombre" />
+          <ScalarProperty Name="idEmpresaAsociada" ColumnName="idEmpresaAsociada" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="SolicitudesDeTraspasoes">
+      <EntityTypeMapping TypeName="CNModel.SolicitudesDeTraspaso">
+        <MappingFragment StoreEntitySet="SolicitudesDeTraspaso">
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idTraspaso" ColumnName="idTraspaso" />
+          <ScalarProperty Name="idEmpresaAsociadaOrigen" ColumnName="idEmpresaAsociadaOrigen" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorTraspasos">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorTraspaso">
+        <MappingFragment StoreEntitySet="VwEntradasPorTraspasos">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idTraspaso" ColumnName="idTraspaso" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeTraspaso" ColumnName="idDetalleDeTraspaso" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorTraspasos">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorTraspaso">
+        <MappingFragment StoreEntitySet="VwSalidasPorTraspasos">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idTraspaso" ColumnName="idTraspaso" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeTraspaso" ColumnName="idDetalleDeTraspaso" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Compras">
+      <EntityTypeMapping TypeName="CNModel.Compra">
+        <MappingFragment StoreEntitySet="Compras">
+          <ScalarProperty Name="descuentos" ColumnName="descuentos" />
+          <ScalarProperty Name="cargos" ColumnName="cargos" />
+          <ScalarProperty Name="idOrdenDeCompra" ColumnName="idOrdenDeCompra" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idEstatusDeCompra" ColumnName="idEstatusDeCompra" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="PedimentoPorCompras" TypeName="CNModel.PedimentoPorCompras" StoreEntitySet="PedimentoPorCompras">
+      <EndProperty Name="Pedimento">
+        <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+      </EndProperty>
+      <EndProperty Name="Compra">
+        <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="VwResumenPorCompras">
+      <EntityTypeMapping TypeName="CNModel.VwResumenPorCompra">
+        <MappingFragment StoreEntitySet="VwResumenPorCompra">
+          <ScalarProperty Name="descuentos" ColumnName="descuentos" />
+          <ScalarProperty Name="cargos" ColumnName="cargos" />
+          <ScalarProperty Name="abonado" ColumnName="abonado" />
+          <ScalarProperty Name="impuestos" ColumnName="impuestos" />
+          <ScalarProperty Name="subtotal" ColumnName="subtotal" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDeCompra" ColumnName="idEstatusDeCompra" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="moneda" ColumnName="moneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pagos">
+      <EntityTypeMapping TypeName="CNModel.Pago">
+        <MappingFragment StoreEntitySet="Pagos">
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="idUsoCFDI" ColumnName="idUsoCFDI" />
+          <ScalarProperty Name="idRegimen" ColumnName="idRegimen" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idEstatusDePago" ColumnName="idEstatusDePago" />
+          <ScalarProperty Name="idMetodoDePago" ColumnName="idMetodoDePago" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idPago" ColumnName="idPago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwListaPagos">
+      <EntityTypeMapping TypeName="CNModel.VwListaPago">
+        <MappingFragment StoreEntitySet="VwListaPagos">
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="totalDolares" ColumnName="totalDolares" />
+          <ScalarProperty Name="totalPesos" ColumnName="totalPesos" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="estatus" ColumnName="estatus" />
+          <ScalarProperty Name="idEstatusDePago" ColumnName="idEstatusDePago" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idPago" ColumnName="idPago" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CambioDivisas">
+      <EntityTypeMapping TypeName="CNModel.CambioDivisa">
+        <MappingFragment StoreEntitySet="CambioDivisas">
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="idMonedaDivisa" ColumnName="idMonedaDivisa" />
+          <ScalarProperty Name="idCambioDivisa" ColumnName="idCambioDivisa" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DatosExtraPorNotaDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.DatosExtraPorNotaDeCredito">
+        <MappingFragment StoreEntitySet="DatosExtraPorNotaDeCredito">
+          <ScalarProperty Name="valor" ColumnName="valor" />
+          <ScalarProperty Name="dato" ColumnName="dato" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DetallesDeNotaDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.DetallesDeNotaDeCredito">
+        <MappingFragment StoreEntitySet="DetallesDeNotaDeCredito">
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="idDetalleDeNotaDeCredito" ColumnName="idDetalleDeNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeNotaDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeNotaDeCredito">
+        <MappingFragment StoreEntitySet="EstatusDeNotaDeCredito">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDeNotaDeCredito" ColumnName="idEstatusDeNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="PedimentoPorDetalleDeNotaDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.PedimentoPorDetalleDeNotaDeCredito">
+        <MappingFragment StoreEntitySet="PedimentoPorDetalleDeNotaDeCredito">
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idPedimento" ColumnName="idPedimento" />
+          <ScalarProperty Name="idDetalleDeNotaDeCredito" ColumnName="idDetalleDeNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <AssociationSetMapping Name="ImpuestosPorDetalleDeNotaDeCredito" TypeName="CNModel.ImpuestosPorDetalleDeNotaDeCredito" StoreEntitySet="ImpuestosPorDetalleDeNotaDeCredito">
+      <EndProperty Name="Impuesto">
+        <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+      </EndProperty>
+      <EndProperty Name="DetallesDeNotaDeCredito">
+        <ScalarProperty Name="idDetalleDeNotaDeCredito" ColumnName="idDetalleDeNotaDeCredito" />
+      </EndProperty>
+    </AssociationSetMapping>
+    <EntitySetMapping Name="CancelacionesDeNotaDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeNotaDeCredito">
+        <MappingFragment StoreEntitySet="CancelacionesDeNotaDeCredito">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeTimbresDeNotasDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeTimbresDeNotasDeCredito">
+        <MappingFragment StoreEntitySet="CancelacionesDeTimbresDeNotasDeCredito">
+          <ScalarProperty Name="acuse" ColumnName="acuse" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idCancelacionDeTimbreDeNotaDeCredito" ColumnName="idCancelacionDeTimbreDeNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="TimbresDeNotasDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.TimbresDeNotasDeCredito">
+        <MappingFragment StoreEntitySet="TimbresDeNotasDeCredito">
+          <ScalarProperty Name="sello" ColumnName="sello" />
+          <ScalarProperty Name="noCertificado" ColumnName="noCertificado" />
+          <ScalarProperty Name="leyenda" ColumnName="leyenda" />
+          <ScalarProperty Name="rfcProvCertif" ColumnName="rfcProvCertif" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="fechaTimbrado" ColumnName="fechaTimbrado" />
+          <ScalarProperty Name="UUID" ColumnName="UUID" />
+          <ScalarProperty Name="noCertificadoSAT" ColumnName="noCertificadoSAT" />
+          <ScalarProperty Name="selloCFD" ColumnName="selloCFD" />
+          <ScalarProperty Name="selloSAT" ColumnName="selloSAT" />
+          <ScalarProperty Name="version" ColumnName="version" />
+          <ScalarProperty Name="idTimbreDeNotaDeCredito" ColumnName="idTimbreDeNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotasDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.NotasDeCredito">
+        <MappingFragment StoreEntitySet="NotasDeCredito">
+          <ScalarProperty Name="idCuentaBancaria" ColumnName="idCuentaBancaria" />
+          <ScalarProperty Name="idEstatusDeNotaDeCredito" ColumnName="idEstatusDeNotaDeCredito" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idRegimen" ColumnName="idRegimen" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idFormaDePago" ColumnName="idFormaDePago" />
+          <ScalarProperty Name="cadenaOriginal" ColumnName="cadenaOriginal" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeOrdenDeCompras">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeOrdenDeCompra">
+        <MappingFragment StoreEntitySet="EstatusDeOrdenDeCompra">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDeOrdenDeCompra" ColumnName="idEstatusDeOrdenDeCompra" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwFoliosPorSeries">
+      <EntityTypeMapping TypeName="CNModel.VwFoliosPorSerie">
+        <MappingFragment StoreEntitySet="VwFoliosPorSerie">
+          <ScalarProperty Name="timbresConsumidos" ColumnName="timbresConsumidos" />
+          <ScalarProperty Name="ultimoFolio" ColumnName="ultimoFolio" />
+          <ScalarProperty Name="timbresDeNotasDeCredito" ColumnName="timbresDeNotasDeCredito" />
+          <ScalarProperty Name="ultimaNotaDeCredito" ColumnName="ultimaNotaDeCredito" />
+          <ScalarProperty Name="timbresDePagos" ColumnName="timbresDePagos" />
+          <ScalarProperty Name="ultimoPago" ColumnName="ultimoPago" />
+          <ScalarProperty Name="timbresDeParcialidades" ColumnName="timbresDeParcialidades" />
+          <ScalarProperty Name="ultimaParcialidad" ColumnName="ultimaParcialidad" />
+          <ScalarProperty Name="timbresDeFacturas" ColumnName="timbresDeFacturas" />
+          <ScalarProperty Name="ultimaFactura" ColumnName="ultimaFactura" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="folioFinal" ColumnName="folioFinal" />
+          <ScalarProperty Name="folioInicial" ColumnName="folioInicial" />
+          <ScalarProperty Name="identificador" ColumnName="identificador" />
+          <ScalarProperty Name="idSerie" ColumnName="idSerie" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorArticuloes">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorArticulo">
+        <MappingFragment StoreEntitySet="VwEntradasPorArticulo">
+          <ScalarProperty Name="entradasNotasDeCredito" ColumnName="entradasNotasDeCredito" />
+          <ScalarProperty Name="totalEntradas" ColumnName="totalEntradas" />
+          <ScalarProperty Name="entradasTraspasos" ColumnName="entradasTraspasos" />
+          <ScalarProperty Name="totalAjustes" ColumnName="totalAjustes" />
+          <ScalarProperty Name="salidasAjustes" ColumnName="salidasAjustes" />
+          <ScalarProperty Name="entradasAjustes" ColumnName="entradasAjustes" />
+          <ScalarProperty Name="totalCompras" ColumnName="totalCompras" />
+          <ScalarProperty Name="salidasCompras" ColumnName="salidasCompras" />
+          <ScalarProperty Name="entradasCompras" ColumnName="entradasCompras" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Proveedores">
+      <EntityTypeMapping TypeName="CNModel.Proveedore">
+        <MappingFragment StoreEntitySet="Proveedores">
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteInventarioFisicoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteInventarioFisico">
+        <MappingFragment StoreEntitySet="VwReporteInventarioFisico">
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idClasificacion" ColumnName="idClasificacion" />
+          <ScalarProperty Name="unidadMedida" ColumnName="unidadMedida" />
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Clientes">
+      <EntityTypeMapping TypeName="CNModel.Cliente">
+        <MappingFragment StoreEntitySet="Clientes">
+          <ScalarProperty Name="idUsoCFDI" ColumnName="idUsoCFDI" />
+          <ScalarProperty Name="diasCredito" ColumnName="diasCredito" />
+          <ScalarProperty Name="limiteCredito" ColumnName="limiteCredito" />
+          <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
+          <ScalarProperty Name="activo" ColumnName="activo" />
+          <ScalarProperty Name="idListaDePrecio" ColumnName="idListaDePrecio" />
+          <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
+          <ScalarProperty Name="condicionDePago" ColumnName="condicionDePago" />
+          <ScalarProperty Name="contacto" ColumnName="contacto" />
+          <ScalarProperty Name="correoElectronico" ColumnName="correoElectronico" />
+          <ScalarProperty Name="telefono" ColumnName="telefono" />
+          <ScalarProperty Name="rfc" ColumnName="rfc" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="nombreComercial" ColumnName="nombreComercial" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="EstatusDeNotaDeDescuentoes">
+      <EntityTypeMapping TypeName="CNModel.EstatusDeNotaDeDescuento">
+        <MappingFragment StoreEntitySet="EstatusDeNotaDeDescuento">
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="idEstatusDeNotaDeDescuento" ColumnName="idEstatusDeNotaDeDescuento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="NotasDeDescuentoes">
+      <EntityTypeMapping TypeName="CNModel.NotasDeDescuento">
+        <MappingFragment StoreEntitySet="NotasDeDescuento">
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idEstatusDeNotaDeDescuento" ColumnName="idEstatusDeNotaDeDescuento" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idNotaDeDescuento" ColumnName="idNotaDeDescuento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CancelacionesDeNotaDeDescuentoes">
+      <EntityTypeMapping TypeName="CNModel.CancelacionesDeNotaDeDescuento">
+        <MappingFragment StoreEntitySet="CancelacionesDeNotaDeDescuento">
+          <ScalarProperty Name="motivo" ColumnName="motivo" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idNotaDeDescuento" ColumnName="idNotaDeDescuento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwEntradasPorNotasDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.VwEntradasPorNotasDeCredito">
+        <MappingFragment StoreEntitySet="VwEntradasPorNotasDeCredito">
+          <ScalarProperty Name="factura" ColumnName="factura" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeNotaDeCredito" ColumnName="idDetalleDeNotaDeCredito" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwSalidasPorNotasDeCreditoCanceladas">
+      <EntityTypeMapping TypeName="CNModel.VwSalidasPorNotasDeCreditoCancelada">
+        <MappingFragment StoreEntitySet="VwSalidasPorNotasDeCreditoCanceladas">
+          <ScalarProperty Name="factura" ColumnName="factura" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="Unidades" ColumnName="Unidades" />
+          <ScalarProperty Name="idDetalleDeNotaDeCredito" ColumnName="idDetalleDeNotaDeCredito" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteImpuestosPorPeriodoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteImpuestosPorPeriodo">
+        <MappingFragment StoreEntitySet="VwReporteImpuestosPorPeriodo">
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+          <ScalarProperty Name="baseGravable" ColumnName="baseGravable" />
+          <ScalarProperty Name="valorImpuesto" ColumnName="valorImpuesto" />
+          <ScalarProperty Name="descripcionTipoDeFactor" ColumnName="descripcionTipoDeFactor" />
+          <ScalarProperty Name="idTipoFactor" ColumnName="idTipoFactor" />
+          <ScalarProperty Name="descripcionTipoDeImpuesto" ColumnName="descripcionTipoDeImpuesto" />
+          <ScalarProperty Name="idTipoDeImpuesto" ColumnName="idTipoDeImpuesto" />
+          <ScalarProperty Name="idImpuesto" ColumnName="idImpuesto" />
+          <ScalarProperty Name="descripcionImpuesto" ColumnName="descripcionImpuesto" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodigosDeArticuloPorProveedors">
+      <EntityTypeMapping TypeName="CNModel.CodigosDeArticuloPorProveedor">
+        <MappingFragment StoreEntitySet="CodigosDeArticuloPorProveedor">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idCodigoDeArticuloPorProveedor" ColumnName="idCodigoDeArticuloPorProveedor" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwCodigosDeArticuloPorClientes">
+      <EntityTypeMapping TypeName="CNModel.VwCodigosDeArticuloPorCliente">
+        <MappingFragment StoreEntitySet="VwCodigosDeArticuloPorCliente">
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="codigoAlterno" ColumnName="codigoAlterno" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwCodigosDeArticuloPorProveedors">
+      <EntityTypeMapping TypeName="CNModel.VwCodigosDeArticuloPorProveedor">
+        <MappingFragment StoreEntitySet="VwCodigosDeArticuloPorProveedor">
+          <ScalarProperty Name="proveedor" ColumnName="proveedor" />
+          <ScalarProperty Name="idProveedor" ColumnName="idProveedor" />
+          <ScalarProperty Name="codigoAlterno" ColumnName="codigoAlterno" />
+          <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="CodigosDeArticuloPorClientes">
+      <EntityTypeMapping TypeName="CNModel.CodigosDeArticuloPorCliente">
+        <MappingFragment StoreEntitySet="CodigosDeArticuloPorCliente">
+          <ScalarProperty Name="codigo" ColumnName="codigo" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="idCodigoDeArticuloPorCliente" ColumnName="idCodigoDeArticuloPorCliente" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteAvaluos">
+      <EntityTypeMapping TypeName="CNModel.VwReporteAvaluo">
+        <MappingFragment StoreEntitySet="VwReporteAvaluo">
+          <ScalarProperty Name="salidas" ColumnName="salidas" />
+          <ScalarProperty Name="entradas" ColumnName="entradas" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="importado" ColumnName="importado" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+          <ScalarProperty Name="descripcionArticulo" ColumnName="descripcionArticulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaAjustesEntradas">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaAjustesEntrada">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaAjustesEntrada">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaAjustesSalidas">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaAjustesSalida">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaAjustesSalida">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idAjuste" ColumnName="idAjuste" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaAvaluos">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaAvaluo">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaAvaluo">
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaCompras">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaCompra">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaCompras">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaCuentasPorCobrars">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaCuentasPorCobrar">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaCuentasPorCobrar">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaCuentasPorPagars">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaCuentasPorPagar">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaCuentasPorPagar">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idCompra" ColumnName="idCompra" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaFacturas">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaFactura">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaFacturas">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaNotasDeCreditoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaNotasDeCredito">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaNotasDeCredito">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idNotaDeCredito" ColumnName="idNotaDeCredito" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaNotasDeDescuentoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaNotasDeDescuento">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaNotasDeDescuento">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idNotaDeDescuento" ColumnName="idNotaDeDescuento" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaPedidos">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaPedido">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaPedidos">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteEstatusDeLaEmpresaRemisiones">
+      <EntityTypeMapping TypeName="CNModel.VwReporteEstatusDeLaEmpresaRemisione">
+        <MappingFragment StoreEntitySet="VwReporteEstatusDeLaEmpresaRemisiones">
+          <ScalarProperty Name="impuestosRetenidos" ColumnName="impuestosRetenidos" />
+          <ScalarProperty Name="impuestosTrasladados" ColumnName="impuestosTrasladados" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Remisiones">
+      <EntityTypeMapping TypeName="CNModel.Remisione">
+        <MappingFragment StoreEntitySet="Remisiones">
+          <ScalarProperty Name="ordenDeCompra" ColumnName="ordenDeCompra" />
+          <ScalarProperty Name="idEstatusCrediticio" ColumnName="idEstatusCrediticio" />
+          <ScalarProperty Name="idVendedor" ColumnName="idVendedor" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idRemision" ColumnName="idRemision" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Pedidos">
+      <EntityTypeMapping TypeName="CNModel.Pedido">
+        <MappingFragment StoreEntitySet="Pedidos">
+          <ScalarProperty Name="ordenDeCompra" ColumnName="ordenDeCompra" />
+          <ScalarProperty Name="idEmpresa" ColumnName="idEmpresa" />
+          <ScalarProperty Name="idEstatusDePedido" ColumnName="idEstatusDePedido" />
+          <ScalarProperty Name="idUsuarioRegistro" ColumnName="idUsuarioRegistro" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idPedido" ColumnName="idPedido" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteListaDePrecios">
+      <EntityTypeMapping TypeName="CNModel.VwReporteListaDePrecio">
+        <MappingFragment StoreEntitySet="VwReporteListaDePrecios">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="precioUnitarioD" ColumnName="precioUnitarioD" />
+          <ScalarProperty Name="precioUnitarioC" ColumnName="precioUnitarioC" />
+          <ScalarProperty Name="precioUnitarioB" ColumnName="precioUnitarioB" />
+          <ScalarProperty Name="precioUnitarioA" ColumnName="precioUnitarioA" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+          <ScalarProperty Name="descripcionArticulo" ColumnName="descripcionArticulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteListaDePreciosConImpuestos">
+      <EntityTypeMapping TypeName="CNModel.VwReporteListaDePreciosConImpuesto">
+        <MappingFragment StoreEntitySet="VwReporteListaDePreciosConImpuestos">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="precioUnitarioD" ColumnName="precioUnitarioD" />
+          <ScalarProperty Name="precioUnitarioC" ColumnName="precioUnitarioC" />
+          <ScalarProperty Name="precioUnitarioB" ColumnName="precioUnitarioB" />
+          <ScalarProperty Name="precioUnitarioA" ColumnName="precioUnitarioA" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+          <ScalarProperty Name="descripcionArticulo" ColumnName="descripcionArticulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteListaDePreciosPorListas">
+      <EntityTypeMapping TypeName="CNModel.VwReporteListaDePreciosPorLista">
+        <MappingFragment StoreEntitySet="VwReporteListaDePreciosPorLista">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="idListaDePrecio" ColumnName="idListaDePrecio" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+          <ScalarProperty Name="descripcionArticulo" ColumnName="descripcionArticulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteListaDePreciosPorListaConImpuestos">
+      <EntityTypeMapping TypeName="CNModel.VwReporteListaDePreciosPorListaConImpuesto">
+        <MappingFragment StoreEntitySet="VwReporteListaDePreciosPorListaConImpuestos">
+          <ScalarProperty Name="existencia" ColumnName="existencia" />
+          <ScalarProperty Name="inventariado" ColumnName="inventariado" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="precioUnitario" ColumnName="precioUnitario" />
+          <ScalarProperty Name="idListaDePrecio" ColumnName="idListaDePrecio" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+          <ScalarProperty Name="descripcionArticulo" ColumnName="descripcionArticulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteCostoDeLoVendidoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteCostoDeLoVendido">
+        <MappingFragment StoreEntitySet="VwReporteCostoDeLoVendido">
+          <ScalarProperty Name="fechaCancelacionTexto" ColumnName="fechaCancelacionTexto" />
+          <ScalarProperty Name="fechaCancelacion" ColumnName="fechaCancelacion" />
+          <ScalarProperty Name="nombreUsuario" ColumnName="nombreUsuario" />
+          <ScalarProperty Name="idUsuario" ColumnName="idUsuario" />
+          <ScalarProperty Name="descripcionMoneda" ColumnName="descripcionMoneda" />
+          <ScalarProperty Name="idMonedaTransaccion" ColumnName="idMonedaTransaccion" />
+          <ScalarProperty Name="codigoCliente" ColumnName="codigoCliente" />
+          <ScalarProperty Name="razonSocialCliente" ColumnName="razonSocialCliente" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="fechaTexto" ColumnName="fechaTexto" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+          <ScalarProperty Name="idMonedaArticulo" ColumnName="idMonedaArticulo" />
+          <ScalarProperty Name="costo" ColumnName="costo" />
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteVentasPorArticuloes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteVentasPorArticulo">
+        <MappingFragment StoreEntitySet="VwReporteVentasPorArticulo">
+          <ScalarProperty Name="serie" ColumnName="serie" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="idEstatusDeRemision" ColumnName="idEstatusDeRemision" />
+          <ScalarProperty Name="idEstatusDeFactura" ColumnName="idEstatusDeFactura" />
+          <ScalarProperty Name="Estatus" ColumnName="Estatus" />
+          <ScalarProperty Name="codigoCliente" ColumnName="codigoCliente" />
+          <ScalarProperty Name="cliente" ColumnName="cliente" />
+          <ScalarProperty Name="fecha" ColumnName="fecha" />
+          <ScalarProperty Name="folioTexto" ColumnName="folioTexto" />
+          <ScalarProperty Name="nota" ColumnName="nota" />
+          <ScalarProperty Name="costoUnitario" ColumnName="costoUnitario" />
+          <ScalarProperty Name="precio" ColumnName="precio" />
+          <ScalarProperty Name="descripcionMoneda" ColumnName="descripcionMoneda" />
+          <ScalarProperty Name="tipoDeCambio" ColumnName="tipoDeCambio" />
+          <ScalarProperty Name="idMonedaTransaccion" ColumnName="idMonedaTransaccion" />
+          <ScalarProperty Name="importe" ColumnName="importe" />
+          <ScalarProperty Name="cantidad" ColumnName="cantidad" />
+          <ScalarProperty Name="idMonedaArticulo" ColumnName="idMonedaArticulo" />
+          <ScalarProperty Name="articulo" ColumnName="articulo" />
+          <ScalarProperty Name="idArticulo" ColumnName="idArticulo" />
+          <ScalarProperty Name="codigoArticulo" ColumnName="codigoArticulo" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="VwReporteNotasDeDescuentoes">
+      <EntityTypeMapping TypeName="CNModel.VwReporteNotasDeDescuento">
+        <MappingFragment StoreEntitySet="VwReporteNotasDeDescuento">
+          <ScalarProperty Name="idEstatusDeNotaDeDescuento" ColumnName="idEstatusDeNotaDeDescuento" />
+          <ScalarProperty Name="fechaFactura" ColumnName="fechaFactura" />
+          <ScalarProperty Name="folioFactura" ColumnName="folioFactura" />
+          <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+          <ScalarProperty Name="razonSocial" ColumnName="razonSocial" />
+          <ScalarProperty Name="idCliente" ColumnName="idCliente" />
+          <ScalarProperty Name="descripcionMoneda" ColumnName="descripcionMoneda" />
+          <ScalarProperty Name="idMoneda" ColumnName="idMoneda" />
+          <ScalarProperty Name="monto" ColumnName="monto" />
+          <ScalarProperty Name="folio" ColumnName="folio" />
+          <ScalarProperty Name="fechaTexto" ColumnName="fechaTexto" />
+          <ScalarProperty Name="fechaHora" ColumnName="fechaHora" />
+          <ScalarProperty Name="idNotaDeDescuento" ColumnName="idNotaDeDescuento" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

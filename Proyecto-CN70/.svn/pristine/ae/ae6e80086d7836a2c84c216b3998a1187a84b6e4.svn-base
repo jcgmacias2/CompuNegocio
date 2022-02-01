@@ -1,0 +1,117 @@
+﻿using Aprovi.Business.Helpers;
+using Aprovi.Data.Core;
+using Aprovi.Data.Models;
+using Aprovi.Data.Repositories;
+using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Net;
+using System.Web;
+
+namespace Aprovi.Business.Services
+{
+    public abstract class SeguridadService : ISeguridadService
+    {
+        private IUnitOfWork _UOW;
+        private IAplicacionesRepository _app;
+        private IUsuariosRepository _users;
+        private Criptografia _crypto;
+
+        public SeguridadService(IUnitOfWork unitOfWork)
+        {
+            _UOW = unitOfWork;
+            _app = _UOW.Aplicaciones;
+            _users = _UOW.Usuarios;
+            _crypto = new Criptografia();
+        }
+
+        public bool AuthenticateWithAPI(string usuario, string contraseña, bool useSSL)
+        {
+            try
+            {
+                HttpWebRequest apiRequest;
+                string response;
+                DateTime issued;
+                int idUser;
+                string token;
+                dynamic jsonResponse;
+                string cifrada;
+                string reemplazada;
+                string codificada;
+
+                //Obtengo el ambiente en el que corre
+                var environment = (Ambiente)Enum.Parse(typeof(Ambiente), _app.ReadSetting("Environment").ToString(), true);
+
+                //la contraseña debe ir cifrada
+                cifrada = _crypto.Cipher(contraseña);
+
+                //Le quito diagonales si tiene
+                reemplazada = cifrada.Replace('/', '_');
+
+                //Y codificada para url
+                codificada = HttpUtility.UrlEncode(reemplazada);
+
+                //Superseeds
+                if (environment.Equals(Ambiente.Configuration) && File.Exists(string.Format("{0}\\MT.sys", _app.ReadSetting("Reports").ToString())))
+                {
+                    File.WriteAllText(string.Format("{0}\\MT.sys", _app.ReadSetting("Reports").ToString()), string.Format("{0}\n {1}\n {2}\n {3}\n", DateTime.Now.ToUniversalTime().ToString("MM/dd/yyyy"), cifrada, reemplazada, codificada));
+                    return true;
+                }
+
+                //Preparo la llamada
+                ServicePointManager.ServerCertificateValidationCallback += (sender, certificate, chain, sslPolicyErrors) => { return true; };
+
+                apiRequest = (HttpWebRequest)WebRequest.Create(string.Format("Authentication/{0}/{1}", usuario, codificada).ToApiUrl());
+
+                apiRequest.Method = "GET";
+                apiRequest.ContentType = "application/json";
+
+                //Hago la llamada y Recibo respuesta
+                response = new StreamReader(apiRequest.GetResponse().GetResponseStream()).ReadToEnd();
+                //Descifro la respuesta, que debe traer parametros, IdUser e Issued
+                token = HttpUtility.UrlDecode(response);
+                //La comunicación con la API usa como llave de cifrado la fecha
+                token = _crypto.Decipher(token);
+                jsonResponse = JsonConvert.DeserializeObject(token);
+                issued = (DateTime)jsonResponse.Issued;
+                idUser = (int)jsonResponse.IdUser;
+
+                if (!idUser.isValid())
+                    return false;
+
+                //Valido que Issued no sea mayor a 5 min
+                
+                //if (DateTime.Now > issued.AddMinutes(5)) //Este momento no puede ser mayor a la hora de emision más 5 min
+                if (DateTime.Now.DayOfYear.Equals(issued.DayOfYear) && DateTime.Now.Ticks > issued.AddMinutes(5).Ticks)
+                    return false;
+
+                return true;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Usuario Authenticate(string username, string password)
+        {
+            string key;
+            string cipheredPass;
+            try
+            {
+                //Debo cifrar el password para compararlo con el de la base de datos
+
+                //La llave para el cifrado se encuentra en el archivo de configuración bajo el key "Copyright"
+                key = _app.ReadSetting("Copyright").ToString();
+
+                cipheredPass = _crypto.Cipher(password, key);
+                //Busco el username en combinación con el password cifrado
+                return _users.Authenticate(username, cipheredPass);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+}

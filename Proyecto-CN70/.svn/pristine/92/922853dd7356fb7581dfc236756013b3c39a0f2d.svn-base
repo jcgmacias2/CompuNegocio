@@ -1,0 +1,56 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.CustomsApplicationsExitView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Selección de Pedimentos de importación"
+        Icon="{StaticResource ImgNewDocument}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=dgArticulos}"
+        Height="510" Width="780">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <GroupBox Header="Artículos que requieren pedimento" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="180" Width="750"/>
+        <DataGrid Name="dgArticulos" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Height="150" Width="730" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="100" Header="Código" Binding="{Binding Articulo.codigo}" />
+                <DataGridTextColumn Width="250" Header="Descripción" Binding="{Binding Articulo.descripcion}" />
+                <DataGridTextColumn Width="170" Header="Unidad de Medida" Binding="{Binding Articulo.UnidadesDeMedida.descripcion}" />
+                <DataGridTextColumn Width="90" Header="Vendidos" Binding="{Binding Vendidos, StringFormat=\{0:F\}}" />
+                <DataGridTextColumn Width="90" Header="Asociados" Binding="{Binding Asociados, StringFormat=\{0:F\}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Header="Pedimentos por artículo" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Height="180" Width="320"/>
+        <DataGrid Name="dgPedimentos" HorizontalAlignment="Left" Margin="20,220,0,0" VerticalAlignment="Top" Height="150" Width="300" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="135" Header="Pedimento" Binding="{Binding NumeroDePedimento}" IsReadOnly="True" />
+                <DataGridTextColumn Width="70" Header="Existencia" Binding="{Binding Existencia, StringFormat=\{0:F\}}" IsReadOnly="True" />
+                <DataGridTextColumn Width="70" Header="Asociar" Binding="{Binding Asociar, StringFormat=\{0:F\}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnAsociar" IsTabStop="False" Style="{StaticResource ImageButton}" Tag="{StaticResource ImgGoNext}" Margin="360,230,0,0"/>
+        <Button x:Name="btnAsociarTodo" IsTabStop="False" Style="{StaticResource ImageButton}" Tag="{StaticResource ImgProcess}" Margin="360,280,0,0"/>
+        <Button x:Name="btnDesasociar" IsTabStop="False" Style="{StaticResource ImageButton}" Tag="{StaticResource ImgGoPrevious}" Margin="360,330,0,0"/>
+
+        <GroupBox Header="Detalle de asociación de pedimentos" HorizontalAlignment="Left" Margin="420,200,0,0" VerticalAlignment="Top" Height="180" Width="340"/>
+        <DataGrid Name="dgAsociaciones" HorizontalAlignment="Left" Margin="430,220,0,0" VerticalAlignment="Top" Height="150" Width="320" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="85" Header="Código" Binding="{Binding Articulo.codigo}" />
+                <DataGridTextColumn Width="135" Header="Pedimento" Binding="{Binding NumeroDePedimento}" />
+                <DataGridTextColumn Width="70" Header="Cantidad" Binding="{Binding Cantidad, StringFormat=\{0:F\}}" />
+                
+            </DataGrid.Columns>
+        </DataGrid>
+        
+        <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="360,400,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>
+
+
+
+

@@ -1,0 +1,449 @@
+﻿using Aprovi.Data.Core;
+using Aprovi.Data.Repositories;
+using Aprovi.Business.ViewModels;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Aprovi.Data.Models;
+
+namespace Aprovi.Business.Services
+{
+    public abstract class RemisionService : IRemisionService
+    {
+        private IUnitOfWork _UOW;
+        private IRemisionesRepository _billsOfSale;
+        private IConfiguracionService _config;
+        private readonly ICotizacionService _quotes;
+        private IViewFoliosPorAbonosRepository _folios;
+        private IClientesRepository _clients;
+        private IArticulosRepository _items;
+        private IViewReporteAntiguedadSaldosRemisionesRepository _collectableBalances;
+        
+        public RemisionService(IUnitOfWork unitOfWork,  IConfiguracionService config, ICotizacionService quotes)
+        {
+            _UOW = unitOfWork;
+            _billsOfSale = _UOW.Remisiones;
+            _config = config;
+            _quotes = quotes;
+            _folios = _UOW.FoliosPorAbono;
+            _clients = _UOW.Clientes;
+            _items = _UOW.Articulos;
+            _collectableBalances = _UOW.AntiguedadSaldosRemisiones;
+        }
+
+        public int Next()
+        {
+            try
+            {
+                return _billsOfSale.Next();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public int Last()
+        {
+            try
+            {
+                return _billsOfSale.Last();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public virtual Remisione Add(VMRemision billOfSale)
+        {
+            try
+            {
+                //Se obtiene la cotizacion de la que viene la remision
+                Cotizacione cotizacion = null;
+                if (billOfSale.Cotizaciones.isValid() && !billOfSale.Cotizaciones.IsEmpty())
+                {
+                     cotizacion = billOfSale.Cotizaciones.FirstOrDefault();
+                }
+
+                //Obtengo una instancia de la configuración
+                var config = _config.GetDefault();
+
+                //Le asigno la empresa configurada
+                billOfSale.idEmpresa = config.Estacion.idEmpresa;
+
+                //Antes de registrarla obtengo nuevamente el folio, por si acaso ya se utilizo mientras agregaba los artículos
+                billOfSale.folio = _billsOfSale.Next();
+
+                //Le agrego estado
+                billOfSale.idEstatusDeRemision = (int)StatusDeRemision.Registrada;
+
+                //Si tiene abonos, le pongo los defaults a cada abono
+                //Obtengo el siguiente folio menos 1 para que se autoincrementen aqui.
+                var folios = _folios.Next().ToInt();
+                foreach (var a in billOfSale.AbonosDeRemisions)
+                {
+                    a.fechaHora = DateTime.Now;
+                    a.folio = (folios++).ToString();
+                    a.idEstatusDeAbono = (int)StatusDeAbono.Registrado;
+                    a.FormasPago = null;
+                    a.Moneda = null;
+                }
+
+                //Guardo la remisión
+                var local = billOfSale.ToRemision(_items);
+
+                //Defaults de remisión
+                local.Cliente = null;
+                local.Usuario = null;
+                local.Factura = null;
+
+                //Ahora si guardo
+                _billsOfSale.Add(local);
+                _UOW.Save();
+
+                //Si venia de una cotizacion, se guarda el id de la factura en la remision
+                if (cotizacion.isValid())
+                {
+                    cotizacion.idRemision = local.idRemision;
+                    cotizacion.idEstatusDeCotizacion = (int) StatusDeCotizacion.Remisionada;
+
+                    _quotes.Update(new VMCotizacion(cotizacion));
+                    _UOW.Save();
+                }
+
+                billOfSale.idRemision = local.idRemision;
+
+                return billOfSale;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Remisione Find(int idBillOfSale)
+        {
+            try
+            {
+                return _billsOfSale.Find((object)idBillOfSale);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Remisione FindByFolio(int folio)
+        {
+            try
+            {
+                return _billsOfSale.Find(folio);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> List()
+        {
+            try
+            {
+                return _billsOfSale.List().ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> ListBySeller(DateTime startDate, DateTime endDate, Usuario user = null)
+        {
+            try
+            {
+                if (user.isValid() && user.idUsuario.isValid())
+                {
+                    return _billsOfSale.ListBySeller(startDate, endDate, user);
+                }
+                else
+                {
+                    return _billsOfSale.List(startDate, endDate);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> WithFolioOrClientLike(string value)
+        {
+            try
+            {
+                return _billsOfSale.WithFolioOrClientLike(value, null);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Remisione Cancel(int idBillOfSale, string reason)
+        {
+            try
+            {
+                var billOfSale = _billsOfSale.FindById(idBillOfSale);
+                //No puedo cancelar una remisión facturada
+                if (billOfSale.idFactura.isValid())
+                    throw new Exception("No es posible cancelar una remisión facturada");
+
+                billOfSale.idEstatusDeRemision = (int)StatusDeRemision.Cancelada;
+                billOfSale.EstatusDeRemision = null;
+                billOfSale.CancelacionesDeRemisione = new CancelacionesDeRemisione();
+                billOfSale.CancelacionesDeRemisione.fechaHora = DateTime.Now;
+                billOfSale.CancelacionesDeRemisione.motivo = reason;
+
+                //Cuando se cancela se cambia el estatus a cancelada y lo mismo para todos sus abonos
+                foreach (var a in billOfSale.AbonosDeRemisions)
+                {
+                    a.idEstatusDeAbono = (int)StatusDeAbono.Cancelado;
+                    a.EstatusDeAbono = null;
+                }
+
+                _billsOfSale.Update(billOfSale);
+                _UOW.Save();
+
+                return billOfSale;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Remisione Invoiced(int idBillOfSale, int idInvoice)
+        {
+            try
+            {
+
+                var billOfSale = _billsOfSale.FindById(idBillOfSale);
+                if (billOfSale.idFactura.isValid())
+                    throw new Exception("Esta remisión ya fue facturada");
+
+                billOfSale.idEstatusDeRemision = (int)StatusDeRemision.Facturada;
+                billOfSale.idFactura = idInvoice;
+                _UOW.Save();
+
+                return billOfSale;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> List(DateTime startDate, DateTime endDate, Tipos_Reporte_Remisiones filter)
+        {
+            try
+            {
+                return _billsOfSale.List(startDate, endDate, filter);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> ListActive()
+        {
+            try
+            {
+                return _billsOfSale.ListActive();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Remisione> ActiveWithFolioOrClientLike(string value)
+        {
+            try
+            {
+                return _billsOfSale.ActiveWithFolioOrClientLike(value);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public VMFactura ToInvoice(ICollection<VMRemision> billsOfSale, string serie, int folio, decimal exchangeRate, Cliente customer, Moneda currency, Regimene regimen, MetodosPago paymentMethod, UsosCFDI cfdiUsage, Empresa company, Usuario user, FormasPago formaPago)
+        {
+            AbonosDeFactura abono;
+            List<VMDetalleDeRemision> detalles;
+
+            //Se convierten las remisiones a la moneda especificada con el tipo de cambio especificado (si aplica)
+            billsOfSale.ToCurrency(currency, exchangeRate);
+
+            //Se juntan los abonos y se seleccionan solo los que no estan cancelados
+            List<AbonosDeRemision> abonos = billsOfSale.SelectMany(x => x.AbonosDeRemisions).Where(x => x.idEstatusDeAbono == (int)StatusDeAbono.Registrado).ToList();
+
+            //Se crea el abono total
+            abono = new AbonosDeFactura();
+            abono.idMoneda = currency.idMoneda;
+            abono.Moneda = currency;
+            abono.monto = abonos.Sum(x => x.monto);
+            abono.idEstatusDeAbono = (int)StatusDeAbono.Registrado;
+            abono.tipoDeCambio = exchangeRate;
+            abono.idEmpresa = company.idEmpresa;
+            abono.idFormaPago = formaPago.idFormaPago;
+            //Se requiere el objeto forma de pago en la vista de abonos
+            abono.FormasPago = formaPago;
+            abono.fechaHora = DateTime.Now;
+
+            //Se crea el detalle de remisiones simplificado (solo 1 detalle por cada item con el mismo articulo y precio)
+            detalles = new List<VMDetalleDeRemision>();
+            List<VMDetalleDeRemision> bosDetails = billsOfSale.SelectMany(x => x.DetalleDeRemision).ToList();
+
+            foreach (var detail in bosDetails)
+            {
+                VMDetalleDeRemision d = detalles.FirstOrDefault(x => x.idArticulo == detail.idArticulo && x.precioUnitario == detail.precioUnitario);
+
+                if (d.isValid())
+                {
+                    //Se manejan las cantidades de los articulos repetidos
+                    d.cantidad += detail.cantidad;
+
+                    //Se manejan los pedimentos
+                    if (!detail.PedimentoPorDetalleDeRemisions.IsEmpty())
+                    {
+                        //Simplemente se agregan los pedimentos al detalle
+                        foreach (var p in detail.PedimentoPorDetalleDeRemisions)
+                        {
+                            d.PedimentoPorDetalleDeRemisions.Add(p);
+                        }
+                    }
+                    //Se manejan los impuestos (no se hace nada por que el articulo ya deberia traer los impuestos en este punto)
+                }
+                else
+                {
+                    //Se crea el detalle
+                    d = new VMDetalleDeRemision();
+
+                    //Se llena el detalle
+                    d.cantidad = detail.cantidad;
+                    d.idArticulo = detail.idArticulo;
+
+                    //El articulo se requiere en la vista de facturacion
+                    d.Articulo = detail.Articulo;
+
+                    d.precioUnitario = detail.precioUnitario;
+                    d.descuento = detail.descuento;
+                    d.PedimentoPorDetalleDeRemisions = detail.PedimentoPorDetalleDeRemisions;
+                    d.Impuestos = detail.Impuestos;
+
+                    //Se agrega a la lista
+                    detalles.Add(d);
+                }
+            }
+
+            //Se crea la factura
+            VMFactura invoice = new VMFactura();
+            invoice.idMoneda = currency.idMoneda;
+            invoice.Moneda = currency;
+            invoice.idCliente = customer.idCliente;
+            invoice.Cliente = customer;
+            invoice.idMetodoPago = paymentMethod.idMetodoPago;
+            invoice.MetodosPago = paymentMethod;
+            invoice.fechaHora = DateTime.Now;
+            invoice.tipoDeCambio = exchangeRate;
+            invoice.DetalleDeFactura = detalles.ToDetalleDeFactura();
+            invoice.idUsoCFDI = cfdiUsage.idUsoCFDI;
+            invoice.UsosCFDI = cfdiUsage;
+            invoice.idRegimen = regimen.idRegimen;
+            invoice.Regimene = regimen;
+
+            //Si no existen abonos en las remisiones, no se agrega ninguno
+            List<AbonosDeFactura> abonosFactura = new List<AbonosDeFactura>();
+            if (abono.monto.isValid())
+            {
+                abonosFactura.Add(abono);
+            }
+            invoice.AbonosDeFacturas = abonosFactura;
+
+            invoice.serie = serie;
+            invoice.folio = folio;
+            invoice.idUsuarioRegistro = user.idUsuario;
+            invoice.Usuario = user;
+            invoice.DatosExtraPorFacturas = new List<DatosExtraPorFactura>()
+            {
+                new DatosExtraPorFactura()
+                {
+                    dato = DatoExtra.Nota.ToString(),
+                    valor = string.Format("Remisiones {0}",string.Join(",",billsOfSale.Select(x=>x.folio).ToArray()))
+                }
+            };
+
+            //Actualiza totales
+            invoice.UpdateAccount();
+
+            return invoice;
+        }
+
+        public List<VMRDetalleVentaPorPeriodo> GetSalesDetailsForPeriod(DateTime startDate, DateTime endDate)
+        {
+            try
+            {
+                var billsOfSale = _billsOfSale.List(startDate, endDate);
+
+                return billsOfSale.Select(x => new VMRDetalleVentaPorPeriodo(new VMRemision(x))).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<VMRDetalleComision> GetComissionDetailsForPeriodAndUser(DateTime startDate, DateTime endDate, Usuario user)
+        {
+            try
+            {
+                var billsOfSale = ListBySeller(startDate, endDate, user).ToViewModelList();
+
+                return billsOfSale.Select(x => new VMRDetalleComision(x)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<VMRDetalleAntiguedadSaldos> ListForDetailedCollectableBalancesReport(Cliente customer, Usuario seller, bool onlyExpired, DateTime to)
+        {
+            try
+            {
+                return _collectableBalances.List(customer, seller, onlyExpired, to).Select(x=> new VMRDetalleAntiguedadSaldos(x, to)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<VMRTotalAntiguedadSaldos> ListForTotalCollectableBalancesReport(Cliente customer, Usuario seller, bool onlyExpired, DateTime to)
+        {
+            try
+            {
+                return _collectableBalances.List(customer, seller, onlyExpired, to).Select(x => new VMRTotalAntiguedadSaldos(x, to)).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+}

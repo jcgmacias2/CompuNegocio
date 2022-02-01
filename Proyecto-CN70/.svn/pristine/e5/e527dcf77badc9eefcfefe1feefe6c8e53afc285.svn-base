@@ -1,0 +1,422 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{7F70008E-9110-474F-9532-D7F80DB9FAC1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Aprovi.Business</RootNamespace>
+    <AssemblyName>Aprovi.Business</AssemblyName>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
+    <OutputPath>bin\x86\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <Optimize>true</Optimize>
+    <DebugType>pdbonly</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+  </PropertyGroup>
+  <PropertyGroup>
+    <AssemblyOriginatorKeyFile>CompuNegocio.Business.pfx</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-x86|AnyCPU'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\Debug-x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug-x86|x86'">
+    <DebugSymbols>true</DebugSymbols>
+    <OutputPath>bin\x86\Debug-x86\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <DebugType>full</DebugType>
+    <PlatformTarget>x86</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="BouncyCastle.Crypto">
+      <HintPath>..\packages\BouncyCastle.1.8.1\lib\BouncyCastle.Crypto.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="EPPlus, Version=4.1.1.0, Culture=neutral, PublicKeyToken=ea159fdaa78159a1, processorArchitecture=MSIL">
+      <HintPath>..\packages\EPPlus.4.1.1\lib\net40\EPPlus.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>..\packages\Newtonsoft.Json.9.0.1\lib\net45\Newtonsoft.Json.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Net.Http.Formatting">
+      <HintPath>..\packages\Microsoft.AspNet.WebApi.Client.5.2.3\lib\net45\System.Net.Http.Formatting.dll</HintPath>
+      <Private>True</Private>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Helpers\Comparer.cs" />
+    <Compile Include="Helpers\Criptografia.cs" />
+    <Compile Include="Helpers\Extensions.cs" />
+    <Compile Include="Helpers\Operations.cs" />
+    <Compile Include="Helpers\QRCode.cs" />
+    <Compile Include="Helpers\RawPrinterHelper.cs" />
+    <Compile Include="Helpers\RSAParameterTraits.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\Aprovi\AproviAbonoDeRemisionService.cs" />
+    <Compile Include="Services\Aprovi\AproviAbonoDeCompraService.cs" />
+    <Compile Include="Services\Aprovi\AproviAbonoDeFacturaService.cs" />
+    <Compile Include="Services\Aprovi\AproviAbonosService.cs" />
+    <Compile Include="Services\Aprovi\AproviAjusteService.cs" />
+    <Compile Include="Services\Aprovi\AproviArticuloService.cs" />
+    <Compile Include="Services\Aprovi\AproviBancoService.cs" />
+    <Compile Include="Services\Aprovi\AproviBasculaService.cs" />
+    <Compile Include="Services\Aprovi\AproviCodigoDeArticuloPorClienteService.cs" />
+    <Compile Include="Services\Aprovi\AproviCodigoDeArticuloPorProveedorService.cs" />
+    <Compile Include="Services\Aprovi\AproviComprobanteEnviadoService.cs" />
+    <Compile Include="Services\Aprovi\AproviEmpresaAsociadaService.cs" />
+    <Compile Include="Services\Aprovi\AproviCuentaDeCorreoService.cs" />
+    <Compile Include="Services\Aprovi\AproviCuentaGuardianService.cs" />
+    <Compile Include="Services\Aprovi\AproviEmpresaService.cs" />
+    <Compile Include="Services\Aprovi\AproviCatalogosEstaticosService.cs" />
+    <Compile Include="Services\Aprovi\AproviCertificadoService.cs" />
+    <Compile Include="Services\Aprovi\AproviClasificacionService.cs" />
+    <Compile Include="Services\Aprovi\AproviClienteService.cs" />
+    <Compile Include="Services\Aprovi\AproviCompraService.cs" />
+    <Compile Include="Services\Aprovi\AproviComprobanteFiscalService.cs" />
+    <Compile Include="Services\Aprovi\AproviConfiguracionService.cs" />
+    <Compile Include="Services\Aprovi\AproviCuentaBancariaService.cs" />
+    <Compile Include="Services\Aprovi\AproviCuentaPredialService.cs" />
+    <Compile Include="Services\Aprovi\AproviDispositivoService.cs" />
+    <Compile Include="Services\Aprovi\AproviEnvioDeCorreoService.cs" />
+    <Compile Include="Services\Aprovi\AproviEquivalenciaService.cs" />
+    <Compile Include="Services\Aprovi\AproviEstacionService.cs" />
+    <Compile Include="Services\Aprovi\AproviNotaDeDescuentoService.cs" />
+    <Compile Include="Services\Aprovi\AproviNotaDeCreditoService.cs" />
+    <Compile Include="Services\Aprovi\AproviPagoService.cs" />
+    <Compile Include="Services\Aprovi\AproviFacturaService.cs" />
+    <Compile Include="Services\Aprovi\AproviImpuestoService.cs" />
+    <Compile Include="Services\Aprovi\AproviLicenciaService.cs" />
+    <Compile Include="Services\Aprovi\AproviListaDePrecioService.cs" />
+    <Compile Include="Services\Aprovi\AproviMetodoDePagoService.cs" />
+    <Compile Include="Services\Aprovi\AproviOrdenDeCompraService.cs" />
+    <Compile Include="Services\Aprovi\AproviEstadoDeLaEmpresaService.cs" />
+    <Compile Include="Services\Aprovi\AproviCostoDeLoVendidoService.cs" />
+    <Compile Include="Services\Aprovi\AproviVentasPorArticuloService.cs" />
+    <Compile Include="Services\Aprovi\AproviSolicitudDeTraspasoService.cs" />
+    <Compile Include="Services\Aprovi\AproviTraspasoService.cs" />
+    <Compile Include="Services\Aprovi\AproviPedimentoService.cs" />
+    <Compile Include="Services\Aprovi\AproviPrivilegioService.cs" />
+    <Compile Include="Services\Aprovi\AproviProductoServicioService.cs" />
+    <Compile Include="Services\Aprovi\AproviProveedorService.cs" />
+    <Compile Include="Services\Aprovi\AproviRegimenService.cs" />
+    <Compile Include="Services\Aprovi\AproviCotizacionService.cs" />
+    <Compile Include="Services\Aprovi\AproviPedidoService.cs" />
+    <Compile Include="Services\Aprovi\AproviRemisionService.cs" />
+    <Compile Include="Services\Aprovi\AproviSaldosPorClienteService.cs" />
+    <Compile Include="Services\Aprovi\AproviSaldosPorProveedorService.cs" />
+    <Compile Include="Services\Aprovi\AproviSeguridadService.cs" />
+    <Compile Include="Services\Aprovi\AproviSerieService.cs" />
+    <Compile Include="Services\Aprovi\AproviUnidadDeMedidaService.cs" />
+    <Compile Include="Services\Aprovi\AproviUsosCFDIService.cs" />
+    <Compile Include="Services\Aprovi\AproviUsuarioService.cs" />
+    <Compile Include="Services\Implementations\AbonoDeCompraService.cs" />
+    <Compile Include="Services\Implementations\AbonoDeFacturaService.cs" />
+    <Compile Include="Services\Implementations\AbonoDeRemisionService.cs" />
+    <Compile Include="Services\Implementations\AbonosService.cs" />
+    <Compile Include="Services\Implementations\AjusteService.cs" />
+    <Compile Include="Services\Implementations\ArticuloService.cs" />
+    <Compile Include="Services\Implementations\BancoService.cs" />
+    <Compile Include="Services\Implementations\BasculaService.cs" />
+    <Compile Include="Services\Implementations\CodigoDeArticuloPorClienteService.cs" />
+    <Compile Include="Services\Implementations\CodigoDeArticuloPorProveedorService.cs" />
+    <Compile Include="Services\Implementations\ComprobanteEnviadoService.cs" />
+    <Compile Include="Services\Implementations\EmpresaAsociadaService.cs" />
+    <Compile Include="Services\Implementations\CuentaDeCorreoService.cs" />
+    <Compile Include="Services\Implementations\CuentaGuardianService.cs" />
+    <Compile Include="Services\Implementations\EmpresaService.cs" />
+    <Compile Include="Services\Implementations\CatalogosEstaticosService.cs" />
+    <Compile Include="Services\Implementations\CertificadoService.cs" />
+    <Compile Include="Services\Implementations\ClasificacionService.cs" />
+    <Compile Include="Services\Implementations\ClienteService.cs" />
+    <Compile Include="Services\Implementations\CompraService.cs" />
+    <Compile Include="Services\Implementations\ComprobanteFiscalService.cs" />
+    <Compile Include="Services\Implementations\ConfiguracionService.cs" />
+    <Compile Include="Services\Implementations\CuentaBancariaService.cs" />
+    <Compile Include="Services\Implementations\CuentaPredialService.cs" />
+    <Compile Include="Services\Implementations\DispositivoService.cs" />
+    <Compile Include="Services\Implementations\EnvioDeCorreoService.cs" />
+    <Compile Include="Services\Implementations\EquivalenciaService.cs" />
+    <Compile Include="Services\Implementations\EstacionService.cs" />
+    <Compile Include="Services\Implementations\NotaDeDescuentoService.cs" />
+    <Compile Include="Services\Implementations\NotaDeCreditoService.cs" />
+    <Compile Include="Services\Implementations\PagoService.cs" />
+    <Compile Include="Services\Implementations\FacturaService.cs" />
+    <Compile Include="Services\Implementations\OrdenDeCompraService.cs" />
+    <Compile Include="Services\Implementations\EstadoDeLaEmpresaService.cs" />
+    <Compile Include="Services\Implementations\CostoDeLoVendidoService.cs" />
+    <Compile Include="Services\Implementations\VentasPorArticuloService.cs" />
+    <Compile Include="Services\Implementations\SolicitudDeTraspasoService.cs" />
+    <Compile Include="Services\Implementations\TraspasoService.cs" />
+    <Compile Include="Services\Implementations\PedimentoService.cs" />
+    <Compile Include="Services\Implementations\ProductoServicioService.cs" />
+    <Compile Include="Services\Implementations\CotizacionService.cs" />
+    <Compile Include="Services\Implementations\PedidoService.cs" />
+    <Compile Include="Services\Implementations\UsosCFDIService.cs" />
+    <Compile Include="Services\Implementations\MigrationDataService.cs" />
+    <Compile Include="Services\Interfaces\ICodigoDeArticuloPorClienteService.cs" />
+    <Compile Include="Services\Interfaces\ICodigoDeArticuloPorProveedorService.cs" />
+    <Compile Include="Services\Interfaces\IComprobanteEnviadoService.cs" />
+    <Compile Include="Services\Interfaces\IEmpresaAsociadaService.cs" />
+    <Compile Include="Services\Interfaces\ICuentaDeCorreoService.cs" />
+    <Compile Include="Services\Interfaces\ICuentaGuardianService.cs" />
+    <Compile Include="Services\Interfaces\ICuentaPredialService.cs" />
+    <Compile Include="Services\Interfaces\IEmpresaService.cs" />
+    <Compile Include="Services\Interfaces\IEnvioDeCorreoService.cs" />
+    <Compile Include="Services\Interfaces\INotaDeDescuentoService.cs" />
+    <Compile Include="Services\Interfaces\INotaDeCreditoService.cs" />
+    <Compile Include="Services\Interfaces\IPagoService.cs" />
+    <Compile Include="Services\Interfaces\IOrdenDeCompraService.cs" />
+    <Compile Include="Services\Interfaces\IEstadoDeLaEmpresaService.cs" />
+    <Compile Include="Services\Interfaces\ICostoDeLoVendidoService.cs" />
+    <Compile Include="Services\Interfaces\IVentasPorArticuloService.cs" />
+    <Compile Include="Services\Interfaces\ISolicitudDeTraspasoService.cs" />
+    <Compile Include="Services\Interfaces\ITraspasoService.cs" />
+    <Compile Include="Services\Interfaces\IPedimentoService.cs" />
+    <Compile Include="Services\Interfaces\IProductoServicioService.cs" />
+    <Compile Include="Services\Implementations\LicenciaService.cs" />
+    <Compile Include="Services\Implementations\FormaPagoService.cs" />
+    <Compile Include="Services\Implementations\ImpuestoService.cs" />
+    <Compile Include="Services\Implementations\ListaDePrecioService.cs" />
+    <Compile Include="Services\Implementations\PrivilegioService.cs" />
+    <Compile Include="Services\Implementations\ProveedorService.cs" />
+    <Compile Include="Services\Implementations\RegimenService.cs" />
+    <Compile Include="Services\Implementations\RemisionService.cs" />
+    <Compile Include="Services\Implementations\SaldosPorClienteService.cs" />
+    <Compile Include="Services\Implementations\SeguridadService.cs" />
+    <Compile Include="Services\Implementations\SerieService.cs" />
+    <Compile Include="Helpers\Conversor.cs" />
+    <Compile Include="Services\Implementations\UnidadDeMedidaService.cs" />
+    <Compile Include="Services\Implementations\UsuarioService.cs" />
+    <Compile Include="Services\Implementations\SaldosPorProveedorService.cs" />
+    <Compile Include="Services\Interfaces\IAbonoDeCompraService.cs" />
+    <Compile Include="Services\Interfaces\IAbonoDeFacturaService.cs" />
+    <Compile Include="Services\Interfaces\IAbonoDeRemisionService.cs" />
+    <Compile Include="Services\Interfaces\IAbonosService.cs" />
+    <Compile Include="Services\Interfaces\IAjusteService.cs" />
+    <Compile Include="Services\Interfaces\IArticuloService.cs" />
+    <Compile Include="Services\Interfaces\IBancoService.cs" />
+    <Compile Include="Services\Interfaces\IBasculaService.cs" />
+    <Compile Include="Services\Interfaces\ICatalogosEstaticosService.cs" />
+    <Compile Include="Services\Interfaces\ICertificadoService.cs" />
+    <Compile Include="Services\Interfaces\IClasificacionService.cs" />
+    <Compile Include="Services\Interfaces\IClienteService.cs" />
+    <Compile Include="Services\Interfaces\ICompraService.cs" />
+    <Compile Include="Services\Interfaces\IComprobanteFiscalService.cs" />
+    <Compile Include="Services\Interfaces\IConfiguracionService.cs" />
+    <Compile Include="Services\Interfaces\ICuentaBancariaService.cs" />
+    <Compile Include="Services\Interfaces\IDispositivoService.cs" />
+    <Compile Include="Services\Interfaces\IEquivalenciaService.cs" />
+    <Compile Include="Services\Interfaces\IEstacionService.cs" />
+    <Compile Include="Services\Interfaces\IFacturaService.cs" />
+    <Compile Include="Services\Interfaces\IFormasPagoService.cs" />
+    <Compile Include="Services\Interfaces\ILicenciaService.cs" />
+    <Compile Include="Services\Interfaces\IImpuestoService.cs" />
+    <Compile Include="Services\Interfaces\IListaDePrecioService.cs" />
+    <Compile Include="Services\Interfaces\IPrivilegioService.cs" />
+    <Compile Include="Services\Interfaces\IProveedorService.cs" />
+    <Compile Include="Services\Interfaces\IRegimenService.cs" />
+    <Compile Include="Services\Interfaces\ICotizacionService.cs" />
+    <Compile Include="Services\Interfaces\IPedidoService.cs" />
+    <Compile Include="Services\Interfaces\IRemisionService.cs" />
+    <Compile Include="Services\Interfaces\ISaldosPorClienteService.cs" />
+    <Compile Include="Services\Interfaces\ISaldosPorProveedorService.cs" />
+    <Compile Include="Services\Interfaces\ISeguridadService.cs" />
+    <Compile Include="Services\Interfaces\ISerieService.cs" />
+    <Compile Include="Services\Interfaces\IUnidadDeMedidaService.cs" />
+    <Compile Include="Services\Interfaces\IUsosCFDIService.cs" />
+    <Compile Include="Services\Interfaces\IUsuarioService.cs" />
+    <Compile Include="Services\Interfaces\IMigrationDataService.cs" />
+    <Compile Include="ViewModels\VMAbono.cs" />
+    <Compile Include="ViewModels\VMAbonoCuentaCliente.cs" />
+    <Compile Include="ViewModels\VMAbonoCuentaProveedor.cs" />
+    <Compile Include="ViewModels\VMAcuse.cs" />
+    <Compile Include="ViewModels\VMAddendaComercialMexicana.cs" />
+    <Compile Include="ViewModels\VMAddendaCalimax.cs" />
+    <Compile Include="ViewModels\VMAddendaJardines.cs" />
+    <Compile Include="ViewModels\VMAddendaGayosso.cs" />
+    <Compile Include="ViewModels\VMAntiguedadSaldos.cs" />
+    <Compile Include="ViewModels\VMCFDIRelacionado.cs" />
+    <Compile Include="ViewModels\VMDetalle.cs" />
+    <Compile Include="ViewModels\VMArticulo.cs" />
+    <Compile Include="ViewModels\VMCertificado.cs" />
+    <Compile Include="ViewModels\VMCompra.cs" />
+    <Compile Include="ViewModels\VMCredencial.cs" />
+    <Compile Include="ViewModels\VMDetalleDeAjuste.cs" />
+    <Compile Include="ViewModels\VMDetalleDeCompra.cs" />
+    <Compile Include="ViewModels\VMDetalleDeCotizacion.cs" />
+    <Compile Include="ViewModels\VMDetalleDeNotaDeCredito.cs" />
+    <Compile Include="ViewModels\VMDetalleDeFactura.cs" />
+    <Compile Include="ViewModels\VMDetalleDeOrdenDeCompra.cs" />
+    <Compile Include="ViewModels\VMDetalleDePedido.cs" />
+    <Compile Include="ViewModels\VMDetalleDeRemision.cs" />
+    <Compile Include="ViewModels\VMDetalleKardex.cs" />
+    <Compile Include="ViewModels\VMEquivalenciaClasificacion.cs" />
+    <Compile Include="ViewModels\VMEquivalenciaUnidades.cs" />
+    <Compile Include="ViewModels\VMEstadoDeLaEmpresa.cs" />
+    <Compile Include="ViewModels\VMNotaDeCredito.cs" />
+    <Compile Include="ViewModels\VMFactura.cs" />
+    <Compile Include="ViewModels\VMFacturaConSaldo.cs" />
+    <Compile Include="ViewModels\VMFlujoPorArticulo.cs" />
+    <Compile Include="ViewModels\VMImpuesto.cs" />
+    <Compile Include="ViewModels\VMInventario.cs" />
+    <Compile Include="ViewModels\VMOperacion.cs" />
+    <Compile Include="ViewModels\VMPago.cs" />
+    <Compile Include="ViewModels\VMPagoMultiple.cs" />
+    <Compile Include="ViewModels\VMParcialidad.cs" />
+    <Compile Include="ViewModels\VMOrdenDeCompra.cs" />
+    <Compile Include="ViewModels\VMPedimento.cs" />
+    <Compile Include="ViewModels\VMPedimentoAsociado.cs" />
+    <Compile Include="ViewModels\VMPedimentoDisponible.cs" />
+    <Compile Include="ViewModels\VMArticulosConPedimento.cs" />
+    <Compile Include="ViewModels\VMPrecio.cs" />
+    <Compile Include="ViewModels\VMCotizacion.cs" />
+    <Compile Include="ViewModels\VMRAvaluo.cs" />
+    <Compile Include="ViewModels\VMRDetalleAvaluo.cs" />
+    <Compile Include="ViewModels\VMRDetalleCostoDeLoVendido.cs" />
+    <Compile Include="ViewModels\VMRDetalleImpuestosPorPeriodo.cs" />
+    <Compile Include="ViewModels\VMReporteNotaDeCredito.cs" />
+    <Compile Include="ViewModels\VMRImpuestosPorPeriodo.cs" />
+    <Compile Include="ViewModels\VMRNotaDeCredito.cs" />
+    <Compile Include="ViewModels\VMRCotizacion.cs" />
+    <Compile Include="ViewModels\VMRDetalleAntiguedadSaldos.cs" />
+    <Compile Include="ViewModels\VMRDetalleCompra.cs" />
+    <Compile Include="ViewModels\VMRDetalleComision.cs" />
+    <Compile Include="ViewModels\VMRDetalleDeCotizacion.cs" />
+    <Compile Include="ViewModels\VMRDetalleDeOrdenDeCompra.cs" />
+    <Compile Include="ViewModels\VMRDetalleDeTraspaso.cs" />
+    <Compile Include="ViewModels\VMRDetalleDePedido.cs" />
+    <Compile Include="ViewModels\VMRDetalleVentaPorPeriodo.cs" />
+    <Compile Include="ViewModels\VMPedido.cs" />
+    <Compile Include="ViewModels\VMRDetalleVentasPorArticulo.cs" />
+    <Compile Include="ViewModels\VMRemision.cs" />
+    <Compile Include="ViewModels\VMReporteRemisiones.cs" />
+    <Compile Include="ViewModels\VMReporteCompra.cs" />
+    <Compile Include="ViewModels\VMRAbonosFacturas.cs" />
+    <Compile Include="ViewModels\VMReporteTraspasos.cs" />
+    <Compile Include="ViewModels\VMRNotaDeDescuento.cs" />
+    <Compile Include="ViewModels\VMROrdenDeCompra.cs" />
+    <Compile Include="ViewModels\VMRTraspaso.cs" />
+    <Compile Include="ViewModels\VMRPedido.cs" />
+    <Compile Include="ViewModels\VMRRemision.cs" />
+    <Compile Include="ViewModels\VMRFactura.cs" />
+    <Compile Include="ViewModels\VMRComisiones.cs" />
+    <Compile Include="ViewModels\VMRDetalleAbonosFacturas.cs" />
+    <Compile Include="ViewModels\VMRTotalAntiguedadSaldos.cs" />
+    <Compile Include="ViewModels\VMRVentasPorPeriodo.cs" />
+    <Compile Include="ViewModels\VMTraspaso.cs" />
+    <Compile Include="ViewModels\VMVentasPorArticulo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="CompuNegocio.Business.pfx" />
+    <None Include="packages.config" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMEstadoDeLaEmpresa.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMPago.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRAbonosFacturas.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRCotizacion.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleAbonosFacturas1.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleAntiguedadSaldos.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleAvaluo.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleDeCotizacion.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleDePedido.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRDetalleDeTraspaso.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMReporteRemisiones.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRNotaDeCredito1.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRNotaDeDescuento.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRRemision.datasource" />
+    <None Include="Properties\DataSources\Aprovi.Business.ViewModels.VMRTraspaso.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Business.ViewModels.VMDetalle.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Business.ViewModels.VMDetalleDeAjuste.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Business.ViewModels.VMDetalleDeCompra.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Business.ViewModels.VMMiembro.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Data.Models.Cliente.datasource" />
+    <None Include="Properties\DataSources\CompuRegistro.Data.Models.Domicilio.datasource" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\CompuNegocio.Data\Aprovi.Data.csproj">
+      <Project>{5af88e15-325b-40ce-96d1-8a37a31205f8}</Project>
+      <Name>Aprovi.Data</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Custom\MDK\" />
+    <Folder Include="Custom\Oteiza\" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

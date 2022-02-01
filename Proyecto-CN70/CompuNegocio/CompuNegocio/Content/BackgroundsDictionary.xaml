@@ -1,0 +1,28 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="StylesDictionary.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+    
+    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03" x:Key="BlueToWhiteGradient">
+        <GradientStop Color="{StaticResource MildBlue}" Offset="0"/>
+        <GradientStop Color="{StaticResource White}" Offset="0.800"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03" x:Key="WhiteToBlueGradient">
+        <GradientStop Color="{StaticResource White}" Offset="0.001"/>
+        <GradientStop Color="{StaticResource MildBlue}" Offset="0.700"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="0.504,1.5" StartPoint="0.504,0.03" x:Key="DarkgrayToBlueGradient">
+        <GradientStop Color="{StaticResource Darkgray}" Offset="0"/>
+        <GradientStop Color="{StaticResource MildBlue}" Offset="0.800"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="688,0" MappingMode="Absolute" StartPoint="0,0" x:Key="GrayBrownToWhiteGradient">
+        <GradientStop Color="{StaticResource GrayBrown}" Offset="0"/>
+        <GradientStop Color="{StaticResource LightBrown}" Offset="1.5"/>
+    </LinearGradientBrush>
+    <LinearGradientBrush EndPoint="688,0" MappingMode="Absolute" StartPoint="0,0" x:Key="SoberBlueToWhiteGradient">
+        <GradientStop Color="{StaticResource SoberBlue}" Offset="0"/>
+        <GradientStop Color="{StaticResource LightBlue}" Offset="1.5"/>
+    </LinearGradientBrush>
+
+</ResourceDictionary>

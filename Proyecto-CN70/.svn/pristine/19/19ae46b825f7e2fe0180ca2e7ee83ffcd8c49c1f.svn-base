@@ -1,0 +1,714 @@
+﻿using System;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+using Aprovi.Application.Helpers;
+using Aprovi.Data.Models;
+
+namespace Aprovi.Views.UI
+{
+    /// <summary>
+    /// Interaction logic for MainView.xaml
+    /// </summary>
+    public partial class MainView : BaseView, IMainView
+    {
+        public event Action OpenSignIn;
+        public event Action OpenTaxes;
+        public event Action OpenUnitsOfMeasure;
+        public event Action OpenItems;
+        public event Action Quit;
+        public event Action SignOut;
+        public event Action OpenUsers;
+        public event Action OpenClients;
+        public event Action OpenClassifications;
+        public event Action OpenPrices;
+        public event Action OpenPaymentMethods;
+        public event Action OpenSuppliers;
+        public event Action OpenPurchases;
+        public event Action OpenPurchasePayments;
+        public event Action OpenGeneralProperties;
+        public event Action OpenBusinesses;
+        public event Action OpenStations;
+        public event Action OpenSales;
+        public event Action OpenInvoices;
+        public event Action OpenFiscalPayments;
+        public event Action OpenDeposits;
+        public event Action OpenBillsOfSale;
+        public event Action OpenPaymentsByPeriod;
+        public event Action OpenRegistersCashOut;
+        public event Action OpenRegistersCashOutSummary;
+        public event Action OpenAdjustments;
+        public event Action OpenStockReport;
+        public event Action OpenAdjustmentsReport;
+        public event Action OpenInvoiceReport;
+        public event Action OpenDatabaseConfig;
+        public event Action OpenPurchasesByPeriodReport;
+        public event Action OpenPayableBalancesReport;
+        public event Action OpenSupplierStatementReport;
+        public event Action OpenStockFlowReport;
+        public event Action OpenKardexReport;
+        public event Action OpenCollectableBalancesReport;
+        public event Action OpenClientStatementReport;
+        public event Action OpenMigrationTools;
+        public event Action OpenBanks;
+        public event Action OpenBankAccounts;
+        public event Action OpenProductsServices;
+        public event Action OpenCFDIUses;
+        public event Action OpenPropertyAccounts;
+        public event Action OpenFiscalPaymentReport;
+        public event Action OpenGuardianManualSend;
+        public event Action OpenHomologationTool;
+        public event Action OpenQuotes;
+        public event Action OpenBillsOfSalePerPeriodReport;
+        public event Action OpenSalesPerPeriodReport;
+        public event Action OpenCommissionsPerPeriodReport;
+        public event Action OpenOrders;
+        public event Action OpenInvoiceBillsOfSale;
+        public event Action OpenOrdersReport;
+        public event Action OpenPurchaseOrders;
+        public event Action OpenClientPayments;
+        public event Action OpenQuotesPerPeriodReport;
+        public event Action OpenAssociatedCompanies;
+        public event Action OpenTransfers;
+        public event Action OpenTransferRequestsList;
+        public event Action OpenTransfersByPeriodReport;
+        public event Action OpenSalesPerItemReport;
+        public event Action OpenCreditNotes;
+        public event Action OpenCreditNotesByPeriodReport;
+        public event Action OpenDiscountNotes;
+        public event Action OpenTaxesByPeriodReport;
+        public event Action OpenAppraisalReport;
+        public event Action OpenCompanyStatusReport;
+        public event Action OpenSoldItemsCostReport;
+
+        public MainView(string windowTitle)
+        {
+            InitializeComponent();
+            BindComponents();
+            this.Title = string.Format("{0} - {1}", this.Title, windowTitle);
+        }
+
+        private void BindComponents()
+        {
+            //Inicio de sesión
+            this.Loaded += MainView_Loaded;
+            this.PreviewKeyDown += MainView_PreviewKeyDown;
+            this.Closed += MainView_Closed;
+
+            //Menu Archivo
+            mniUnidadesDeMedida.Click += mniUnidadesDeMedida_Click;
+            mniUsuarios.Click += mniUsuarios_Click;
+            mniClientes.Click += mniClientes_Click;
+            mniClasificaciones.Click += mniClasificaciones_Click;
+            mniFormasPago.Click += mniFormasPago_Click;
+            mniProveedores.Click += mniProveedores_Click;
+            mniBancos.Click += MniBancos_Click;
+            mniCuentasBancarias.Click += MniCuentasBancarias_Click;
+            mniUsosCFDI.Click += MniUsosCFDI_Click;
+            mniEmpresasAsociadas.Click += MniEmpresasAsociadasOnClick;
+            mniGuardian.Click += MniGuardian_Click;
+
+            //Menu Inventario
+            mniArticulos.Click += mniArticulos_Click;
+            mniProductosServicios.Click += MniProductosServicios_Click;
+            mniAjustes.Click += mniAjustes_Click;
+            mniCuentasPrediales.Click += MniCuentasPrediales_Click;
+            mniTraspasos.Click += MniTraspasosOnClick;
+            mniSolicitudesDeTraspaso.Click += MniSolicitudesDeTraspasoOnClick;
+
+            //Menu Ventas
+            mniFacturas.Click += mniFacturas_Click;
+            mniReporteDePagos.Click += mniReporteDePagos_Click;
+            mniRemisiones.Click += mniRemisiones_Click;
+            mniCotizaciones.Click += MniCotizacionesOnClick;
+            mniRemisionesPorPeriodo.Click += MniRemisionesPorPeriodoOnClick;
+            mniPedidos.Click += MniPedidosOnClick;
+            mniFacturarRemisiones.Click += MniFacturarRemisionesOnClick;
+            mniAbonosCliente.Click += MniAbonosClienteOnClick;
+            mniDevoluciones.Click += MniNotasDeCreditoOnClick;
+            mniDescuentos.Click += MniDescuentosOnClick;
+
+            //Menu Compras
+            mniOrdenesDeCompra.Click += MniOrdenesDeCompraOnClick;
+            mniCompras.Click += mniCompras_Click;
+            mniAbonosDeCompra.Click += mniAbonosDeCompra_Click;
+
+            //Menu Reportes
+            mniAbonosPorPeriodo.Click += mniAbonosPorPeriodo_Click;
+            mniInventarioFisico.Click += mniInventarioFisico_Click;
+            mniReporteDeAjustes.Click += mniReporteDeAjustes_Click;
+            mniReporteDeFactura.Click += mniReporteDeFactura_Click;
+            mniComprasPorPeriodos.Click += mniComprasPorPeriodos_Click;
+            mniAntiguedadDeSaldosPorPagar.Click += mniAntiguedadDeSaldosPorPagar_Click;
+            mniEstadoDeCuentaProveedor.Click += mniEstadoDeCuentaProveedor_Click;
+            mniFlujoDeInventario.Click += mniFlujoDeInventario_Click;
+            mniKardexPorArticulo.Click += mniKardexPorArticulo_Click;
+            mniAntiguedadDeSaldosPorCobrar.Click += mniAntiguedadDeSaldosPorCobrar_Click;
+            mniEstadoDeCuentaCliente.Click += mniEstadoDeCuentaCliente_Click;
+            mniVentasPorPeriodo.Click += MniVentasPorPeriodoOnClick;
+            mniComisionesPorPeriodo.Click += MniComisionesPorPeriodoOnClick;
+            mniReporteDePedidos.Click += MniReporteDePedidosOnClick;
+            mniCotizacionesPorPeriodo.Click += MniCotizacionesPorPeriodoOnClick;
+            mniTraspasosPorPeriodo.Click += MniTraspasosPorPeriodoOnClick;
+            mniVentasPorArticulo.Click += MniVentasPorArticuloOnClick;
+            mniNotasDeCreditoPorPeriodo.Click += MniNotasDeCreditoPorPeriodoOnClick;
+            mniImpuestosPorPeriodo.Click += MniImpuestosPorPeriodoOnClick;
+            mniAvaluo.Click += MniAvaluo_Click;
+            mniReporteEstadoDeLaEmpresa.Click +=MniReporteEstadoDeLaEmpresaOnClick; 
+            mniCostoDeLoVendido.Click += MniCostoDeLoVendidoOnClick;
+
+            //Menu Salir
+            mniCerrarSesion.Click += mniCerrarSesion_Click;
+            mniSalir.Click += mniSalir_Click;
+
+            //Menu Propiedades
+            mniGenerales.Click += mniGenerales_Click;
+            mniImpuestos.Click += mniImpuestos_Click;
+            mniEmpresas.Click += mniEmpresas_Click;
+            mniEstaciones.Click += mniEstaciones_Click;
+            mniHerramientas.Click += MniHerramientas_Click;
+            mniHomologacion.Click += MniHomologacion_Click;
+
+            #region Personalizaciones
+
+            //KOWI
+            mniTransferenciaDeArticulos.Click += mniTransferenciaDeArticulos_Click;
+
+            //Integra
+            mniOrdenesDeServicio.Click += MniOrdenesDeServicio_Click;
+
+            #endregion
+
+            //Esto determina que mostrar y que no
+            ModulesControl.SetVisibility(MainMenu.Items.Cast<MenuItem>());
+        }
+
+        private void MniAvaluo_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenAppraisalReport.isValid())
+            {
+                OpenAppraisalReport();
+            }
+        }
+
+        private void MniImpuestosPorPeriodoOnClick(object sender, RoutedEventArgs e)
+        {
+            if (OpenTaxesByPeriodReport.isValid())
+            {
+                OpenTaxesByPeriodReport();
+            }
+        }
+
+        private void MniNotasDeCreditoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenCreditNotes.isValid())
+            {
+                OpenCreditNotes();
+            }
+        }
+
+        private void MniVentasPorArticuloOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenSalesPerItemReport.isValid())
+            {
+                OpenSalesPerItemReport();
+            }
+        }
+
+        private void MniPedidosOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenOrders.isValid())
+            {
+                OpenOrders();
+            }
+        }
+
+        private void MniCotizacionesOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenQuotes.isValid())
+            {
+                OpenQuotes();
+            }
+        }
+
+        private void MniHomologacion_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenHomologationTool.isValid())
+                OpenHomologationTool();
+        }
+
+        private void MainView_Closed(object sender, EventArgs e)
+        {
+            if (Quit.isValid())
+                Quit();
+        }
+
+        private void MniHerramientas_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenMigrationTools.isValid())
+                OpenMigrationTools();
+        }
+
+        #region Inventario
+
+        private void mniArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenItems.isValid())
+                OpenItems();
+        }
+
+        private void MniProductosServicios_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenProductsServices.isValid())
+                OpenProductsServices();
+        }
+
+        private void mniAjustes_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenAdjustments.isValid())
+                OpenAdjustments();
+        }
+
+        private void MniCuentasPrediales_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPropertyAccounts.isValid())
+                OpenPropertyAccounts();
+        }
+
+        private void mniSurtidoDePedidos_Click(object sender, RoutedEventArgs e)
+        {
+            OrdersSupply view = new OrdersSupply();
+            view.ShowWindow();
+        }
+
+        private void MniTraspasosOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenTransfers.isValid())
+            {
+                OpenTransfers();
+            }
+        }
+
+        private void MniSolicitudesDeTraspasoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenTransferRequestsList.isValid())
+            {
+                OpenTransferRequestsList();
+            }
+        }
+
+        #endregion
+
+        #region Reportes
+
+        private void mniEstadoDeCuentaCliente_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (OpenClientStatementReport.isValid())
+                OpenClientStatementReport();
+        }
+
+        private void mniAntiguedadDeSaldosPorCobrar_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenCollectableBalancesReport.isValid())
+                OpenCollectableBalancesReport();
+        }
+
+        private void mniKardexPorArticulo_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenKardexReport.isValid())
+                OpenKardexReport();
+        }
+
+        private void mniFlujoDeInventario_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenStockFlowReport.isValid())
+                OpenStockFlowReport();
+        }
+
+        private void mniEstadoDeCuentaProveedor_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenSupplierStatementReport.isValid())
+                OpenSupplierStatementReport();
+        }
+
+        private void mniAbonosPorPeriodo_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPaymentsByPeriod.isValid())
+                OpenPaymentsByPeriod();
+        }
+
+        private void mniImpresionCorteDeCaja_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenRegistersCashOutSummary.isValid())
+                OpenRegistersCashOutSummary();
+        }
+
+        private void mniInventarioFisico_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenStockReport.isValid())
+                OpenStockReport();
+        }
+
+        private void mniReporteDeFactura_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenInvoiceReport.isValid())
+                OpenInvoiceReport();
+        }
+
+        private void mniReporteDePagos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenFiscalPaymentReport.isValid())
+                OpenFiscalPaymentReport();
+        }
+
+        private void mniReporteDeAjustes_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenAdjustmentsReport.isValid())
+                OpenAdjustmentsReport();
+        }
+
+        private void mniComprasPorPeriodos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPurchasesByPeriodReport.isValid())
+                OpenPurchasesByPeriodReport();
+        }
+
+        private void mniAntiguedadDeSaldosPorPagar_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPayableBalancesReport.isValid())
+                OpenPayableBalancesReport();
+        }
+
+        private void MniComisionesPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenCommissionsPerPeriodReport.isValid())
+            {
+                OpenCommissionsPerPeriodReport();
+            }
+        }
+
+        private void MniVentasPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenSalesPerPeriodReport.isValid())
+            {
+                OpenSalesPerPeriodReport();
+            }
+        }
+
+        private void MniRemisionesPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenBillsOfSalePerPeriodReport.isValid())
+            {
+                OpenBillsOfSalePerPeriodReport();
+            }
+        }
+
+        private void MniReporteDePedidosOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenOrdersReport.isValid())
+            {
+                OpenOrdersReport();
+            }
+        }
+
+        private void MniCotizacionesPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenQuotesPerPeriodReport.isValid())
+            {
+                OpenQuotesPerPeriodReport();
+            }
+        }
+
+        private void MniTraspasosPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenTransfersByPeriodReport.isValid())
+            {
+                OpenTransfersByPeriodReport();
+            }
+        }
+
+        private void MniNotasDeCreditoPorPeriodoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenCreditNotesByPeriodReport.isValid())
+            {
+                OpenCreditNotesByPeriodReport();
+            }
+        }
+
+        private void MniReporteEstadoDeLaEmpresaOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenCompanyStatusReport.isValid())
+            {
+                OpenCompanyStatusReport();
+            }
+        }
+
+        private void MniCostoDeLoVendidoOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenSoldItemsCostReport.isValid())
+            {
+                OpenSoldItemsCostReport();
+            }
+        }
+        #endregion
+
+        #region Inicio de sesión
+
+        private void MainView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (OpenSignIn.isValid())
+                OpenSignIn();
+        }
+
+        #endregion
+
+        #region Menu Archivo
+
+        private void MniUsosCFDI_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenCFDIUses.isValid())
+                OpenCFDIUses();
+        }
+
+        private void MniCuentasBancarias_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenBankAccounts.isValid())
+                OpenBankAccounts();
+        }
+
+        private void MniBancos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenBanks.isValid())
+                OpenBanks();
+        }
+
+        private void mniClasificaciones_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenClassifications.isValid())
+                OpenClassifications();
+        }
+
+        private void mniClientes_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenClients.isValid())
+                OpenClients();
+        }
+
+        private void mniUsuarios_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenUsers.isValid())
+                OpenUsers();
+        }
+
+        private void mniUnidadesDeMedida_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenUnitsOfMeasure.isValid())
+                OpenUnitsOfMeasure();
+        }
+
+        private void mniListasDePrecio_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPrices.isValid())
+                OpenPrices();
+
+        }
+
+        private void mniFormasPago_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPaymentMethods.isValid())
+                OpenPaymentMethods();
+        }
+
+        private void mniProveedores_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenSuppliers.isValid())
+                OpenSuppliers();
+        }
+
+        private void MniGuardian_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenGuardianManualSend.isValid())
+                OpenGuardianManualSend();
+        }
+
+        private void MniEmpresasAsociadasOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenAssociatedCompanies.isValid())
+            {
+                OpenAssociatedCompanies();
+            }
+        }
+        #endregion
+
+        #region Menu Ventas
+
+        void mniVentas_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenSales.isValid())
+                OpenSales();
+        }
+
+        void mniFacturas_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenInvoices.isValid())
+                OpenInvoices();
+        }
+
+        void mniDepositos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenDeposits.isValid())
+                OpenDeposits();
+        }
+
+        private void mniParcialidades_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenFiscalPayments.isValid())
+                OpenFiscalPayments();
+        }
+
+        private void mniRemisiones_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenBillsOfSale.isValid())
+                OpenBillsOfSale();
+        }
+
+        private void mniCortesDeCaja_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenRegistersCashOut.isValid())
+                OpenRegistersCashOut();
+        }
+
+        private void MniFacturarRemisionesOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenInvoiceBillsOfSale.isValid() && Session.LoggedUser.HasAccess(AccesoRequerido.Ver_y_Agregar, "InvoicesPresenter", true))
+            {
+                OpenInvoiceBillsOfSale();
+            }
+        }
+
+        private void MniAbonosClienteOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenClientPayments.isValid())
+            {
+                OpenClientPayments();
+            }
+        }
+
+        private void MniDescuentosOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenDiscountNotes.isValid())
+            {
+                OpenDiscountNotes();
+            }
+        }
+
+        #endregion
+
+        #region Menu Compras
+
+        private void mniCompras_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPurchases.isValid())
+                OpenPurchases();
+        }
+
+        private void mniAbonosDeCompra_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenPurchasePayments.isValid())
+                OpenPurchasePayments();
+        }
+
+        private void MniOrdenesDeCompraOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenPurchaseOrders.isValid())
+            {
+                OpenPurchaseOrders();
+            }
+        }
+
+        #endregion
+
+        #region Menu Propiedades
+
+        private void mniGenerales_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenGeneralProperties.isValid())
+                OpenGeneralProperties();
+        }
+
+        private void mniImpuestos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenTaxes.isValid())
+                OpenTaxes();
+        }
+
+        private void mniEmpresas_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenBusinesses.isValid())
+                OpenBusinesses();
+        }
+
+        void mniEstaciones_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenStations.isValid())
+                OpenStations();
+        }
+
+        #endregion
+
+        #region Menu Salir
+
+        private void mniSalir_Click(object sender, RoutedEventArgs e)
+        {
+            if (Quit.isValid())
+                Quit();
+        }
+
+        private void mniCerrarSesion_Click(object sender, RoutedEventArgs e)
+        {
+            if (SignOut.isValid())
+                SignOut();
+        }
+
+        #endregion
+
+        public void HideWindow()
+        {
+            this.Hide();
+        }
+
+        public void MainView_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Home && OpenDatabaseConfig.isValid())
+                OpenDatabaseConfig();
+        }
+
+        #region Evento Personalizaciones
+
+        #region Kowi
+        //KOWI
+        public event Action OpenItemsTransfer;
+
+        private void mniTransferenciaDeArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenItemsTransfer.isValid())
+                OpenItemsTransfer();
+        }
+
+        #endregion
+
+        #region Integra
+
+        private void MniOrdenesDeServicio_Click(object sender, RoutedEventArgs e)
+        {
+            ServiceOrdersView view = new ServiceOrdersView();
+            view.ShowWindow();
+        }
+
+        #endregion
+
+        #endregion
+    }
+}

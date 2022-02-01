@@ -1,0 +1,47 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.SalesPerItemReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Reporte de ventas por artículo"
+        Icon="{StaticResource ImgItems}"
+        WindowStartupLocation="CenterScreen" 
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=dpFechaInicio}"
+        Height="560" Width="350">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Incluir :" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbTodos" Style="{StaticResource RadioButtonSmall}" GroupName="FilterType" Content="Todos los artículos" Margin="10,50,0,0" IsChecked="True"/>
+
+        <RadioButton x:Name="rbSoloUnaClasificacion" Style="{StaticResource RadioButtonSmall}" GroupName="FilterType" Content="Solo de clasificación :" Margin="10,80,0,0" />
+        <TextBox x:Name="txtClasificacion" HorizontalAlignment="Left" Margin="150,75,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="130" IsEnabled="False"/>
+        <Button x:Name="btnListarClasificaciones" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="285,75,0,0" Width="23" Height="23" IsEnabled="False"/>
+
+        <RadioButton x:Name="rbSoloUnArticulo" Style="{StaticResource RadioButtonSmall}" GroupName="FilterType" Content="Solo el artículo :" Margin="10,110,0,0" />
+        <TextBox x:Name="txtArticulo" HorizontalAlignment="Left" Margin="150,105,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="23" Width="130" IsEnabled="False"/>
+        <Button x:Name="btnListarArticulos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="285,105,0,0" Width="23" Height="23" IsEnabled="False"/>
+
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Reporte :" HorizontalAlignment="Left" Margin="10,140,0,0" VerticalAlignment="Top"/>
+        <RadioButton x:Name="rbReporteTotalizado" Style="{StaticResource RadioButtonSmall}" GroupName="ReportType" Content="Totalizado" Margin="10,170,0,0" IsChecked="True" />
+        <RadioButton x:Name="rbReporteDetallado" Style="{StaticResource RadioButtonSmall}" GroupName="ReportType" Content="Detallado" Margin="10,195,0,0" />
+        <RadioButton x:Name="rbReporteDetalladoCliente" Style="{StaticResource RadioButtonSmall}" GroupName="ReportType" Content="Detallado con datos del cliente" Margin="10,220,0,0" />
+
+        <Label Style="{StaticResource LabelSmall}" FontWeight="Bold" Content="Habilitando las opciones de :" HorizontalAlignment="Left" Margin="10,245,0,0" VerticalAlignment="Top"/>
+        <CheckBox x:Name="cbIncluirFacturas" Style="{StaticResource CheckBoxSmall}" Margin="10,275,0,0" Content="Facturas" IsChecked="True"></CheckBox>
+        <CheckBox x:Name="cbIncluirRemisiones" Style="{StaticResource CheckBoxSmall}" Margin="10,300,0,0" Content="Remisiones"></CheckBox>
+        <CheckBox x:Name="cbIncluirCancelaciones" Style="{StaticResource CheckBoxSmall}" Margin="10,325,0,0" Content="Cancelaciones"></CheckBox>
+
+        <Label Style="{StaticResource LabelSmall}" Content="Desde :" HorizontalAlignment="Left" Margin="10,360,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaInicio" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}"  HorizontalAlignment="Left" Margin="85,360,0,0" VerticalAlignment="Top" Width="200"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Hasta :" HorizontalAlignment="Left" Margin="10,390,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaFinal" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}"  HorizontalAlignment="Left" Margin="85,390,0,0" VerticalAlignment="Top" Width="200"/>
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="75,440,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnVistaPrevia" Content="Ver" Style="{StaticResource BlockButton}" Margin="145,440,0,0" Tag="{StaticResource ImgPreview}"/>
+        <Button x:Name="btnImprimir" Content="Imprimir" Style="{StaticResource BlockButton}" Margin="215,440,0,0" Tag="{StaticResource ImgPrint}"/>
+    </Grid>
+    </base:BaseView>
+
+
+
+

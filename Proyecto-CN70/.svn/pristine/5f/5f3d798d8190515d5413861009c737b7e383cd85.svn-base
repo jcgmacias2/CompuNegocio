@@ -1,0 +1,631 @@
+﻿using Aprovi.Business.ViewModels;
+using Aprovi.Data.Models;
+using Aprovi.Application.Helpers;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Windows;
+using System.Windows.Controls;
+using System.Windows.Input;
+
+namespace Aprovi.Views.UI
+{
+    /// <summary>
+    /// Interaction logic for BillsOfLadingView.xaml
+    /// </summary>
+    public partial class BillsOfSaleView : BaseView, IBillsOfSaleView
+    {
+
+        public event Action FindClient;
+        public event Action OpenClientsList;
+        public event Action Find;
+        public event Action OpenList;
+        public event Action Load;
+        public event Action FindItem;
+        public event Action OpenItemsList;
+        public event Action AddItem;
+        public event Action AddItemComment;
+        public event Action ViewTaxDetails;
+        public event Action RemoveItem;
+        public event Action SelectItem;
+        public event Action Quit;
+        public event Action Cancel;
+        public event Action New;
+        public event Action OpenBillOfSaleToInvoice;
+        public event Action Print;
+        public event Action Save;
+        public event Action OpenNote;
+        public event Action OpenQuotesList;
+        public event Action ChangeCurrency;
+        public event Action OpenUsersList;
+        public event Action FindUser;
+
+        private int _idBillOfSale;
+        private Cliente _client;
+        private Articulo _currentItem;
+        private Moneda _lastCurrency;
+        private Usuario _seller;
+        private VMRemision _billOfSale;
+        private List<DatosExtraPorRemision> _extraData = new List<DatosExtraPorRemision>();
+        private Cotizacione _quote;
+        private int? _idPedido = null;
+
+        public BillsOfSaleView()
+        {
+            InitializeComponent();
+            BindComponents();
+        }
+
+        private void OpenQuotesListView(object sender, KeyEventArgs e)
+        {
+            if (Keyboard.IsKeyDown(Key.LeftAlt) && Keyboard.IsKeyDown(Key.Z))
+            {
+                if (OpenQuotesList.isValid())
+                {
+                    OpenQuotesList();
+                }
+            }
+        }
+
+        private void BindComponents()
+        {
+            this.Loaded += BillOfSaleView_Loaded;
+            this.KeyDown += OpenQuotesListView;
+            txtCliente.LostFocus += txtCliente_LostFocus;
+            btnListarClientes.Click += btnListarClientes_Click;
+            txtFolio.LostFocus += txtFolio_LostFocus;
+            btnListarRemisiones.Click += btnListarRemisiones_Click;
+            txtArticuloCodigo.LostFocus += txtArticuloCodigo_LostFocus;
+            txtArticuloCodigo.PreviewKeyDown += TxtArticuloCodigo_PreviewKeyDown;
+            btnListarArticulos.Click += btnListarArticulos_Click;
+            txtArticuloCantidad.GotFocus += txtArticuloCantidad_GotFocus;
+            txtArticuloPrecio.PreviewKeyDown += txtArticuloPrecio_PreviewKeyDown;
+            dgDetalle.PreviewKeyUp += dgDetalle_PreviewKeyUp;
+            dgDetalle.MouseDoubleClick += dgDetalle_MouseDoubleClick;
+            dgDetalle.PreviewMouseRightButtonUp += DgDetalle_PreviewMouseRightButtonUp;
+            cmbImpuestos.SelectionChanged += cmbImpuestos_SelectionChanged;
+            btnCerrar.Click += btnCerrar_Click;
+            btnNuevo.Click += btnNuevo_Click;
+            btnCancelar.Click += btnCancelar_Click;
+            btnImprimir.Click += btnImprimir_Click;
+            btnRegistrar.Click += btnRegistrar_Click;
+            btnFacturar.Click += btnFacturar_Click;
+            btnNota.Click += BtnNotaOnClick;
+            cmbMonedas.SelectionChanged += CmbMonedasOnSelectionChanged;
+            txtVendedor.LostFocus += TxtVendedorOnLostFocus;
+            btnListarUsuarios.Click += BtnListarUsuariosOnClick;
+
+            //Abonos
+            txtAbonoCantidad.PreviewKeyUp += txtAbonoCantidad_PreviewKeyUp;
+            dgAbonos.PreviewKeyUp += dgAbonos_PreviewKeyUp;
+
+            _seller = new Usuario();
+        }
+
+        private void BtnListarUsuariosOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenUsersList.isValid())
+            {
+                OpenUsersList();
+            }
+        }
+
+        private void TxtVendedorOnLostFocus(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (FindUser.isValid())
+            {
+                FindUser();
+            }
+        }
+
+        private void CmbMonedasOnSelectionChanged(object sender, SelectionChangedEventArgs selectionChangedEventArgs)
+        {
+            if (ChangeCurrency.isValid())
+            {
+                ChangeCurrency();
+            }
+        }
+
+        private void BtnNotaOnClick(object sender, RoutedEventArgs routedEventArgs)
+        {
+            if (OpenNote.isValid())
+            {
+                OpenNote();
+            }
+        }
+
+        private void DgDetalle_PreviewMouseRightButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var row = dgDetalle.SelectedIndex;
+
+            if (row >= 0 && AddItemComment.isValid())
+                AddItemComment();
+        }
+
+        void btnFacturar_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenBillOfSaleToInvoice.isValid() &&
+                Session.LoggedUser.HasAccess(AccesoRequerido.Total, "InvoicesPresenter", true))
+                OpenBillOfSaleToInvoice();
+        }
+
+        void btnRegistrar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!IsDirty)
+            {
+                if (Save.isValid(AccesoRequerido.Ver_y_Agregar))
+                    Save();
+            }
+        }
+
+        void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            if (Print.isValid(AccesoRequerido.Ver))
+                Print();
+        }
+
+        void btnCancelar_Click(object sender, RoutedEventArgs e)
+        {
+            if (Cancel.isValid(AccesoRequerido.Total))
+                Cancel();
+        }
+
+        void btnNuevo_Click(object sender, RoutedEventArgs e)
+        {
+            if (New.isValid())
+                New();
+        }
+
+        void btnCerrar_Click(object sender, RoutedEventArgs e)
+        {
+            if (Quit.isValid())
+                Quit();
+        }
+
+        void cmbImpuestos_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            if (ViewTaxDetails.isValid())
+                ViewTaxDetails();
+        }
+
+        void dgDetalle_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            if (SelectItem.isValid())
+                SelectItem();
+        }
+
+        void dgDetalle_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Delete) && RemoveItem.isValid(AccesoRequerido.Ver_y_Agregar))
+                RemoveItem();
+        }
+
+        void txtArticuloPrecio_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter && AddItem.isValid())
+            {
+                e.Handled = true;
+                AddItem();
+                txtArticuloCodigo.Focus();
+            }
+        }
+
+        void txtArticuloCantidad_GotFocus(object sender, RoutedEventArgs e)
+        {
+            //Al perder el foco del txtArticuloCodigo llega aquí
+            //Si el código del articulo esta en blanco enfocar botón Pagar
+            if (!txtArticuloCodigo.Text.isValid())
+            {
+                cmbAbonoFormasPago.Focus();
+                //btnRegistrar.Focus();
+                return;
+            }
+
+            //Si el articulo no existe enfoco nuevamente código de articulo
+            if (!txtArticuloCantidad.Text.ToDecimalOrDefault().isValid())
+            {
+                txtArticuloCodigo.Focus();
+                return;
+            }
+        }
+
+        void btnListarArticulos_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenItemsList.isValid())
+                OpenItemsList();
+        }
+
+        private void TxtArticuloCodigo_PreviewKeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.F2))
+                OpenItemsList();
+        }
+
+        void txtArticuloCodigo_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (FindItem.isValid())
+                FindItem();
+        }
+
+        void btnListarRemisiones_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenList.isValid())
+                OpenList();
+        }
+
+        void txtFolio_LostFocus(object sender, RoutedEventArgs e)
+        {
+            if (Find.isValid())
+                Find();
+        }
+
+        void btnListarClientes_Click(object sender, RoutedEventArgs e)
+        {
+            if (OpenClientsList.isValid())
+                OpenClientsList();
+        }
+
+        void txtCliente_LostFocus(object sender, RoutedEventArgs e)
+        {
+            //Se activa al cargar una remision si no se usa la condicion del idCliente
+            if (SelectedCustomerChanged && FindClient.isValid())
+                FindClient();
+        }
+
+        void BillOfSaleView_Loaded(object sender, RoutedEventArgs e)
+        {
+            if (Load.isValid())
+                Load();
+        }
+
+        public VMRemision BillOfSale
+        {
+            get
+            {
+                //_client.codigo = txtCliente.Text;
+                return IsDirty
+                    ? _billOfSale
+                    : new VMRemision() //Cuando es una remisión ya registrada, regreso el registro completo que se cargo
+                    {
+                        idRemision = _idBillOfSale,
+                        Cliente = SelectedCustomerChanged?new Cliente(){codigo = txtCliente.Text}:_client,
+                        idCliente = _client.idCliente,
+                        folio = txtFolio.Text.ToIntOrDefault(),
+                        idMoneda = cmbMonedas.SelectedValue.ToIntOrDefault(),
+                        Moneda = cmbMonedas.SelectedIndex >= 0 ? (Moneda) cmbMonedas.SelectedItem : new Moneda(),
+                        fechaHora = dpFecha.SelectedDate.Value,
+                        tipoDeCambio = txtTipoDeCambio.Text.ToDecimalOrDefault(),
+                        DetalleDeRemision = dgDetalle.Items.Cast<VMDetalleDeRemision>().ToList(),
+                        AbonosDeRemisions = dgAbonos.ItemsSource.isValid()
+                            ? dgAbonos.ItemsSource.Cast<AbonosDeRemision>().ToList()
+                            : new List<AbonosDeRemision>(),
+                        DatosExtraPorRemisions = _extraData,
+                        Cotizaciones = _quote.isValid() && _quote.idCotizacion.isValid() ? new List<Cotizacione>() { _quote } : null,
+                        idPedido = _idPedido,
+                        Usuario1 = new Usuario() { nombreDeUsuario = txtVendedor.Text, idUsuario = _seller.idUsuario},
+                        idVendedor = _seller.idUsuario.isValid() ? _seller.idUsuario : (int?)null
+                    };
+            }
+        }
+
+        public bool IsDirty
+        {
+            get { return _billOfSale.isValid() && _billOfSale.idRemision.isValid() && _billOfSale.folio == txtFolio.Text.ToIntOrDefault() && !SelectedCustomerChanged; }
+        }
+
+        public VMDetalleDeRemision CurrentItem
+        {
+            get
+            {
+                //_currentItem.codigo = txtArticuloCodigo.Text;
+                return new VMDetalleDeRemision()
+                {
+                    idArticulo = _currentItem.idArticulo,
+                    Articulo = new Articulo()
+                    {
+                        idArticulo = _currentItem.idArticulo,
+                        codigo = txtArticuloCodigo.Text,
+                        inventariado = _currentItem.inventariado
+                    },
+                    cantidad = txtArticuloCantidad.Text.ToDecimalOrDefault(),
+                    precioUnitario = txtArticuloPrecio.Text.ToDecimalOrDefault(),
+                };
+            }
+        }
+
+        public Moneda LastCurrency
+        {
+            get { return _lastCurrency; }
+        }
+        private bool SelectedCustomerChanged => (!_client.isValid() || txtCliente.Text.isValid() && _client.codigo != txtCliente.Text);
+
+        public VMImpuesto SelectedTax
+        {
+            get { return cmbImpuestos.SelectedIndex >= 0 ? (VMImpuesto) cmbImpuestos.SelectedItem : new VMImpuesto(); }
+        }
+
+        public VMDetalleDeRemision SelectedItem
+        {
+            get { return dgDetalle.SelectedIndex >= 0 ? (VMDetalleDeRemision) dgDetalle.SelectedItem : null; }
+        }
+
+        public void ShowStock(decimal existencia)
+        {
+            lblExistencia.Content = existencia.ToDecimalString();
+        }
+
+        public void DisableSaveButton()
+        {
+            btnRegistrar.IsEnabled = false;
+        }
+
+        public void Show(VMRemision billOfSale)
+        {
+            txtCliente.Text = billOfSale.Cliente.codigo;
+            lblClienteRazonSocial.Content = billOfSale.Cliente.razonSocial;
+
+            //Cuando tiene un vendedor
+            if (billOfSale.Usuario1.isValid())
+            {
+                Show(billOfSale.Usuario1);
+            }
+            else
+            {
+                //Si es una remision nueva, se debe poner el vendedor del cliente, y en su defecto el usuario actual
+                if (!_billOfSale.isValid() || !_billOfSale.idRemision.isValid())
+                {
+                    if (_client.isValid() && _client.idCliente.isValid() && _client.idVendedor.isValid())
+                    {
+                        //Si el cliente tiene vendedor, se asigna este
+                        Show(_client.Usuario);
+                    }
+                    else
+                    {
+                        Show(Session.LoggedUser);
+                    }
+                }
+                else
+                {
+                    Show(new Usuario());
+                }
+            }
+
+            if (billOfSale.Moneda.isValid())
+                Show(billOfSale.Moneda);
+
+            txtTipoDeCambio.Text = billOfSale.tipoDeCambio.ToDecimalString();
+            txtFolio.Text = billOfSale.folio.ToString();
+            dpFecha.SelectedDate = billOfSale.fechaHora;
+            txtArticuloCodigo.Clear();
+            txtArticuloDescripcion.Clear();
+            txtArticuloCantidad.Clear();
+            txtArticuloUnidad.Clear();
+            txtArticuloPrecio.Clear();
+            _currentItem = new Articulo();
+
+            dgDetalle.ItemsSource = billOfSale.DetalleDeRemision;
+            txtSubtotal.Text = billOfSale.Subtotal.ToDecimalString();
+            cmbImpuestos.ItemsSource = billOfSale.Impuestos;
+            cmbImpuestos.SelectedValuePath = "idImpuesto";
+            cmbImpuestos.DisplayMemberPath = "Descripcion";
+            cmbImpuestos.SelectedValue = 0;
+
+            dgAbonos.ItemsSource = billOfSale.AbonosDeRemisions.Where(a => a.idEstatusDeAbono.Equals((int)StatusDeAbono.Registrado));
+
+            txtTotal.Text = billOfSale.Total.ToDecimalString();
+
+            _idBillOfSale = billOfSale.idRemision;
+            _client = billOfSale.Cliente;
+
+            //Cuando ya es una existente
+            _billOfSale = billOfSale;
+            _extraData = billOfSale.DatosExtraPorRemisions.ToList();
+
+            //Cuando viene de un pedido
+            _idPedido = billOfSale.idPedido;
+
+            //Cuando viene de una cotizacion
+            if (billOfSale.Cotizaciones.isValid() && !billOfSale.Cotizaciones.IsEmpty())
+            {
+                _quote = billOfSale.Cotizaciones.FirstOrDefault();
+            }
+            else
+            {
+                _quote = new Cotizacione();
+            }
+
+            //Si ya esta timbrada deshabilito el boton de registrar
+            if (billOfSale.Factura.isValid() && billOfSale.Factura.idFactura.isValid())
+                lblFacturada.Content = String.Format("Facturada con folio {0}{1}", billOfSale.Factura.serie, billOfSale.Factura.folio);
+
+            SetEnvironment((StatusDeRemision)billOfSale.idEstatusDeRemision);
+        }
+
+        public void Show(Usuario seller)
+        {
+            txtVendedor.Text = seller.nombreDeUsuario;
+            _seller = seller;
+        }
+
+        public void Show(VMDetalleDeRemision detail)
+        {
+            txtArticuloCodigo.Text = detail.Articulo.codigo;
+            txtArticuloDescripcion.Text = detail.Articulo.descripcion;
+            txtArticuloCantidad.Text = detail.cantidad.ToDecimalString();
+            txtArticuloUnidad.Text = detail.Articulo.UnidadesDeMedida.descripcion;
+            txtArticuloPrecio.Text = detail.precioUnitario.ToDecimalString();
+            _currentItem = detail.Articulo;
+            txtArticuloCantidad.Focus();
+        }
+
+        public void Show(VMImpuesto tax)
+        {
+            txtImpuestos.Text = tax.Importe.ToDecimalString();
+        }
+
+        public void Show(Moneda currency)
+        {
+            cmbMonedas.SelectedItem = currency;
+            _lastCurrency = currency;
+        }
+
+        public void ClearItem()
+        {
+            txtArticuloPrecio.Clear();
+            txtArticuloUnidad.Clear();
+            txtArticuloCantidad.Clear();
+            txtArticuloDescripcion.Clear();
+            txtVendedor.Clear();
+            lblExistencia.Content = "";
+
+            _seller = new Usuario();
+            _currentItem = new Articulo();
+        }
+
+        public void FillCombos(List<Moneda> currencies, List<FormasPago> paymentForms)
+        {
+            cmbMonedas.ItemsSource = currencies;
+            cmbMonedas.SelectedValuePath = "idMoneda";
+            cmbMonedas.DisplayMemberPath = "descripcion";
+            cmbMonedas.SelectedIndex = 0;
+            _lastCurrency = (Moneda)cmbMonedas.SelectedItem;
+
+            cmbAbonoMonedas.ItemsSource = currencies;
+            cmbAbonoMonedas.SelectedValuePath = "idMoneda";
+            cmbAbonoMonedas.DisplayMemberPath = "descripcion";
+
+            cmbAbonoFormasPago.ItemsSource = paymentForms;
+            cmbAbonoFormasPago.SelectedValuePath = "idFormaPago";
+            cmbAbonoFormasPago.DisplayMemberPath = "descripcion";
+        }
+
+        private void SetEnvironment(StatusDeRemision status)
+        {
+            //Si esta en cualquier otro estado que no sea nueva, ya no puedo modificarla
+            txtArticuloCodigo.IsEnabled = status.Equals(StatusDeRemision.Nueva);
+            txtArticuloPrecio.IsEnabled = status.Equals(StatusDeRemision.Nueva);
+            dgDetalle.IsReadOnly = !status.Equals(StatusDeRemision.Nueva);
+            lblCancelada.Visibility = System.Windows.Visibility.Hidden;
+            lblFacturada.Visibility = System.Windows.Visibility.Hidden;
+            btnCancelar.IsEnabled = true;
+
+            switch (status)
+            {
+                case StatusDeRemision.Nueva:
+                    btnRegistrar.IsEnabled = true;
+                    btnFacturar.IsEnabled = false;
+                    btnCancelar.IsEnabled = false;
+                    break;
+                case StatusDeRemision.Registrada:
+                    btnRegistrar.IsEnabled = false;
+                    btnFacturar.IsEnabled = true;
+                    break;
+                case StatusDeRemision.Facturada:
+                    btnRegistrar.IsEnabled = false;
+                    btnCancelar.IsEnabled = false;
+                    btnFacturar.IsEnabled = false;
+                    lblFacturada.Visibility = System.Windows.Visibility.Visible;
+                    break;
+                case StatusDeRemision.Cancelada:
+                    btnRegistrar.IsEnabled = false;
+                    btnCancelar.IsEnabled = false;
+                    btnFacturar.IsEnabled = false;
+                    lblCancelada.Visibility = System.Windows.Visibility.Visible;
+                    break;
+                default:
+                    break;
+            }
+        }
+
+        #region Abonos
+
+        public event Action Add;
+
+        public event Action Remove;
+
+        public AbonosDeRemision Payment
+        {
+            get
+            {
+                return new AbonosDeRemision()
+                {
+                    idRemision = _idBillOfSale,
+                    idEstatusDeAbono = (int)StatusDeAbono.Registrado,
+                    idFormaPago = cmbAbonoFormasPago.SelectedValue.ToIntOrDefault(),
+                    FormasPago = cmbAbonoMonedas.SelectedIndex >= 0 ? (FormasPago)cmbAbonoFormasPago.SelectedItem : null,
+                    idMoneda = cmbAbonoMonedas.SelectedValue.ToIntOrDefault(),
+                    Moneda = cmbMonedas.SelectedIndex >= 0 ? (Moneda)cmbAbonoMonedas.SelectedItem : null,
+                    monto = txtAbonoCantidad.Text.ToDecimalOrDefault(),
+                    tipoDeCambio = txtTipoDeCambio.Text.ToDecimalOrDefault()
+                };
+            }
+        }
+
+        public AbonosDeRemision Selected
+        {
+            get { return dgAbonos.SelectedIndex >= 0 ? (AbonosDeRemision)dgAbonos.SelectedItem : null; }
+        }
+
+        public void Show(List<AbonosDeRemision> payments)
+        {
+            txtAbonoCantidad.Clear();
+            dgAbonos.ItemsSource = payments.Where(p => p.idEstatusDeAbono.Equals((int)StatusDeAbono.Registrado));
+
+            //Calculo la cuenta nuevamente para poder definir el flujo del foco de los controles
+            _billOfSale.AbonosDeRemisions = payments;
+            _billOfSale.UpdateAccount();
+        }
+
+        void dgAbonos_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if (e.Key.Equals(Key.Delete) && Remove.isValid())
+                Remove();
+        }
+
+        void txtAbonoCantidad_PreviewKeyUp(object sender, KeyEventArgs e)
+        {
+            if ((e.Key.Equals(Key.Enter) || e.Key.Equals(Key.Tab)))
+            {
+                Mouse.OverrideCursor = Cursors.Wait;
+                //Si me dejo la cantidad en blanco y ya esta saldado lo mando a registrar
+                if (!txtAbonoCantidad.Text.isValid() && _billOfSale.Saldo.Equals(0.0m))
+                {
+                    btnRegistrar.Focus();
+                    e.Handled = true;
+                    Mouse.OverrideCursor = null;
+                    return;
+                }
+
+                //Si me pone un zero, lo mando a registrar
+                if(txtAbonoCantidad.Text.isValid() && txtAbonoCantidad.Text.Equals("0"))
+                {
+                    btnRegistrar.Focus();
+                    e.Handled = true;
+                    Mouse.OverrideCursor = null;
+                    return;
+                }
+
+                //Si esta en blanco, puede ser que apenas llego al textbox, aquí lo dejo
+                if(!txtAbonoCantidad.Text.isValid())
+                {
+                    e.Handled = true;
+                    Mouse.OverrideCursor = null;
+                    return;
+                }
+
+                //Si me capturó algo intengo registrar
+                if (Add.isValid())
+                    Add();
+
+                Mouse.OverrideCursor = null;
+                //Después de que registro evaluo a donde lo mando, si de regreso a registrar otro abono o al boton de registrar
+                if (_billOfSale.Saldo > 0.0m)
+                    cmbAbonoFormasPago.Focus();
+                else
+                    btnRegistrar.Focus();
+            }
+        }
+
+        #endregion
+    }
+}

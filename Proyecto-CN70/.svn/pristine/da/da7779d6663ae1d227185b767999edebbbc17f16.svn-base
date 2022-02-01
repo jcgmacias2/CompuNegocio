@@ -1,0 +1,57 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.ItemsMigrationToolView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Migración de Artículos VFP - SQL"
+        Icon="{StaticResource ImgProperties}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=dgUnidades}"
+        Height="550" Width="500">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <GroupBox Header="Equivalencias de Unidades de Medida" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="180" Width="470"/>
+        <DataGrid Name="dgUnidades" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top" Height="150" Width="450" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="215" Header="Unidad de Medida Original" Binding="{Binding Descripcion}" />
+                <DataGridComboBoxColumn Width="210"  Header="Equivalencia" x:Name="cmbUnidades" 
+                                        SelectedValueBinding="{Binding IdUnidadDeMedida}" 
+                                        DisplayMemberPath="descripcion" SelectedValuePath="idUnidadDeMedida"/>
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <GroupBox Header="Equivalencias de Clasificaciones" HorizontalAlignment="Left" Margin="10,200,0,0" VerticalAlignment="Top" Height="180" Width="470"/>
+        <DataGrid Name="dgClasificaciones" HorizontalAlignment="Left" Margin="20,220,0,0" VerticalAlignment="Top" Height="150" Width="450" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="55" Header="Clave" Binding="{Binding Clave}" />
+                <DataGridTextColumn Width="170" Header="Departamento o Familia" Binding="{Binding Descripcion}" />
+                <DataGridComboBoxColumn Width="200"  Header="Equivalencia" x:Name="cmbClasificaciones" 
+                                        SelectedValueBinding="{Binding IdClasificacion}" 
+                                        DisplayMemberPath="descripcion" SelectedValuePath="idClasificacion"/>
+            </DataGrid.Columns>
+        </DataGrid>
+        <GroupBox Header="Equivalencia de IVA" HorizontalAlignment="Left" Margin="10,380,0,0" VerticalAlignment="Top" Height="50" Width="470"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Asignar este impuesto a los artículos que traen iva :" HorizontalAlignment="Left" Margin="20,400,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbImpuestos" HorizontalAlignment="Left" Margin="305,400,0,0" VerticalAlignment="Top" Width="165" Height="23">
+            <ComboBox.ItemTemplate>
+                <DataTemplate>
+                    <TextBlock>
+                        <TextBlock.Text>
+                            <MultiBinding StringFormat="{}{0} - {1} {2}">
+                                <Binding Path="nombre"/>
+                                <Binding Path="valor"/>
+                                <Binding Path="TiposDeImpuesto.descripcion"/>
+                            </MultiBinding>
+                        </TextBlock.Text>
+                    </TextBlock>
+                </DataTemplate>
+            </ComboBox.ItemTemplate>
+        </ComboBox>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="185,440,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnProcesar" Content="Procesar" Style="{StaticResource BlockButton}" Margin="255,440,0,0" Tag="{StaticResource ImgProcess}"/>
+    </Grid>
+</base:BaseView>
+

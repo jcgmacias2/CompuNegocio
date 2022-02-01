@@ -1,0 +1,37 @@
+﻿using System.Collections.Generic;
+using System.Linq;
+using System.Xml.Serialization;
+using Aprovi.Data.Models;
+
+namespace Aprovi.Business.ViewModels
+{
+    [XmlRoot(ElementName = "Orden")]
+    public class VMAddendaJardines
+    {
+        public string OrdenDeCompra { get; set; }
+        public string NumeroRM { get; set; }
+        public string SubTotal { get; set; }
+        public string Total { get; set; }
+        public string Iva { get; set; }
+        public string TasaIva { get; set; }
+        public string IvaTotal { get; set; }
+
+        public VMAddendaJardines()
+        { }
+
+        public VMAddendaJardines(VMFactura invoice, List<DatosExtraPorFactura> datos)
+        {
+            DatosExtraPorFactura numeroRm = datos.FindDatoOrDefault(DatoExtra.NumeroRM);
+            VMImpuesto impuesto = invoice.Impuestos.FirstOrDefault(x =>
+                x.codigo == ((int)Impuestos.IVA).ToString("000") && x.idTipoDeImpuesto == (int)TipoDeImpuesto.Trasladado);
+
+            OrdenDeCompra = invoice.ordenDeCompra;
+            NumeroRM = numeroRm.isValid() ? numeroRm.valor : "";
+            SubTotal = invoice.Subtotal.ToDecimalString();
+            Total = invoice.Total.ToDecimalString();
+            Iva = impuesto.isValid() ? impuesto.MontoGravable.ToDecimalString() : "0.00";
+            TasaIva = impuesto.isValid() ? impuesto.valor.ToDecimalString() : "0.00";
+            IvaTotal = impuesto.isValid() ? impuesto.Importe.ToDecimalString() : "0.00";
+        }
+    }
+}

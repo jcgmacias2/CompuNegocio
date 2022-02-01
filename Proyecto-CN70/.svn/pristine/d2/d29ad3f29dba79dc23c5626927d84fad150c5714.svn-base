@@ -1,0 +1,116 @@
+﻿using Aprovi.Data.Models;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace Aprovi.Business.ViewModels
+{
+    public class VMDetalleKardex
+    {
+        public VMDetalleKardex(VwEntradasPorCompra movimiento)
+        {
+            fechaHora = movimiento.fechaHora;
+            Movimiento = "Compra";
+            Folio = movimiento.folio;
+            Entrada = movimiento.Unidades.GetValueOrDefault();
+            Salida = 0.0m;
+        }
+
+        public VMDetalleKardex(VwSalidasPorComprasCancelada movimiento)
+        {
+            fechaHora = movimiento.fechaCancelacion.GetValueOrDefault();
+            Movimiento = "Cancelación de compra";
+            Folio = movimiento.folio;
+            Entrada = 0.0m;
+            Salida = movimiento.Unidades.GetValueOrDefault();
+        }
+
+        public VMDetalleKardex(VwEntradasPorAjuste movimiento)
+        {
+            fechaHora = movimiento.fechaHora;
+            Movimiento = "Ajuste de entrada";
+            Folio = movimiento.folio;
+            Entrada = movimiento.Unidades;
+            Salida = 0.0m;
+        }
+
+        public VMDetalleKardex(VwSalidasPorAjustesCancelado movimiento)
+        {
+            fechaHora = movimiento.fechaCancelacion;
+            Movimiento = "Cancelación de ajuste de entrada";
+            Folio = movimiento.folio;
+            Entrada = 0.0m;
+            Salida = movimiento.Unidades.GetValueOrDefault();
+        }
+
+        public VMDetalleKardex(VwSalidasPorAjuste movimiento)
+        {
+            fechaHora = movimiento.fechaHora;
+            Movimiento = "Ajuste de salida";
+            Folio = movimiento.folio;
+            Entrada = 0.0m;
+            Salida = movimiento.Unidades;
+        }
+
+        public VMDetalleKardex(VwEntradasPorAjustesCancelado movimiento)
+        {
+            fechaHora = movimiento.fechaCancelacion.GetValueOrDefault();
+            Movimiento = "Cancelación de ajuste de salida";
+            Folio = movimiento.folio;
+            Entrada = movimiento.Unidades;
+            Salida = 0.0m;
+        }
+
+        public VMDetalleKardex(VwSalidasPorFactura movimiento)
+        {
+            fechaHora = movimiento.fechaHora;
+            Movimiento = "Factura";
+            Folio = movimiento.folio.ToUpper();
+            Entrada = 0.0m;
+            Salida = movimiento.Unidades;
+        }
+
+        public VMDetalleKardex(VwEntradasPorFacturasCancelada movimiento)
+        {
+            if (!movimiento.fechaCancelacion.HasValue)
+            {
+                Movimiento = "Anulación de factura";
+                fechaHora = movimiento.fechaHora;
+            }
+            else
+            {
+                Movimiento = "Cancelación de factura";
+                fechaHora = movimiento.fechaCancelacion.GetValueOrDefault();
+            }
+            Folio = movimiento.folio.ToUpper();
+            Entrada = movimiento.Unidades;
+            Salida = 0.0m;
+        }
+
+        public VMDetalleKardex(VwSalidasPorRemisione movimiento)
+        {
+            fechaHora = movimiento.fechaHora;
+            Movimiento = "Remisión";
+            Folio = movimiento.folio.ToString();
+            Entrada = 0.0m;
+            Salida = movimiento.Unidades;
+        }
+
+        public VMDetalleKardex(VwEntradasPorRemisionesCancelada movimiento)
+        {
+            fechaHora = movimiento.fechaCancelacion.GetValueOrDefault();
+            Movimiento = "Cancelación de remisión";
+            Folio = movimiento.folio.ToString();
+            Entrada = movimiento.Unidades;
+            Salida = 0.0m;
+        }
+
+        public DateTime fechaHora { get; set; }
+        public string Movimiento { get; set; }
+        public string Folio { get; set; }
+        public decimal Entrada { get; set; }
+        public decimal Salida { get; set; }
+    }
+}

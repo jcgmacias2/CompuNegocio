@@ -1,0 +1,779 @@
+﻿using Aprovi.Application.Helpers;
+using Aprovi.Business.Helpers;
+using Aprovi.Business.Services;
+using Aprovi.Business.ViewModels;
+using Aprovi.Data.Models;
+using Aprovi.Helpers;
+using Aprovi.Views;
+using Aprovi.Views.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Aprovi.Presenters
+{
+    public class PurchaseOrdersPresenter
+    {
+        private IPurchaseOrdersView _view;
+        private IOrdenDeCompraService _orders;
+        private ICatalogosEstaticosService _catalogs;
+        private IProveedorService _providers;
+        private IArticuloService _items;
+        private IAbonoDeRemisionService _payments;
+        private readonly IUnidadDeMedidaService _measureUnits;
+        private readonly ICompraService _purchases;
+        private readonly IAbonoDeCompraService _purchasePayments;
+        private readonly IEquivalenciaService _equivalences;
+        private readonly IFormaPagoService _paymentForms;
+        private IImpuestoService _taxes;
+
+        public PurchaseOrdersPresenter(IPurchaseOrdersView view, IOrdenDeCompraService orders, ICatalogosEstaticosService catalogs, IArticuloService items, IImpuestoService taxes, IUnidadDeMedidaService measureUnits, ICompraService purchases, IAbonoDeCompraService purchasePayments, IEquivalenciaService equivalences, IFormaPagoService paymentForms, IProveedorService providers)
+        {
+            _view = view;
+            _orders = orders;
+            _catalogs = catalogs;
+            _items = items;
+            _taxes = taxes;
+            _measureUnits = measureUnits;
+            _purchases = purchases;
+            _purchasePayments = purchasePayments;
+            _equivalences = equivalences;
+            _paymentForms = paymentForms;
+            _providers = providers;
+
+            _view.Save += Save;
+            _view.Print += Print;
+            _view.Cancel += Cancel;
+            _view.New += New;
+            _view.Quit += Quit;
+            _view.SelectItem += SelectItem;
+            _view.RemoveItem += RemoveItem;
+            _view.ViewTaxDetails += ViewTaxDetails;
+            _view.AddItem += AddItem;
+            _view.AddItemComment += AddItemComment;
+            _view.OpenItemsList += OpenItemsList;
+            _view.FindItem += FindItem;
+            _view.OpenList += OpenList;
+            _view.Find += Find;
+            _view.OpenProvidersList += OpenProvidersList;
+            _view.FindProvider += FindProvider;
+            _view.Load += Load;
+            _view.OpenNote += OpenNote;
+            _view.Update += Update;
+
+            _view.FillCombos(_catalogs.ListMonedas());
+        }
+
+        private void Update()
+        {
+            try
+            {
+                //Se obtiene el pedido original
+                VMOrdenDeCompra pedido = _view.Order;
+                OrdenesDeCompra dbOrder = _orders.Find(pedido.idOrdenDeCompra);
+
+                if (pedido.Detalles.HasChanged(dbOrder.DetallesDeOrdenDeCompras.ToList()))
+                {
+                    //Se verifica que la orden no haya sido surtida o cancelada
+                    if (pedido.idEstatusDeOrdenDeCompra != (int)StatusDeOrdenDeCompra.Registrado)
+                    {
+                        throw new Exception("No se puede modificar una orden de compra surtida o cancelada");
+                    }
+
+                    _orders.Update(pedido, pedido.Detalles);
+
+                    _view.ShowMessage("Orden de compra modificada exitosamente");
+                }
+
+                if (_view.Order.idEstatusDeOrdenDeCompra != (int)StatusDeOrdenDeCompra.Registrado &&
+                    _view.Order.idEstatusDeOrdenDeCompra != (int)StatusDeOrdenDeCompra.Surtido_Parcial)
+                {
+                    throw new Exception("No se puede surtir una orden de compra surtida totalmente o cancelada");
+                }
+
+                //Cambia la cantidad a la cantidad de surtidos
+                pedido.Detalles.ForEach(x=>x.Cantidad = x.Surtido);
+                pedido.UpdateAccount();
+
+                //Si el pedido contiene articulos surtidos, se muestra la ventana de compras
+                if (pedido.Detalles.Any(x => x.Cantidad > 0))
+                {
+                    IPurchasesView purchaseView = new PurchasesView();
+                    PurchasesPresenter purchasePresenter = new PurchasesPresenter(purchaseView, _purchases, _purchasePayments, _items, _providers, _taxes, _catalogs, _equivalences, _measureUnits, _paymentForms, _orders);
+
+                    purchaseView.ShowWindowIndependent();
+                    purchaseView.Show(pedido, pedido.Detalles.Where(x=>x.Cantidad > 0).Select(x => x.ToDetalleDeCompra(_items)).ToList());
+
+                    _view.CloseWindow();
+                }
+            }
+            catch (Exception e)
+            {
+                _view.ShowError(e.Message);
+            }
+        }
+
+        private void OpenNote()
+        {
+            try
+            {
+                DatosExtraPorOrdenDeCompra nota = null;
+
+                if (_view.Order.isValid() && _view.Order.folio.isValid())
+                {
+                    //Se busca la nota de la orden de compra
+                    nota = _view.Order.DatosExtraPorOrdenDeCompras.FirstOrDefault(x => x.dato == DatoExtra.Nota.ToString());
+                }
+
+                nota = nota ?? new DatosExtraPorOrdenDeCompra() { dato = DatoExtra.Nota.ToString() };
+
+                INoteView view;
+                NotePresenter presenter;
+
+                view = new NoteView();
+                presenter = new NotePresenter(view, nota.valor);
+
+                view.ShowWindow();
+
+                nota.valor = view.Nota;
+
+                //Si el pedido ya tiene una nota, se actualiza en vez de agregarla
+                DatosExtraPorOrdenDeCompra datoOrdenDeCompra = _view.Order.DatosExtraPorOrdenDeCompras.FirstOrDefault(x => x.dato == DatoExtra.Nota.ToString());
+
+                if (datoOrdenDeCompra.isValid())
+                {
+                    datoOrdenDeCompra.valor = nota.valor;
+                }
+                else
+                {
+                    _view.Order.DatosExtraPorOrdenDeCompras.Add(nota);
+                }
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void Load()
+        {
+            try
+            {
+                //Establezco los defaults
+                var order = new VMOrdenDeCompra();
+                order.fechaHora = DateTime.Now;
+                order.tipoDeCambio = 0m;
+                order.idEstatusDeOrdenDeCompra = (int)StatusDeOrdenDeCompra.Nuevo;
+                order.folio = _orders.Next();
+
+                _view.Show(order);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void FindProvider()
+        {
+            if (!_view.Order.Proveedore.codigo.isValid())
+                return;
+
+            try
+            {
+                VMOrdenDeCompra order;
+
+                var provider = _providers.Find(_view.Order.Proveedore.codigo);
+
+                if (!provider.isValid())
+                {
+                    _view.ShowError("No existe ningún proveedor con ese código");
+                    New();
+                    return;
+                }
+
+                if (_view.Order.folio.isValid())
+                    order = new VMOrdenDeCompra(provider, _view.Order.folio.ToString());
+                else
+                    order = new VMOrdenDeCompra() { Proveedore = provider, idProveedor = provider.idProveedor };
+
+                _view.Show(order);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void OpenProvidersList()
+        {
+            try
+            {
+                ISuppliersListView view;
+                SuppliersListPresenter presenter;
+
+                view = new SuppliersListView();
+                presenter = new SuppliersListPresenter(view, _providers);
+
+                view.ShowWindow();
+
+                if (view.Supplier.isValid() && view.Supplier.idProveedor.isValid())
+                {
+                    VMOrdenDeCompra order;
+
+                    if (_view.Order.folio.isValid())
+                        order = new VMOrdenDeCompra(view.Supplier, _view.Order.folio.ToString());
+                    else
+                        order = new VMOrdenDeCompra() { Proveedore = view.Supplier, idProveedor = view.Supplier.idProveedor };
+
+                    _view.Show(order);
+                }
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Find()
+        {
+            if (!_view.Order.folio.isValid())
+                return;
+
+            try
+            {
+                    var order = _orders.FindByFolio(_view.Order.folio.ToInt());
+
+                if (order.isValid()) //Voy a mostrar una orden de compra
+                    _view.Show(new VMOrdenDeCompra(order,_purchases.Find(order)));
+                else
+                    _view.Show(new VMOrdenDeCompra(_view.Order.Proveedore, _orders.Next().ToString()));
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private void OpenList()
+        {
+            try
+            {
+                IPurchaseOrdersListView view;
+                PurchaseOrdersListPresenter presenter;
+
+                view = new PurchaseOrdersListView();
+                presenter = new PurchaseOrdersListPresenter(view, _orders);
+
+                view.ShowWindow();
+
+                if (view.Order.isValid() && view.Order.idOrdenDeCompra.isValid())
+                    _view.Show(new VMOrdenDeCompra(view.Order, _purchases.Find(view.Order)));
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void FindItem()
+        {
+            if (!_view.CurrentItem.CodigoArticulo.isValid())
+                return;
+
+            if (!_view.Order.Proveedore.idProveedor.isValid())
+            {
+                _view.ShowMessage("Debe seleccionar un proveedor para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            if (!_view.Order.idMoneda.isValid())
+            {
+                _view.ShowError("Se requiere la selección de una moneda para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            if(!_view.Order.tipoDeCambio.isValid())
+            {
+                _view.ShowError("Se requiere el tipo de cambio para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            try
+            {
+                //Toda esta parte se trata de obtener el artículo que el cliente busca
+                var item = new VMArticulo();
+                var items = _items.FindAllForSupplier(_view.CurrentItem.CodigoArticulo, _view.Order.idProveedor).Select(a => new VMArticulo(a)).ToList();
+
+                if (items.IsEmpty())
+                {
+                    _view.ShowError("No existe ningún artículo con el código especificado");
+                    _view.ClearItem();
+                    return;
+                }
+
+                if (!items.HasSingleItem())
+                {
+                    //Se muestra los artículos que coinciden
+                    IItemSelectionView view;
+                    ItemSelectionPresenter presenter;
+
+                    view = new ItemSelectionView();
+                    presenter = new ItemSelectionPresenter(view, items);
+
+                    view.ShowWindow();
+
+                    //Se valida que se haya escogido algún artículo
+                    if (!view.Item.isValid() || !view.Item.idArticulo.isValid())
+                    {
+                        _view.ClearItem();
+                        throw new Exception("No se seleccionó ninguna de las coincidencias");
+                    }
+
+                    item = view.Item;
+                }
+                else
+                {
+                    item = items.First();
+                }
+
+                //Si lo encontré preparo un Detalle de Orden de compra
+                var detail = GetDetail(item);
+
+                //Lo muestro
+                _view.Show(new VMDetalleDeOrdenDeCompra(detail, null), _measureUnits.List(item.idArticulo));
+
+                //Se muestra la existencia del articulo
+                var existencia = item.inventariado ? _items.Stock(detail.idArticulo) : 0.0m;
+                _view.ShowStock(existencia);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void OpenItemsList()
+        {
+            if (!_view.Order.Proveedore.idProveedor.isValid())
+            {
+                _view.ShowMessage("Debe seleccionar un proveedor para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            if (!_view.Order.idMoneda.isValid())
+            {
+                _view.ShowError("Se requiere la selección de una moneda para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            if (!_view.Order.tipoDeCambio.isValid())
+            {
+                _view.ShowError("Se requiere el tipo de cambio para la transacción antes de agregar artículos");
+                _view.ClearItem();
+                return;
+            }
+
+            try
+            {
+                IItemsListView view;
+                ItemsListPresenter presenter;
+
+                view = new ItemsListView(true);
+                presenter = new ItemsListPresenter(view, _items);
+
+                view.ShowWindow();
+
+                if (view.Item.idArticulo.isValid())
+                {
+                    //La lista de articulos ahora regresa una viewModel, se debe obtener el item correspondiente
+                    var item = _items.Find(view.Item.idArticulo);
+
+                    _view.Show(new VMDetalleDeOrdenDeCompra(GetDetail(item),null), _measureUnits.List(view.Item.idArticulo));
+                    //Tambien se muestra la existencia del producto
+                    var existencia = item.inventariado ? _items.Stock(view.Item.idArticulo) : 0.0m;
+                    _view.ShowStock(existencia);
+                }
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void AddItem()
+        {
+            if (!_view.CurrentItem.idArticulo.isValid())
+            {
+                _view.ClearItem();
+                return;
+            }
+
+            try
+            {
+                //Me lo traigo para manipulación local
+                var detail = _view.CurrentItem;
+
+                //Se valida que la cantidad surtida sea menor o igual a la pendiente
+                if (detail.Surtido > (detail.Cantidad-detail.surtidoEnOtros))
+                {
+                    _view.ShowError("No se puede surtir una cantidad mayor a la pendiente");
+                    return;
+                }
+
+                //Si ya existe el artículo con el mismo precio unitario, sumo la cantidad a ese registro
+                var order = _view.Order;
+                var exists = order.Detalles.FirstOrDefault(d => d.idArticulo.Equals(detail.idArticulo) && d.CostoUnitario.Equals(detail.CostoUnitario));
+                if (exists.isValid())
+                    exists.Cantidad += detail.Cantidad;
+                else
+                {
+                    //Si no existe en el detalle actual, agrego el detalle a la lista
+                    //Busco los impuestos que el articulo debe pagar
+                    detail.Impuestos = _items.Find(detail.idArticulo).Impuestos.ToList();
+                    order.Detalles.Add(detail);
+                }
+
+                //Hago el calculo de la cuenta Subtotal, Impuestos, Total
+                order.UpdateAccount();
+
+                //Limpio el artículo en edición
+                _view.ClearItem();
+
+                //Muestra la nueva venta completa con la nueva lista de detalles y la cuenta
+                _view.Show(order);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void AddItemComment()
+        {
+            try
+            {
+                var item = _view.SelectedItem;
+
+                if (!item.isValid())
+                    return;
+
+                IItemCommentView view;
+
+                if (item.Comentario.isValid())
+                    view = new ItemCommentView(item.Comentario);
+                else
+                    view = new ItemCommentView();
+                ItemCommentPresenter presenter = new ItemCommentPresenter(view);
+
+                view.ShowWindow();
+                if (view.Comment.isValid())
+                    item.Comentario = view.Comment;
+                else
+                    item.Comentario = null;
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void ViewTaxDetails()
+        {
+            try
+            {
+                if (_view.SelectedTax.idImpuesto < 0)
+                {
+                    _view.ShowError("No existe ningún impuesto seleccionado");
+                    return;
+                }
+
+                _view.Show(_view.SelectedTax);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void RemoveItem()
+        {
+            if (_view.IsDirty && _view.Order.idEstatusDeOrdenDeCompra != (int)StatusDeOrdenDeCompra.Registrado)
+            {
+                _view.ShowError("No se pueden editar las ordenes de compra surtidas o canceladas");
+                return;
+            }
+
+            if (!_view.SelectedItem.idArticulo.isValid())
+            {
+                _view.ShowError("No existe ningún detalle seleccionado");
+                return;
+            }
+
+            try
+            {
+                var item = _view.SelectedItem;
+
+                //Lo elimino del detalle
+                var order = _view.Order;
+                order.Detalles.Remove(item);
+
+                //Recalculo
+                order.UpdateAccount();
+
+                //Muestro la venta sin el articulo
+                _view.Show(order);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void SelectItem()
+        {
+            if (!_view.SelectedItem.idArticulo.isValid())
+            {
+                _view.ShowError("No existe ningún detalle seleccionado");
+                return;
+            }
+
+            try
+            {
+                var item = _view.SelectedItem;
+
+                //Lo elimino del detalle
+                var order = _view.Order;
+                order.Detalles.Remove(item);
+
+                order.UpdateAccount();
+
+                //Muestro la venta sin el articulo
+                _view.Show(order);
+
+                //Muestro en edición el artículo seleccionado
+                _view.Show(item, _measureUnits.List(item.idArticulo));
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Quit()
+        {
+            try
+            {
+                _view.CloseWindow();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void New()
+        {
+            try
+            {
+                //Establezco los defaults
+                var order = new VMOrdenDeCompra();
+                order.fechaHora = DateTime.Now;
+                order.tipoDeCambio = 0m;
+                order.idEstatusDeOrdenDeCompra = (int)StatusDeOrdenDeCompra.Nuevo;
+                order.folio = _orders.Next();
+
+                _view.Show(order);
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Cancel()
+        {
+            if (!_view.IsDirty)
+            {
+                _view.ShowError("No hay ninguna orden de compra seleccionada para cancelación");
+                return;
+            }
+
+            try
+            {
+                //Se solicita el motivo de la cancelacion
+                ICancellationView view;
+                CancellationPresenter presenter;
+
+                view = new CancellationView();
+                presenter = new CancellationPresenter(view);
+
+                view.ShowWindow();
+
+                var order = new VMOrdenDeCompra(_orders.Cancel(_view.Order.idOrdenDeCompra,view.Reason),_purchases.Find(_view.Order));
+
+                _view.ShowMessage("Pedido cancelado exitosamente");
+
+                //Inicializo nuevamente
+                Load();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Print()
+        {
+            if (!_view.IsDirty)
+            {
+                _view.ShowMessage("No es posible imprimir una orden de compra que no ha sido registrada");
+                return;
+            }
+
+            PurchaseOrderPrintPresenter presenter;
+            IPurchaseOrderPrintView view;
+
+            view = new PurchaseOrderPrintView(_view.Order);
+            presenter = new PurchaseOrderPrintPresenter(view, _orders, _purchases);
+
+            view.ShowWindow();
+
+            //Inicializo nuevamente
+            Load();
+        }
+
+        private void Save()
+        {
+            string error;
+
+            var order = _view.Order;
+            if (!IsOrderValid(order, out error))
+            {
+                _view.ShowError(error);
+                return;
+            }
+
+            try
+            {
+                //Le agrego quien la registra
+                order.idUsuarioRegistro = Session.LoggedUser.idUsuario;
+                order.Usuario = Session.LoggedUser;
+                //La hora en que se esta registrando
+                order.fechaHora = DateTime.Now;
+
+                //Actualizo el folio
+                order.folio = _orders.Next();
+
+                //Actualizo la cuenta
+                order.UpdateAccount();
+
+                //Agrego la orden de compra
+                //Se guarda el detalle para restablecerlo posteriormente
+                List<VMDetalleDeOrdenDeCompra> detalle = order.Detalles;
+                order = new VMOrdenDeCompra(_orders.Add(order), detalle);
+                _view.Order.idEstatusDeOrdenDeCompra = order.idEstatusDeOrdenDeCompra;
+
+                _view.ShowMessage("Orden de compra registrada exitosamente");
+
+                //Se muestra la vista del reporte de orden de compra
+                IPurchaseOrderPrintView printView = new PurchaseOrderPrintView(_view.Order);
+                PurchaseOrderPrintPresenter printPresenter = new PurchaseOrderPrintPresenter(printView,_orders,_purchases);
+
+                printView.ShowWindow();
+
+                if (detalle.Any(x=>x.Surtido > 0))
+                {
+                    //Se restablece el detalle
+                    //order.Detalles = detalle;
+                    _view.Show(order);
+
+                    //Si tiene items surtidos, se procede a procesarlos
+                    Update();
+                }
+
+                //Inicializo nuevamente
+                Load();
+            }
+            catch(Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        #region Private Utility Functions
+
+        private bool IsOrderValid(VMOrdenDeCompra order, out string error)
+        {
+
+            if (!order.Proveedore.codigo.isValid())
+            {
+                error = "El código del proveedor no es válido";
+                return false;
+            }
+
+            if (!order.idProveedor.isValid())
+            {
+                error = "El proveedor no es válido";
+                return false;
+            }
+
+            if (!order.idMoneda.isValid())
+            {
+                error = "La moneda no es válida";
+                return false;
+            }
+
+            if (!order.tipoDeCambio.isValid())
+            {
+                error = "El tipo de cambio no es válido";
+                return false;
+            }
+
+            if (!order.fechaHora.isValid())
+            {
+                error = "La fecha no es válida";
+                return false;
+            }
+
+            if (!order.folio.isValid())
+            {
+                error = "El folio no es válido";
+                return false;
+            }
+
+            if (order.Detalles.Count.Equals(0))
+            {
+                error = "Los conceptos no son válidos";
+                return false;
+            }
+
+            error = string.Empty;
+            return true;
+        }
+
+        private DetallesDeOrdenDeCompra GetDetail(Articulo item)
+        {
+            //Si lo encontré preparo un Detalle de orden de compra
+            var detail = new DetallesDeOrdenDeCompra();
+            detail.Articulo = item;
+            detail.idArticulo = item.idArticulo;
+            detail.cantidad = 0.0m;
+            detail.Impuestos = item.Impuestos;
+
+            detail.costoUnitario = item.costoUnitario.ToDocumentCurrency(item.Moneda, _view.Order.Moneda, _view.Order.tipoDeCambio);
+            detail.Impuestos = item.Impuestos;
+            detail.idUnidadDeMedida = item.idUnidadDeMedida;
+            detail.UnidadesDeMedida = item.UnidadesDeMedida;
+
+            return detail;
+        }
+
+        #endregion
+    }
+}

@@ -1,0 +1,20 @@
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Aprovi.Business.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Aprovi.Business.dll.config
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Aprovi.Data.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\BouncyCastle.Crypto.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\EPPlus.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Newtonsoft.Json.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\System.Net.Http.Formatting.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\EntityFramework.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\EPPlus.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Newtonsoft.Json.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\System.Net.Http.Formatting.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\EntityFramework.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.pdb
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Aprovi.Business.pdb
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\x86\Debug\Aprovi.Data.pdb
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.csprojResolveAssemblyReference.cache
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.csproj.AssemblyReference.cache
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.dll
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\x86\Debug\Aprovi.Business.pdb

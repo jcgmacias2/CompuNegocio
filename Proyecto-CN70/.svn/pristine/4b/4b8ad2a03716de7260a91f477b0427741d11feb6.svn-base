@@ -1,0 +1,198 @@
+﻿using Aprovi.Application.Helpers;
+using Aprovi.Business.Services;
+using Aprovi.Views;
+using Aprovi.Views.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Aprovi.Application.ViewModels;
+using Aprovi.Business.ViewModels;
+using Aprovi.Data.Models;
+
+namespace Aprovi.Presenters
+{
+    public class ItemsAppraisalReportPresenter
+    {
+        private IItemsAppraisalReportView _view;
+        private IArticuloService _items;
+        private IClasificacionService _classifications;
+
+        public ItemsAppraisalReportPresenter(IItemsAppraisalReportView view, IArticuloService items, IClasificacionService classifications)
+        {
+            _view = view;
+            _items = items;
+            _classifications = classifications;
+
+            _view.Quit += Quit;
+            _view.Preview += Preview;
+            _view.Print += Print;
+            _view.Load += Load;
+            _view.OpenClassificationsList += OpenClassificationsList;
+            _view.FindClassification += FindClassification;
+            _view.SelectedFilterChanged += FilterChanged;
+        }
+
+        private void FilterChanged()
+        {
+            try
+            {
+                VMRAvaluo vm = _view.Report;
+
+                if (!vm.Filtro.Equals(FiltroReporteAvaluo.Clasificacion))
+                {
+                    vm.Clasificacion = new Clasificacione();
+                }
+
+                _view.Show(vm);
+            }
+            catch (Exception e)
+            {
+                _view.ShowMessage(e.Message);
+            }
+        }
+
+        private void FindClassification()
+        {
+            try
+            {
+                var vm = _view.Report;
+
+                if (!vm.Clasificacion.isValid() && !vm.Clasificacion.descripcion.isValid())
+                {
+                    vm.Clasificacion = new Clasificacione();
+                }
+
+                try
+                {
+                    var classification = _classifications.Find(vm.Clasificacion.descripcion);
+
+                    if (!classification.isValid())
+                    {
+                        vm.Clasificacion = new Clasificacione();
+                        _view.ShowError("No se encontró una clasificación con el valor proporcionado");
+                    }
+                    else
+                    {
+                        vm.Clasificacion = classification;
+                    }
+
+                    _view.Show(vm);
+                }
+                catch (Exception ex)
+                {
+                    _view.ShowError(ex.Message);
+                }
+            }
+            catch (Exception e)
+            {
+                _view.ShowMessage(e.Message);
+            }
+        }
+
+        private void OpenClassificationsList()
+        {
+            try
+            {
+                IClassificationsListView view;
+                ClassificationsListPresenter presenter;
+
+                view = new ClassificationsListView();
+                presenter = new ClassificationsListPresenter(view, _classifications);
+
+                view.ShowWindow();
+
+                if (view.Classification.isValid() && view.Classification.idClasificacion.isValid())
+                {
+                    var vm = _view.Report;
+
+                    vm.Clasificacion = view.Classification;
+
+                    _view.Show(vm);
+                }
+            }
+            catch (Exception e)
+            {
+                _view.ShowMessage(e.Message);
+            }
+        }
+
+        private void Load()
+        {
+            try
+            {
+                VMRAvaluo detail = new VMRAvaluo();
+                detail.TipoDeCambio = Session.Configuration.tipoDeCambio;
+                detail.Clasificacion = new Clasificacione();
+                detail.Fecha = DateTime.Today;
+
+                _view.Show(detail);
+            }
+            catch (Exception e)
+            {
+                _view.ShowError(e.Message);
+            }
+        }
+
+        private void Print()
+        {
+            try
+            {
+                IReportViewerView view;
+                ReportViewerPresenter presenter;
+
+                var report = _view.Report;
+                VMReporte r;
+
+                report = _items.GetAppraisal(report.Filtro, report.SoloExistencias, report.TipoDeCambio, report.Fecha, report.Clasificacion);
+                r = Reports.FillReport(report, Session.Station.Empresa);
+
+                view = new ReportViewerView(r);
+                presenter = new ReportViewerPresenter(view);
+
+                view.Print();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Preview()
+        {
+            try
+            {
+                IReportViewerView view;
+                ReportViewerPresenter presenter;
+
+                var report = _view.Report;
+                VMReporte r;
+
+                report = _items.GetAppraisal(report.Filtro, report.SoloExistencias, report.TipoDeCambio, report.Fecha, report.Clasificacion);
+                r = Reports.FillReport(report, Session.Station.Empresa);
+
+                view = new ReportViewerView(r);
+                presenter = new ReportViewerPresenter(view);
+
+                view.Preview();                
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Quit()
+        {
+            try
+            {
+                _view.CloseWindow();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+    }
+}

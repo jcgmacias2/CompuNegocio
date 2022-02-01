@@ -1,0 +1,23 @@
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\Aprovi.Data.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\Aprovi.Data.dll.config
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\EntityFramework.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\EntityFramework.SqlServer.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\Microsoft.CSharp.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.ComponentModel.DataAnnotations.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.Configuration.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.Data.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\EntityFramework.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\EntityFramework.SqlServer.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\Microsoft.CSharp.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.ComponentModel.DataAnnotations.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.Configuration.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\System.Data.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.pdb
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\bin\x86\Debug\Aprovi.Data.pdb
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.csprojResolveAssemblyReference.cache
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.csproj.AssemblyReference.cache
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.dll
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Data\obj\x86\Debug\Aprovi.Data.pdb

@@ -1,0 +1,4 @@
+System.Net.WebException: Error en el servidor remoto: (401) No autorizado.
+   en System.Net.HttpWebRequest.GetResponse()
+   en Aprovi.Business.Services.SeguridadService.AuthenticateWithAPI(String usuario, String contraseña, Boolean useSSL) en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\Services\Implementations\SeguridadService.cs:línea 92
+   en Aprovi.Presenters.AuthenticationPresenter.AuthorizeOnAPI() en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio\Presenters\AuthenticationPresenter.cs:línea 49-----Message ----Error en el servidor remoto: (401) No autorizado.TrueTrue

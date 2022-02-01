@@ -1,0 +1,136 @@
+﻿using Aprovi.Data.Core;
+using Aprovi.Data.Models;
+using Aprovi.Data.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+namespace Aprovi.Business.Services
+{
+    public abstract class ImpuestoService : IImpuestoService
+    {
+        private IImpuestosRepository _taxes;
+        private IUnitOfWork _UOW;
+
+        public ImpuestoService(IUnitOfWork unitOfWork)
+        {
+            _UOW = unitOfWork;
+            _taxes = _UOW.Impuestos;
+        }
+
+        public Impuesto Add(Impuesto tax)
+        {
+            try
+            {
+                tax.TiposDeImpuesto = null;
+                tax.TiposFactor = null;
+                _taxes.Add(tax);
+                _UOW.Save();
+                return tax;
+            }
+            catch (Exception)
+            {
+                
+                throw;
+            }
+        }
+
+        public List<Impuesto> List(bool includeInactive)
+        {
+            try
+            {
+                if (includeInactive)
+                    return _taxes.List().ToList();
+                else
+                    return _taxes.List().Where(t => t.activo).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Impuesto> WithNameLike(string name)
+        {
+            try
+            {
+                return _taxes.WithNameLike(name).Where(i => i.activo).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Impuesto Find(int id)
+        {
+            try
+            {
+                return _taxes.Find(id);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Impuesto Find(decimal rate, TiposDeImpuesto type)
+        {
+            try
+            {
+                return _taxes.Find(rate, type);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public Impuesto Update(Impuesto tax)
+        {
+            try
+            {
+                var local = _taxes.Find(tax.idImpuesto);
+                local.nombre = tax.nombre;
+                local.idTipoDeImpuesto = tax.idTipoDeImpuesto;
+                local.activo = tax.activo;
+
+                _UOW.Save();
+                return local;
+
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void Delete(Impuesto tax)
+        {
+            try
+            {
+                if (!_taxes.CanDelete(tax.idImpuesto))
+                    throw new Exception("El impuesto ya se encuentra relacionado, por lo que no puede eliminarse");
+
+                _taxes.Remove(tax.idImpuesto);
+                _UOW.Save();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public bool CanDelete(Impuesto tax)
+        {
+            try
+            {
+                return _taxes.CanDelete(tax.idImpuesto);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+    }
+}

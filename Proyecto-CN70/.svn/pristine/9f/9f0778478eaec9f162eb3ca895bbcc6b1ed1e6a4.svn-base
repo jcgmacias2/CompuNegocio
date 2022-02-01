@@ -1,0 +1,262 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Colors Definition-->
+    <Color x:Key="LightGray">#e9e8eb</Color>
+    <Color x:Key="Darkgray">#414045</Color>
+    <Color x:Key="White">#FFFFFFFF</Color>
+    <Color x:Key="DarkBlue">#214263</Color>
+    <Color x:Key="MildBlue">#164d9e</Color>
+
+
+    <Color x:Key="LightYellow">#FFF3E28D</Color>
+    <Color x:Key="MildYellow">#FFFFB7</Color>
+    <Color x:Key="GrayBrown">#FFD4D0C8</Color>
+    <Color x:Key="LightBrown">#FFF5F5F4</Color>
+    <Color x:Key="SoberBlue">#566a85</Color>
+    <Color x:Key="LightBlue">#ebebeb</Color>
+    <Color x:Key="SolidRed">#7f0000</Color>
+
+    <!-- Brushes-->
+    <SolidColorBrush x:Key="Bordersolid" Color="{StaticResource Darkgray}"/>
+    <SolidColorBrush x:Key="ButtonHoverBackground" Color="{StaticResource MildYellow}"/>
+    <SolidColorBrush x:Key="ButtonBackground" Color="{StaticResource LightGray}"/>
+
+
+    <!--Window Template -->
+    <Style x:Key="WindowBorder" TargetType="{x:Type Window}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Bordersolid}"/>
+        <Setter Property="ResizeMode" Value="NoResize"/>
+        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+    </Style>
+
+    <!--Window Template -->
+    <Style x:Key="MainWindowBorder" TargetType="{x:Type Window}">
+        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="BorderBrush" Value="{StaticResource Bordersolid}"/>
+        <Setter Property="ResizeMode" Value="CanResize"/>
+        <Setter Property="WindowStyle" Value="SingleBorderWindow"/>
+    </Style>
+
+    <!--DatePicker-->
+    <Style x:Key="DatePickerSmall" TargetType="{x:Type DatePicker}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+
+
+    <!--Labels-->
+    <Style x:Key="LabelSmall" TargetType="{x:Type Label}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+    <Style x:Key="LabelMedium" TargetType="{x:Type Label}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+    <Style x:Key="LabelLarge" TargetType="{x:Type Label}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="18"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+    
+    <!--RadioButtons-->
+    <Style x:Key="RadioButtonSmall" TargetType="{x:Type RadioButton}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+
+    <!--Checkboxes-->
+    <Style x:Key="CheckBoxSmall" TargetType="{x:Type CheckBox}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#414045" />
+    </Style>
+
+    <!--Warning Labels-->
+    <Style x:Key="LabelMediumWarning" TargetType="{x:Type Label}">
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="14"/>
+        <Setter Property="Foreground" Value="#7f0000" />
+    </Style>
+
+    <!--Buttons-->
+    <Style x:Key="SmallButton" TargetType="{x:Type Button}">
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#121114" />
+        <Setter Property="FontWeight" Value="SemiBold"/>
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="23"/>
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="MenuButton" TargetType="{x:Type Button}">
+        <Setter Property="Margin" Value="2"/>
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="80" />
+        <Setter Property="Width" Value="80" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#121114" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{StaticResource Bordersolid}">
+                        <StackPanel>
+                            <Image Source="{TemplateBinding Tag}" 
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Height="50"
+                                Margin="2" />
+                            <ContentPresenter x:Name="ButtonContentPresenter"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center" Margin="0">
+                            </ContentPresenter>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="BlockButton" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="60" />
+        <Setter Property="Width" Value="60" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#121114" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{StaticResource Bordersolid}">
+                        <StackPanel>
+                            <Image Source="{TemplateBinding Tag}" 
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Height="40"
+                                Margin="2" />
+                            <ContentPresenter x:Name="ButtonContentPresenter"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center" Margin="0">
+                            </ContentPresenter>
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ImageButton" TargetType="{x:Type Button}">
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="40" />
+        <Setter Property="Width" Value="40" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="11"/>
+        <Setter Property="Foreground" Value="#121114" />
+        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="VerticalAlignment" Value="Top"/>
+        <Setter Property="HorizontalAlignment" Value="Left"/>
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border x:Name="border" CornerRadius="3" Background="{TemplateBinding Background}" BorderThickness="1" BorderBrush="{StaticResource Bordersolid}">
+                        <StackPanel>
+                            <Image Source="{TemplateBinding Tag}" 
+                                VerticalAlignment="Top"
+                                HorizontalAlignment="Center"
+                                Height="40"
+                                Margin="2" />
+                        </StackPanel>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <!--GridView-->
+
+    <!--Template for Menu Items-->
+    <Style x:Key="MenuLabelItem" TargetType="{x:Type MenuItem}">
+        <Setter Property="Margin" Value="2,2,0,0"/>
+        <Setter Property="Padding" Value="5,1,0,0"/>
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="100" />
+        <Setter Property="FontFamily" Value="Segoe UI"/>
+        <Setter Property="FontSize" Value="12"/>
+        <Setter Property="Foreground" Value="#121114" />
+        <Setter Property="FontWeight" Value="Bold" />
+        <Setter Property="Background" Value="{StaticResource ButtonBackground}"/>
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="true">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}" />
+            </Trigger>
+            <Trigger Property="IsFocused" Value="True">
+                <Setter Property="Background" Value="{StaticResource ButtonHoverBackground}"/>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+</ResourceDictionary>

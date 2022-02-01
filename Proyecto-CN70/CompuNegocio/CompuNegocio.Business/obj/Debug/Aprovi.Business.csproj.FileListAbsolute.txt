@@ -1,0 +1,17 @@
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\Aprovi.Business.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\Aprovi.Business.dll.config
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\Aprovi.Data.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\BouncyCastle.Crypto.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\EPPlus.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\Newtonsoft.Json.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\System.Net.Http.Formatting.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\EntityFramework.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\EPPlus.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\Newtonsoft.Json.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\System.Net.Http.Formatting.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\bin\Debug\EntityFramework.xml
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\Debug\Aprovi.Business.dll
+C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\Debug\Aprovi.Business.pdb
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\Debug\Aprovi.Business.csproj.AssemblyReference.cache
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\Debug\Aprovi.Business.dll
+C:\Users\Juan Carlos\CompuNegocio\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\obj\Debug\Aprovi.Business.pdb

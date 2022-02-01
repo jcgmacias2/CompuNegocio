@@ -1,0 +1,40 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.GuardianManualSendView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Envío Manual Guardián"
+        Icon="{StaticResource ImgMail}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtCodigo}"
+        Height="450" Width="520">
+    <Window.Resources>
+        <hlp:BoolConverter x:Key="BoolConverter"/>
+    </Window.Resources>
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Comprobantes fiscales que no fueron enviados por completo :" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+        <DataGrid x:Name="dgPendientes" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="20,50
+                      ,0,0" VerticalAlignment="Top" Height="260" Width="470"
+                  CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+            <DataGrid.Columns>
+                <DataGridTextColumn Width="100" Header="Comprobante">
+                    <DataGridTextColumn.Binding>
+                        <MultiBinding StringFormat="{}{0}{1}">
+                            <Binding Path="serie"/>
+                            <Binding Path="folio"/>
+                        </MultiBinding>
+                    </DataGridTextColumn.Binding>
+                </DataGridTextColumn>
+                <DataGridTextColumn Width="80" Header="Tipo" Binding="{Binding TiposDeComprobante.descripcion}" />
+                <DataGridTextColumn Width="85" Header="Fecha" Binding="{Binding fechaHora, StringFormat=\{0:dd/MM/yyyy\}}" />
+                <DataGridTextColumn Width="90" Header="pdf" Binding="{Binding pdf, Converter={StaticResource BoolConverter}}" />
+                <DataGridTextColumn Width="90" Header="xml" Binding="{Binding xml, Converter={StaticResource BoolConverter}}" />
+            </DataGrid.Columns>
+        </DataGrid>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="195,340,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnEnviar" Content="Enviar" Style="{StaticResource BlockButton}" Margin="265,340,0,0" Tag="{StaticResource ImgMailSend}"/>
+    </Grid>
+</base:BaseView>

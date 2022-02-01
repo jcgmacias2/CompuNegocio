@@ -1,0 +1,26 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.BusinessesView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Empresas"
+        Icon="{StaticResource ImgRegister}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtDescripcion}"
+        Height="250" Width="305">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Descripción :" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="23" Margin="95,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="145"/>
+        <Button x:Name="btnListarCajas" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="250,20,0,0" Width="25"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Licencia :" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtLicencia" HorizontalAlignment="Left" Height="50" Margin="95,50,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="180"/>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="10,140,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="80,140,0,0" Tag="{StaticResource ImgNewDocument}"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" Style="{StaticResource BlockButton}" Margin="150,140,0,0" Tag="{StaticResource ImgDelete}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="220,140,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>
+
+

@@ -1,0 +1,42 @@
+﻿using Aprovi.Data.Models;
+using System;
+using System.Collections.Generic;
+using Aprovi.Business.ViewModels;
+
+namespace Aprovi.Views
+{
+    public interface IItemsView : IBaseView
+    {
+        event Action Quit;
+        event Action New;
+        event Action Find;
+        event Action Delete;
+        event Action Save;
+        event Action Update;
+        event Action OpenList;
+        event Action OpenEquivalencies;
+        event Action AddClassification;
+        event Action DeleteClassification;
+        event Action AddTax;
+        event Action CalculateByUtility;
+        event Action FindProductService;
+        event Action OpenProductServiceList;
+        event Action DeleteTax;
+        event Action ChangeCurrency;
+
+        VMArticulo Item { get; }
+        bool IsDirty { get; }
+        Clasificacione CurrentClassification { get; }
+        Impuesto SelectedTax { get; }
+        Moneda LastCurrency { get; }
+
+        void UpdatePrices(VMArticulo item);
+        void Show(Moneda currency);
+        void Show(VMArticulo item);
+        void Show(List<Impuesto> taxes);
+        void Show(List<Clasificacione> clasifications);
+        void Show(ProductosServicio productService);
+        void Clear();
+        void FillCombos(List<Moneda> currencies, List<UnidadesDeMedida> unitOfMeasure, List<TiposDeComision> comissionTypes);
+    }
+}

@@ -1,0 +1,68 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.StationsView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Estaciones"
+        Icon="{StaticResource ImgStation}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtDescripcion}"
+        Height="310" Width="530">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <TabControl HorizontalAlignment="Left" Height="180" Margin="10,5,0,0" VerticalAlignment="Top" Width="500">
+            <TabItem Header="Estación" IsTabStop="False" x:Name="tabEstacion">
+                <Grid>
+                    <Label Style="{StaticResource LabelSmall}" Content="Estación :" HorizontalAlignment="Left" Margin="10,20,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDescripcion" HorizontalAlignment="Left" Height="23" Margin="75,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                    <Button x:Name="btnListarEstaciones" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="230,20,0,0" Width="25"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Empresa :" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbEmpresas" HorizontalAlignment="Left" Margin="75,50,0,0" VerticalAlignment="Top" Width="180" Height="23"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Tickets :" HorizontalAlignment="Left" Margin="10,80,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbImpresoraDeTickets" HorizontalAlignment="Left" Margin="75,80,0,0" VerticalAlignment="Top" Width="180" Height="23"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Reportes :" HorizontalAlignment="Left" Margin="10,110,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbImpresoraDeReportes" HorizontalAlignment="Left" Margin="75,110,0,0" VerticalAlignment="Top" Width="180" Height="23"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Báscula">
+                <Grid>
+                    <Label Style="{StaticResource LabelSmall}" Content="Puerto :" HorizontalAlignment="Left" Margin="75,0,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbPuertoBascula" HorizontalAlignment="Left" Height="23" Margin="125,0,0,0" VerticalAlignment="Top" Width="80"/>
+                    <Button x:Name="btnLeerPuertosBascula" Content="Listar Puertos" IsTabStop="False" Style="{StaticResource SmallButton}" Margin="214,0,0,0" Width="90"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Velocidad :" HorizontalAlignment="Left" Margin="304,00,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtVelocidadBascula" HorizontalAlignment="Left" Height="23" Margin="375,0,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Tiempo de escritura :" HorizontalAlignment="Left" Margin="5,30,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtTiempoDeEscrituraBascula" HorizontalAlignment="Left" Height="23" Margin="125,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Tiempo de lectura :" HorizontalAlignment="Left" Margin="260,30,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtTiempoDeLecturaBascula" HorizontalAlignment="Left" Height="23" Margin="375,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Bits de Parada :" HorizontalAlignment="Left" Margin="35,60,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbBitsDeParadaBascula" HorizontalAlignment="Left" Height="23" Margin="125,60,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Paridad :" HorizontalAlignment="Left" Margin="315,60,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cmbParidadBascula" HorizontalAlignment="Left" Height="23" Margin="375,60,0,0" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Bits de Datos :" HorizontalAlignment="Left" Margin="40,90,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtBitsDeDatosBascula" HorizontalAlignment="Left" Height="23" Margin="125,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Fin de linea :" HorizontalAlignment="Left" Margin="295,90,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtFinDeLineaBascula" HorizontalAlignment="Left" Height="23" Margin="375,90,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Seleccion">
+                <Grid>
+                    <Label Style="{StaticResource LabelSmall}" Content="Establecer esta estación como mi equipo" HorizontalAlignment="Left" Margin="30,10,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Name="chkRelacionarEquipo" Margin="10,15" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <Label Style="{StaticResource LabelSmall}" Content="Utilizar escáner" HorizontalAlignment="Left" Margin="30,40,0,0" VerticalAlignment="Top"/>
+                    <CheckBox Name="chkUtilizarEscaner" Margin="10,45" HorizontalAlignment="Left" VerticalAlignment="Top" />
+                    <TextBox x:Name="txtEscaner" HorizontalAlignment="Left" Height="23" Margin="130,40,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                    <CheckBox Name="chkUtilizarCajon" Margin="10,75,0,0" HorizontalAlignment="Left" VerticalAlignment="Top" Height="15" />
+                    <Label Style="{StaticResource LabelSmall}" Content="Utilizar cajon de efectivo" HorizontalAlignment="Left" Margin="30,70,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="130,200,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="200,200,0,0" Tag="{StaticResource ImgNewDocument}"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" Style="{StaticResource BlockButton}" Margin="270,200,0,0" Tag="{StaticResource ImgDelete}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="340,200,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>
+
+
+

@@ -1,0 +1,65 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!--Imagenes Aprovi -->
+    <BitmapImage x:Key="ImgAproviLogo" UriSource="/Content/Images/Logo-Aprovi.png"/>
+    <BitmapImage x:Key="ImgCNIcon" UriSource="/Content/Images/CN-Icon.ico"/>
+    <BitmapImage x:Key="ImgCNLogo" UriSource="/Content/Images/CN-Logo.png"/>
+    <BitmapImage x:Key="ImgCNLogoShadow" UriSource="/Content/Images/CompuNegocio-Shadow.png"/>
+
+    <!--Imagenes del sistema -->
+    <BitmapImage x:Key="ImgNewDocument" UriSource="/Content/Images/Document-New-32.png"/>
+    <BitmapImage x:Key="ImgNewFolder" UriSource="/Content/Images/Folder-New-32.png"/>
+    <BitmapImage x:Key="ImgEdit" UriSource="/Content/Images/Input-Tablet-32.png"/>
+    <BitmapImage x:Key="ImgSearch" UriSource="/Content/Images/Zoom-32.png"/>
+    <BitmapImage x:Key="ImgSave" UriSource="/Content/Images/Dialog-Apply-32.png"/>
+    <BitmapImage x:Key="ImgReturn" UriSource="/Content/Images/Edit-Undo-32.png"/>
+    <BitmapImage x:Key="ImgHome" UriSource="/Content/Images/Go-Home-32.png"/>
+    <BitmapImage x:Key="ImgLock" UriSource="/Content/Images/Emblem-Readonly-32.png"/>
+    <BitmapImage x:Key="ImgPrinter" UriSource="/Content/Images/Gnome-Printer-32.png"/>
+    <BitmapImage x:Key="ImgPrint" UriSource="/Content/Images/Imprimir.png"/>
+    <BitmapImage x:Key="ImgCancel" UriSource="/Content/Images/Gnome-Process-Stop-32.png"/>
+    <BitmapImage x:Key="ImgAdd" UriSource="/Content/Images/Gnome-List-Add-32.png"/>
+    <BitmapImage x:Key="ImgRemove" UriSource="/Content/Images/Gnome-List-Remove-32.png"/>
+    <BitmapImage x:Key="ImgDelete" UriSource="/Content/Images/Gnome-Edit-Delete-32.png"/>
+    <BitmapImage x:Key="ImgUsers" UriSource="/Content/Images/Gnome-System-Users-32.png"/>
+    <BitmapImage x:Key="ImgUser" UriSource="/Content/Images/Gnome-Stock-Person-32.png"/>
+    <BitmapImage x:Key="ImgIncome" UriSource="/Content/Images/Emblem-Money-32.png"/>
+    <BitmapImage x:Key="ImgClients" UriSource="/Content/Images/Address-Book.png"/>
+    <BitmapImage x:Key="ImgItems" UriSource="/Content/Images/Gnome-Applications-Office-32.png"/>
+    <BitmapImage x:Key="ImgCatalogs" UriSource="/Content/Images/Gnome-Applications-Other-32.png"/>
+    <BitmapImage x:Key="ImgCalculate" UriSource="/Content/Images/Gnome-Accessories-Calculator-32.png"/>
+    <BitmapImage x:Key="ImgWeighing" UriSource="/Content/Images/Bascula.png"/>
+    <BitmapImage x:Key="ImgTrucks" UriSource="/Content/Images/Truck-32.png"/>
+    <BitmapImage x:Key="ImgInvoice" UriSource="/Content/Images/Facturar.png"/>
+    <BitmapImage x:Key="ImgPayments" UriSource="/Content/Images/FormasDePago.png"/>
+    <BitmapImage x:Key="ImgReport" UriSource="/Content/Images/Reporte.png"/>
+    <BitmapImage x:Key="ImgSales" UriSource="/Content/Images/Ventas.png"/>
+    <BitmapImage x:Key="ImgPreview" UriSource="/Content/Images/VistaPrevia.png"/>
+    <BitmapImage x:Key="ImgClose" UriSource="/Content/Images/Gnome-Window-Close-32.png"/>
+    <BitmapImage x:Key="ImgProperties" UriSource="/Content/Images/Gnome-System-Run-32.png"/>
+    <BitmapImage x:Key="ImgGoFirst" UriSource="/Content/Images/Gnome-Go-First-32.png"/>
+    <BitmapImage x:Key="ImgGoLast" UriSource="/Content/Images/Gnome-Go-Last-32.png"/>
+    <BitmapImage x:Key="ImgGoNext" UriSource="/Content/Images/Gnome-Go-Next-32.png"/>
+    <BitmapImage x:Key="ImgGoPrevious" UriSource="/Content/Images/Gnome-Go-Previous-32.png"/>
+    <BitmapImage x:Key="ImgPause" UriSource="/Content/Images/Gnome-Media-Playback-Pause-32.png"/>
+    <BitmapImage x:Key="ImgKeys" UriSource="/Content/Images/Gnome-Dialog-Password-32.png"/>
+    <BitmapImage x:Key="ImgMeasure" UriSource="/Content/Images/Glade-3-32.png"/>
+    <BitmapImage x:Key="ImgSettings" UriSource="/Content/Images/Gnome-Preferences-System-32.png"/>
+    <BitmapImage x:Key="ImgBoxPackage" UriSource="/Content/Images/Gnome-Package-X-Generic-32.png"/>
+    <BitmapImage x:Key="ImgSuppliers" UriSource="/Content/Images/Proveedores-32.png"/>
+    <BitmapImage x:Key="ImgPurchases" UriSource="/Content/Images/Add-Files-To-Archive-32.png"/>
+    <BitmapImage x:Key="ImgRegister" UriSource="/Content/Images/Gnome-Insert-Object-32.png"/>
+    <BitmapImage x:Key="ImgStation" UriSource="/Content/Images/Gnome-Network-Transmit-Receive-32.png"/>
+    <BitmapImage x:Key="ImgDeposit" UriSource="/Content/Images/Add-Files-To-Archive-Yellow-32.png"/>
+    <BitmapImage x:Key="ImgBillOfSale" UriSource="/Content/Images/Gnome-Edit-Select-All-32.png"/>
+    <BitmapImage x:Key="ImgCashRegister" UriSource="/Content/Images/cash-register-32.png"/>
+    <BitmapImage x:Key="ImgAdjustments" UriSource="/Content/Images/Adjustment-32.png"/>
+    <BitmapImage x:Key="ImgMemberTypes" UriSource="/Content/Images/Im-Msn-32.png"/>
+    <BitmapImage x:Key="ImgDoyang" UriSource="/Content/Images/Doyang.png"/>
+    <BitmapImage x:Key="ImgTransfer" UriSource="/Content/Images/Add-Files-To-Archive-Blue-32.png"/>
+    <BitmapImage x:Key="ImgProcess" UriSource="/Content/Images/Gnome-View-Refresh-32.png"/>
+    <BitmapImage x:Key="ImgMail" UriSource="/Content/Images/Gnome-Mail-Mark-Important-32.png"/>
+    <BitmapImage x:Key="ImgMailSend" UriSource="/Content/Images/Gnome-Mail-Forward-32.png"/>
+    
+</ResourceDictionary>

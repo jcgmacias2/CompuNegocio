@@ -1,0 +1,225 @@
+﻿using Aprovi.Business.Helpers;
+using Aprovi.Data.Models;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+
+namespace Aprovi.Business.ViewModels
+{
+    [MetadataType(typeof(Articulo))]
+    public class VMArticulo : Articulo
+    {
+        public VMArticulo() : base()
+        {
+        }
+
+        public VMArticulo(Articulo item) : base()
+        {
+            this.idArticulo = item.idArticulo;
+            this.idMoneda = item.idMoneda;
+            this.idUnidadDeMedida = item.idUnidadDeMedida;
+            this.Impuestos = item.Impuestos;
+            this.Moneda = item.Moneda;
+            this.Precios = item.Precios;
+            this.UnidadesDeMedida = item.UnidadesDeMedida;
+            this.activo = item.activo;
+            this.Clasificaciones = item.Clasificaciones;
+            this.codigo = item.codigo;
+            this.costoUnitario = item.costoUnitario;
+            this.descripcion = item.descripcion;
+            this.DetallesDeCompras = item.DetallesDeCompras;
+            this.DetallesDeFacturas = item.DetallesDeFacturas;
+            this.DetallesDeCotizacions = item.DetallesDeCotizacions;
+            this.DetallesDeAjustes = item.DetallesDeAjustes;
+            this.DetallesDeOrdenDeCompras = item.DetallesDeOrdenDeCompras;
+            this.DetallesDePedidoes = item.DetallesDePedidoes;
+            this.DetallesDeRemisions = item.DetallesDeRemisions;
+            this.Equivalencias = item.Equivalencias;
+            this.idProductoServicio = item.idProductoServicio;
+            this.ProductosServicio = item.ProductosServicio;
+            this.Existencia = 0.0m;
+            this.importado = item.importado;
+
+            var precioA = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.A));
+            this.PrecioA = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioA.utilidad);
+            this.PrecioConImpuestosA = this.PrecioA + Operations.CalculateTaxes(this.PrecioA, this.Impuestos.ToList());
+
+            var precioB = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.B));
+            this.PrecioB = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioB.utilidad);
+            this.PrecioConImpuestosB = this.PrecioB + Operations.CalculateTaxes(this.PrecioB, this.Impuestos.ToList());
+
+            var precioC = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.C));
+            this.PrecioC = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioC.utilidad);
+            this.PrecioConImpuestosC = this.PrecioC + Operations.CalculateTaxes(this.PrecioC, this.Impuestos.ToList());
+
+            var precioD = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.D));
+            this.PrecioD = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioD.utilidad);
+            this.PrecioConImpuestosD = this.PrecioD + Operations.CalculateTaxes(this.PrecioD, this.Impuestos.ToList());
+
+            this.TiposDeComision = item.TiposDeComision;
+            this.idTipoDeComision = item.idTipoDeComision;
+        }
+
+        public VMArticulo(VwListaArticulo item)
+        {
+            this.idArticulo = item.idArticulo;
+            this.codigo = item.Codigo;
+            this.descripcion = item.Descripcion;
+            this.UnidadesDeMedida = new UnidadesDeMedida(){descripcion = item.UnidadDeMedida};
+            this.PrecioA = item.PrecioUnitario.GetValueOrDefault(0m);
+            this.Moneda = new Moneda(){descripcion = item.Moneda};
+            this.Existencia = item.Existencia.GetValueOrDefault(0m);
+            this.activo = item.Activo;
+        }
+
+        public VMArticulo(Articulo item, List<Precio> pricesList) : base()
+        {
+            this.idArticulo = item.idArticulo;
+            this.idMoneda = item.idMoneda;
+            this.idUnidadDeMedida = item.idUnidadDeMedida;
+            this.Impuestos = item.Impuestos;
+            this.Moneda = item.Moneda;
+            this.Precios = item.Precios;
+            this.UnidadesDeMedida = item.UnidadesDeMedida;
+            this.activo = item.activo;
+            this.Clasificaciones = item.Clasificaciones;
+            this.codigo = item.codigo;
+            this.costoUnitario = item.costoUnitario;
+            this.descripcion = item.descripcion;
+            this.DetallesDeCompras = item.DetallesDeCompras;
+            this.DetallesDeFacturas = item.DetallesDeFacturas;
+            this.DetallesDeCotizacions = item.DetallesDeCotizacions;
+            this.DetallesDeAjustes = item.DetallesDeAjustes;
+            this.DetallesDeOrdenDeCompras = item.DetallesDeOrdenDeCompras;
+            this.DetallesDePedidoes = item.DetallesDePedidoes;
+            this.DetallesDeRemisions = item.DetallesDeRemisions;
+            this.Equivalencias = item.Equivalencias;
+            this.idProductoServicio = item.idProductoServicio;
+            this.ProductosServicio = item.ProductosServicio;
+            this.Existencia = 0.0m;
+            this.importado = item.importado;
+
+            var precioA = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.A));
+            this.UtilidadA = precioA.utilidad;
+            this.PrecioA = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioA.utilidad);
+            this.PrecioConImpuestosA = this.PrecioA + Operations.CalculateTaxes(this.PrecioA, this.Impuestos.ToList());
+
+            var precioB = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.B));
+            this.UtilidadB = precioB.utilidad;
+            this.PrecioB = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioB.utilidad);
+            this.PrecioConImpuestosB = this.PrecioB + Operations.CalculateTaxes(this.PrecioB, this.Impuestos.ToList());
+
+            var precioC = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.C));
+            this.UtilidadC = precioC.utilidad;
+            this.PrecioC = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioC.utilidad);
+            this.PrecioConImpuestosC = this.PrecioC + Operations.CalculateTaxes(this.PrecioC, this.Impuestos.ToList());
+
+            var precioD = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.D));
+            this.UtilidadD = precioD.utilidad;
+            this.PrecioD = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioD.utilidad);
+            this.PrecioConImpuestosD = this.PrecioD + Operations.CalculateTaxes(this.PrecioD, this.Impuestos.ToList());
+
+            this.TiposDeComision = item.TiposDeComision;
+            this.idTipoDeComision = item.idTipoDeComision;
+        }
+
+        public VMArticulo(Articulo item, decimal stock) : base()
+        {
+            this.idArticulo = item.idArticulo;
+            this.idMoneda = item.idMoneda;
+            this.idUnidadDeMedida = item.idUnidadDeMedida;
+            this.Impuestos = item.Impuestos;
+            this.Moneda = item.Moneda;
+            this.Precios = item.Precios;
+            this.UnidadesDeMedida = item.UnidadesDeMedida;
+            this.activo = item.activo;
+            this.Clasificaciones = item.Clasificaciones;
+            this.codigo = item.codigo;
+            this.costoUnitario = item.costoUnitario;
+            this.descripcion = item.descripcion;
+            this.DetallesDeCompras = item.DetallesDeCompras;
+            this.DetallesDeFacturas = item.DetallesDeFacturas;
+            this.DetallesDeCotizacions = item.DetallesDeCotizacions;
+            this.DetallesDeAjustes = item.DetallesDeAjustes;
+            this.DetallesDeOrdenDeCompras = item.DetallesDeOrdenDeCompras;
+            this.DetallesDePedidoes = item.DetallesDePedidoes;
+            this.DetallesDeRemisions = item.DetallesDeRemisions;
+            this.Equivalencias = item.Equivalencias;
+            this.idProductoServicio = item.idProductoServicio;
+            this.ProductosServicio = item.ProductosServicio;
+            this.inventariado = item.inventariado;
+            this.Existencia = item.inventariado ? stock : 0.0m;
+            this.importado = item.importado;
+
+            var precioA = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.A));
+            this.UtilidadA = precioA.utilidad;
+            this.PrecioA = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioA.utilidad);
+            this.PrecioConImpuestosA = this.PrecioA + Operations.CalculateTaxes(this.PrecioA, this.Impuestos.ToList());
+
+            var precioB = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.B));
+            this.UtilidadB = precioB.utilidad;
+            this.PrecioB = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioB.utilidad);
+            this.PrecioConImpuestosB = this.PrecioB + Operations.CalculateTaxes(this.PrecioB, this.Impuestos.ToList());
+
+            var precioC = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.C));
+            this.UtilidadC = precioC.utilidad;
+            this.PrecioC = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioC.utilidad);
+            this.PrecioConImpuestosC = this.PrecioC + Operations.CalculateTaxes(this.PrecioC, this.Impuestos.ToList());
+
+            var precioD = item.Precios.FirstOrDefault(p => p.idListaDePrecio.Equals((int)List.D));
+            this.UtilidadD = precioD.utilidad;
+            this.PrecioD = Operations.CalculatePriceWithoutTaxes(this.costoUnitario, precioD.utilidad);
+            this.PrecioConImpuestosD = this.PrecioD + Operations.CalculateTaxes(this.PrecioD, this.Impuestos.ToList());
+
+            this.TiposDeComision = item.TiposDeComision;
+            this.idTipoDeComision = item.idTipoDeComision;
+        }
+
+        public Articulo ToArticulo()
+        {
+            Articulo local = new Articulo();
+            local.idArticulo = this.idArticulo;
+            local.idMoneda = this.idMoneda;
+            local.idUnidadDeMedida = this.idUnidadDeMedida;
+            local.Impuestos = this.Impuestos;
+            local.Moneda = this.Moneda;
+            local.Precios = this.Precios;
+            local.UnidadesDeMedida = this.UnidadesDeMedida;
+            local.activo = this.activo;
+            local.Clasificaciones = this.Clasificaciones;
+            local.codigo = this.codigo;
+            local.costoUnitario = this.costoUnitario;
+            local.descripcion = this.descripcion;
+            local.DetallesDeCompras = this.DetallesDeCompras;
+            local.DetallesDeFacturas = this.DetallesDeFacturas;
+            local.Equivalencias = this.Equivalencias;
+            local.idProductoServicio = this.idProductoServicio;
+            local.ProductosServicio = this.ProductosServicio;
+            local.inventariado = this.inventariado;
+            local.importado = this.importado;
+            local.idTipoDeComision = this.idTipoDeComision;
+
+            local.Precios = new List<Precio>();
+            local.Precios.Add(new Precio() { idArticulo = this.idArticulo, idListaDePrecio = (int)List.A, utilidad = this.UtilidadA });
+            local.Precios.Add(new Precio() { idArticulo = this.idArticulo, idListaDePrecio = (int)List.B, utilidad = this.UtilidadB });
+            local.Precios.Add(new Precio() { idArticulo = this.idArticulo, idListaDePrecio = (int)List.C, utilidad = this.UtilidadC });
+            local.Precios.Add(new Precio() { idArticulo = this.idArticulo, idListaDePrecio = (int)List.D, utilidad = this.UtilidadD });
+
+            return local;
+        }
+
+        public decimal UtilidadA { get; set; }
+        public decimal PrecioA { get; set; }
+        public decimal PrecioConImpuestosA { get; set; }
+        public decimal UtilidadB { get; set; }
+        public decimal PrecioB { get; set; }
+        public decimal PrecioConImpuestosB { get; set; }
+        public decimal UtilidadC { get; set; }
+        public decimal PrecioC { get; set; }
+        public decimal PrecioConImpuestosC { get; set; }
+        public decimal UtilidadD { get; set; }
+        public decimal PrecioD { get; set; }
+        public decimal PrecioConImpuestosD { get; set; }
+        public decimal Existencia { get; set; }
+    }
+}

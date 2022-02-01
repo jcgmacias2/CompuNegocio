@@ -1,0 +1,24 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.AuthorizationView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Autorización"
+        Icon="{StaticResource ImgLock}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtUsuario}"
+        Height="200" Width="320">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Usuario :" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtUsuario" TabIndex="1" HorizontalAlignment="Left" Height="23" Margin="110,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Contraseña :" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top"/>
+        <PasswordBox x:Name="txtContraseña" TabIndex="2" HorizontalAlignment="Left" Height="23" Margin="110,50,0,0" VerticalAlignment="Top" Width="140"/>
+
+        <Button x:Name="btnCancelar" TabIndex="4" Content="Cancelar" Style="{StaticResource BlockButton}" Margin="90,90,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnAutorizar" TabIndex="3" Content="Autorizar" Style="{StaticResource BlockButton}" Margin="160,90,0,0" Tag="{StaticResource ImgKeys}"/>
+    </Grid>
+</base:BaseView>
+
+
+

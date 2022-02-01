@@ -1,0 +1,103 @@
+﻿<base:BaseView
+        x:Class="Aprovi.Views.UI.MainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+    Title="Menu Principal - CompuNegocio"
+        Icon="{StaticResource ImgHome}"
+        WindowStartupLocation="Manual"
+        WindowState="Maximized"
+        Style="{StaticResource MainWindowBorder}"
+        Background="White"
+        Height="465" Width="920">
+    <DockPanel>
+        <DockPanel.Background>
+            <ImageBrush ImageSource="{StaticResource ImgCNLogoShadow}" Stretch="Uniform"/>
+        </DockPanel.Background>
+        <Menu Height="30" Name="MainMenu" Margin="0,0,5,5" Background="{StaticResource ButtonBackground}" HorizontalAlignment="Stretch" VerticalAlignment="Top" BorderThickness="2">
+            <Menu.BitmapEffect>
+                <DropShadowBitmapEffect/>
+            </Menu.BitmapEffect>
+            <MenuItem Header="_Archivo" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Transferencia de Artículos" Name="mniTransferenciaDeArticulos" Tag="Kowi"/>
+                <MenuItem Header="Clientes" Name="mniClientes"/>
+                <MenuItem Header="Usuarios" Name="mniUsuarios"/>
+                <MenuItem Header="Proveedores" Name="mniProveedores"/>
+                <MenuItem Header="Clasificaciones" Name="mniClasificaciones"/>
+                <MenuItem Header="Unidades de Medida" Name="mniUnidadesDeMedida"/>
+                <MenuItem Header="Formas de Pago" Name="mniFormasPago"/>
+                <MenuItem Header="Bancos" Name="mniBancos"/>
+                <MenuItem Header="Cuentas Bancarias" Name="mniCuentasBancarias"/>
+                <MenuItem Header="Usos de CFDI" Name="mniUsosCFDI"/>
+                <MenuItem Header="Guardián" Name="mniGuardian" Tag="Envio_De_Correos"/>
+            </MenuItem>
+            <MenuItem Header="_Inventario" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <!--<MenuItem Header="Pedidos" x:Name="mniPedidos"/>
+                <MenuItem Header="Surtido de pedidos" x:Name="mniSurtidoDePedidos"/>-->
+                <MenuItem Header="Productos y Servicios" Name="mniProductosServicios"/>
+                <MenuItem Header="Cuentas Prediales" Name="mniCuentasPrediales" Tag="Predial"/>
+                <MenuItem Header="Artículos" Name="mniArticulos"/>
+                <MenuItem Header="Ajustes" x:Name="mniAjustes"/>
+                <MenuItem Header="Traspasos" x:Name="mniTraspasos" Tag="Traspasos"/>
+                <MenuItem Header="Solicitudes de traspaso" x:Name="mniSolicitudesDeTraspaso" Tag="Traspasos"/>
+            </MenuItem>
+            <MenuItem Header="_Ventas" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Facturación" x:Name="mniFacturas"/>
+                <MenuItem Header="Remisiones" x:Name="mniRemisiones"/>
+                <MenuItem Header="Cotizaciones" x:Name="mniCotizaciones"/>
+                <MenuItem Header="Ordenes de servicio" x:Name="mniOrdenesDeServicio" Tag="Integra"/>
+                <MenuItem Header="Pedidos" x:Name="mniPedidos"/>
+                <MenuItem Header="Facturar remisiones" x:Name="mniFacturarRemisiones"/>
+                <MenuItem Header="Abonos de cliente" x:Name="mniAbonosCliente"/>
+            </MenuItem>
+            <MenuItem Header="_Compras" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Ordenes de Compra" Name="mniOrdenesDeCompra"/>
+                <MenuItem Header="Compras" Name="mniCompras"/>
+                <MenuItem Header="Abonos de Compra" Name="mniAbonosDeCompra"/>
+            </MenuItem>
+            <MenuItem Header="_Reportes" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Ventas">
+                    <MenuItem Header="Ventas por Período" x:Name="mniVentasPorPeriodo"/>
+                    <MenuItem Header="Abonos por Periodo" x:Name="mniAbonosPorPeriodo"/>
+                    <MenuItem Header="Remisiones por Período" x:Name="mniRemisionesPorPeriodo"/>
+                    <MenuItem Header="Cotizaciones por Período" x:Name="mniCotizacionesPorPeriodo"/>
+                    <MenuItem Header="Impresión de Factura" x:Name="mniReporteDeFactura"/>
+                    <MenuItem Header="Impresión de Pagos" x:Name="mniReporteDePagos"/>
+                    <MenuItem Header="Impresión de Pedidos" x:Name="mniReporteDePedidos"/>
+                    <MenuItem Header="Estado de Cuenta por Cliente" x:Name="mniEstadoDeCuentaCliente"/>
+                    <MenuItem Header="Comisiones por Período" x:Name="mniComisionesPorPeriodo"/>
+                    <MenuItem Header="Antigüedad de Saldos por Cobrar" x:Name="mniAntiguedadDeSaldosPorCobrar"/>
+                </MenuItem>
+                <MenuItem Header="Inventario">
+                    <MenuItem Header="Inventario Físico" x:Name="mniInventarioFisico"/>
+                    <MenuItem Header="Ajustes" x:Name="mniReporteDeAjustes"/>
+                    <MenuItem Header="Flujo de Inventario" x:Name="mniFlujoDeInventario"/>
+                    <MenuItem Header="Kardex por Artículo" x:Name="mniKardexPorArticulo"/>
+                </MenuItem>
+                <MenuItem Header="Compras">
+                    <MenuItem Header="Compras por Períodos" x:Name="mniComprasPorPeriodos"/>
+                    <MenuItem Header="Antigüedad de Saldos por Pagar" x:Name="mniAntiguedadDeSaldosPorPagar"/>
+                    <MenuItem Header="Estado de Cuenta por Proveedor" x:Name="mniEstadoDeCuentaProveedor"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Propiedades" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Generales" Name="mniGenerales" />
+                <MenuItem Header="Impuestos" Name="mniImpuestos"/>
+                <MenuItem Header="Empresas">
+                    <MenuItem Header="Empresas" Name="mniEmpresas"/>
+                    <MenuItem Header="Estaciones" Name="mniEstaciones"/>
+                    <MenuItem Header="Empresas asociadas" Name="mniEmpresasAsociadas" Tag="Traspasos"/>
+                </MenuItem>
+                <MenuItem Header="Herramientas" Name="mniHerramientasMenu">
+                    <MenuItem Header="Migración" Name="mniHerramientas"/>
+                    <MenuItem Header="Homologación" Name="mniHomologacion"/>
+                </MenuItem>
+            </MenuItem>
+            <MenuItem Header="_Salir" Margin="0,0,0,0" Style="{StaticResource MenuLabelItem}">
+                <MenuItem Header="Cerrar Sesión" Name="mniCerrarSesion"/>
+                <MenuItem Header="Salir del Sistema" Name="mniSalir"/>
+            </MenuItem>
+        </Menu>
+    </DockPanel>
+</base:BaseView>
+

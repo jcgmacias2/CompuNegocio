@@ -1,0 +1,185 @@
+﻿using Aprovi.Application.Helpers;
+using Aprovi.Business.Services;
+using Aprovi.Data.Models;
+using Aprovi.Views;
+using Aprovi.Views.UI;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Aprovi.Business.ViewModels;
+
+namespace Aprovi.Presenters
+{
+    public class CompanyStatusReportPresenter
+    {
+        ICompanyStatusReportView _view;
+        IArticuloService _items;
+        IPedidoService _orders;
+        IFacturaService _invoices;
+        IRemisionService _billsOfSale;
+        ICompraService _purchases;
+        IAjusteService _adjustments;
+        INotaDeCreditoService _creditNotes;
+        INotaDeDescuentoService _discountNotes;
+
+        public CompanyStatusReportPresenter(ICompanyStatusReportView view, IArticuloService items, IPedidoService orders, IFacturaService invoices, IRemisionService billsOfSale, ICompraService purchases, IAjusteService adjustments, INotaDeCreditoService creditNotes, INotaDeDescuentoService discountNotes)
+        {
+            _view = view;
+            _items = items;
+            _orders = orders;
+            _invoices = invoices;
+            _billsOfSale = billsOfSale;
+            _purchases = purchases;
+            _adjustments = adjustments;
+            _creditNotes = creditNotes;
+            _discountNotes = discountNotes;
+
+            _view.Preview += Preview;
+            _view.Print += Print;
+            _view.Quit += Quit;
+            _view.Load += Load;
+            _view.FilterChanged += FilterChanged;
+        }
+
+        private void FilterChanged()
+        {
+            try
+            {
+                if (_view.Report.FechaFin < _view.Report.FechaInicio)
+                {
+                    _view.ShowError("La fecha final no puede ser inferior a la fecha inicial");
+                    return;
+                }
+
+                //Se debe volver a llenar el reporte
+                var vm = _view.Report;
+
+                //Se genera uno nuevo
+                vm = new VMEstadoDeLaEmpresa()
+                {
+                    FechaFin = vm.FechaFin,
+                    FechaInicio = vm.FechaInicio,
+                    IncluirRemisiones = vm.IncluirRemisiones,
+                    TipoDeCambio = vm.TipoDeCambio
+                };
+
+                //JL: Ya hemos platicado sobre la importancia de escribir el código en donde corresponde,
+                // Este tipo de código es la regla de negocio detrás del reporte, por lo tanto no debe ir aqui.
+                //JL: En los nombres de los métodos se requiere uniformidad, porque algunos incluyen el nombre del documento y otros no?
+                //Se obtienen los detalles individuales del reporte
+                _adjustments.ListEntranceForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _adjustments.ListExitForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _items.ListForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _purchases.ListPurchasesForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _purchases.ListPayableBalancesForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _invoices.ListCollectableBalancesForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _creditNotes.ListForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _discountNotes.ListForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _orders.ListForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                _invoices.ListInvoicesForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+
+                //si se deben incluir remisiones
+                if (vm.IncluirRemisiones)
+                {
+                    _billsOfSale.ListForCompanyStatus(vm, vm.FechaInicio, vm.FechaFin);
+                }
+
+                //Se muestra el reporte
+                _view.Show(vm);
+            }
+            catch (Exception e)
+            {
+                _view.ShowError(e.Message);
+            }
+        }
+
+        private void Load()
+        {
+            try
+            {
+                //Se debe llenar la vista con la fecha de inicio del mes y la fecha final
+                DateTime fechaActual = DateTime.Today;
+
+                var defaultReport = new VMEstadoDeLaEmpresa()
+                {
+                    FechaInicio = new DateTime(fechaActual.Year, fechaActual.Month, 1),
+                    FechaFin = fechaActual,
+                    IncluirRemisiones = false,
+                    TipoDeCambio = Session.Configuration.tipoDeCambio
+                };
+
+                _view.Show(defaultReport);
+
+                //Se debe llenar el reporte por defecto
+                FilterChanged();
+            }
+            catch (Exception e)
+            {
+                _view.ShowError(e.Message);
+            }
+        }
+
+        private void Preview()
+        {
+            if (_view.Report.FechaFin < _view.Report.FechaInicio)
+            {
+                _view.ShowError("La fecha final no puede ser inferior a la fecha inicial");
+                return;
+            }
+
+            try
+            {
+                ReportViewerView view;
+                ReportViewerPresenter presenter;
+
+
+                view = new ReportViewerView(Reports.FillReport(_view.Report));
+                presenter = new ReportViewerPresenter(view);
+
+                view.Preview();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Print()
+        {
+            if (_view.Report.FechaFin < _view.Report.FechaInicio)
+            {
+                _view.ShowError("La fecha final no puede ser inferior a la fecha inicial");
+                return;
+            }
+
+            try
+            {
+                ReportViewerView view;
+                ReportViewerPresenter presenter;
+
+                view = new ReportViewerView(Reports.FillReport(_view.Report));
+                presenter = new ReportViewerPresenter(view);
+
+                view.Print();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void Quit()
+        {
+            try
+            {
+                _view.CloseWindow();
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+    }
+}

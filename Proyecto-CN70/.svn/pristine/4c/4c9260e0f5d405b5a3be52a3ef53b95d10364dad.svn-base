@@ -1,0 +1,18 @@
+﻿using Aprovi.Data.Models;
+using System;
+using System.Collections.Generic;
+
+namespace Aprovi.Views
+{
+    public interface IInvoicePaymentsView
+    {
+        event Action AddPayment;
+        event Action RemovePayment;
+        event Action StampPayment;
+
+        AbonosDeFactura Payment { get; }
+        AbonosDeFactura Selected { get; }
+
+        void Show(List<AbonosDeFactura> payments);
+    }
+}

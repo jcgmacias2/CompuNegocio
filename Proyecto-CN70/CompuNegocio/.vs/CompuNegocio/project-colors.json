@@ -1,0 +1,16 @@
+{
+  "Version": 1,
+  "ProjectMap": {
+    "5af88e15-325b-40ce-96d1-8a37a31205f8": {
+      "ProjectGuid": "5af88e15-325b-40ce-96d1-8a37a31205f8",
+      "DisplayName": "Aprovi.Data",
+      "ColorIndex": 0
+    },
+    "bbd7302e-f01b-4b24-ade2-02e1891283b0": {
+      "ProjectGuid": "bbd7302e-f01b-4b24-ade2-02e1891283b0",
+      "DisplayName": "CompuNegocio",
+      "ColorIndex": 1
+    }
+  },
+  "NextColorIndex": 2
+}

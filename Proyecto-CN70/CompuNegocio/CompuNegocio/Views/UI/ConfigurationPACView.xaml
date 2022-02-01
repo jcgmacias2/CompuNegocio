@@ -1,0 +1,24 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.ConfigurationPACView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Configuración Administrativa"
+        Icon="{StaticResource ImgProperties}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtUsuario}"
+        Height="230" Width="305">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <GroupBox Header="Proveedor Autorizado de Certificación" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top" Height="100" Width="280"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Usuario :" HorizontalAlignment="Left" Margin="20,30,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtUsuario" HorizontalAlignment="Left" Height="23" Margin="100,30,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Contraseña :" HorizontalAlignment="Left" Margin="20,60,0,0" VerticalAlignment="Top"/>
+        <TextBox x:Name="txtContraseña" HorizontalAlignment="Left" Height="23" Margin="100,60,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="170"/>
+        
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="80,120,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="150,120,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+    </base:BaseView>
+
+

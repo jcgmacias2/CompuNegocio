@@ -1,0 +1,410 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="9fdd8b61613c45b68ae9e85c85be1c4b" Name="Diagram1" ZoomLevel="10">
+        <EntityTypeShape EntityType="CNModel.AbonosDeCompra" Width="1.5" PointX="3" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.AbonosDeFactura" Width="1.5" PointX="6" PointY="31.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.AbonosDeRemision" Width="1.5" PointX="3" PointY="26.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Ajuste" Width="1.5" PointX="9" PointY="50.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Banco" Width="1.5" PointX="3.75" PointY="18.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Bascula" Width="1.5" PointX="5.25" PointY="10.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeAjuste" Width="1.5" PointX="11.25" PointY="51" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeCompra" Width="1.5" PointX="11.25" PointY="32.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeFactura" Width="1.5" PointX="8.25" PointY="41.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeRemisione" Width="1.5" PointX="18.5" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeTimbreDeAbonosDeFactura" Width="1.5" PointX="10.5" PointY="37.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeTimbresDeFactura" Width="1.5" PointX="10.5" PointY="46.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Certificado" Width="1.5" PointX="3.75" PointY="67.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Clasificacione" Width="1.5" PointX="5.25" PointY="45.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CuentaPredialPorDetalle" Width="1.5" PointX="15.5" PointY="48.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CuentasBancaria" Width="1.5" PointX="6" PointY="27.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.CuentasPrediale" Width="1.5" PointX="11.125" PointY="5.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeAjuste" Width="1.5" PointX="11.25" PointY="40.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeCompra" Width="1.5" PointX="13.25" PointY="35.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeFactura" Width="1.5" PointX="13.25" PointY="44.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeRemision" Width="1.5" PointX="14.25" PointY="39.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Domicilio" Width="1.5" PointX="11.75" PointY="21.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Empresa" Width="1.5" PointX="0.75" PointY="10.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Equivalencia" Width="1.5" PointX="11.25" PointY="29.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Estacione" Width="1.5" PointX="3" PointY="10.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeAbono" Width="1.5" PointX="0.75" PointY="14" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeAjuste" Width="1.5" PointX="6.75" PointY="49.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeCompra" Width="1.5" PointX="6.75" PointY="25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeFactura" Width="1.5" PointX="3.75" PointY="23.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeRemision" Width="1.5" PointX="14" PointY="29.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.FormasPago" Width="1.5" PointX="0.75" PointY="16.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.ImpresorasPorEstacion" Width="1.5" PointX="8.25" PointY="10.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.ListasDePrecio" Width="1.5" PointX="11.75" PointY="26" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.MetodosPago" Width="1.5" PointX="3.75" PointY="21.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Moneda" Width="1.5" PointX="0.75" PointY="31.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Pais" Width="1.5" PointX="9.5" PointY="22.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Pantalla" Width="1.5" PointX="3.75" PointY="62.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Permiso" Width="1.5" PointX="3.75" PointY="65" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Precio" Width="1.5" PointX="14.25" PointY="32.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Privilegio" Width="1.5" PointX="6" PointY="58.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.ProductosServicio" Width="1.5" PointX="0.75" PointY="37.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Regimene" Width="1.5" PointX="3.75" PointY="49.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.Series" Width="1.5" PointX="3.75" PointY="70.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TimbresDeAbonosDeFactura" Width="1.5" PointX="8.25" PointY="36.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TimbresDeFactura" Width="1.5" PointX="8.25" PointY="45.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposDeAjuste" Width="1.5" PointX="6.75" PointY="52.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposDeComprobante" Width="1.5" PointX="6" PointY="71.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposDeComprobanteFiscal" Width="2" PointX="8.625" PointY="3.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposDeImpresora" Width="1.5" PointX="6" PointY="7.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposDeImpuesto" Width="1.5" PointX="14.25" PointY="51.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposFactor" Width="1.5" PointX="14.25" PointY="53.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.TiposRelacion" Width="1.5" PointX="3.75" PointY="52.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.UnidadesDeMedida" Width="1.5" PointX="0.75" PointY="39.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="CNModel.UsosCFDI" Width="1.5" PointX="3.75" PointY="55.125" IsExpanded="true" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeC__idFor__71D1E811" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeC__idMon__6FE99F9F" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idCue__42E1EEFE" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idEmp__41EDCAC5" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idEst__40F9A68C" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idFor__40058253" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idMon__3F115E1A" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__TimbresDe__idTim__7D0E9093" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeR__idEmp__6FB49575" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeR__idEst__6EC0713C" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeR__idFor__6DCC4D03" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeR__idMon__6CD828CA" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Ajustes__idEstat__4D5F7D71" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Ajustes__idTipoD__4C6B5938" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idAju__503BEA1C" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idAju__531856C7" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__CuentasBa__idBan__2D27B809" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Basculas__idBasc__05D8E0BE" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idCan__02C769E9" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idCan__05A3D694" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__CuentaPre__idCue__37703C52" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__CuentasBa__idMon__2E1BDC42" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idMon__55009F39" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idUni__76969D2E" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Domicilio__idPai__0CBAE877" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Estacione__idEmp__02FC7413" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Equivalen__idUni__5CD6CB2B" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Impresora__idEst__0B91BA14" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Impresora__idTip__0C85DE4D" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Precios__idLista__46E78A0C" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Privilegi__idPan__060DEAE8" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__Privilegi__idPer__07020F21" ManuallyRouted="false" />
+        <AssociationConnector Association="CNModel.FK__TiposDeCo__idSer__76619304" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorAjuste" Width="1.5" PointX="0.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorAjustesCancelado" Width="1.5" PointX="2.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorCompra" Width="1.5" PointX="7.25" PointY="0.625" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorFacturasCancelada" Width="1.5" PointX="1" PointY="3.5" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorRemisionesCancelada" Width="1.5" PointX="9.125" PointY="0.625" />
+        <EntityTypeShape EntityType="CNModel.VwExistencia" Width="1.5" PointX="3.125" PointY="3.625" />
+        <EntityTypeShape EntityType="CNModel.VwFoliosPorAbono" Width="1.5" PointX="8.75" PointY="7.75" />
+        <EntityTypeShape EntityType="CNModel.VwResumenPorRemision" Width="1.5" PointX="12.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwSaldosPorClientePorMoneda" Width="1.5" PointX="6.75" PointY="3.375" />
+        <EntityTypeShape EntityType="CNModel.VwSaldosPorProveedorPorMoneda" Width="1.5" PointX="12.75" PointY="10.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorAjuste" Width="1.5" PointX="7.75" PointY="13.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorAjustesCancelado" Width="1.5" PointX="14.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorArticulo" Width="1.75" PointX="3.75" PointY="14.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorComprasCancelada" Width="1.5" PointX="5" PointY="3.625" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorFactura" Width="1.5" PointX="14.75" PointY="8.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorRemisione" Width="1.5" PointX="9.75" PointY="14.75" />
+        <EntityTypeShape EntityType="CNModel.VwTimbresPorFactura" Width="1.5" PointX="14.75" PointY="11.75" />
+        <EntityTypeShape EntityType="CNModel.ComprobantesEnviado" Width="1.5" PointX="12.375" PointY="15.75" />
+        <EntityTypeShape EntityType="CNModel.CuentasDeCorreo" Width="1.5" PointX="16.25" PointY="23.875" />
+        <EntityTypeShape EntityType="CNModel.CuentasGuardian" Width="1.5" PointX="3.75" PointY="74.125" />
+        <AssociationConnector Association="CNModel.FK__Comproban__idTip__0D0FEE32" />
+        <EntityTypeShape EntityType="CNModel.PedimentoPorDetalleDeAjuste" Width="1.5" PointX="20.5" PointY="47.875" />
+        <EntityTypeShape EntityType="CNModel.PedimentoPorDetalleDeFactura" Width="1.5" PointX="23.5" PointY="47.625" />
+        <EntityTypeShape EntityType="CNModel.PedimentoPorDetalleDeRemision" Width="1.5" PointX="21.5" PointY="44.125" />
+        <EntityTypeShape EntityType="CNModel.Pedimento" Width="1.5" PointX="18.25" PointY="48.125" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idDet__1C5231C2" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idDet__2022C2A6" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idDet__23F3538A" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idPed__1B5E0D89" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idPed__1F2E9E6D" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idPed__22FF2F51" />
+        <AssociationConnector Association="CNModel.PedimentoPorAjustes" />
+        <EntityTypeShape EntityType="CNModel.ComentariosPorDetalleDeFactura" Width="1.5" PointX="15.5" PointY="56" />
+        <AssociationConnector Association="CNModel.FK__Comentari__idDet__27C3E46E" />
+        <EntityTypeShape EntityType="CNModel.ComentariosPorDetalleDeRemision" Width="1.5" PointX="16.5" PointY="34.875" />
+        <AssociationConnector Association="CNModel.FK__Comentari__idDet__2AA05119" />
+        <EntityTypeShape EntityType="CNModel.AddendaDeCliente" Width="1.5" PointX="16.25" PointY="20.875" />
+        <EntityTypeShape EntityType="CNModel.Addenda" Width="1.5" PointX="14" PointY="20.125" />
+        <AssociationConnector Association="CNModel.FK__AddendaDe__idAdd__3429BB53" />
+        <EntityTypeShape EntityType="CNModel.Directorio" Width="1.5" PointX="15.375" PointY="14.75" />
+        <EntityTypeShape EntityType="CNModel.Seccione" Width="1.5" PointX="6.375" PointY="16.75" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorRemision" Width="1.5" PointX="18.5" PointY="52.125" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeCotizacione" Width="1.5" PointX="26.75" PointY="35" />
+        <EntityTypeShape EntityType="CNModel.ComentariosPorDetalleDeCotizacion" Width="1.5" PointX="7.5" PointY="54.875" />
+        <EntityTypeShape EntityType="CNModel.Cotizacione" Width="1.5" PointX="24.5" PointY="33.375" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeCotizacion" Width="1.5" PointX="5.25" PointY="38.125" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeCotizacion" Width="1.5" PointX="22.25" PointY="32.125" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idCot__54968AE5" />
+        <AssociationConnector Association="CNModel.FK__Comentari__idDet__51BA1E3A" />
+        <AssociationConnector Association="CNModel.FK__Cotizacio__idEmp__45544755" />
+        <AssociationConnector Association="CNModel.FK__Cotizacio__idEst__4460231C" />
+        <AssociationConnector Association="CNModel.FK__Cotizacio__idMon__4183B671" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idCot__4B0D20AB" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorCotizacion" Width="1.5" PointX="26.75" PointY="38.25" />
+        <AssociationConnector Association="CNModel.FK__DatosExtr__idCot__5772F790" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasConPedimento" Width="1.5" PointX="17.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwExistenciasConPedimento" Width="1.5" PointX="17.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasConPedimento" Width="1.5" PointX="17.375" PointY="7.75" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorFactura" Width="1.5" PointX="21.5" PointY="35" />
+        <EntityTypeShape EntityType="CNModel.Articulo" Width="1.5" PointX="3" PointY="37" />
+        <EntityTypeShape EntityType="CNModel.ComisionesPorUsuario" Width="1.5" PointX="6" PointY="42.375" />
+        <EntityTypeShape EntityType="CNModel.TiposDeComision" Width="1.5" PointX="0.75" PointY="28.875" />
+        <AssociationConnector Association="CNModel.FK__Articulos__idMon__38996AB5" />
+        <AssociationConnector Association="CNModel.FK__Articulos__idPro__3A81B327" />
+        <AssociationConnector Association="CNModel.FK__Articulos__idTip__65C116E7" />
+        <AssociationConnector Association="CNModel.FK__Articulos__idUni__398D8EEE" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__2CF2ADDF" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__4A18FC72" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__540C7B00" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__634EBE90" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__75A278F5" />
+        <AssociationConnector Association="CNModel.FK__Equivalen__idArt__5BE2A6F2" />
+        <AssociationConnector Association="CNModel.FK__Precios__idArtic__47DBAE45" />
+        <AssociationConnector Association="CNModel.FK__Comisione__idTip__64CCF2AE" />
+        <AssociationConnector Association="CNModel.ClasificacionesPorArticulo" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDePedido" Width="1.5" PointX="18.5" PointY="22.375" />
+        <EntityTypeShape EntityType="CNModel.ComentariosPorDetalleDePedido" Width="1.5" PointX="21.75" PointY="38.125" />
+        <EntityTypeShape EntityType="CNModel.EstatusDePedido" Width="1.5" PointX="14" PointY="59.5" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorPedido" Width="1.5" PointX="18.5" PointY="18.875" />
+        <EntityTypeShape EntityType="CNModel.DetallesDePedido" Width="1.5" PointX="19.5" PointY="38.25" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__7132C993" />
+        <AssociationConnector Association="CNModel.FK__Comentari__idDet__77DFC722" />
+        <EntityTypeShape EntityType="CNModel.OpcionesCosto" Width="1.5" PointX="0.75" PointY="62" />
+        <EntityTypeShape EntityType="CNModel.VwResumenPorFactura" Width="1.5" PointX="19.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeOrdenesDeCompra" Width="1.5" PointX="11.25" PointY="57" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorOrdenDeCompra" Width="1.5" PointX="11.25" PointY="54.375" />
+        <EntityTypeShape EntityType="CNModel.OrdenesDeCompra" Width="1.5" PointX="23.75" PointY="25.625" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idOrd__1940BAED" />
+        <AssociationConnector Association="CNModel.FK__DatosExtr__idOrd__16644E42" />
+        <AssociationConnector Association="CNModel.FK__OrdenesDe__idEmp__1387E197" />
+        <AssociationConnector Association="CNModel.FK__OrdenesDe__idMon__10AB74EC" />
+        <EntityTypeShape EntityType="CNModel.ComentariosPorDetalleDeOrdenDeCompra" Width="1.5" PointX="29.125" PointY="31.875" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeOrdenDeCompra" Width="1.5" PointX="26.875" PointY="31" />
+        <EntityTypeShape EntityType="CNModel.Impuesto" Width="1.5" PointX="23.75" PointY="42.125" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__47FBA9D6" />
+        <AssociationConnector Association="CNModel.FK__Comentari__idDet__4F9CCB9E" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idOrd__48EFCE0F" />
+        <AssociationConnector Association="CNModel.fk_DetallesDeOrdenDeCompra_UnidadesDeMedida" />
+        <AssociationConnector Association="CNModel.FK__Impuestos__idTip__1ED998B2" />
+        <AssociationConnector Association="CNModel.FK__Impuestos__idTip__1FCDBCEB" />
+        <AssociationConnector Association="CNModel.ImpuestosPorArticulo" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeCompra" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeCotizacion" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeFactura" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeOrdenDeCompra" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDePedido" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeRemision" />
+        <EntityTypeShape EntityType="CNModel.VwArticulosVendido" Width="1.5" PointX="19.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CNModel.Usuario" Width="1.5" PointX="0.75" PointY="43.75" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeC__idUsu__72C60C4A" />
+        <AssociationConnector Association="CNModel.FK__Ajustes__idUsuar__4B7734FF" />
+        <AssociationConnector Association="CNModel.FK__Comisione__idUsu__63D8CE75" />
+        <AssociationConnector Association="CNModel.FK__Cotizacio__idUsu__436BFEE3" />
+        <AssociationConnector Association="CNModel.FK__OrdenesDe__idUsu__38B96646" />
+        <AssociationConnector Association="CNModel.FK__Privilegi__idUsu__0519C6AF" />
+        <EntityTypeShape EntityType="CNModel.Factura" Width="1.5" PointX="19.25" PointY="28.375" />
+        <AssociationConnector Association="CNModel.FK__AbonosDeF__idFac__3E1D39E1" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idFac__2A164134" />
+        <AssociationConnector Association="CNModel.FK__Cotizacio__idFac__46486B8E" />
+        <AssociationConnector Association="CNModel.FK__DatosExtr__idFac__2E70E1FD" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idFac__2DE6D218" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idEmpr__236943A5" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idEsta__22751F6C" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idComp__2645B050" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idMeto__2180FB33" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idMone__1EA48E88" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idRegi__25518C17" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idTipo__2739D489" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idUsoC__245D67DE" />
+        <AssociationConnector Association="CNModel.FK__Facturas__idUsua__208CD6FA" />
+        <AssociationConnector Association="CNModel.FK__TimbresDe__idTim__7FEAFD3E" />
+        <AssociationConnector Association="CNModel.fk_Facturas_Usuarios" />
+        <EntityTypeShape EntityType="CNModel.VwVentasActivasPorCliente" Width="1.5" PointX="19.375" PointY="10.75" />
+        <EntityTypeShape EntityType="CNModel.VwSaldoDeudorPorClientePorMoneda" Width="1.5" PointX="19.375" PointY="14.75" />
+        <EntityTypeShape EntityType="CNModel.Configuracione" Width="1.5" PointX="23" PointY="50.5" />
+        <AssociationConnector Association="CNModel.FK__Certifica__idCon__7A3223E8" />
+        <AssociationConnector Association="CNModel.FK__Configura__idDom__0F624AF8" />
+        <AssociationConnector Association="CNModel.FK__CuentasGu__idCon__075714DC" />
+        <AssociationConnector Association="CNModel.FK__Regimenes__idCon__17F790F9" />
+        <AssociationConnector Association="CNModel.FK__Series__idConfig__1332DBDC" />
+        <AssociationConnector Association="CNModel.fk_Configuraciones_OpcionesCostos_Aumenta" />
+        <AssociationConnector Association="CNModel.fk_Configuraciones_OpcionesCostos_Disminuye" />
+        <EntityTypeShape EntityType="CNModel.VwListaFactura" Width="1.5" PointX="0.75" PointY="20.75" />
+        <EntityTypeShape EntityType="CNModel.Formato" Width="1.5" PointX="23.625" PointY="0.875" />
+        <EntityTypeShape EntityType="CNModel.Reporte" Width="1.5" PointX="21.375" PointY="1.125" />
+        <AssociationConnector Association="CNModel.FK__Formatos__idRepo__77AABCF8" />
+        <EntityTypeShape EntityType="CNModel.FormatosPorConfiguracion" Width="1.5" PointX="28.875" PointY="23.875" />
+        <AssociationConnector Association="CNModel.FK__FormatosP__idCon__7F4BDEC0" />
+        <AssociationConnector Association="CNModel.FK__FormatosP__idFor__01342732" />
+        <AssociationConnector Association="CNModel.FK__FormatosP__idRep__004002F9" />
+        <EntityTypeShape EntityType="CNModel.EstatusDePago" Width="1.5" PointX="19" PointY="25.125" />
+        <EntityTypeShape EntityType="CNModel.TimbresDePago" Width="1.5" PointX="23.5" PointY="21.125" />
+        <EntityTypeShape EntityType="CNModel.VwListaParcialidade" Width="1.5" PointX="21.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CNModel.VwListaArticulo" Width="1.5" PointX="23.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteAntiguedadSaldosFactura" Width="1.5" PointX="23.375" PointY="8.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteAntiguedadSaldosRemisione" Width="1.5" PointX="25.375" PointY="4.75" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeTraspaso" Width="1.5" PointX="0.75" PointY="54.5" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDePago" Width="1.5" PointX="23.5" PointY="17.875" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeTimbresDePago" Width="1.5" PointX="25.75" PointY="20.125" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idCan__0F4D3C5F" />
+        <EntityTypeShape EntityType="CNModel.VwCotizacionesPorPeriodo" Width="1.5" PointX="25.375" PointY="12.75" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeTraspaso" Width="1.5" PointX="16.625" PointY="44.25" />
+        <EntityTypeShape EntityType="CNModel.PedimentoPorDetalleDeTraspaso" Width="1.5" PointX="25.875" PointY="50.75" />
+        <EntityTypeShape EntityType="CNModel.Traspaso" Width="1.5" PointX="9.375" PointY="57.875" />
+        <AssociationConnector Association="CNModel.FK_DetallesDeTraspaso_Articulos" />
+        <AssociationConnector Association="CNModel.FK_DetallesDeTraspaso_Monedas" />
+        <AssociationConnector Association="CNModel.FK_DetallesDeTraspaso_Traspasos" />
+        <AssociationConnector Association="CNModel.FK_PedimentoPorDetalleDeTraspaso_DetallesDeTraspaso" />
+        <AssociationConnector Association="CNModel.FK_Traspasos_EstatusDeTraspaso" />
+        <AssociationConnector Association="CNModel.FK_PedimentoPorDetalleDeTraspaso_Pedimentos" />
+        <AssociationConnector Association="CNModel.FK_Traspasos_Usuarios" />
+        <EntityTypeShape EntityType="CNModel.EmpresasAsociada" Width="1.5" PointX="3" PointY="77.75" />
+        <AssociationConnector Association="CNModel.FK_EmpresasAsociadas_Empresas" />
+        <AssociationConnector Association="CNModel.FK_Traspasos_EmpresasAsociadas_Destino" />
+        <AssociationConnector Association="CNModel.FK_Traspasos_EmpresasAsociadas_Origen" />
+        <EntityTypeShape EntityType="CNModel.SolicitudesDeTraspaso" Width="1.5" PointX="5.25" PointY="78.375" />
+        <AssociationConnector Association="CNModel.FK_SolicitudesDeTraspaso_EmpesasAsociadas" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorTraspaso" Width="1.5" PointX="8.375" PointY="27.75" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorTraspaso" Width="1.5" PointX="27.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CNModel.Compra" Width="1.5" PointX="29.875" PointY="34.625" />
+        <AssociationConnector Association="CNModel.F_AbonosDeCompra_10172" />
+        <AssociationConnector Association="CNModel.F_CancelacionesDeCompras_1018D" />
+        <AssociationConnector Association="CNModel.F_Compras_101A2" />
+        <AssociationConnector Association="CNModel.F_Compras_101A3" />
+        <AssociationConnector Association="CNModel.F_Compras_101A5" />
+        <AssociationConnector Association="CNModel.F_DetallesDeCompra_101C0" />
+        <AssociationConnector Association="CNModel.fk_Compras_OrdenesDeCompra" />
+        <AssociationConnector Association="CNModel.PedimentoPorCompras" />
+        <EntityTypeShape EntityType="CNModel.VwResumenPorCompra" Width="1.5" PointX="29.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.Pago" Width="1.5" PointX="21.25" PointY="22.125" />
+        <AssociationConnector Association="CNModel.fk_AbonosDeFactura_Pagos" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idPag__2FBA0BF1" />
+        <AssociationConnector Association="CNModel.fk_Pagos_Empresas" />
+        <AssociationConnector Association="CNModel.fk_Pagos_EstatusDePagos" />
+        <AssociationConnector Association="CNModel.fk_Pagos_MetodosPago" />
+        <AssociationConnector Association="CNModel.fk_Pagos_Regimenes" />
+        <AssociationConnector Association="CNModel.fk_Pagos_UsosCFDI" />
+        <AssociationConnector Association="CNModel.fk_Pagos_Usuarios" />
+        <AssociationConnector Association="CNModel.fk_TimbresDePagos_Pagos" />
+        <EntityTypeShape EntityType="CNModel.VwListaPago" Width="1.5" PointX="29.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CNModel.CambioDivisa" Width="1.5" PointX="9.25" PointY="19.75" />
+        <AssociationConnector Association="CNModel.FK__CambioDiv__idCam__033C6B35" />
+        <AssociationConnector Association="CNModel.FK__CambioDiv__idMon__04308F6E" />
+        <EntityTypeShape EntityType="CNModel.DatosExtraPorNotaDeCredito" Width="1.5" PointX="33.75" PointY="25.25" />
+        <EntityTypeShape EntityType="CNModel.DetallesDeNotaDeCredito" Width="1.5" PointX="36.75" PointY="33.5" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeNotaDeCredito" Width="1.5" PointX="29.25" PointY="28.75" />
+        <EntityTypeShape EntityType="CNModel.PedimentoPorDetalleDeNotaDeCredito" Width="1.5" PointX="25.5" PointY="53.875" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idArt__507BE13E" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idDet__53584DE9" />
+        <AssociationConnector Association="CNModel.FK__Pedimento__idPed__544C7222" />
+        <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeNotaDeCredito" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeNotaDeCredito" Width="1.5" PointX="33.75" PointY="30.75" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeTimbresDeNotasDeCredito" Width="1.5" PointX="36" PointY="21.625" />
+        <EntityTypeShape EntityType="CNModel.TimbresDeNotasDeCredito" Width="1.5" PointX="33.75" PointY="20.625" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idCan__6D181FEC" />
+        <EntityTypeShape EntityType="CNModel.NotasDeCredito" Width="1.5" PointX="31.5" PointY="26.75" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idNot__7484378A" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idCue__5DA0D232" />
+        <AssociationConnector Association="CNModel.FK__DatosExtr__idNot__71A7CADF" />
+        <AssociationConnector Association="CNModel.FK__DetallesD__idNot__607D3EDD" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idEmp__56F3D4A3" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idEst__5CACADF9" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idFac__5BB889C0" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idFor__55FFB06A" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idMon__58DC1D15" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idReg__5AC46587" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idUsu__59D0414E" />
+        <AssociationConnector Association="CNModel.FK__TimbresDe__idTim__6BEEF189" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeOrdenDeCompra" Width="1.5" PointX="0.75" PointY="7.875" />
+        <AssociationConnector Association="CNModel.F_OrdenesDeCompra_101F4" />
+        <EntityTypeShape EntityType="CNModel.VwFoliosPorSerie" Width="1.5" PointX="29.375" PointY="11.75" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorArticulo" Width="1.5" PointX="26.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.Proveedore" Width="1.5" PointX="14" PointY="22.875" />
+        <AssociationConnector Association="CNModel.F_Compras_101A4" />
+        <AssociationConnector Association="CNModel.F_Proveedores_10214" />
+        <AssociationConnector Association="CNModel.F_OrdenesDeCompra_101F6" />
+        <EntityTypeShape EntityType="CNModel.VwReporteInventarioFisico" Width="1.5" PointX="6.375" PointY="19.75" />
+        <EntityTypeShape EntityType="CNModel.Cliente" Width="1.5" PointX="26" PointY="41.375" />
+        <AssociationConnector Association="CNModel.F_AddendaDeCliente_10183" />
+        <AssociationConnector Association="CNModel.F_Clientes_10198" />
+        <AssociationConnector Association="CNModel.F_Clientes_10199" />
+        <AssociationConnector Association="CNModel.F_Cotizaciones_101AB" />
+        <AssociationConnector Association="CNModel.F_CuentasDeCorreo_101B5" />
+        <AssociationConnector Association="CNModel.F_Facturas_101D1" />
+        <AssociationConnector Association="CNModel.FK__Clientes__idUsoC__55CAA640" />
+        <AssociationConnector Association="CNModel.FK__NotasDeCr__idCli__57E7F8DC" />
+        <AssociationConnector Association="CNModel.fk_Clientes_Usuarios" />
+        <AssociationConnector Association="CNModel.fk_Pagos_Clientes" />
+        <EntityTypeShape EntityType="CNModel.EstatusDeNotaDeDescuento" Width="1.5" PointX="34.5" PointY="28" />
+        <EntityTypeShape EntityType="CNModel.NotasDeDescuento" Width="1.5" PointX="36.75" PointY="27.375" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idCli__066DDD9B" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idEmp__0579B962" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idEst__0856260D" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idFac__094A4A46" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idMon__04859529" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idNot__0A3E6E7F" />
+        <AssociationConnector Association="CNModel.FK__NotasDeDe__idUsu__076201D4" />
+        <EntityTypeShape EntityType="CNModel.CancelacionesDeNotaDeDescuento" Width="1.5" PointX="39" PointY="29" />
+        <AssociationConnector Association="CNModel.FK__Cancelaci__idNot__0D1ADB2A" />
+        <EntityTypeShape EntityType="CNModel.VwEntradasPorNotasDeCredito" Width="1.5" PointX="28.375" PointY="19.75" />
+        <EntityTypeShape EntityType="CNModel.VwSalidasPorNotasDeCreditoCancelada" Width="1.5" PointX="30.375" PointY="16.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteImpuestosPorPeriodo" Width="1.5" PointX="31.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.CodigosDeArticuloPorProveedor" Width="1.5" PointX="17.25" PointY="39.25" />
+        <EntityTypeShape EntityType="CNModel.VwCodigosDeArticuloPorCliente" Width="1.5" PointX="11.375" PointY="7.75" />
+        <EntityTypeShape EntityType="CNModel.VwCodigosDeArticuloPorProveedor" Width="1.5" PointX="13.375" PointY="5.75" />
+        <AssociationConnector Association="CNModel.FK__CodigosPo__idArt__5E0AE686" />
+        <AssociationConnector Association="CNModel.FK__CodigosPo__idPro__5EFF0ABF" />
+        <EntityTypeShape EntityType="CNModel.CodigosDeArticuloPorCliente" Width="1.5" PointX="28.25" PointY="41.5" />
+        <AssociationConnector Association="CNModel.FK__CodigosDe__idArt__3C54ED00" />
+        <AssociationConnector Association="CNModel.FK__CodigosDe__idCli__3D491139" />
+        <EntityTypeShape EntityType="CNModel.VwReporteAvaluo" Width="1.5" PointX="31.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaAjustesEntrada" Width="1.5" PointX="30.375" PointY="20.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaAjustesSalida" Width="1.5" PointX="8.375" PointY="31.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaAvaluo" Width="1.5" PointX="31.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaCompra" Width="1.5" PointX="31.375" PointY="12.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaCuentasPorCobrar" Width="1.5" PointX="32.375" PointY="15.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaCuentasPorPagar" Width="1.5" PointX="33.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaFactura" Width="1.5" PointX="33.375" PointY="3.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaNotasDeCredito" Width="1.5" PointX="33.375" PointY="6.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaNotasDeDescuento" Width="1.5" PointX="33.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaPedido" Width="1.5" PointX="33.375" PointY="12.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteEstatusDeLaEmpresaRemisione" Width="1.5" PointX="34.375" PointY="15.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteVentasPorArticulo" Width="1.5" PointX="32.375" PointY="34.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteCostoDeLoVendido" Width="1.5" PointX="35.375" PointY="0.75" />
+        <EntityTypeShape EntityType="CNModel.Remisione" Width="1.5" PointX="38.25" PointY="19.75" />
+        <AssociationConnector Association="CNModel.F_AbonosDeRemision_10181" />
+        <AssociationConnector Association="CNModel.F_CancelacionesDeRemisiones_10192" />
+        <AssociationConnector Association="CNModel.F_Remisiones_10216" />
+        <AssociationConnector Association="CNModel.F_Cotizaciones_101B0" />
+        <AssociationConnector Association="CNModel.F_DatosExtraPorRemision_101BB" />
+        <AssociationConnector Association="CNModel.F_DetallesDeRemision_101CC" />
+        <AssociationConnector Association="CNModel.F_Remisiones_10217" />
+        <AssociationConnector Association="CNModel.F_Remisiones_10218" />
+        <AssociationConnector Association="CNModel.F_Remisiones_10219" />
+        <AssociationConnector Association="CNModel.F_Remisiones_1021A" />
+        <AssociationConnector Association="CNModel.F_Remisiones_1021C" />
+        <AssociationConnector Association="CNModel.fk_Remisiones_Usuarios" />
+        <EntityTypeShape EntityType="CNModel.Pedido" Width="1.5" PointX="31.25" PointY="40.375" />
+        <AssociationConnector Association="CNModel.F_CancelacionesDePedidos_10191" />
+        <AssociationConnector Association="CNModel.F_Pedidos_10200" />
+        <AssociationConnector Association="CNModel.F_DatosExtraPorPedido_101BA" />
+        <AssociationConnector Association="CNModel.F_DetallesDePedido_101CA" />
+        <AssociationConnector Association="CNModel.F_Pedidos_10201" />
+        <AssociationConnector Association="CNModel.F_Pedidos_10202" />
+        <AssociationConnector Association="CNModel.F_Facturas_101D7" />
+        <AssociationConnector Association="CNModel.F_Pedidos_10203" />
+        <AssociationConnector Association="CNModel.F_Pedidos_10204" />
+        <AssociationConnector Association="CNModel.F_Remisiones_1021B" />
+        <EntityTypeShape EntityType="CNModel.VwReporteListaDePrecio" Width="1.5" PointX="16.375" PointY="27.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteListaDePreciosConImpuesto" Width="1.5" PointX="35.375" PointY="5.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteListaDePreciosPorLista" Width="1.5" PointX="35.375" PointY="9.75" />
+        <EntityTypeShape EntityType="CNModel.VwReporteListaDePreciosPorListaConImpuesto" Width="1.5" PointX="36.375" PointY="13.75" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

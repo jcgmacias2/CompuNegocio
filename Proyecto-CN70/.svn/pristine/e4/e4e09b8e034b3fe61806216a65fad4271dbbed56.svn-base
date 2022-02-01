@@ -1,0 +1,77 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <configSections>
+    <section name="entityFramework" type="System.Data.Entity.Internal.ConfigFile.EntityFrameworkSection, EntityFramework, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" requirePermission="false" />
+    <!-- For more information on Entity Framework configuration, visit http://go.microsoft.com/fwlink/?LinkID=237468 -->
+  </configSections>
+  <startup>
+    <supportedRuntime version="v4.0" sku=".NETFramework,Version=v4.6.1" />
+  </startup>
+  <appSettings>
+    <add key="Environment" value="Configuration" />
+    <add key="Copyright" value="demo@aprovi.com.mx" />
+    <add key="System" value="1" />
+    <add key="Reports" value="E:\Proyectos\CompuNegocio 7\Desarrollo\CompuNegocio\CompuNegocio\Reports\" />
+    <add key="Xml" value="E:\Proyectos\CompuNegocio 7\Desarrollo\DevelopmentFiles\XML" />
+    <add key="Pdf" value="E:\Proyectos\CompuNegocio 7\Desarrollo\DevelopmentFiles\PDF" />
+    <add key="Cbb" value="E:\Proyectos\CompuNegocio 7\Desarrollo\DevelopmentFiles\CBB" />
+    <add key="Logo" value="E:\Proyectos\CompuNegocio 7\Desarrollo\DevelopmentFiles\CN-Logo.jpg" />
+    <add key="Estacion" value="2" />
+    <add key="CSD" value="E:\Proyectos\CompuNegocio 7\Desarrollo\DevelopmentFiles\Files\CSDCSO1211145F0.pfx" />
+    <add key="Scanner" value="0" />
+    <add key="ScannerCode" value="" />
+    <add key="Drawer" value="0" />
+    <add key="ClientSettingsProvider.ServiceUri" value="" />
+  </appSettings>
+  <connectionStrings>
+    <!--<add name="CNEntities" connectionString="metadata=res://*/Models.CNModel.csdl|res://*/Models.CNModel.ssdl|res://*/Models.CNModel.msl;provider=System.Data.SqlClient;provider connection string='data source=compuregistro.com;initial catalog=compureg_natalia;persist security info=True;user id=compureg_natalia;password=Natalia2017.;MultipleActiveResultSets=True;App=EntityFramework'" providerName="System.Data.EntityClient" />-->
+    <!--<add name="CNEntities" connectionString="metadata=res://*/Models.CNModel.csdl|res://*/Models.CNModel.ssdl|res://*/Models.CNModel.msl;provider=System.Data.SqlClient;provider connection string='data source=compunegocio.net;initial catalog=compune1_dev;persist security info=True;user id=compune1_dev;password=Desarrollo2018;MultipleActiveResultSets=True;App=EntityFramework'" providerName="System.Data.EntityClient" />-->
+    <add name="CNEntities" connectionString="metadata=res://*/Models.CNModel.csdl|res://*/Models.CNModel.ssdl|res://*/Models.CNModel.msl;provider=System.Data.SqlClient;provider connection string='data source=www.desarrollo.dyndns-office.com;initial catalog=CN33;persist security info=True;user id=DevCompuNegocio;password=DevCompuNegocio2017.;MultipleActiveResultSets=True;App=EntityFramework'" providerName="System.Data.EntityClient" />
+  </connectionStrings>
+  <entityFramework>
+    <defaultConnectionFactory type="System.Data.Entity.Infrastructure.LocalDbConnectionFactory, EntityFramework">
+      <parameters>
+        <parameter value="mssqllocaldb" />
+      </parameters>
+    </defaultConnectionFactory>
+    <providers>
+      <provider invariantName="System.Data.SqlClient" type="System.Data.Entity.SqlServer.SqlProviderServices, EntityFramework.SqlServer" />
+    </providers>
+  </entityFramework>
+  <runtime>
+    <assemblyBinding xmlns="urn:schemas-microsoft-com:asm.v1">
+      <dependentAssembly>
+        <assemblyIdentity name="Microsoft.SqlServer.Types" publicKeyToken="89845dcd8080cc91" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-14.0.0.0" newVersion="14.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="Newtonsoft.Json" publicKeyToken="30ad4fe6b2a6aeed" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-9.0.0.0" newVersion="9.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System" publicKeyToken="b77a5c561934e089" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Data" publicKeyToken="b77a5c561934e089" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+      </dependentAssembly>
+      <dependentAssembly>
+        <assemblyIdentity name="System.Configuration" publicKeyToken="b03f5f7f11d50a3a" culture="neutral" />
+        <bindingRedirect oldVersion="0.0.0.0-4.0.0.0" newVersion="4.0.0.0" />
+      </dependentAssembly>
+    </assemblyBinding>
+  </runtime>
+  <system.web>
+    <membership defaultProvider="ClientAuthenticationMembershipProvider">
+      <providers>
+        <add name="ClientAuthenticationMembershipProvider" type="System.Web.ClientServices.Providers.ClientFormsAuthenticationMembershipProvider, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" />
+      </providers>
+    </membership>
+    <roleManager defaultProvider="ClientRoleProvider" enabled="true">
+      <providers>
+        <add name="ClientRoleProvider" type="System.Web.ClientServices.Providers.ClientRoleProvider, System.Web.Extensions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35" serviceUri="" cacheTimeout="86400" />
+      </providers>
+    </roleManager>
+  </system.web>
+</configuration>

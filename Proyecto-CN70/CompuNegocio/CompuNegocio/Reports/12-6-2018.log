@@ -1,0 +1,10 @@
+System.Net.WebException: Error en el servidor remoto: (401) No autorizado.
+   en System.Net.HttpWebRequest.GetResponse()
+   en Aprovi.Business.Services.SeguridadService.AuthenticateWithAPI(String usuario, String contraseña, Boolean useSSL) en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\Services\Implementations\SeguridadService.cs:línea 92
+   en Aprovi.Presenters.AuthenticationPresenter.AuthorizeOnAPI() en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio\Presenters\AuthenticationPresenter.cs:línea 49-----Message ----Error en el servidor remoto: (401) No autorizado.TrueTrueTrueSystem.IO.DirectoryNotFoundException: No se puede encontrar una parte de la ruta de acceso 'C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio\XML\A10621.xml'.
+   en System.IO.__Error.WinIOError(Int32 errorCode, String maybeFullPath)
+   en System.IO.FileStream.Init(String path, FileMode mode, FileAccess access, Int32 rights, Boolean useRights, FileShare share, Int32 bufferSize, FileOptions options, SECURITY_ATTRIBUTES secAttrs, String msgPath, Boolean bFromProxy, Boolean useLongPath, Boolean checkHost)
+   en System.IO.FileStream..ctor(String path, FileMode mode, FileAccess access, FileShare share)
+   en System.Xml.XmlDocument.Save(String filename)
+   en Aprovi.Business.Services.FacturaService.Stamp(VMFactura invoice, Boolean requiresAddenda) en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio.Business\Services\Implementations\FacturaService.cs:línea 256
+   en Aprovi.Presenters.InvoicesPresenter.Stamp() en C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio\Presenters\InvoicesPresenter.cs:línea 1150-----Message ----No se puede encontrar una parte de la ruta de acceso 'C:\Program Files (x86)\Aprovi Software\Proyecto-CN70\CompuNegocio\CompuNegocio\XML\A10621.xml'.TrueTrueTrueTrue

@@ -1,0 +1,55 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.UsersView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        Title="Usuarios"
+        Icon="{StaticResource ImgUsers}"
+        WindowStartupLocation="CenterScreen" 
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=txtNombreDeUsuario}"
+        Height="330" Width="460">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <TabControl HorizontalAlignment="Left" Height="200" Margin="10,5,0,0" VerticalAlignment="Top" Width="425">
+            <TabItem Header="Generales" IsTabStop="False">
+                <Grid>
+                    <Label Style="{StaticResource LabelSmall}" Content="Nombre de Usuario :" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtNombreDeUsuario" HorizontalAlignment="Left" Height="23" Margin="150,20,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="140"/>
+                    <Button x:Name="btnListarUsuarios" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="295,20,0,0" Width="25"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Contraseña :" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top"/>
+                    <PasswordBox  x:Name="txtContraseña" HorizontalAlignment="Left" Height="23" Margin="150,50,0,0" VerticalAlignment="Top" Width="140"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Nombre Completo :" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtNombreCompleto" HorizontalAlignment="Left" Height="23" Margin="150,80,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="259"/>
+                    <Label Style="{StaticResource LabelSmall}" Content="Descuento Máximo :" HorizontalAlignment="Left" Margin="22,110,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtDescuento" HorizontalAlignment="Left" Height="23" Margin="150,110,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="90"/>
+                    <Label Style="{StaticResource LabelSmall}" FontWeight="ExtraBold" Content="%" HorizontalAlignment="Left" Margin="240,110,0,0" VerticalAlignment="Top"/>
+                </Grid>
+            </TabItem>
+            <TabItem Header="Comisiones" IsTabStop="False">
+                <Grid>
+                    <Label Content="Comisión:" Style="{StaticResource LabelSmall}" HorizontalAlignment="Left" Margin="10,10,0,0" VerticalAlignment="Top"/>
+                    <ComboBox x:Name="cbComision" Margin="77,10,187,132"/>
+                    <Label Content="Porcentaje:" Style="{StaticResource LabelSmall}" HorizontalAlignment="Left" Margin="246,10,0,0" VerticalAlignment="Top"/>
+                    <TextBox x:Name="txtPorcentajeComision" HorizontalAlignment="Left" Height="23" Margin="317,13,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="32"/>
+                    <Label Content="%" Style="{StaticResource LabelSmall}" HorizontalAlignment="Left" Margin="347,10,0,0" VerticalAlignment="Top"/>
+                    <Button x:Name="btnAgregarComision" IsTabStop="False" Content="+" Style="{StaticResource SmallButton}" Margin="379,13,0,0" Width="25"/>
+                    <DataGrid Name="dgComisiones" HorizontalAlignment="Left" Margin="10,50,0,0" VerticalAlignment="Top" Height="112" Width="394" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                              ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="271" Header="Descripción" Binding="{Binding TiposDeComision.descripcion}" />
+                            <DataGridTextColumn Width="271" Header="Porcentaje" Binding="{Binding valor}" />
+                        </DataGrid.Columns>
+                    </DataGrid>
+                </Grid>
+            </TabItem>
+        </TabControl>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="60,220,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="130,220,0,0" Tag="{StaticResource ImgNewDocument}"/>
+        <Button x:Name="btnPrivilegios" Content="Privilegios" Style="{StaticResource BlockButton}" Margin="200,220,0,0" Tag="{StaticResource ImgKeys}"/>
+        <Button x:Name="btnEliminar" Content="Eliminar" Style="{StaticResource BlockButton}" Margin="270,220,0,0" Tag="{StaticResource ImgDelete}"/>
+        <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="340,220,0,0" Tag="{StaticResource ImgSave}"/>
+    </Grid>
+</base:BaseView>
+
+

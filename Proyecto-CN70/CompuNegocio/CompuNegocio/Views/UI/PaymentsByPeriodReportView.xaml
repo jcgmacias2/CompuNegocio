@@ -1,0 +1,27 @@
+﻿<base:BaseView x:Class="Aprovi.Views.UI.PaymentsByPeriodReportView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:base="clr-namespace:Aprovi.Views"
+        xmlns:hlp="clr-namespace:Aprovi.Application.Helpers"
+        xmlns:sys="clr-namespace:System;assembly=mscorlib"
+        Title="Abonos por periodos"
+        Icon="{StaticResource ImgCashRegister}"
+        WindowStartupLocation="CenterScreen"
+        Style="{StaticResource WindowBorder}"
+        FocusManager.FocusedElement="{Binding ElementName=dpFechaInicio}"
+        Height="280" Width="280">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
+        <Label Style="{StaticResource LabelSmall}" Content="Seleccionar período :" FontWeight="Bold" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Desde :" HorizontalAlignment="Left" Margin="20,50,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaInicio" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}"  HorizontalAlignment="Left" Margin="80,50,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Hasta :" HorizontalAlignment="Left" Margin="20,80,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaFinal" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}"  HorizontalAlignment="Left" Margin="80,80,0,0" VerticalAlignment="Top" Width="150"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Empresa :" HorizontalAlignment="Left" Margin="20,110,0,0" VerticalAlignment="Top"/>
+        <ComboBox x:Name="cmbEmpresas" HorizontalAlignment="Left" Margin="80,110,0,0" VerticalAlignment="Top" Width="150" Height="23"/>
+
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="40,170,0,0" Tag="{StaticResource ImgClose}"/>
+        <Button x:Name="btnVistaPrevia" Content="Ver" Style="{StaticResource BlockButton}" Margin="110,170,0,0" Tag="{StaticResource ImgPreview}"/>
+        <Button x:Name="btnImprimir" Content="Imprimir" Style="{StaticResource BlockButton}" Margin="180,170,0,0" Tag="{StaticResource ImgPrint}"/>
+    </Grid>
+</base:BaseView>
+
