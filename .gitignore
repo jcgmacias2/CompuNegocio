@@ -22,15 +22,15 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio/bin/*/*.*
+# Build results
+[Dd]ebug/
+[Dd]ebugPublic/
+[Rr]elease/
+[Rr]eleases/
+x64/
+x86/
+build/
+bld/
+[Bb]in/
+[Oo]bj/
 
-Proyecto-CN70/CompuNegocio/CompuNegocio.Business/obj/*/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Business/bin/*/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Data/obj/*/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Data/bin/*/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*/*.*
-
-Proyecto-CN70/CompuNegocio/.vs/*/*.*
-
-.vs/*.*
