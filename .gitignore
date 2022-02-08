@@ -22,14 +22,15 @@ _UpgradeReport_Files/
 ###############
 # Directories #
 ###############
-Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio/bin/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio/bin/*/*.*
 
-Proyecto-CN70/CompuNegocio/CompuNegocio.Business/obj/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Business/bin/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Data/obj/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio.Data/bin/*.*
-Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio.Business/obj/*/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio.Business/bin/*/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio.Data/obj/*/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio.Data/bin/*/*.*
+Proyecto-CN70/CompuNegocio/CompuNegocio/obj/*/*.*
 
-Proyecto-CN70/CompuNegocio/.vs/*.*
+Proyecto-CN70/CompuNegocio/.vs/*/*.*
 
+.vs/*.*
