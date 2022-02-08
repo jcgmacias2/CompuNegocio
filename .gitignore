@@ -9,6 +9,7 @@
 *.dll.config
 *.cache
 *.suo
+*.bin
 # Include dlls if they’re in the NuGet packages directory
 !/packages/*/lib/*.dll
 !/packages/*/lib/*/*.dll
@@ -37,4 +38,5 @@ bld/
 .vs/
 
 Proyecto-CN70/CompuNegocio/.vs
-Proyecto-CN70/CompuNegocio/CompuNegocio.Business/bin/Debug/Aprovi.Business.dll
+Proyecto-CN70/CompuNegocio/CompuNegocio.Business/bin/
+Proyecto-CN70/CompuNegocio/CompuNegocio.Business/obj/
