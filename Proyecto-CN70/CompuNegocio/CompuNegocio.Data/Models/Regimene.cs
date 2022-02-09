@@ -20,6 +20,7 @@ namespace Aprovi.Data.Models
             this.Facturas = new HashSet<Factura>();
             this.Pagos = new HashSet<Pago>();
             this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
+            this.Clientes = new HashSet<Cliente>();
         }
     
         public int idRegimen { get; set; }
@@ -35,5 +36,7 @@ namespace Aprovi.Data.Models
         public virtual ICollection<Pago> Pagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

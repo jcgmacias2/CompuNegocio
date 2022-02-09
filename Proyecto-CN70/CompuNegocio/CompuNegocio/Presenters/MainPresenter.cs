@@ -327,7 +327,7 @@ namespace Aprovi.Presenters
                     return;
 
                 view = new ClientsView(Modulos.Envio_De_Correos.IsActive());
-                presenter = new ClientsPresenter(view, _container.Resolve<IClienteService>(), _container.Resolve<ICatalogosEstaticosService>(), _container.Resolve<IListaDePrecioService>(),_container.Resolve<ICuentaDeCorreoService>(), _container.Resolve<IArticuloService>(), _container.Resolve<IUsuarioService>(), _container.Resolve<IUsosCFDIService>(), _container.Resolve<ICodigoDeArticuloPorClienteService>());
+                presenter = new ClientsPresenter(view, _container.Resolve<IClienteService>(), _container.Resolve<ICatalogosEstaticosService>(), _container.Resolve<IListaDePrecioService>(),_container.Resolve<ICuentaDeCorreoService>(), _container.Resolve<IArticuloService>(), _container.Resolve<IUsuarioService>(), _container.Resolve<IUsosCFDIService>(), _container.Resolve<ICodigoDeArticuloPorClienteService>(), _container.Resolve<IRegimenService>());
 
                 view.ShowWindowIndependent();
 

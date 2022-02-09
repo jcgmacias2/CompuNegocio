@@ -28,5 +28,11 @@ namespace Aprovi.Business.Services
         /// </summary>
         /// <param name="regime">Régimen a eliminar (con el id basta)</param>
         void Delete(Regimene regime);
+
+        /// <summary>
+        /// Lista completa de Regimenes Fiscales
+        /// </summary>
+        /// <returns>Lista de Regimenes</returns>
+        List<Regimene> List();
     }
 }

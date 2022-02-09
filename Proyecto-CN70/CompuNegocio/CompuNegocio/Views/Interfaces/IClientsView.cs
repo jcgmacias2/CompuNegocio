@@ -25,6 +25,6 @@ namespace Aprovi.Views
         void Show(Usuario user);
         void ShowTotals(VwSaldosPorClientePorMoneda totalDollars, VwSaldosPorClientePorMoneda totalPesos);
         void Clear();
-        void FillCombo(List<Pais> countries, List<ListasDePrecio> priceLists, List<UsosCFDI> cfdiUsages);
+        void FillCombo(List<Pais> countries, List<ListasDePrecio> priceLists, List<UsosCFDI> cfdiUsages, List<Regimene> regimenes);
     }
 }

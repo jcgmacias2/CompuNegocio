@@ -20,9 +20,10 @@ namespace Aprovi.Presenters
         private IArticuloService _items;
         private IUsuarioService _users;
         private IUsosCFDIService _cfdiUsages;
+        private IRegimenService _registrimen;
         private ICodigoDeArticuloPorClienteService _customerCodes;
 
-        public ClientsPresenter(IClientsView view, IClienteService clientsService, ICatalogosEstaticosService catalogs, IListaDePrecioService pricesList, ICuentaDeCorreoService accounts, IArticuloService items, IUsuarioService users, IUsosCFDIService cfdiUsages, ICodigoDeArticuloPorClienteService customerCodes)
+        public ClientsPresenter(IClientsView view, IClienteService clientsService, ICatalogosEstaticosService catalogs, IListaDePrecioService pricesList, ICuentaDeCorreoService accounts, IArticuloService items, IUsuarioService users, IUsosCFDIService cfdiUsages, ICodigoDeArticuloPorClienteService customerCodes, IRegimenService regimen)
         {
             _view = view;
             _clients = clientsService;
@@ -32,6 +33,7 @@ namespace Aprovi.Presenters
             _items = items;
             _users = users;
             _cfdiUsages = cfdiUsages;
+            _registrimen = regimen;
             _customerCodes = customerCodes;
 
             _view.Quit += Quit;
@@ -50,7 +52,7 @@ namespace Aprovi.Presenters
             _view.AddItemCode += AddItemCode;
             _view.DeleteItemCode += DeleteItemCode;
 
-            _view.FillCombo(_catalog.ListPaises(), _pricesList.List(), _cfdiUsages.List());
+            _view.FillCombo(_catalog.ListPaises(), _pricesList.List(), _cfdiUsages.List(), _registrimen.List());
 
             //Cuentas de correo
             _view.AddAccount += AddAccount;

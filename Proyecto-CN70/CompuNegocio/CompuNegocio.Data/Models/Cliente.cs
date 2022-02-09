@@ -45,7 +45,8 @@ namespace Aprovi.Data.Models
         public Nullable<decimal> limiteCredito { get; set; }
         public Nullable<int> diasCredito { get; set; }
         public Nullable<int> idUsoCFDI { get; set; }
-    
+        public Nullable<int> idRegimen { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddendaDeCliente> AddendaDeClientes { get; set; }
         public virtual Domicilio Domicilio { get; set; }
@@ -70,5 +71,6 @@ namespace Aprovi.Data.Models
         public virtual ICollection<Remisione> Remisiones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
+        public virtual Regimene Regimene { get; set; }
     }
 }

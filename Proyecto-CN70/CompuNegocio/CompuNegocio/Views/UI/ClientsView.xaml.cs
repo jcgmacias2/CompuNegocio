@@ -181,9 +181,11 @@ namespace Aprovi.Views.UI
                     diasCredito = txtDiasCredito.Text.ToValidatedInt(),
                     idUsoCFDI = cmbUsosCFDI.SelectedValue.ToIntOrDefault(),
                     UsosCFDI = cmbUsosCFDI.SelectedItem as UsosCFDI,
+                    idRegimen = cmbRegimenFiscal.SelectedValue.ToIntOrDefault(),
                     CodigosDeArticuloPorClientes = _customer.CodigosDeArticuloPorClientes
                 };
-        }}
+            }
+        }
 
         public bool IsDirty
         {
@@ -218,6 +220,11 @@ namespace Aprovi.Views.UI
             txtLimiteCredito.Text = client.limiteCredito.HasValue ? client.limiteCredito.Value.ToDecimalString() : "";
             txtDiasCredito.Text = client.diasCredito.HasValue ? client.diasCredito.Value.ToString() : "";
             cmbUsosCFDI.SelectedValue = client.idUsoCFDI;
+
+            if (client.idRegimen.isValid())
+                cmbRegimenFiscal.SelectedValue = client.idRegimen;
+            else
+                cmbRegimenFiscal.SelectedIndex = 0;
 
             if (client.Usuario.isValid())
             {
@@ -274,6 +281,7 @@ namespace Aprovi.Views.UI
             txtCondicionDePago.Clear();
             cmbListaDePrecio.SelectedIndex = -1;
             cmbUsosCFDI.SelectedIndex = -1;
+            cmbRegimenFiscal.SelectedIndex = -1;
             txtVendedor.Clear();
             txtLimiteCredito.Clear();
             txtDiasCredito.Clear();
@@ -294,7 +302,7 @@ namespace Aprovi.Views.UI
             _item = new Articulo();
         }
 
-        public void FillCombo(List<Pais> countries, List<ListasDePrecio> priceLists, List<UsosCFDI> cfdiUsages)
+        public void FillCombo(List<Pais> countries, List<ListasDePrecio> priceLists, List<UsosCFDI> cfdiUsages, List<Regimene> regimenes)
         {
             cmbPais.ItemsSource = countries;
             cmbPais.DisplayMemberPath = "descripcion";
@@ -310,6 +318,11 @@ namespace Aprovi.Views.UI
             cmbUsosCFDI.DisplayMemberPath = "descripcion";
             cmbUsosCFDI.SelectedValuePath = "idUsoCFDI";
             cmbUsosCFDI.SelectedIndex = 0;
+
+            cmbRegimenFiscal.ItemsSource = regimenes;
+            cmbRegimenFiscal.DisplayMemberPath = "descripcion";
+            cmbRegimenFiscal.SelectedValuePath = "idRegimen";
+            cmbRegimenFiscal.SelectedIndex = 0;
         }
 
         #region Cuentas

@@ -1,7 +1,9 @@
 ﻿using Aprovi.Data.Core;
+using System.Collections.Generic;
 using Aprovi.Data.Models;
 using Aprovi.Data.Repositories;
 using System;
+using System.Linq;
 
 namespace Aprovi.Business.Services
 {
@@ -63,6 +65,18 @@ namespace Aprovi.Business.Services
                      _regimes.Remove(regime.idRegimen);
 
                 _UOW.Save();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Regimene> List()
+        {
+            try
+            {
+                return _regimes.List().ToList();
             }
             catch (Exception)
             {

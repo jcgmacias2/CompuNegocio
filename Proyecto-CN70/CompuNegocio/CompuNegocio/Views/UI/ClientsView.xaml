@@ -8,8 +8,8 @@
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource WindowBorder}"
         FocusManager.FocusedElement="{Binding ElementName=txtCodigo}"
-        Height="690" Width="550">
-    <TabControl HorizontalAlignment="Left" Height="670" Margin="0,0,0,0" VerticalAlignment="Top" Width="545">
+        Height="710" Width="550">
+    <TabControl HorizontalAlignment="Left" Height="688" Margin="0,0,0,0" VerticalAlignment="Top" Width="545">
         <TabItem Header="Generales" IsTabStop="False">
             <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
                 <Label Style="{StaticResource LabelSmall}" Content="Código :" HorizontalAlignment="Left" Margin="20,20,0,0" VerticalAlignment="Top"/>
@@ -46,58 +46,61 @@
                 <Label Style="{StaticResource LabelSmall}" Content="Lista de Precio :" HorizontalAlignment="Left" Margin="20,260,0,0" VerticalAlignment="Top"/>
                 <ComboBox x:Name="cmbListaDePrecio" HorizontalAlignment="Left" Margin="150,260,0,0" VerticalAlignment="Top" Width="100" Height="23"/>
 
-                <Label Style="{StaticResource LabelSmall}" Content="Uso CFDI :" HorizontalAlignment="Left" Margin="20,290,0,0" VerticalAlignment="Top"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Uso CFDI :" Margin="20,290,0,0"/>
                 <ComboBox x:Name="cmbUsosCFDI" HorizontalAlignment="Left" Margin="150,290,0,0" VerticalAlignment="Top" Width="370" Height="23"/>
 
-                <GroupBox Header="Contacto" HorizontalAlignment="Left" Margin="20,320,0,0" VerticalAlignment="Top" Height="115" Width="250"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Contacto :" HorizontalAlignment="Left" Margin="30,340,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtContacto" HorizontalAlignment="Left" Height="23" Margin="100,340,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Correo :" HorizontalAlignment="Left" Margin="30,370,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="23" Margin="100,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Teléfono :" HorizontalAlignment="Left" Margin="30,400,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="23" Margin="100,400,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
-                <GroupBox Header="Ventas a crédito" HorizontalAlignment="Left" Margin="279,320,0,0" VerticalAlignment="Top" Height="115" Width="241"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Dlls." HorizontalAlignment="Left" Margin="451,337,0,0" VerticalAlignment="Top"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Pesos" HorizontalAlignment="Left" Margin="360,337,0,0" VerticalAlignment="Top"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Saldo :" HorizontalAlignment="Left" Margin="286,367,0,0" VerticalAlignment="Top"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Total :" HorizontalAlignment="Left" Margin="286,397,0,0" VerticalAlignment="Top"/>
-                <TextBox x:Name="txtSaldoPesos" HorizontalAlignment="Left" Height="23" Margin="337,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
-                <TextBox x:Name="txtSaldoDolares" HorizontalAlignment="Left" Height="23" Margin="424,370,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
-                <TextBox x:Name="txtTotalPesos" HorizontalAlignment="Left" Height="23" Margin="337,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
-                <TextBox x:Name="txtTotalDolares" HorizontalAlignment="Left" Height="23" Margin="424,398,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Regimen Fiscal :" Margin="20,320,0,0"/>
+                <ComboBox x:Name="cmbRegimenFiscal" HorizontalAlignment="Left" Margin="150,320,0,0" VerticalAlignment="Top" Width="370" Height="23"/>
 
-                <GroupBox Header="Crédito" HorizontalAlignment="Left" Margin="20,440,0,0" VerticalAlignment="Top" Height="85" Width="250"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Límite :" HorizontalAlignment="Left" Margin="30,460,0,0" VerticalAlignment="Top"/>
-                <TextBox TextAlignment="Left" x:Name="txtLimiteCredito" HorizontalAlignment="Left" Height="23" Margin="100,460,0,0" VerticalAlignment="Top" Width="160"/>
-                <Label Style="{StaticResource LabelSmall}" Content="Días :" HorizontalAlignment="Left" Margin="30,490,0,0" VerticalAlignment="Top"/>
-                <TextBox TextAlignment="Left" x:Name="txtDiasCredito" HorizontalAlignment="Left" Height="23" Margin="100,490,0,0" VerticalAlignment="Top" Width="160"/>
+                <GroupBox Header="Contacto" HorizontalAlignment="Left" Margin="20,349,0,0" VerticalAlignment="Top" Height="115" Width="250"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Contacto :" Margin="30,369,0,0"/>
+                <TextBox x:Name="txtContacto" HorizontalAlignment="Left" Height="23" Margin="100,369,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Correo :" Margin="30,399,0,0"/>
+                <TextBox x:Name="txtCorreo" HorizontalAlignment="Left" Height="23" Margin="100,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="160"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Teléfono :" Margin="30,429,0,0"/>
+                <TextBox x:Name="txtTelefono" HorizontalAlignment="Left" Height="23" Margin="100,429,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
+                <GroupBox Header="Ventas a crédito" HorizontalAlignment="Left" Margin="279,349,0,0" VerticalAlignment="Top" Height="115" Width="241"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Dlls." Margin="451,366,0,0"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Pesos" Margin="360,366,0,0"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Saldo :" Margin="286,396,0,0"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Total :" Margin="286,426,0,0"/>
+                <TextBox x:Name="txtSaldoPesos" HorizontalAlignment="Left" Height="23" Margin="337,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
+                <TextBox x:Name="txtSaldoDolares" HorizontalAlignment="Left" Height="23" Margin="424,399,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
+                <TextBox x:Name="txtTotalPesos" HorizontalAlignment="Left" Height="23" Margin="337,427,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
+                <TextBox x:Name="txtTotalDolares" HorizontalAlignment="Left" Height="23" Margin="424,427,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="85" IsReadOnly="True"/>
 
-                <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="70,550,0,0" Tag="{StaticResource ImgClose}"/>
-                <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="140,550,0,0" Tag="{StaticResource ImgNewDocument}"/>
-                <Button x:Name="btnEliminar" Content="Eliminar" Style="{StaticResource BlockButton}" Margin="210,550,0,0" Tag="{StaticResource ImgDelete}"/>
-                <Button x:Name="btnArticulos" Content="Artículos" Style="{StaticResource BlockButton}" Margin="280,550,0,0" Tag="{StaticResource ImgItems}"/>
-                <Button x:Name="btnVentas" Content="Ventas" Style="{StaticResource BlockButton}" Margin="350,550,0,0" Tag="{StaticResource ImgSales}"/>
-                <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="420,550,0,0" Tag="{StaticResource ImgSave}"/>
+                <GroupBox Header="Crédito" HorizontalAlignment="Left" Margin="20,469,0,0" VerticalAlignment="Top" Height="85" Width="250"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Límite :" Margin="30,489,0,0"/>
+                <TextBox TextAlignment="Left" x:Name="txtLimiteCredito" HorizontalAlignment="Left" Height="23" Margin="100,489,0,0" VerticalAlignment="Top" Width="160"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Días :" Margin="30,519,0,0"/>
+                <TextBox TextAlignment="Left" x:Name="txtDiasCredito" HorizontalAlignment="Left" Height="23" Margin="100,519,0,0" VerticalAlignment="Top" Width="160"/>
+
+                <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="70,569,0,0" Tag="{StaticResource ImgClose}"/>
+                <Button x:Name="btnNuevo" Content="Nuevo" Style="{StaticResource BlockButton}" Margin="140,569,0,0" Tag="{StaticResource ImgNewDocument}"/>
+                <Button x:Name="btnEliminar" Content="Eliminar" Style="{StaticResource BlockButton}" Margin="210,569,0,0" Tag="{StaticResource ImgDelete}"/>
+                <Button x:Name="btnArticulos" Content="Artículos" Style="{StaticResource BlockButton}" Margin="280,569,0,0" Tag="{StaticResource ImgItems}"/>
+                <Button x:Name="btnVentas" Content="Ventas" Style="{StaticResource BlockButton}" Margin="350,569,0,0" Tag="{StaticResource ImgSales}"/>
+                <Button x:Name="btnGuardar" Content="Guardar" Style="{StaticResource BlockButton}" Margin="420,569,0,0" Tag="{StaticResource ImgSave}"/>
             </Grid>
         </TabItem>
         <TabItem Header="Homologados" IsTabStop="False" x:Name="tabHomologados">
             <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True">
-            <!-- Homologados -->
-            <Label Style="{StaticResource LabelSmall}" Content="Código Alterno" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
-            <Label Style="{StaticResource LabelSmall}" Content="Artículo" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"/>
-            <TextBox x:Name="txtCodigoAlterno" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
-            <TextBox x:Name="txtAlternoArticulo" HorizontalAlignment="Left" Height="23" Margin="160,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
-            <Button x:Name="btnListarArticulos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="265,35,0,0" Width="25"/>
-            <Button x:Name="btnAgregarCodigoArticulo" Content="+" Style="{StaticResource SmallButton}" Margin="300,35,0,0" Width="25"/>
+                <!-- Homologados -->
+                <Label Style="{StaticResource LabelSmall}" Content="Código Alterno" HorizontalAlignment="Left" Margin="20,10,0,0" VerticalAlignment="Top"/>
+                <Label Style="{StaticResource LabelSmall}" Content="Artículo" HorizontalAlignment="Left" Margin="160,10,0,0" VerticalAlignment="Top"/>
+                <TextBox x:Name="txtCodigoAlterno" HorizontalAlignment="Left" Height="23" Margin="10,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="150"/>
+                <TextBox x:Name="txtAlternoArticulo" HorizontalAlignment="Left" Height="23" Margin="160,35,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="100"/>
+                <Button x:Name="btnListarArticulos" IsTabStop="False" Content="..." Style="{StaticResource SmallButton}" Margin="265,35,0,0" Width="25"/>
+                <Button x:Name="btnAgregarCodigoArticulo" Content="+" Style="{StaticResource SmallButton}" Margin="300,35,0,0" Width="25"/>
 
-            <DataGrid Name="dgCodigosAlternos" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Height="200" Width="500" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
+                <DataGrid Name="dgCodigosAlternos" HorizontalAlignment="Left" Margin="10,75,0,0" VerticalAlignment="Top" Height="200" Width="500" AutoGenerateColumns="False" CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False" IsReadOnly="True"
                           ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" SelectionMode="Extended">
-                <DataGrid.Columns>
-                    <DataGridTextColumn Width="150" Header="Código" Binding="{Binding codigo}" />
-                    <DataGridTextColumn Width="100" Header="Artículo" Binding="{Binding Articulo.codigo}" />
-                    <DataGridTextColumn Width="225" Header="Descripción" Binding="{Binding Articulo.descripcion}" />
-                </DataGrid.Columns>
-            </DataGrid>
+                    <DataGrid.Columns>
+                        <DataGridTextColumn Width="150" Header="Código" Binding="{Binding codigo}" />
+                        <DataGridTextColumn Width="100" Header="Artículo" Binding="{Binding Articulo.codigo}" />
+                        <DataGridTextColumn Width="225" Header="Descripción" Binding="{Binding Articulo.descripcion}" />
+                    </DataGrid.Columns>
+                </DataGrid>
             </Grid>
         </TabItem>
         <TabItem Header="Guardián" IsTabStop="False" x:Name="tabGuardian">

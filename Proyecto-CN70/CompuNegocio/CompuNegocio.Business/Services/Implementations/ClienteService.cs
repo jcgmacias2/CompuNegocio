@@ -117,6 +117,7 @@ namespace Aprovi.Business.Services
                 local.limiteCredito = client.limiteCredito;
                 local.diasCredito = client.diasCredito;
                 local.idUsoCFDI = client.idUsoCFDI.isValid() ? client.idUsoCFDI : (int?)null;
+                local.idRegimen = client.idRegimen.isValid() ? client.idRegimen : (int?)null;
 
                 _clients.Update(local);
                 _UOW.Save();
