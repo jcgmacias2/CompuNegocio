@@ -17,9 +17,9 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Domicilio()
         {
+            this.Clientes = new HashSet<Cliente>();
             this.Configuraciones = new HashSet<Configuracione>();
             this.Proveedores = new HashSet<Proveedore>();
-            this.Clientes = new HashSet<Cliente>();
         }
     
         public int idDomicilio { get; set; }
@@ -32,12 +32,12 @@ namespace Aprovi.Data.Models
         public int idPais { get; set; }
         public string codigoPostal { get; set; }
     
-        public virtual Pais Pais { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Configuracione> Configuraciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Proveedore> Proveedores { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cliente> Clientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Configuracione> Configuraciones { get; set; }
+        public virtual Pais Pais { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Proveedore> Proveedores { get; set; }
     }
 }

@@ -51,7 +51,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>CompuNegocio.Data.pfx</AssemblyOriginatorKeyFile>
@@ -229,6 +229,9 @@
     <Compile Include="Models\CuentasPrediale.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\DatosExtraPorCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\DatosExtraPorCotizacion.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
@@ -245,6 +248,9 @@
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DatosExtraPorRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DatosExtraPorTraspaso.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DetallesDeAjuste.cs">
@@ -291,6 +297,9 @@
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Estacione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\EstatusCrediticio.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\EstatusDeAbono.cs">
@@ -481,7 +490,40 @@
     <Compile Include="Models\Usuario.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VwArticulosOrdenado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VwArticulosVendido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorDetalleDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorDetalleDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorDetalleDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorDetalleDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorDetalleDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwBaseGravableDeImpuestosPorRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwClientePorMoneda.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwCodigosDeArticuloPorCliente.cs">
@@ -490,7 +532,22 @@
     <Compile Include="Models\VwCodigosDeArticuloPorProveedor.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VwComprasPorArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwComprobantesCancelado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VwCotizacionesPorPeriodo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwDetallesDePedidosFacturado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwDetallesDePedidosPorSurtir.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwDetallesDePedidosRemisionado.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwEntradasConPedimento.cs">
@@ -520,6 +577,30 @@
     <Compile Include="Models\VwEntradasPorTraspaso.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorAjustesCancelado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorFacturasCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorRemisionesCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwEntradasTotalesPorTraspasosRechazado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VwExistencia.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
@@ -529,7 +610,40 @@
     <Compile Include="Models\VwFoliosPorAbono.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VwFoliosPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwFoliosPorNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwFoliosPorPago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwFoliosPorParcialidade.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VwFoliosPorSerie.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInformacionTotalDeImpuestosPorDetalleDeCompra.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInformacionTotalDeImpuestosPorDetalleDeFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInformacionTotalDeImpuestosPorDetalleDeNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInformacionTotalDeImpuestosPorDetalleDePedido.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInformacionTotalDeImpuestosPorDetalleDeRemision.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInventario.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwInventarioPorClasificacion.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwListaArticulo.cs">
@@ -542,6 +656,12 @@
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwListaParcialidade.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListasDePrecioPorArticulo.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwListasDePrecioPorArticuloConExistencia.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwReporteAntiguedadSaldosFactura.cs">
@@ -595,18 +715,6 @@
     <Compile Include="Models\VwReporteInventarioFisico.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
-    <Compile Include="Models\VwReporteListaDePrecio.cs">
-      <DependentUpon>CNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VwReporteListaDePreciosConImpuesto.cs">
-      <DependentUpon>CNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VwReporteListaDePreciosPorLista.cs">
-      <DependentUpon>CNModel.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Models\VwReporteListaDePreciosPorListaConImpuesto.cs">
-      <DependentUpon>CNModel.tt</DependentUpon>
-    </Compile>
     <Compile Include="Models\VwReporteNotasDeDescuento.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
@@ -617,6 +725,12 @@
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwResumenPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwResumenPorNotaDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwResumenPorOrdenDeCompra.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwResumenPorRemision.cs">
@@ -658,7 +772,34 @@
     <Compile Include="Models\VwSalidasPorTraspaso.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorAjuste.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorAjustesCancelado.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorComprasCancelada.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorRemisione.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwSalidasTotalesPorTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\VwTimbresPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwTimbresPorNotasDeCredito.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwTimbresPorPago.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\VwTimbresPorParcialidade.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\VwVentasActivasPorCliente.cs">
@@ -745,10 +886,6 @@
     <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaAjustesSalidaRepository.cs" />
     <Compile Include="Repositories\Implementations\ViewReporteEstatusDeLaEmpresaAjustesEntradaRepository.cs" />
     <Compile Include="Repositories\Implementations\ViewReporteCostoDeLoVendidoRepository.cs" />
-    <Compile Include="Repositories\Implementations\ViewReporteListaDePreciosPorListaConImpuestosRepository.cs" />
-    <Compile Include="Repositories\Implementations\ViewReporteListaDePreciosPorListaRepository.cs" />
-    <Compile Include="Repositories\Implementations\ViewReporteListaDePreciosConImpuestosRepository.cs" />
-    <Compile Include="Repositories\Implementations\ViewReporteListaDePreciosRepository.cs" />
     <Compile Include="Repositories\Implementations\ViewReporteNotasDeDescuentoRepository.cs" />
     <Compile Include="Repositories\Implementations\ViewSaldoDeudorPorClientePorMonedaRepository.cs" />
     <Compile Include="Repositories\Implementations\ViewCotizacionesPorPeriodoRepository.cs" />
@@ -823,11 +960,7 @@
     <Compile Include="Repositories\Interfaces\IViewCotizacionesPorPeriodoRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewReporteAvaluoRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewReporteCostoDeLoVendidoRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IViewReporteListaDePreciosPorListaConImpuestosRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IViewReporteListaDePreciosConImpuestosRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IViewReporteListaDePreciosPorListaRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewReporteNotasDeDescuentoRepository.cs" />
-    <Compile Include="Repositories\Interfaces\IViewReporteListaDePreciosRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewSaldoDeudorPorClientePorMonedaRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewReporteVentasPorArticuloRepository.cs" />
     <Compile Include="Repositories\Interfaces\IViewSalidasPorNotasDeCreditoCanceladasRepository.cs" />

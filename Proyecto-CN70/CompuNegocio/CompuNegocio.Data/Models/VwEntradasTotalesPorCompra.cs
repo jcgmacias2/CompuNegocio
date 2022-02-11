@@ -12,17 +12,9 @@ namespace Aprovi.Data.Models
     using System;
     using System.Collections.Generic;
     
-    public partial class VwReporteListaDePrecio
+    public partial class VwEntradasTotalesPorCompra
     {
         public int idArticulo { get; set; }
-        public string descripcionArticulo { get; set; }
-        public string codigoArticulo { get; set; }
-        public Nullable<decimal> precioUnitarioA { get; set; }
-        public Nullable<decimal> precioUnitarioB { get; set; }
-        public Nullable<decimal> precioUnitarioC { get; set; }
-        public Nullable<decimal> precioUnitarioD { get; set; }
-        public int idMoneda { get; set; }
-        public bool inventariado { get; set; }
-        public Nullable<decimal> existencia { get; set; }
+        public decimal Total { get; set; }
     }
 }

@@ -18,6 +18,7 @@ namespace Aprovi.Data.Models
         public Compra()
         {
             this.AbonosDeCompras = new HashSet<AbonosDeCompra>();
+            this.DatosExtraPorCompras = new HashSet<DatosExtraPorCompra>();
             this.DetallesDeCompras = new HashSet<DetallesDeCompra>();
             this.Pedimentos = new HashSet<Pedimento>();
         }
@@ -39,12 +40,14 @@ namespace Aprovi.Data.Models
         public virtual CancelacionesDeCompra CancelacionesDeCompra { get; set; }
         public virtual EstatusDeCompra EstatusDeCompra { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual Proveedore Proveedore { get; set; }
         public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DatosExtraPorCompra> DatosExtraPorCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeCompra> DetallesDeCompras { get; set; }
         public virtual OrdenesDeCompra OrdenesDeCompra { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedimento> Pedimentos { get; set; }
-        public virtual Proveedore Proveedore { get; set; }
     }
 }

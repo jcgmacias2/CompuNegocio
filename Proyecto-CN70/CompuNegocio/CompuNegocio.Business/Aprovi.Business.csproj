@@ -51,7 +51,7 @@
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
-    <SignAssembly>true</SignAssembly>
+    <SignAssembly>false</SignAssembly>
   </PropertyGroup>
   <PropertyGroup>
     <AssemblyOriginatorKeyFile>CompuNegocio.Business.pfx</AssemblyOriginatorKeyFile>
@@ -151,7 +151,6 @@
     <Compile Include="Services\Aprovi\AproviOrdenDeCompraService.cs" />
     <Compile Include="Services\Aprovi\AproviEstadoDeLaEmpresaService.cs" />
     <Compile Include="Services\Aprovi\AproviCostoDeLoVendidoService.cs" />
-    <Compile Include="Services\Aprovi\AproviListasDePreciosService.cs" />
     <Compile Include="Services\Aprovi\AproviVentasPorArticuloService.cs" />
     <Compile Include="Services\Aprovi\AproviSolicitudDeTraspasoService.cs" />
     <Compile Include="Services\Aprovi\AproviTraspasoService.cs" />
@@ -198,6 +197,7 @@
     <Compile Include="Services\Implementations\EnvioDeCorreoService.cs" />
     <Compile Include="Services\Implementations\EquivalenciaService.cs" />
     <Compile Include="Services\Implementations\EstacionService.cs" />
+    <Compile Include="Services\Implementations\ListaDePrecioService.cs" />
     <Compile Include="Services\Implementations\NotaDeDescuentoService.cs" />
     <Compile Include="Services\Implementations\NotaDeCreditoService.cs" />
     <Compile Include="Services\Implementations\PagoService.cs" />
@@ -205,7 +205,6 @@
     <Compile Include="Services\Implementations\OrdenDeCompraService.cs" />
     <Compile Include="Services\Implementations\EstadoDeLaEmpresaService.cs" />
     <Compile Include="Services\Implementations\CostoDeLoVendidoService.cs" />
-    <Compile Include="Services\Implementations\ListasDePreciosService.cs" />
     <Compile Include="Services\Implementations\VentasPorArticuloService.cs" />
     <Compile Include="Services\Implementations\SolicitudDeTraspasoService.cs" />
     <Compile Include="Services\Implementations\TraspasoService.cs" />
@@ -239,7 +238,6 @@
     <Compile Include="Services\Implementations\LicenciaService.cs" />
     <Compile Include="Services\Implementations\FormaPagoService.cs" />
     <Compile Include="Services\Implementations\ImpuestoService.cs" />
-    <Compile Include="Services\Implementations\ListaDePrecioService.cs" />
     <Compile Include="Services\Implementations\PrivilegioService.cs" />
     <Compile Include="Services\Implementations\ProveedorService.cs" />
     <Compile Include="Services\Implementations\RegimenService.cs" />
@@ -338,7 +336,6 @@
     <Compile Include="ViewModels\VMRDetalleCostoDeLoVendido.cs" />
     <Compile Include="ViewModels\VMRDetalleDeNotaDeDescuento.cs" />
     <Compile Include="ViewModels\VMRDetalleImpuestosPorPeriodo.cs" />
-    <Compile Include="ViewModels\VMRDetalleListaDePrecios.cs" />
     <Compile Include="ViewModels\VMReporteNotaDeCredito.cs" />
     <Compile Include="ViewModels\VMReporteNotasDeDescuento.cs" />
     <Compile Include="ViewModels\VMRImpuestosPorPeriodo.cs" />

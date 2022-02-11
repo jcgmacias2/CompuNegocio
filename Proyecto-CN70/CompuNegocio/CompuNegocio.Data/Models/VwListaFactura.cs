@@ -33,6 +33,7 @@ namespace Aprovi.Data.Models
         public Nullable<decimal> subtotal { get; set; }
         public Nullable<decimal> impuestos { get; set; }
         public Nullable<decimal> abonado { get; set; }
+        public int idEstatusCrediticio { get; set; }
         public string FechaCancelacion { get; set; }
         public Nullable<decimal> Total { get; set; }
     }

@@ -17,6 +17,6 @@ namespace Aprovi.Data.Models
         public int idDetalleDeOrdenDeCompra { get; set; }
         public string comentario { get; set; }
     
-        public virtual DetallesDeOrdenDeCompra DetallesDeOrdenDeCompra { get; set; }
+        public virtual OrdenesDeCompra OrdenesDeCompra { get; set; }
     }
 }

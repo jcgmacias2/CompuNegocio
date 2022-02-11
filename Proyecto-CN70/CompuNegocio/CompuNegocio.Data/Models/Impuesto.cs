@@ -21,10 +21,10 @@ namespace Aprovi.Data.Models
             this.DetallesDeCompras = new HashSet<DetallesDeCompra>();
             this.DetallesDeCotizacions = new HashSet<DetallesDeCotizacion>();
             this.DetallesDeFacturas = new HashSet<DetallesDeFactura>();
-            this.DetallesDeOrdenDeCompras = new HashSet<DetallesDeOrdenDeCompra>();
+            this.DetallesDeNotaDeCreditoes = new HashSet<DetallesDeNotaDeCredito>();
+            this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
             this.DetallesDePedidoes = new HashSet<DetallesDePedido>();
             this.DetallesDeRemisions = new HashSet<DetallesDeRemision>();
-            this.DetallesDeNotaDeCreditoes = new HashSet<DetallesDeNotaDeCredito>();
         }
     
         public int idImpuesto { get; set; }
@@ -46,12 +46,12 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeOrdenDeCompra> DetallesDeOrdenDeCompras { get; set; }
+        public virtual ICollection<DetallesDeNotaDeCredito> DetallesDeNotaDeCreditoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDePedido> DetallesDePedidoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeRemision> DetallesDeRemisions { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeNotaDeCredito> DetallesDeNotaDeCreditoes { get; set; }
     }
 }

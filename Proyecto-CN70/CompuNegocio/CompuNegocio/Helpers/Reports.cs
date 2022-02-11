@@ -351,7 +351,7 @@ namespace Aprovi.Application.Helpers
                 var data = new List<ReportDataSource>();
 
                 //Agrego todos los data sources a la lista "data"
-                data.Add(new ReportDataSource("Detalle", vm.Detalle));
+                //data.Add(new ReportDataSource("Detalle", vm.Detalle));
 
                 if (vm.ReportType.Equals(ReportesListaDePrecios.Todos_Los_Precios))
                 {

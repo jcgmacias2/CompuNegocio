@@ -17,10 +17,10 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Regimene()
         {
-            this.Facturas = new HashSet<Factura>();
-            this.Pagos = new HashSet<Pago>();
-            this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
             this.Clientes = new HashSet<Cliente>();
+            this.Facturas = new HashSet<Factura>();
+            this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
+            this.Pagos = new HashSet<Pago>();
         }
     
         public int idRegimen { get; set; }
@@ -28,15 +28,16 @@ namespace Aprovi.Data.Models
         public int idConfiguracion { get; set; }
         public string descripcion { get; set; }
         public bool activo { get; set; }
+        public Nullable<int> aplicaEmisor { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Factura> Facturas { get; set; }
+        public virtual ICollection<Cliente> Clientes { get; set; }
         public virtual Configuracione Configuracione { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagos { get; set; }
+        public virtual ICollection<Factura> Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cliente> Clientes { get; set; }
+        public virtual ICollection<Pago> Pagos { get; set; }
     }
 }

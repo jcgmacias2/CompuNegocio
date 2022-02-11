@@ -17,9 +17,9 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Proveedore()
         {
+            this.CodigosDeArticuloPorProveedors = new HashSet<CodigosDeArticuloPorProveedor>();
             this.Compras = new HashSet<Compra>();
             this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
-            this.CodigosDeArticuloPorProveedors = new HashSet<CodigosDeArticuloPorProveedor>();
         }
     
         public int idProveedor { get; set; }
@@ -32,11 +32,11 @@ namespace Aprovi.Data.Models
         public string telefono { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CodigosDeArticuloPorProveedor> CodigosDeArticuloPorProveedors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compra> Compras { get; set; }
         public virtual Domicilio Domicilio { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CodigosDeArticuloPorProveedor> CodigosDeArticuloPorProveedors { get; set; }
     }
 }

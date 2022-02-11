@@ -19,7 +19,7 @@ namespace Aprovi.Data.Models
         public string CodigoArticulo { get; set; }
         public string DescripcionArticulo { get; set; }
         public decimal Cantidad { get; set; }
-        public decimal Precio { get; set; }
+        public Nullable<decimal> Precio { get; set; }
         public Nullable<decimal> Subtotal { get; set; }
         public string Moneda { get; set; }
         public string Folio { get; set; }

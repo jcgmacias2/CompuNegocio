@@ -17,8 +17,8 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Cotizacione()
         {
-            this.DetallesDeCotizacions = new HashSet<DetallesDeCotizacion>();
             this.DatosExtraPorCotizacions = new HashSet<DatosExtraPorCotizacion>();
+            this.DetallesDeCotizacions = new HashSet<DetallesDeCotizacion>();
         }
     
         public int idCotizacion { get; set; }
@@ -36,16 +36,16 @@ namespace Aprovi.Data.Models
         public Nullable<int> idRemision { get; set; }
     
         public virtual CancelacionesDeCotizacione CancelacionesDeCotizacione { get; set; }
+        public virtual Cliente Cliente { get; set; }
         public virtual Empresa Empresa { get; set; }
         public virtual EstatusDeCotizacion EstatusDeCotizacion { get; set; }
+        public virtual Factura Factura { get; set; }
         public virtual Moneda Moneda { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeCotizacion> DetallesDeCotizacions { get; set; }
+        public virtual Remisione Remisione { get; set; }
+        public virtual Usuario Usuario { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DatosExtraPorCotizacion> DatosExtraPorCotizacions { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        public virtual Factura Factura { get; set; }
-        public virtual Cliente Cliente { get; set; }
-        public virtual Remisione Remisione { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeCotizacion> DetallesDeCotizacions { get; set; }
     }
 }

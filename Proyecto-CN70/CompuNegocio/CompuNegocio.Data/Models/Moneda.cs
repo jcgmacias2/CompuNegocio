@@ -20,19 +20,19 @@ namespace Aprovi.Data.Models
             this.AbonosDeCompras = new HashSet<AbonosDeCompra>();
             this.AbonosDeFacturas = new HashSet<AbonosDeFactura>();
             this.AbonosDeRemisions = new HashSet<AbonosDeRemision>();
+            this.Articulos = new HashSet<Articulo>();
+            this.CambioDivisas = new HashSet<CambioDivisa>();
+            this.Compras = new HashSet<Compra>();
+            this.Cotizaciones = new HashSet<Cotizacione>();
             this.CuentasBancarias = new HashSet<CuentasBancaria>();
             this.DetallesDeAjustes = new HashSet<DetallesDeAjuste>();
-            this.Cotizaciones = new HashSet<Cotizacione>();
-            this.Articulos = new HashSet<Articulo>();
-            this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
-            this.Facturas = new HashSet<Factura>();
             this.DetallesDeTraspasoes = new HashSet<DetallesDeTraspaso>();
-            this.Compras = new HashSet<Compra>();
-            this.CambioDivisas = new HashSet<CambioDivisa>();
+            this.Facturas = new HashSet<Factura>();
             this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
             this.NotasDeDescuentoes = new HashSet<NotasDeDescuento>();
-            this.Remisiones = new HashSet<Remisione>();
+            this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
             this.Pedidos = new HashSet<Pedido>();
+            this.Remisiones = new HashSet<Remisione>();
         }
     
         public int idMoneda { get; set; }
@@ -48,30 +48,30 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbonosDeRemision> AbonosDeRemisions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Articulo> Articulos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CambioDivisa> CambioDivisas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Compra> Compras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Cotizacione> Cotizaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuentasBancaria> CuentasBancarias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeAjuste> DetallesDeAjustes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Cotizacione> Cotizaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Articulo> Articulos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Factura> Facturas { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeTraspaso> DetallesDeTraspasoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Compra> Compras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CambioDivisa> CambioDivisas { get; set; }
+        public virtual ICollection<Factura> Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeDescuento> NotasDeDescuentoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Remisione> Remisiones { get; set; }
+        public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remisione> Remisiones { get; set; }
     }
 }

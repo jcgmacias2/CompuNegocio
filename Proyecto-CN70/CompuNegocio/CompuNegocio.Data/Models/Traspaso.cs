@@ -17,6 +17,7 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Traspaso()
         {
+            this.DatosExtraPorTraspasoes = new HashSet<DatosExtraPorTraspaso>();
             this.DetallesDeTraspasoes = new HashSet<DetallesDeTraspaso>();
         }
     
@@ -33,10 +34,12 @@ namespace Aprovi.Data.Models
         public Nullable<System.DateTime> fechaHoraRemoto { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DatosExtraPorTraspaso> DatosExtraPorTraspasoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeTraspaso> DetallesDeTraspasoes { get; set; }
-        public virtual EstatusDeTraspaso EstatusDeTraspaso { get; set; }
-        public virtual Usuario Usuario { get; set; }
         public virtual EmpresasAsociada EmpresasAsociada { get; set; }
         public virtual EmpresasAsociada EmpresasAsociada1 { get; set; }
+        public virtual EstatusDeTraspaso EstatusDeTraspaso { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

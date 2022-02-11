@@ -17,9 +17,10 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public OrdenesDeCompra()
         {
+            this.Compras = new HashSet<Compra>();
             this.DatosExtraPorOrdenDeCompras = new HashSet<DatosExtraPorOrdenDeCompra>();
             this.DetallesDeOrdenDeCompras = new HashSet<DetallesDeOrdenDeCompra>();
-            this.Compras = new HashSet<Compra>();
+            this.Impuestos = new HashSet<Impuesto>();
         }
     
         public int idOrdenDeCompra { get; set; }
@@ -33,16 +34,19 @@ namespace Aprovi.Data.Models
         public int idEstatusDeOrdenDeCompra { get; set; }
     
         public virtual CancelacionesDeOrdenesDeCompra CancelacionesDeOrdenesDeCompra { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DatosExtraPorOrdenDeCompra> DatosExtraPorOrdenDeCompras { get; set; }
-        public virtual Empresa Empresa { get; set; }
-        public virtual Moneda Moneda { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeOrdenDeCompra> DetallesDeOrdenDeCompras { get; set; }
-        public virtual Usuario Usuario { get; set; }
+        public virtual ComentariosPorDetalleDeOrdenDeCompra ComentariosPorDetalleDeOrdenDeCompra { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Compra> Compras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DatosExtraPorOrdenDeCompra> DatosExtraPorOrdenDeCompras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeOrdenDeCompra> DetallesDeOrdenDeCompras { get; set; }
+        public virtual Empresa Empresa { get; set; }
         public virtual EstatusDeOrdenDeCompra EstatusDeOrdenDeCompra { get; set; }
+        public virtual Moneda Moneda { get; set; }
         public virtual Proveedore Proveedore { get; set; }
+        public virtual Usuario Usuario { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Impuesto> Impuestos { get; set; }
     }
 }

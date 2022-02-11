@@ -18,15 +18,15 @@ namespace Aprovi.Data.Models
         public Cliente()
         {
             this.AddendaDeClientes = new HashSet<AddendaDeCliente>();
+            this.CodigosDeArticuloPorClientes = new HashSet<CodigosDeArticuloPorCliente>();
             this.Cotizaciones = new HashSet<Cotizacione>();
             this.CuentasDeCorreos = new HashSet<CuentasDeCorreo>();
             this.Facturas = new HashSet<Factura>();
             this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
-            this.Pagos = new HashSet<Pago>();
             this.NotasDeDescuentoes = new HashSet<NotasDeDescuento>();
-            this.CodigosDeArticuloPorClientes = new HashSet<CodigosDeArticuloPorCliente>();
-            this.Remisiones = new HashSet<Remisione>();
+            this.Pagos = new HashSet<Pago>();
             this.Pedidos = new HashSet<Pedido>();
+            this.Remisiones = new HashSet<Remisione>();
         }
     
         public int idCliente { get; set; }
@@ -45,32 +45,33 @@ namespace Aprovi.Data.Models
         public Nullable<decimal> limiteCredito { get; set; }
         public Nullable<int> diasCredito { get; set; }
         public Nullable<int> idUsoCFDI { get; set; }
+        public string comentario { get; set; }
         public Nullable<int> idRegimen { get; set; }
-
+    
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AddendaDeCliente> AddendaDeClientes { get; set; }
         public virtual Domicilio Domicilio { get; set; }
         public virtual ListasDePrecio ListasDePrecio { get; set; }
+        public virtual UsosCFDI UsosCFDI { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CodigosDeArticuloPorCliente> CodigosDeArticuloPorClientes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cotizacione> Cotizaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuentasDeCorreo> CuentasDeCorreos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Factura> Facturas { get; set; }
-        public virtual UsosCFDI UsosCFDI { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
-        public virtual Usuario Usuario { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeDescuento> NotasDeDescuentoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CodigosDeArticuloPorCliente> CodigosDeArticuloPorClientes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Remisione> Remisiones { get; set; }
+        public virtual ICollection<Pago> Pagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remisione> Remisiones { get; set; }
         public virtual Regimene Regimene { get; set; }
+        public virtual Usuario Usuario { get; set; }
     }
 }

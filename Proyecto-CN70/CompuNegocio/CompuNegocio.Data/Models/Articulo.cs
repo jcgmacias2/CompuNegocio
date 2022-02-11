@@ -17,21 +17,21 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public Articulo()
         {
-            this.DetallesDeFacturas = new HashSet<DetallesDeFactura>();
-            this.DetallesDeCotizacions = new HashSet<DetallesDeCotizacion>();
-            this.DetallesDeAjustes = new HashSet<DetallesDeAjuste>();
-            this.DetallesDeRemisions = new HashSet<DetallesDeRemision>();
+            this.CodigosDeArticuloPorClientes = new HashSet<CodigosDeArticuloPorCliente>();
+            this.CodigosDeArticuloPorProveedors = new HashSet<CodigosDeArticuloPorProveedor>();
             this.DetallesDeCompras = new HashSet<DetallesDeCompra>();
+            this.DetallesDeCotizacions = new HashSet<DetallesDeCotizacion>();
+            this.DetallesDeTraspasoes = new HashSet<DetallesDeTraspaso>();
+            this.DetallesDePedidoes = new HashSet<DetallesDePedido>();
+            this.DetallesDeFacturas = new HashSet<DetallesDeFactura>();
+            this.DetallesDeNotaDeCreditoes = new HashSet<DetallesDeNotaDeCredito>();
+            this.DetallesDeAjustes = new HashSet<DetallesDeAjuste>();
+            this.DetallesDeOrdenDeCompras = new HashSet<DetallesDeOrdenDeCompra>();
+            this.DetallesDeRemisions = new HashSet<DetallesDeRemision>();
             this.Equivalencias = new HashSet<Equivalencia>();
             this.Precios = new HashSet<Precio>();
             this.Clasificaciones = new HashSet<Clasificacione>();
-            this.DetallesDePedidoes = new HashSet<DetallesDePedido>();
-            this.DetallesDeOrdenDeCompras = new HashSet<DetallesDeOrdenDeCompra>();
             this.Impuestos = new HashSet<Impuesto>();
-            this.DetallesDeTraspasoes = new HashSet<DetallesDeTraspaso>();
-            this.DetallesDeNotaDeCreditoes = new HashSet<DetallesDeNotaDeCredito>();
-            this.CodigosDeArticuloPorProveedors = new HashSet<CodigosDeArticuloPorProveedor>();
-            this.CodigosDeArticuloPorClientes = new HashSet<CodigosDeArticuloPorCliente>();
         }
     
         public int idArticulo { get; set; }
@@ -42,24 +42,39 @@ namespace Aprovi.Data.Models
         public int idUnidadDeMedida { get; set; }
         public int idProductoServicio { get; set; }
         public bool inventariado { get; set; }
-        public bool activo { get; set; }
         public bool importado { get; set; }
+        public bool activo { get; set; }
         public Nullable<int> idTipoDeComision { get; set; }
+        public decimal puntoDeReorden { get; set; }
+        public decimal minimo { get; set; }
+        public decimal maximo { get; set; }
     
         public virtual Moneda Moneda { get; set; }
         public virtual ProductosServicio ProductosServicio { get; set; }
         public virtual TiposDeComision TiposDeComision { get; set; }
         public virtual UnidadesDeMedida UnidadesDeMedida { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; }
+        public virtual ICollection<CodigosDeArticuloPorCliente> CodigosDeArticuloPorClientes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<CodigosDeArticuloPorProveedor> CodigosDeArticuloPorProveedors { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeCompra> DetallesDeCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeCotizacion> DetallesDeCotizacions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeTraspaso> DetallesDeTraspasoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDePedido> DetallesDePedidoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<DetallesDeNotaDeCredito> DetallesDeNotaDeCreditoes { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeAjuste> DetallesDeAjustes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeRemision> DetallesDeRemisions { get; set; }
+        public virtual ICollection<DetallesDeOrdenDeCompra> DetallesDeOrdenDeCompras { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeCompra> DetallesDeCompras { get; set; }
+        public virtual ICollection<DetallesDeRemision> DetallesDeRemisions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Equivalencia> Equivalencias { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -67,18 +82,6 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Clasificacione> Clasificaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDePedido> DetallesDePedidoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeOrdenDeCompra> DetallesDeOrdenDeCompras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Impuesto> Impuestos { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeTraspaso> DetallesDeTraspasoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<DetallesDeNotaDeCredito> DetallesDeNotaDeCreditoes { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CodigosDeArticuloPorProveedor> CodigosDeArticuloPorProveedors { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<CodigosDeArticuloPorCliente> CodigosDeArticuloPorClientes { get; set; }
     }
 }

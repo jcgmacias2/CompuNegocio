@@ -49,11 +49,12 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeRemision> DetallesDeRemisions { get; set; }
         public virtual Empresa Empresa { get; set; }
+        public virtual EstatusCrediticio EstatusCrediticio { get; set; }
         public virtual EstatusDeRemision EstatusDeRemision { get; set; }
         public virtual Factura Factura { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual Pedido Pedido { get; set; }
         public virtual Usuario Usuario { get; set; }
         public virtual Usuario Usuario1 { get; set; }
-        public virtual Pedido Pedido { get; set; }
     }
 }

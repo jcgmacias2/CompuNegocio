@@ -12,7 +12,7 @@ namespace Aprovi.Business.ViewModels
         public Moneda Moneda { get; set; }
         public decimal TipoDeCambio { get; set; }
 
-        public List<VMRDetalleListaDePrecios> Detalle { get; set; }
+        //public List<VMRDetalleListaDePrecios> Detalle { get; set; }
 
         public ReportesListaDePrecios ReportType { get; set; }
         public TiposFiltroReporteListaDePrecios FilterType { get; set; }

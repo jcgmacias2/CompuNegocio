@@ -178,7 +178,7 @@ namespace Aprovi.Application.Helpers
             _container.RegisterType<INotaDeDescuentoService, AproviNotaDeDescuentoService>(new PerResolveLifetimeManager());
             _container.RegisterType<IEstadoDeLaEmpresaService, AproviEstadoDeLaEmpresaService>(new PerResolveLifetimeManager());
             _container.RegisterType<ICostoDeLoVendidoService, AproviCostoDeLoVendidoService>(new PerResolveLifetimeManager());
-            _container.RegisterType<IListasDePreciosService, AproviListasDePreciosService>(new PerResolveLifetimeManager());
+            //_container.RegisterType<IListasDePreciosService, AproviListasDePreciosService>(new PerResolveLifetimeManager());
         }
 
         /// <summary>

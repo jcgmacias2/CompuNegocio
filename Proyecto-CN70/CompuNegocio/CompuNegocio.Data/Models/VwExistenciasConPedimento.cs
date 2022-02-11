@@ -16,10 +16,12 @@ namespace Aprovi.Data.Models
     {
         public int idArticulo { get; set; }
         public string codigo { get; set; }
+        public string descripcion { get; set; }
         public Nullable<decimal> entradas { get; set; }
-        public decimal salidas { get; set; }
+        public Nullable<decimal> salidas { get; set; }
         public Nullable<decimal> existencia { get; set; }
         public int idPedimento { get; set; }
         public string numeroDePedimento { get; set; }
+        public System.DateTime fecha { get; set; }
     }
 }

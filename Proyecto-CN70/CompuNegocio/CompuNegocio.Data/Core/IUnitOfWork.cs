@@ -245,6 +245,7 @@ namespace Aprovi.Data.Core
 
         IViewReporteCostoDeLoVendidoRepository CostoDeLoVendido { get; }
 
+        /*
         IViewReporteListaDePreciosRepository ListaDePrecios { get; }
 
         IViewReporteListaDePreciosPorListaRepository ListaDePreciosPorLista { get; }
@@ -252,6 +253,7 @@ namespace Aprovi.Data.Core
         IViewReporteListaDePreciosConImpuestosRepository ListaDePreciosConImpuestos { get; }
 
         IViewReporteListaDePreciosPorListaConImpuestosRepository ListaDePreciosPorListaConImpuestos { get; }
+        */
 
         IViewReporteNotasDeDescuentoRepository ReporteNotasDeDescuento { get; }
 

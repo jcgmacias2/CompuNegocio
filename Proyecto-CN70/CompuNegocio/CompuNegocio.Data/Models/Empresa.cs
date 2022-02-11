@@ -19,16 +19,16 @@ namespace Aprovi.Data.Models
         {
             this.AbonosDeFacturas = new HashSet<AbonosDeFactura>();
             this.AbonosDeRemisions = new HashSet<AbonosDeRemision>();
-            this.Estaciones = new HashSet<Estacione>();
             this.Cotizaciones = new HashSet<Cotizacione>();
-            this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
-            this.Facturas = new HashSet<Factura>();
             this.EmpresasAsociadas = new HashSet<EmpresasAsociada>();
-            this.Pagos = new HashSet<Pago>();
+            this.Estaciones = new HashSet<Estacione>();
+            this.Facturas = new HashSet<Factura>();
             this.NotasDeCreditoes = new HashSet<NotasDeCredito>();
             this.NotasDeDescuentoes = new HashSet<NotasDeDescuento>();
-            this.Remisiones = new HashSet<Remisione>();
+            this.OrdenesDeCompras = new HashSet<OrdenesDeCompra>();
+            this.Pagos = new HashSet<Pago>();
             this.Pedidos = new HashSet<Pedido>();
+            this.Remisiones = new HashSet<Remisione>();
         }
     
         public int idEmpresa { get; set; }
@@ -41,24 +41,24 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbonosDeRemision> AbonosDeRemisions { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Estacione> Estaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cotizacione> Cotizaciones { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Factura> Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<EmpresasAsociada> EmpresasAsociadas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Pago> Pagos { get; set; }
+        public virtual ICollection<Estacione> Estaciones { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Factura> Facturas { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeDescuento> NotasDeDescuentoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Remisione> Remisiones { get; set; }
+        public virtual ICollection<OrdenesDeCompra> OrdenesDeCompras { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Pago> Pagos { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Pedido> Pedidos { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<Remisione> Remisiones { get; set; }
     }
 }

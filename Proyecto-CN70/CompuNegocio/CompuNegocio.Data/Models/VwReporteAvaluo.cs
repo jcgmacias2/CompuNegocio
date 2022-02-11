@@ -21,7 +21,7 @@ namespace Aprovi.Data.Models
         public int idMoneda { get; set; }
         public Nullable<decimal> precioUnitario { get; set; }
         public Nullable<System.DateTime> fechaHora { get; set; }
-        public decimal entradas { get; set; }
+        public Nullable<decimal> entradas { get; set; }
         public Nullable<decimal> salidas { get; set; }
     }
 }

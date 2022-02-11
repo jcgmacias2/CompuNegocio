@@ -132,10 +132,10 @@ namespace Aprovi.Data.Core
         private IViewReporteEstatusDeLaEmpresaPedidosRepository _estatusDeLaEmpresaPedidos;
         private IViewReporteEstatusDeLaEmpresaRemisionesRepository _estatusDeLaEmpresaRemisiones;
         private IViewReporteCostoDeLoVendidoRepository _costoDeLoVendido;
-        private IViewReporteListaDePreciosRepository _listaDePrecios;
-        private IViewReporteListaDePreciosPorListaRepository _listaDePreciosPorLista;
-        private IViewReporteListaDePreciosConImpuestosRepository _listaDePreciosConImpuestos;
-        private IViewReporteListaDePreciosPorListaConImpuestosRepository _listaDePreciosPorListaConImpuestos;
+        //private IViewReporteListaDePreciosRepository _listaDePrecios;
+        //private IViewReporteListaDePreciosPorListaRepository _listaDePreciosPorLista;
+        //private IViewReporteListaDePreciosConImpuestosRepository _listaDePreciosConImpuestos;
+        //private IViewReporteListaDePreciosPorListaConImpuestosRepository _listaDePreciosPorListaConImpuestos;
         private IViewReporteNotasDeDescuentoRepository _reporteNotasDeDescuento;
 
         #endregion
@@ -707,13 +707,13 @@ namespace Aprovi.Data.Core
 
         public IViewReporteCostoDeLoVendidoRepository CostoDeLoVendido => _costoDeLoVendido.isValid() ? _costoDeLoVendido : _costoDeLoVendido = new ViewReporteCostoDeLoVendidoRepository(_context);
 
-        public IViewReporteListaDePreciosRepository ListaDePrecios => _listaDePrecios.isValid() ? _listaDePrecios : _listaDePrecios = new ViewReporteListaDePreciosRepository(_context);
+        //public IViewReporteListaDePreciosRepository ListaDePrecios => _listaDePrecios.isValid() ? _listaDePrecios : _listaDePrecios = new ViewReporteListaDePreciosRepository(_context);
 
-        public IViewReporteListaDePreciosConImpuestosRepository ListaDePreciosConImpuestos => _listaDePreciosConImpuestos.isValid() ? _listaDePreciosConImpuestos : _listaDePreciosConImpuestos = new ViewReporteListaDePreciosConImpuestosRepository(_context);
+        //public IViewReporteListaDePreciosConImpuestosRepository ListaDePreciosConImpuestos => _listaDePreciosConImpuestos.isValid() ? _listaDePreciosConImpuestos : _listaDePreciosConImpuestos = new ViewReporteListaDePreciosConImpuestosRepository(_context);
 
-        public IViewReporteListaDePreciosPorListaRepository ListaDePreciosPorLista => _listaDePreciosPorLista.isValid() ? _listaDePreciosPorLista : _listaDePreciosPorLista = new ViewReporteListaDePreciosPorListaRepository(_context);
+        //public IViewReporteListaDePreciosPorListaRepository ListaDePreciosPorLista => _listaDePreciosPorLista.isValid() ? _listaDePreciosPorLista : _listaDePreciosPorLista = new ViewReporteListaDePreciosPorListaRepository(_context);
 
-        public IViewReporteListaDePreciosPorListaConImpuestosRepository ListaDePreciosPorListaConImpuestos => _listaDePreciosPorListaConImpuestos.isValid() ? _listaDePreciosPorListaConImpuestos : _listaDePreciosPorListaConImpuestos = new ViewReporteListaDePreciosPorListaConImpuestosRepository(_context);
+        //public IViewReporteListaDePreciosPorListaConImpuestosRepository ListaDePreciosPorListaConImpuestos => _listaDePreciosPorListaConImpuestos.isValid() ? _listaDePreciosPorListaConImpuestos : _listaDePreciosPorListaConImpuestos = new ViewReporteListaDePreciosPorListaConImpuestosRepository(_context);
         
         public IViewReporteNotasDeDescuentoRepository ReporteNotasDeDescuento => _reporteNotasDeDescuento.isValid() ? _reporteNotasDeDescuento : _reporteNotasDeDescuento = new ViewReporteNotasDeDescuentoRepository(_context);
         #endregion

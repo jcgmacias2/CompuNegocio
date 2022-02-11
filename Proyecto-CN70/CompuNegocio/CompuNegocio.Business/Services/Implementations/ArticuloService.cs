@@ -716,7 +716,7 @@ namespace Aprovi.Business.Services
                     detalle.DescripcionArticulo = i.descripcionArticulo;
                     detalle.idArticulo = i.idArticulo;
                     detalle.Precio = i.precioUnitario.GetValueOrDefault(0).ToDocumentCurrency(new Moneda(){idMoneda = i.idMoneda},new Moneda() { idMoneda = (int)Monedas.Pesos}, exchangeRate);
-                    detalle.Existencia = item.Sum(x => x.entradas) - item.Sum(x => x.salidas.GetValueOrDefault(0));
+                    detalle.Existencia = (decimal)(item.Sum(x => x.entradas) - item.Sum(x => x.salidas.GetValueOrDefault(0)));
                     detalle.Importe = detalle.Existencia * detalle.Precio;
 
                     detail.Add(detalle);

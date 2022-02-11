@@ -53,6 +53,7 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<AbonosDeFactura> AbonosDeFacturas { get; set; }
         public virtual CancelacionesDeFactura CancelacionesDeFactura { get; set; }
+        public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Cotizacione> Cotizaciones { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -60,25 +61,25 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<DetallesDeFactura> DetallesDeFacturas { get; set; }
         public virtual Empresa Empresa { get; set; }
+        public virtual EstatusCrediticio EstatusCrediticio { get; set; }
         public virtual EstatusDeFactura EstatusDeFactura { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Factura> Facturas1 { get; set; }
         public virtual Factura Factura1 { get; set; }
         public virtual MetodosPago MetodosPago { get; set; }
         public virtual Moneda Moneda { get; set; }
+        public virtual Pedido Pedido { get; set; }
         public virtual Regimene Regimene { get; set; }
         public virtual TiposRelacion TiposRelacion { get; set; }
         public virtual UsosCFDI UsosCFDI { get; set; }
         public virtual Usuario Usuario { get; set; }
-        public virtual TimbresDeFactura TimbresDeFactura { get; set; }
-        public virtual Usuario Usuario1 { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeCredito> NotasDeCreditoes { get; set; }
-        public virtual Cliente Cliente { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<NotasDeDescuento> NotasDeDescuentoes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Remisione> Remisiones { get; set; }
-        public virtual Pedido Pedido { get; set; }
+        public virtual TimbresDeFactura TimbresDeFactura { get; set; }
+        public virtual Usuario Usuario1 { get; set; }
     }
 }
