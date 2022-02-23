@@ -107,7 +107,7 @@ namespace Aprovi.Business.Services
                 //La configuración me dice el ambiente en el que estoy trabajando
                 if (config.Mode.Equals(Ambiente.Production))
                     webRequest = (HttpWebRequest)WebRequest.Create("https://portalws.itimbre.com/itimbre.php");
-                else //Pruebas 3.3
+                else //Pruebas 4.0
                     webRequest = (HttpWebRequest)WebRequest.Create("https://portalws.itimbre.com/itimbreprueba.php");
 
                 webRequest.Method = "POST";
@@ -216,7 +216,7 @@ namespace Aprovi.Business.Services
                 TimbresDePago timbre;
 
                 xNms = new XmlNamespaceManager(xmlPago.NameTable);
-                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/4");
                 xNms.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
 
                 xNode = xmlPago.ChildNodes[1].SelectSingleNode("//cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", xNms);
@@ -368,7 +368,7 @@ namespace Aprovi.Business.Services
                 //Comprobante
                 cadena = new StringBuilder();
                 cadena.Append("||"); // Inicio de la cadena con un doble pipe
-                cadena.Append("3.3|"); // Version 
+                cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", invoice.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", invoice.folio.ToString().Trim()); // Folio
                 cadena.AppendFormat("{0}|", invoice.fechaHora.ToUTCFormat()); // Fecha
@@ -394,6 +394,7 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToDecimalString()); // TipoDePago
                 cadena.AppendFormat("{0}|", invoice.Total.ToStringRoundedCurrency(invoice.Moneda));
                 cadena.Append("I|"); //tipo de comprobante
+                cadena.AppendFormat("{0}|", "01"); //Exportacion JCRV
                 cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoPago
                 cadena.AppendFormat("{0}|", config.Domicilio.codigoPostal); //LugarExpedición
 
@@ -425,6 +426,8 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", invoice.Cliente.razonSocial.Trim());
                 if (!invoice.Cliente.Domicilio.Pais.idPais.Equals((int)Paises.México)) //Solo cuando es extranjero
                     cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.Pais.codigo);
+                cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.codigoPostal); //Codigo Postal Receptor JCRV
+                cadena.AppendFormat("{0}|", invoice.Cliente.Regimene.codigo); // Regimen Receptor JCRV
                 cadena.AppendFormat("{0}|", invoice.UsosCFDI.codigo);
 
                 //Conceptos
@@ -435,6 +438,7 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", concepto.cantidad.ToDecimalString());
                     cadena.AppendFormat("{0}|", concepto.Articulo.UnidadesDeMedida.codigo);
                     cadena.AppendFormat("{0}|", concepto.Articulo.UnidadesDeMedida.descripcion);
+
                     //Tratándose de las ventas de primera mano, en este campo se debe registrar la fecha del documento aduanero, la cual se puede registrar utilizando un formato libre, ya sea antes o después de la descripción del producto.
                     if (concepto.PedimentoPorDetalleDeFacturas.Count > 0)
                     {
@@ -447,6 +451,7 @@ namespace Aprovi.Business.Services
 
                     cadena.AppendFormat("{0}|", concepto.precioUnitario.ToStringRoundedCurrency(invoice.Moneda));
                     cadena.AppendFormat("{0}|", (concepto.cantidad * concepto.precioUnitario).ToStringRoundedCurrency(invoice.Moneda));
+                    cadena.AppendFormat("{0}|", (concepto.Impuestos.Count > 0) ? "01" : "02"); //ObjetoImp JCRV
 
                     if (concepto.Impuestos.Count > 0)
                     {
@@ -515,6 +520,7 @@ namespace Aprovi.Business.Services
                 {
                     foreach (VMImpuesto imp in invoice.Impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Trasladado)))
                     {
+                        cadena.AppendFormat("{0}|", imp.MontoGravable.ToStringRoundedCurrency(invoice.Moneda)); //Base JCRV
                         cadena.AppendFormat("{0}|", imp.codigo);
                         cadena.AppendFormat("{0}|", imp.TiposFactor.codigo);
                         cadena.AppendFormat("{0}|", imp.valor.ToPorcentageString());
@@ -547,7 +553,7 @@ namespace Aprovi.Business.Services
                 if (invoice.idComprobanteOriginal.isValid() || invoice.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(invoice)))
                     CFDIRelacionados(xmlDoc, invoice).ForEach(x => nodoComprobante.AppendChild(x));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, invoice.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, invoice.UsosCFDI));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, invoice.UsosCFDI, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, invoice));
                 if (invoice.Impuestos.Count > 0)
                     nodoComprobante.AppendChild(Impuestos(xmlDoc, invoice.Impuestos, (MetodoDePago)invoice.idMetodoPago, invoice.Moneda));
@@ -578,7 +584,7 @@ namespace Aprovi.Business.Services
                 TimbresDeFactura timbre;
 
                 xNms = new XmlNamespaceManager(xmlFactura.NameTable);
-                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/4");
                 xNms.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
 
                 xNode = xmlFactura.ChildNodes[1].SelectSingleNode("//cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", xNms);
@@ -615,7 +621,7 @@ namespace Aprovi.Business.Services
                 //Comprobante
                 cadena = new StringBuilder();
                 cadena.Append("||"); // Inicio de la cadena con un doble pipe
-                cadena.Append("3.3|"); // Version 
+                cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", payment.TimbresDeAbonosDeFactura.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", payment.TimbresDeAbonosDeFactura.folio.ToString().Trim()); // Folio
                 cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); // Fecha
@@ -694,7 +700,7 @@ namespace Aprovi.Business.Services
                 //Comprobante
                 cadena = new StringBuilder();
                 cadena.Append("||"); // Inicio de la cadena con un doble pipe
-                cadena.Append("3.3|"); // Version 
+                cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", payment.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", payment.folio.ToString().Trim()); // Folio
                 cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); // Fecha
@@ -793,7 +799,7 @@ namespace Aprovi.Business.Services
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, invoice.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, new UsosCFDI() { codigo = "P01" }));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, new UsosCFDI() { codigo = "P01" }, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, invoice, payment));
 
@@ -818,7 +824,7 @@ namespace Aprovi.Business.Services
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, payment.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, payment.Cliente, new UsosCFDI() { codigo = "P01" }));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, payment.Cliente, new UsosCFDI() { codigo = "P01" }, payment.Cliente.Domicilio, payment.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, payment));
 
@@ -839,7 +845,7 @@ namespace Aprovi.Business.Services
                 TimbresDeAbonosDeFactura timbre;
 
                 xNms = new XmlNamespaceManager(xmlPago.NameTable);
-                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/4");
                 xNms.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
 
                 xNode = xmlPago.ChildNodes[1].SelectSingleNode("//cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", xNms);
@@ -876,7 +882,7 @@ namespace Aprovi.Business.Services
                 //Comprobante
                 cadena = new StringBuilder();
                 cadena.Append("||"); // Inicio de la cadena con un doble pipe
-                cadena.Append("3.3|"); // Version 
+                cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", creditNote.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", creditNote.folio.ToString().Trim()); // Folio
                 cadena.AppendFormat("{0}|", creditNote.fechaHora.ToUTCFormat()); // Fecha
@@ -1068,7 +1074,7 @@ namespace Aprovi.Business.Services
                 TimbresDeNotasDeCredito timbre;
 
                 xNms = new XmlNamespaceManager(xmlNotaDeCredito.NameTable);
-                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/3");
+                xNms.AddNamespace("cfdi", "http://www.sat.gob.mx/cfd/4");
                 xNms.AddNamespace("tfd", "http://www.sat.gob.mx/TimbreFiscalDigital");
 
                 xNode = xmlNotaDeCredito.ChildNodes[1].SelectSingleNode("//cfdi:Comprobante/cfdi:Complemento/tfd:TimbreFiscalDigital", xNms);
@@ -1108,7 +1114,7 @@ namespace Aprovi.Business.Services
                     nodoComprobante.AppendChild(CFDIRelacionados(xmlDoc, creditNote.Factura));
                 }
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, creditNote.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, creditNote.Cliente, new UsosCFDI() { codigo = "G02" }));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, creditNote.Cliente, new UsosCFDI() { codigo = "G02" }, creditNote.Cliente.Domicilio, creditNote.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, creditNote));
                 if (creditNote.Impuestos.Count > 0)
                     nodoComprobante.AppendChild(Impuestos(xmlDoc, creditNote.Impuestos, MetodoDePago.Pago_en_una_sola_exhibicion, creditNote.Moneda));
@@ -1132,16 +1138,16 @@ namespace Aprovi.Business.Services
                 XmlAttribute xSchema = xml.CreateAttribute("xsi", "schemaLocation", "http://www.w3.org/2001/XMLSchema-instance");
                 if (!isPago)
                 {
-                    xSchema.Value = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd";
+                    xSchema.Value = "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd";
 
-                    //   xSchema.Value = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " +
+                    //   xSchema.Value = "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd " +
                     //"http://www.sat.gob.mx/TimbreFiscalDigital http://www.sat.gob.mx/sitio_internet/cfd/TimbreFiscalDigital/TimbreFiscalDigitalv11.xsd " +
                     //"http://www.sat.gob.mx/sitio_internet/cfd/catalogos http://www.sat.gob.mx/sitio_internet/cfd/catalogos/catCFDI.xsd " +
                     //"http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI/tdCFDI.xsd";
                 }
                 else
                 {
-                    xSchema.Value = "http://www.sat.gob.mx/cfd/3 http://www.sat.gob.mx/sitio_internet/cfd/3/cfdv33.xsd " +
+                    xSchema.Value = "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd " +
                  "http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
 
                 }
@@ -1158,11 +1164,11 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/3");
+                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
                 comprobante.SetAttribute("xmlns:catCFDI", "http://www.sat.gob.mx/sitio_internet/cfd/catalogos");
                 comprobante.SetAttribute("xmlns:tdCFDI", "http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                comprobante.SetAttribute("Version", "3.3");
+                comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", factura.serie);
                 comprobante.SetAttribute("Folio", factura.folio.ToString());
                 comprobante.SetAttribute("Fecha", factura.fechaHora.ToUTCFormat());
@@ -1193,6 +1199,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("TipoDeComprobante", "I");
                 comprobante.SetAttribute("MetodoPago", factura.MetodosPago.codigo);
                 comprobante.SetAttribute("LugarExpedicion", config.Domicilio.codigoPostal);
+                comprobante.SetAttribute("Exportacion", "01"); //JCRV
 
                 return comprobante;
             }
@@ -1206,11 +1213,11 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/3");
+                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
                 comprobante.SetAttribute("xmlns:catCFDI", "http://www.sat.gob.mx/sitio_internet/cfd/catalogos");
                 comprobante.SetAttribute("xmlns:tdCFDI", "http://www.sat.gob.mx/sitio_internet/cfd/tipoDatos/tdCFDI");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                comprobante.SetAttribute("Version", "3.3");
+                comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", creditNote.serie);
                 comprobante.SetAttribute("Folio", creditNote.folio.ToString());
                 comprobante.SetAttribute("Fecha", creditNote.fechaHora.ToUTCFormat());
@@ -1243,10 +1250,10 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/3");
+                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
                 comprobante.SetAttribute("xmlns:pago10", "http://www.sat.gob.mx/Pagos");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                comprobante.SetAttribute("Version", "3.3");
+                comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", abono.TimbresDeAbonosDeFactura.serie);
                 comprobante.SetAttribute("Folio", abono.TimbresDeAbonosDeFactura.folio.ToString());
                 comprobante.SetAttribute("Fecha", abono.fechaHora.ToUTCFormat());
@@ -1271,10 +1278,10 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/3");
+                XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
                 comprobante.SetAttribute("xmlns:pago10", "http://www.sat.gob.mx/Pagos");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
-                comprobante.SetAttribute("Version", "3.3");
+                comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", pago.serie);
                 comprobante.SetAttribute("Folio", pago.folio.ToString());
                 comprobante.SetAttribute("Fecha", pago.fechaHora.ToUTCFormat());
@@ -1303,9 +1310,9 @@ namespace Aprovi.Business.Services
                 
                 if (invoice.idComprobanteOriginal.isValid())
                 {
-                    XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/3");
+                    XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/4");
                     nodoCfdisRelacionados.SetAttribute("TipoRelacion", invoice.TiposRelacion.codigo);
-                    XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/3");
+                    XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/4");
                     nodoCfdisRelacionados.AppendChild(nodoCfdiRelacionado);
                     nodoCfdiRelacionado.SetAttribute("UUID", invoice.Factura1.TimbresDeFactura.UUID);
 
@@ -1314,12 +1321,12 @@ namespace Aprovi.Business.Services
 
                 if (invoice.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(invoice)))
                 {
-                    XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/3");
+                    XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/4");
                     nodoCfdisRelacionados.SetAttribute("TipoRelacion", "02");//Al crear un cfdi con descuento a futuro se debe usar el tipo de relacion 02
 
                     foreach (var n in invoice.NotasDeCreditoes.Where(x => x.IsPreSaleCreditNote(invoice)).ToList())
                     {
-                        XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/3");
+                        XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/4");
                         nodoCfdisRelacionados.AppendChild(nodoCfdiRelacionado);
                         nodoCfdiRelacionado.SetAttribute("UUID", n.TimbresDeNotasDeCredito.UUID);
 
@@ -1341,8 +1348,8 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/3");
-                XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoCfdisRelacionados = xml.CreateElement("cfdi", "CfdiRelacionados", "http://www.sat.gob.mx/cfd/4");
+                XmlElement nodoCfdiRelacionado = xml.CreateElement("cfdi", "CfdiRelacionado", "http://www.sat.gob.mx/cfd/4");
                 nodoCfdisRelacionados.SetAttribute("TipoRelacion", "01");
                 nodoCfdisRelacionados.AppendChild(nodoCfdiRelacionado);
                 nodoCfdiRelacionado.SetAttribute("UUID", invoice.TimbresDeFactura.UUID);
@@ -1359,7 +1366,7 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement emisor = xml.CreateElement("cfdi", "Emisor", "http://www.sat.gob.mx/cfd/3");
+                XmlElement emisor = xml.CreateElement("cfdi", "Emisor", "http://www.sat.gob.mx/cfd/4");
                 emisor.SetAttribute("Rfc", config.rfc);
                 emisor.SetAttribute("Nombre", config.razonSocial);
                 emisor.SetAttribute("RegimenFiscal", regimen.codigo);
@@ -1371,16 +1378,18 @@ namespace Aprovi.Business.Services
             }
         }
 
-        private XmlElement Receptor(XmlDocument xml, Cliente cliente, UsosCFDI uso)
+        private XmlElement Receptor(XmlDocument xml, Cliente cliente, UsosCFDI uso, Domicilio domicilio, Regimene regimene)
         {
             try
             {
-                XmlElement receptor = xml.CreateElement("cfdi", "Receptor", "http://www.sat.gob.mx/cfd/3");
+                XmlElement receptor = xml.CreateElement("cfdi", "Receptor", "http://www.sat.gob.mx/cfd/4");
                 receptor.SetAttribute("Rfc", cliente.rfc.Trim());
                 receptor.SetAttribute("Nombre", cliente.razonSocial);
                 if (!cliente.Domicilio.Pais.idPais.Equals((int)Paises.México)) //Solo cuando es extranjero
                     receptor.SetAttribute("ResidenciaFiscal", cliente.Domicilio.Pais.codigo);
                 receptor.SetAttribute("UsoCFDI", uso.codigo);
+                receptor.SetAttribute("DomicilioFiscalReceptor", domicilio.codigoPostal);
+                receptor.SetAttribute("RegimenFiscalReceptor", regimene.codigo);
                 return receptor;
             }
             catch (Exception)
@@ -1393,19 +1402,20 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoConcepto;
                 foreach (var concepto in factura.DetalleDeFactura)
                 {
-                    nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/3");
+                    nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/4");
                     nodoConceptos.AppendChild(nodoConcepto);
                     nodoConcepto.SetAttribute("ClaveProdServ", concepto.Articulo.ProductosServicio.codigo);
                     nodoConcepto.SetAttribute("NoIdentificacion", concepto.Articulo.codigo);
                     nodoConcepto.SetAttribute("Cantidad", concepto.cantidad.ToDecimalString());
                     nodoConcepto.SetAttribute("ClaveUnidad", concepto.Articulo.UnidadesDeMedida.codigo);
                     nodoConcepto.SetAttribute("Unidad", concepto.Articulo.UnidadesDeMedida.descripcion);
+
                     //Tratándose de las ventas de primera mano, en este campo se debe registrar la fecha del documento aduanero, la cual se puede registrar utilizando un formato libre, ya sea antes o después de la descripción del producto.
-                    if(concepto.PedimentoPorDetalleDeFacturas.Count>0)
+                    if (concepto.PedimentoPorDetalleDeFacturas.Count>0)
                     {
                         var descripcion = string.Format("{0} Fecha importación: ", concepto.Articulo.descripcion);
                         concepto.PedimentoPorDetalleDeFacturas.ToList().ForEach(p => descripcion = string.Format("{0} {1}", descripcion, p.Pedimento.fecha.ToShortDateString()));
@@ -1415,12 +1425,14 @@ namespace Aprovi.Business.Services
                         nodoConcepto.SetAttribute("Descripcion", concepto.Articulo.descripcion);
                     nodoConcepto.SetAttribute("ValorUnitario", concepto.precioUnitario.ToStringRoundedCurrency(factura.Moneda));
                     nodoConcepto.SetAttribute("Importe", (concepto.cantidad * concepto.precioUnitario).ToStringRoundedCurrency(factura.Moneda));
+                    nodoConcepto.SetAttribute("ObjetoImp", (concepto.Impuestos.Count > 0) ? "01" : "02");
+                    /* ObjetoImporte  JCRV */
 
                     XmlElement nodoImpuestos;
                     if (concepto.Impuestos.Count > 0)
                     {
                         //Solamente agrego el nodo si existen impuestos
-                        nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/3");
+                        nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/4");
                         nodoConcepto.AppendChild(nodoImpuestos);
 
                         XmlElement nodoTrasladados;
@@ -1428,12 +1440,12 @@ namespace Aprovi.Business.Services
                         if (traslados.Count() > 0)
                         {
                             //Solamente agrego traslados cuando existan impuestos trasladados
-                            nodoTrasladados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/3");
+                            nodoTrasladados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/4");
                             nodoImpuestos.AppendChild(nodoTrasladados);
                             foreach (var impuesto in traslados)
                             {
                                 XmlElement nodoImpuesto;
-                                nodoImpuesto = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/3");
+                                nodoImpuesto = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/4");
                                 nodoTrasladados.AppendChild(nodoImpuesto);
                                 var baseImpuesto = Operations.CalculateTaxBase(Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento), concepto.cantidad, impuesto, concepto.Impuestos.ToList()); // Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento) * concepto.cantidad;
                                 nodoImpuesto.SetAttribute("Base", baseImpuesto.ToStringRoundedCurrency(factura.Moneda));
@@ -1451,12 +1463,12 @@ namespace Aprovi.Business.Services
                         if (retenciones.Count() > 0)
                         {
                             //Solamente agrego traslados cuando existan impuestos trasladados
-                            nodoRetenidos = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/3");
+                            nodoRetenidos = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/4");
                             nodoImpuestos.AppendChild(nodoRetenidos);
                             foreach (var impuesto in retenciones)
                             {
                                 XmlElement nodoImpuesto;
-                                nodoImpuesto = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/3");
+                                nodoImpuesto = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/4");
                                 nodoRetenidos.AppendChild(nodoImpuesto);
                                 var baseImpuesto = Operations.CalculateTaxBase(Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento), concepto.cantidad, impuesto, concepto.Impuestos.ToList()); //Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento) * concepto.cantidad;
                                 nodoImpuesto.SetAttribute("Base", baseImpuesto.ToStringRoundedCurrency(factura.Moneda));
@@ -1478,7 +1490,7 @@ namespace Aprovi.Business.Services
                             //Pedimentos
                             XmlElement nodoInformacionAduanera;
                             //Solamente agrego el nodo si existen pedimentos
-                            nodoInformacionAduanera = xml.CreateElement("cfdi", "InformacionAduanera", "http://www.sat.gob.mx/cfd/3");
+                            nodoInformacionAduanera = xml.CreateElement("cfdi", "InformacionAduanera", "http://www.sat.gob.mx/cfd/4");
                             nodoConcepto.AppendChild(nodoInformacionAduanera);
 
                             //Le agrego el dato del pedimento
@@ -1492,7 +1504,7 @@ namespace Aprovi.Business.Services
                     if (concepto.CuentaPredialPorDetalle.isValid() && concepto.CuentaPredialPorDetalle.idCuentaPredialPorDetalle.isValid())
                     {
                         //Solamente agrego el nodo si existe cuenta predial
-                        nodoCuentaPredial = xml.CreateElement("cfdi", "CuentaPredial", "http://www.sat.gob.mx/cfd/3");
+                        nodoCuentaPredial = xml.CreateElement("cfdi", "CuentaPredial", "http://www.sat.gob.mx/cfd/4");
                         nodoConcepto.AppendChild(nodoCuentaPredial);
 
                         nodoCuentaPredial.SetAttribute("Numero", concepto.CuentaPredialPorDetalle.cuenta);
@@ -1511,9 +1523,9 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoConcepto;
-                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/3");
+                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/4");
                 nodoConceptos.AppendChild(nodoConcepto);
                 nodoConcepto.SetAttribute("ClaveProdServ", "84111506");
                 nodoConcepto.SetAttribute("Cantidad", (1.0m).ToDecimalString());
@@ -1534,9 +1546,9 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoConcepto;
-                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/3");
+                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/4");
                 nodoConceptos.AppendChild(nodoConcepto);
                 nodoConcepto.SetAttribute("ClaveProdServ", "84111506");
                 nodoConcepto.SetAttribute("Cantidad", (1.0m).ToDecimalString());
@@ -1557,10 +1569,10 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoConceptos = xml.CreateElement("cfdi", "Conceptos", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoConcepto;
 
-                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/3");
+                nodoConcepto = xml.CreateElement("cfdi", "Concepto", "http://www.sat.gob.mx/cfd/4");
                 nodoConceptos.AppendChild(nodoConcepto);
                 nodoConcepto.SetAttribute("ClaveProdServ", "84111506");
                 nodoConcepto.SetAttribute("Cantidad", "1");
@@ -1576,19 +1588,19 @@ namespace Aprovi.Business.Services
                 if (creditNote.Impuestos.Any(x => x.idImpuesto.isValid()))
                 {
                     XmlElement nodoImpuestos;
-                    nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/3");
+                    nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/4");
                     nodoConcepto.AppendChild(nodoImpuestos);
 
                     if (!impuestosTrasladados.IsEmpty())
                     {
                         XmlElement nodoTrasladados;
-                        nodoTrasladados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/3");
+                        nodoTrasladados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/4");
                         nodoImpuestos.AppendChild(nodoTrasladados);
 
                         foreach (var i in impuestosTrasladados)
                         {
                             XmlElement nodoImpuesto;
-                            nodoImpuesto = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/3");
+                            nodoImpuesto = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/4");
                             nodoTrasladados.AppendChild(nodoImpuesto);
                             nodoImpuesto.SetAttribute("Base", i.MontoGravable.ToStringRoundedCurrency(creditNote.Moneda));
                             nodoImpuesto.SetAttribute("Impuesto", i.codigo);
@@ -1601,13 +1613,13 @@ namespace Aprovi.Business.Services
                     if (!impuestosRetenidos.IsEmpty())
                     {
                         XmlElement nodoRetenidos;
-                        nodoRetenidos = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/3");
+                        nodoRetenidos = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/4");
                         nodoImpuestos.AppendChild(nodoRetenidos);
 
                         foreach (var i in impuestosRetenidos)
                         {
                             XmlElement nodoImpuesto;
-                            nodoImpuesto = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/3");
+                            nodoImpuesto = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/4");
                             nodoRetenidos.AppendChild(nodoImpuesto);
                             nodoImpuesto.SetAttribute("Base", i.MontoGravable.ToStringRoundedCurrency(creditNote.Moneda));
                             nodoImpuesto.SetAttribute("Impuesto", i.codigo);
@@ -1630,7 +1642,7 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoPagos = xml.CreateElement("pago10", "Pagos", "http://www.sat.gob.mx/Pagos");
                 XmlElement nodoPago = xml.CreateElement("pago10", "Pago", "http://www.sat.gob.mx/Pagos");
                 XmlElement nodoDoctoRelacionado = xml.CreateElement("pago10", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos");
@@ -1680,7 +1692,7 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/4");
                 XmlElement nodoPagos = xml.CreateElement("pago10", "Pagos", "http://www.sat.gob.mx/Pagos");
 
                 //Esto se repite por cada abono
@@ -1734,7 +1746,7 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/3");
+                XmlElement nodoImpuestos = xml.CreateElement("cfdi", "Impuestos", "http://www.sat.gob.mx/cfd/4");
 
                 var totalRetenciones = impuestos.Where(ir => ir.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido)).Sum(i => i.Importe.ToRoundedCurrency(moneda));
                 var cantidadRetenciones = impuestos.Count(ir => ir.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido));
@@ -1764,7 +1776,7 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement domicilioFiscal = xml.CreateElement("cfdi", tipoDomicilio, "http://www.sat.gob.mx/cfd/3");
+                XmlElement domicilioFiscal = xml.CreateElement("cfdi", tipoDomicilio, "http://www.sat.gob.mx/cfd/4");
                 domicilioFiscal.SetAttribute("calle", domicilio.calle);
                 domicilioFiscal.SetAttribute("noExterior", domicilio.numeroExterior);
                 domicilioFiscal.SetAttribute("noInterior", domicilio.numeroInterior);
@@ -1785,15 +1797,16 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement traslados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/3");
+                XmlElement traslados = xml.CreateElement("cfdi", "Traslados", "http://www.sat.gob.mx/cfd/4");
                 foreach (VMImpuesto imp in impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Trasladado)))
                 {
-                    XmlElement traslado = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/3");
+                    XmlElement traslado = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/4");
                     traslados.AppendChild(traslado);
                     traslado.SetAttribute("Impuesto", imp.codigo);
                     traslado.SetAttribute("TipoFactor", imp.TiposFactor.codigo);
                     traslado.SetAttribute("TasaOCuota", imp.valor.ToPorcentageString());
                     traslado.SetAttribute("Importe", imp.Importe.ToStringRoundedCurrency(moneda));
+                    traslado.SetAttribute("Base", imp.MontoGravable.ToStringRoundedCurrency(moneda)); //JCRV i.MontoGravable.ToStringRoundedCurrency(creditNote.Moneda)
                 }
 
                 return traslados;
@@ -1808,10 +1821,10 @@ namespace Aprovi.Business.Services
         {
             try
             {
-                XmlElement retenciones = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/3");
+                XmlElement retenciones = xml.CreateElement("cfdi", "Retenciones", "http://www.sat.gob.mx/cfd/4");
                 foreach (VMImpuesto imp in impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido)))
                 {
-                    XmlElement retencion = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/3");
+                    XmlElement retencion = xml.CreateElement("cfdi", "Retencion", "http://www.sat.gob.mx/cfd/4");
                     retenciones.AppendChild(retencion);
                     retencion.SetAttribute("Impuesto", imp.codigo);
                     retencion.SetAttribute("Importe", imp.Importe.ToStringRoundedCurrency(moneda));

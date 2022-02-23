@@ -154,7 +154,7 @@ namespace Aprovi.Views.UI
             lblRazonSocialCliente.Content = invoice.Cliente.razonSocial;
             _customer = invoice.Cliente;
             cmbMoneda.SelectedValue = invoice.idMoneda;
-            cmbRegimen.SelectedValue = invoice.idRegimen;
+            cmbRegimen.SelectedValue = invoice.Cliente.idRegimen;
             cmbMetodoDePago.SelectedValue = invoice.idMetodoPago;
             cmbUsoCFDI.SelectedValue = invoice.idUsoCFDI;
 
@@ -200,6 +200,15 @@ namespace Aprovi.Views.UI
             else
             {
                 cmbUsoCFDI.SelectedIndex = -1;
+            }
+
+            if (customer.idRegimen.isValid())
+            {
+                cmbRegimen.SelectedValue = customer.idRegimen;
+            }
+            else
+            {
+                cmbRegimen.SelectedIndex = -1;
             }
 
             _customer = customer;
