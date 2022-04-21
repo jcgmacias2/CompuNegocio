@@ -357,6 +357,9 @@
     <Compile Include="Models\Impuesto.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
+    <Compile Include="Models\ImpuestoPorFactura.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
     <Compile Include="Models\ListasDePrecio.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
@@ -407,6 +410,9 @@
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\PedimentoPorDetalleDeTraspaso.cs">
+      <DependentUpon>CNModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\Periodicidad.cs">
       <DependentUpon>CNModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\Permiso.cs">
@@ -834,12 +840,14 @@
     <Compile Include="Repositories\Implementations\CuentasPredialesRepository.cs" />
     <Compile Include="Repositories\Implementations\CotizacionesRepository.cs" />
     <Compile Include="Repositories\Implementations\ComisionesRepository.cs" />
+    <Compile Include="Repositories\Implementations\ImpuestoPorFacturaRepository.cs" />
     <Compile Include="Repositories\Implementations\NotasDeDescuentoRepository.cs" />
     <Compile Include="Repositories\Implementations\NotasDeCreditoRepository.cs" />
     <Compile Include="Repositories\Implementations\PagosRepository.cs" />
     <Compile Include="Repositories\Implementations\FormatosRepository.cs" />
     <Compile Include="Repositories\Implementations\OpcionesCostosRepository.cs" />
     <Compile Include="Repositories\Implementations\OrdenesDeCompraRepository.cs" />
+    <Compile Include="Repositories\Implementations\PeriodicidadRepository.cs" />
     <Compile Include="Repositories\Implementations\SolicitudesDeTraspasoRepository.cs" />
     <Compile Include="Repositories\Implementations\TraspasosRepository.cs" />
     <Compile Include="Repositories\Implementations\PedidosRepository.cs" />
@@ -927,12 +935,14 @@
     <Compile Include="Repositories\Interfaces\ICuentasPredialesRepository.cs" />
     <Compile Include="Repositories\Interfaces\ICotizacionesRepository.cs" />
     <Compile Include="Repositories\Interfaces\IComisionesRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IImpuestoPorFacturaRepository.cs" />
     <Compile Include="Repositories\Interfaces\INotasDeDescuentoRepository.cs" />
     <Compile Include="Repositories\Interfaces\INotasDeCreditoRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPagosRepository.cs" />
     <Compile Include="Repositories\Interfaces\IFormatosRepository.cs" />
     <Compile Include="Repositories\Interfaces\IOpcionesCostosRepository.cs" />
     <Compile Include="Repositories\Interfaces\IOrdenesDeCompraRepository.cs" />
+    <Compile Include="Repositories\Interfaces\IPeriodicidadRepository.cs" />
     <Compile Include="Repositories\Interfaces\ISolicitudesDeTraspasoRepository.cs" />
     <Compile Include="Repositories\Interfaces\ITraspasosRepository.cs" />
     <Compile Include="Repositories\Interfaces\IPedimentosRepository.cs" />

@@ -17,7 +17,7 @@ namespace Aprovi.Views
 
         void Show(Configuracion configuration);
         void ShowImage(Uri imagePath);
-        void FillCombo(List<Pais> countries, List<object> opcionesCosto, List<Reporte> reportes);
+        void FillCombo(List<Pais> countries, List<object> opcionesCosto, List<Reporte> reportes, List<Periodicidad> periodicidads);
         
     }
 }

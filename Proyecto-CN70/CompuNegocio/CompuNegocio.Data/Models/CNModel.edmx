@@ -395,6 +395,7 @@
           <Property Name="idDomicilio" Type="int" Nullable="false" />
           <Property Name="idOpcionCostoAumenta" Type="int" Nullable="false" />
           <Property Name="idOpcionCostoDisminuye" Type="int" Nullable="false" />
+          <Property Name="idPeriodicidad" Type="int" />
         </EntityType>
         <EntityType Name="Cotizaciones">
           <Key>
@@ -851,6 +852,18 @@
           <Property Name="idTipoDeImpresora" Type="int" Nullable="false" />
           <Property Name="impresora" Type="varchar" MaxLength="250" Nullable="false" />
         </EntityType>
+        <EntityType Name="ImpuestoPorFactura">
+          <Key>
+            <PropertyRef Name="idImpuestoPorFactura" />
+          </Key>
+          <Property Name="idImpuestoPorFactura" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="idFactura" Type="int" Nullable="false" />
+          <Property Name="base" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="codigoImpuesto" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="codigoTipoFactor" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="valorTasaOCuaota" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+          <Property Name="importe" Type="decimal" Precision="16" Scale="6" Nullable="false" />
+        </EntityType>
         <EntityType Name="Impuestos">
           <Key>
             <PropertyRef Name="idImpuesto" />
@@ -1134,6 +1147,14 @@
           <Property Name="añoEnCurso" Type="varchar" MaxLength="1" Nullable="false" />
           <Property Name="progresivo" Type="varchar" MaxLength="6" Nullable="false" />
           <Property Name="fecha" Type="datetime" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Periodicidad">
+          <Key>
+            <PropertyRef Name="idPeriodicidad" />
+          </Key>
+          <Property Name="idPeriodicidad" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="codigo" Type="varchar" MaxLength="10" Nullable="false" />
+          <Property Name="descripcion" Type="varchar" MaxLength="50" Nullable="false" />
         </EntityType>
         <EntityType Name="Permisos">
           <Key>
@@ -5171,6 +5192,18 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__ImpuestoPorFactura__idFactura">
+          <End Role="Facturas" Type="Self.Facturas" Multiplicity="1" />
+          <End Role="ImpuestoPorFactura" Type="Self.ImpuestoPorFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Facturas">
+              <PropertyRef Name="idFactura" />
+            </Principal>
+            <Dependent Role="ImpuestoPorFactura">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Impuestos__idArt__5629CD9C">
           <End Role="Articulos" Type="Self.Articulos" Multiplicity="1" />
           <End Role="ImpuestosPorArticulo" Type="Self.ImpuestosPorArticulo" Multiplicity="*" />
@@ -6311,6 +6344,18 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="fk_Configuraciones_Periodicidad">
+          <End Role="Periodicidad" Type="Self.Periodicidad" Multiplicity="0..1" />
+          <End Role="Configuraciones" Type="Self.Configuraciones" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodicidad">
+              <PropertyRef Name="idPeriodicidad" />
+            </Principal>
+            <Dependent Role="Configuraciones">
+              <PropertyRef Name="idPeriodicidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="fk_estatus_ordendeCompra">
           <End Role="EstatusDeOrdenDeCompra" Type="Self.EstatusDeOrdenDeCompra" Multiplicity="1" />
           <End Role="OrdenesDeCompra" Type="Self.OrdenesDeCompra" Multiplicity="*" />
@@ -6434,6 +6479,7 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <EntitySet Name="Formatos" EntityType="Self.Formatos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="FormatosPorConfiguracion" EntityType="Self.FormatosPorConfiguracion" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImpresorasPorEstacion" EntityType="Self.ImpresorasPorEstacion" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ImpuestoPorFactura" EntityType="Self.ImpuestoPorFactura" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Impuestos" EntityType="Self.Impuestos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImpuestosPorArticulo" EntityType="Self.ImpuestosPorArticulo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ImpuestosPorDetalleDeCompra" EntityType="Self.ImpuestosPorDetalleDeCompra" Schema="dbo" store:Type="Tables" />
@@ -6462,6 +6508,7 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <EntitySet Name="PedimentoPorDetalleDeRemision" EntityType="Self.PedimentoPorDetalleDeRemision" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PedimentoPorDetalleDeTraspaso" EntityType="Self.PedimentoPorDetalleDeTraspaso" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Pedimentos" EntityType="Self.Pedimentos" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Periodicidad" EntityType="Self.Periodicidad" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Permisos" EntityType="Self.Permisos" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Precios" EntityType="Self.Precios" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Privilegios" EntityType="Self.Privilegios" Schema="dbo" store:Type="Tables" />
@@ -8337,6 +8384,10 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
             <End Role="TiposDeImpresora" EntitySet="TiposDeImpresora" />
             <End Role="ImpresorasPorEstacion" EntitySet="ImpresorasPorEstacion" />
           </AssociationSet>
+          <AssociationSet Name="FK__ImpuestoPorFactura__idFactura" Association="Self.FK__ImpuestoPorFactura__idFactura">
+            <End Role="Facturas" EntitySet="Facturas" />
+            <End Role="ImpuestoPorFactura" EntitySet="ImpuestoPorFactura" />
+          </AssociationSet>
           <AssociationSet Name="FK__Impuestos__idArt__5629CD9C" Association="Self.FK__Impuestos__idArt__5629CD9C">
             <End Role="Articulos" EntitySet="Articulos" />
             <End Role="ImpuestosPorArticulo" EntitySet="ImpuestosPorArticulo" />
@@ -8715,6 +8766,10 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           </AssociationSet>
           <AssociationSet Name="fk_Configuraciones_OpcionesCostos_Disminuye" Association="Self.fk_Configuraciones_OpcionesCostos_Disminuye">
             <End Role="OpcionesCostos" EntitySet="OpcionesCostos" />
+            <End Role="Configuraciones" EntitySet="Configuraciones" />
+          </AssociationSet>
+          <AssociationSet Name="fk_Configuraciones_Periodicidad" Association="Self.fk_Configuraciones_Periodicidad">
+            <End Role="Periodicidad" EntitySet="Periodicidad" />
             <End Role="Configuraciones" EntitySet="Configuraciones" />
           </AssociationSet>
           <AssociationSet Name="fk_estatus_ordendeCompra" Association="Self.fk_estatus_ordendeCompra">
@@ -9838,6 +9893,16 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
             <End Role="Compra" EntitySet="Compras" />
             <End Role="Pedimento" EntitySet="Pedimentos" />
           </AssociationSet>
+          <EntitySet Name="Periodicidads" EntityType="CNModel.Periodicidad" />
+          <AssociationSet Name="fk_Configuraciones_Periodicidad" Association="CNModel.fk_Configuraciones_Periodicidad">
+            <End Role="Periodicidad" EntitySet="Periodicidads" />
+            <End Role="Configuracione" EntitySet="Configuraciones" />
+          </AssociationSet>
+          <EntitySet Name="ImpuestoPorFacturas" EntityType="CNModel.ImpuestoPorFactura" />
+          <AssociationSet Name="FK__ImpuestoPorFactura__idFactura" Association="CNModel.FK__ImpuestoPorFactura__idFactura">
+            <End Role="Factura" EntitySet="Facturas" />
+            <End Role="ImpuestoPorFactura" EntitySet="ImpuestoPorFacturas" />
+          </AssociationSet>
         </EntityContainer>
         <EntityType Name="AbonosDeCompra">
           <Key>
@@ -10332,6 +10397,8 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <NavigationProperty Name="Series" Relationship="CNModel.FK__Series__idConfig__2645B050" FromRole="Configuracione" ToRole="Series" />
           <NavigationProperty Name="OpcionesCosto" Relationship="CNModel.fk_Configuraciones_OpcionesCostos_Aumenta" FromRole="Configuracione" ToRole="OpcionesCosto" />
           <NavigationProperty Name="OpcionesCosto1" Relationship="CNModel.fk_Configuraciones_OpcionesCostos_Disminuye" FromRole="Configuracione" ToRole="OpcionesCosto" />
+          <Property Name="idPeriodicidad" Type="Int32" />
+          <NavigationProperty Name="Periodicidad" Relationship="CNModel.fk_Configuraciones_Periodicidad" FromRole="Configuracione" ToRole="Periodicidad" />
         </EntityType>
         <EntityType Name="Cotizacione">
           <Key>
@@ -10875,6 +10942,7 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <NavigationProperty Name="Remisiones" Relationship="CNModel.FK__Remisione__idFac__73852659" FromRole="Factura" ToRole="Remisione" />
           <NavigationProperty Name="TimbresDeFactura" Relationship="CNModel.FK__TimbresDe__idTim__12FDD1B2" FromRole="Factura" ToRole="TimbresDeFactura" />
           <NavigationProperty Name="Usuario1" Relationship="CNModel.fk_Facturas_Usuarios" FromRole="Factura" ToRole="Usuario" />
+          <NavigationProperty Name="ImpuestoPorFacturas" Relationship="CNModel.FK__ImpuestoPorFactura__idFactura" FromRole="Factura" ToRole="ImpuestoPorFactura" />
         </EntityType>
         <EntityType Name="FormasPago">
           <Key>
@@ -16079,6 +16147,52 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <End Type="CNModel.Compra" Role="Compra" Multiplicity="*" />
           <End Type="CNModel.Pedimento" Role="Pedimento" Multiplicity="*" />
         </Association>
+        <EntityType Name="Periodicidad">
+          <Key>
+            <PropertyRef Name="idPeriodicidad" />
+          </Key>
+          <Property Name="idPeriodicidad" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="codigo" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="descripcion" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="Configuraciones" Relationship="CNModel.fk_Configuraciones_Periodicidad" FromRole="Periodicidad" ToRole="Configuracione" />
+        </EntityType>
+        <Association Name="fk_Configuraciones_Periodicidad">
+          <End Type="CNModel.Periodicidad" Role="Periodicidad" Multiplicity="0..1" />
+          <End Type="CNModel.Configuracione" Role="Configuracione" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Periodicidad">
+              <PropertyRef Name="idPeriodicidad" />
+            </Principal>
+            <Dependent Role="Configuracione">
+              <PropertyRef Name="idPeriodicidad" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="ImpuestoPorFactura">
+          <Key>
+            <PropertyRef Name="idImpuestoPorFactura" />
+          </Key>
+          <Property Name="idImpuestoPorFactura" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="idFactura" Type="Int32" Nullable="false" />
+          <Property Name="base" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="codigoImpuesto" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="codigoTipoFactor" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="valorTasaOCuaota" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <Property Name="importe" Type="Decimal" Nullable="false" Precision="16" Scale="6" />
+          <NavigationProperty Name="Factura" Relationship="CNModel.FK__ImpuestoPorFactura__idFactura" FromRole="ImpuestoPorFactura" ToRole="Factura" />
+        </EntityType>
+        <Association Name="FK__ImpuestoPorFactura__idFactura">
+          <End Type="CNModel.Factura" Role="Factura" Multiplicity="1" />
+          <End Type="CNModel.ImpuestoPorFactura" Role="ImpuestoPorFactura" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Factura">
+              <PropertyRef Name="idFactura" />
+            </Principal>
+            <Dependent Role="ImpuestoPorFactura">
+              <PropertyRef Name="idFactura" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -16491,6 +16605,7 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
           <EntitySetMapping Name="Configuraciones">
             <EntityTypeMapping TypeName="CNModel.Configuracione">
               <MappingFragment StoreEntitySet="Configuraciones">
+                <ScalarProperty Name="idPeriodicidad" ColumnName="idPeriodicidad" />
                 <ScalarProperty Name="idOpcionCostoDisminuye" ColumnName="idOpcionCostoDisminuye" />
                 <ScalarProperty Name="idOpcionCostoAumenta" ColumnName="idOpcionCostoAumenta" />
                 <ScalarProperty Name="idDomicilio" ColumnName="idDomicilio" />
@@ -19136,6 +19251,28 @@ advertencia 6002: La tabla o vista 'compune1_alma.dbo.VwVentasActivasPorCliente'
               <ScalarProperty Name="idCompra" ColumnName="idCompra" />
             </EndProperty>
           </AssociationSetMapping>
+          <EntitySetMapping Name="Periodicidads">
+            <EntityTypeMapping TypeName="CNModel.Periodicidad">
+              <MappingFragment StoreEntitySet="Periodicidad">
+                <ScalarProperty Name="descripcion" ColumnName="descripcion" />
+                <ScalarProperty Name="codigo" ColumnName="codigo" />
+                <ScalarProperty Name="idPeriodicidad" ColumnName="idPeriodicidad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImpuestoPorFacturas">
+            <EntityTypeMapping TypeName="CNModel.ImpuestoPorFactura">
+              <MappingFragment StoreEntitySet="ImpuestoPorFactura">
+                <ScalarProperty Name="importe" ColumnName="importe" />
+                <ScalarProperty Name="valorTasaOCuaota" ColumnName="valorTasaOCuaota" />
+                <ScalarProperty Name="codigoTipoFactor" ColumnName="codigoTipoFactor" />
+                <ScalarProperty Name="codigoImpuesto" ColumnName="codigoImpuesto" />
+                <ScalarProperty Name="base" ColumnName="base" />
+                <ScalarProperty Name="idFactura" ColumnName="idFactura" />
+                <ScalarProperty Name="idImpuestoPorFactura" ColumnName="idImpuestoPorFactura" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -142,6 +142,7 @@ namespace Aprovi.Business.Services
                 local.Domicilio.codigoPostal = configuration.Domicilio.codigoPostal;                
                 local.Domicilio.idPais = configuration.Domicilio.idPais;
                 local.FormatosPorConfiguracions = configuration.FormatosPorConfiguracions;
+                local.idPeriodicidad = (int)(configuration.idPeriodicidad.isValid() ? configuration.idPeriodicidad : (int?)null);
 
                 _configurations.Update(local);
                 _UOW.Save();

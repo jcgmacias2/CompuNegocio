@@ -70,7 +70,7 @@ namespace Aprovi.Views.UI
 
         private int _idConfiguration;
 
-        public void FillCombo(List<Pais> countries, List<object> opcionesCosto, List<Reporte> reportes)
+        public void FillCombo(List<Pais> countries, List<object> opcionesCosto, List<Reporte> reportes, List<Periodicidad> periodicidads)
         {
             cmbPais.ItemsSource = countries;
             cmbPais.DisplayMemberPath = "descripcion";
@@ -87,6 +87,10 @@ namespace Aprovi.Views.UI
             cmbReportes.ItemsSource = reportes;
             cmbReportes.DisplayMemberPath = "nombre";
             cmbReportes.SelectedValuePath = "idReporte";
+            
+            cmbPeriodicidad.ItemsSource = periodicidads;
+            cmbPeriodicidad.DisplayMemberPath = "descripcion";
+            cmbPeriodicidad.SelectedValuePath = "idPeriodicidad";
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -153,7 +157,8 @@ namespace Aprovi.Views.UI
                     idOpcionCostoDisminuye = cmbOpcionCostoDisminuye.SelectedValue.ToIntOrDefault(),
                     idOpcionCostoAumenta = cmbOpcionCostoAumenta.SelectedValue.ToIntOrDefault(),
                     FormatosPorConfiguracions = dgFormatos.ItemsSource.Cast<FormatosPorConfiguracion>().ToList(),
-                    Logo = new Uri(txtLogo.Text)
+                    Logo = new Uri(txtLogo.Text),
+                    idPeriodicidad = cmbPeriodicidad.SelectedValue.ToIntOrDefault(),
                 };
             }
         }
@@ -170,6 +175,12 @@ namespace Aprovi.Views.UI
             txtCiudad.Text = configuration.Domicilio.ciudad;
             txtEstado.Text = configuration.Domicilio.estado;
             cmbPais.SelectedValue = configuration.Domicilio.idPais;
+
+            if (configuration.idPeriodicidad.isValid())
+                cmbPeriodicidad.SelectedValue = configuration.idPeriodicidad;
+            else
+                cmbPeriodicidad.SelectedIndex = 0;
+
             cmbOpcionCostoAumenta.SelectedValue = configuration.idOpcionCostoAumenta;
             cmbOpcionCostoDisminuye.SelectedValue = configuration.idOpcionCostoDisminuye;
             txtCodigoPostal.Text = configuration.Domicilio.codigoPostal;

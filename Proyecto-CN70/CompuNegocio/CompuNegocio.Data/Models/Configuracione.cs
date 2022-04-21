@@ -19,21 +19,22 @@ namespace Aprovi.Data.Models
         {
             this.Certificados = new HashSet<Certificado>();
             this.CuentasGuardians = new HashSet<CuentasGuardian>();
+            this.FormatosPorConfiguracions = new HashSet<FormatosPorConfiguracion>();
             this.Regimenes = new HashSet<Regimene>();
             this.Series = new HashSet<Series>();
-            this.FormatosPorConfiguracions = new HashSet<FormatosPorConfiguracion>();
         }
     
         public int idConfiguracion { get; set; }
         public string razonSocial { get; set; }
         public string rfc { get; set; }
+        public string telefono { get; set; }
         public decimal tipoDeCambio { get; set; }
         public string usuarioPAC { get; set; }
         public string contraseñaPAC { get; set; }
         public int idDomicilio { get; set; }
-        public string telefono { get; set; }
         public int idOpcionCostoAumenta { get; set; }
         public int idOpcionCostoDisminuye { get; set; }
+        public Nullable<int> idPeriodicidad { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Certificado> Certificados { get; set; }
@@ -41,12 +42,13 @@ namespace Aprovi.Data.Models
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<CuentasGuardian> CuentasGuardians { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<FormatosPorConfiguracion> FormatosPorConfiguracions { get; set; }
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Regimene> Regimenes { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Series> Series { get; set; }
         public virtual OpcionesCosto OpcionesCosto { get; set; }
         public virtual OpcionesCosto OpcionesCosto1 { get; set; }
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<FormatosPorConfiguracion> FormatosPorConfiguracions { get; set; }
+        public virtual Periodicidad Periodicidad { get; set; }
     }
 }

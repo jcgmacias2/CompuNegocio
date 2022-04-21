@@ -28,6 +28,7 @@ namespace Aprovi.Business.Services
         private IViewSeriesRepository _folios;
         private IDirectorioRepository _directorio;
         private ISeccionesRepository _secciones;
+        private IImpuestoPorFacturaRepository _impuestoPorFactura;
 
         public ComprobanteFiscalService(IUnitOfWork unitOfWork)
         {
@@ -36,6 +37,7 @@ namespace Aprovi.Business.Services
             _folios = _UOW.Folios;
             _directorio = _UOW.Directorio;
             _secciones = _UOW.Secciones;
+            _impuestoPorFactura = _UOW.ImpuestoPorFactura;
         }
 
         #region Generales
@@ -630,6 +632,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "XXX"); // Moneda
                 cadena.AppendFormat("{0}|", "0"); //Total
                 cadena.Append("P|"); //tipo de comprobante
+                cadena.AppendFormat("{0}|", "01"); //Exportacion JCRV /*Preguntar que pex */
                 cadena.AppendFormat("{0}|", config.Domicilio.codigoPostal); //LugarExpedición
 
                 //Emisor
@@ -642,6 +645,8 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", invoice.Cliente.razonSocial.Trim());
                 if (!invoice.Cliente.Domicilio.Pais.idPais.Equals((int)Paises.México)) //Solo cuando es extranjero
                     cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.Pais.codigo);
+                cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.codigoPostal); //Codigo Postal Receptor JCRV
+                cadena.AppendFormat("{0}|", invoice.Cliente.Regimene.codigo); // Regimen Receptor JCRV
                 cadena.AppendFormat("{0}|", "P01"); //UsoCFDI
 
                 //Conceptos
@@ -652,9 +657,14 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "Pago");
                 cadena.AppendFormat("{0}|", "0.0");
                 cadena.AppendFormat("{0}|", "0.0");
+                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
 
                 //Complemento de pago
-                cadena.AppendFormat("{0}|", "1.0"); //Version Complemento Pago
+                cadena.AppendFormat("{0}|", "2.0"); //Version Complemento Pago
+
+                var totales = payment.monto.ToRoundedCurrency(payment.Moneda); //Totales JCRV
+                cadena.AppendFormat("{0}|", totales.ToDecimalString()); //MontoTotalPagos JCRV 
+
                 cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); //FechaPago
                 cadena.AppendFormat("{0}|", payment.FormasPago.codigo); //FormaPagoP
                 cadena.AppendFormat("{0}|", payment.Moneda.codigo); //MonedaP
@@ -672,13 +682,29 @@ namespace Aprovi.Business.Services
                     else
                         cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
                 }
-                cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
+                //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                 var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                 cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
                 var abonoParcial = payment.monto.ToDocumentCurrency(payment.Moneda, invoice.Moneda, payment.tipoDeCambio); //cantidad abonada respecto a la moneda del documento
                 cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado + abonoParcial).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoAnt
                 cadena.AppendFormat("{0}|", abonoParcial.ToStringRoundedCurrency(invoice.Moneda)); //ImpPagadoDocumentoRelacionado
                 cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoInsoluto
+                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
+
+                if (invoice.ImpuestoPorFacturas.Count() > 0) 
+                { 
+                    foreach (var impuesto in invoice.ImpuestoPorFacturas.ToList())
+                    {
+                        var base_imp = abonoParcial / (1 + impuesto.valorTasaOCuaota);
+                        //cadena.AppendFormat("{0}|", impuesto.@base.ToStringRoundedCurrency(invoice.Moneda)); //BaseDR
+                        cadena.AppendFormat("{0}|", base_imp.ToStringRoundedCurrency(invoice.Moneda)); //BaseDR
+                        cadena.AppendFormat("{0}|", impuesto.codigoImpuesto); //ImpuestoDR
+                        cadena.AppendFormat("{0}|", impuesto.codigoTipoFactor); //TipoFactorDR
+                        cadena.AppendFormat("{0}|", Math.Abs(impuesto.valorTasaOCuaota).ToTdCFDI_Importe()); //TasaOCuotaDR JCRV
+                        cadena.AppendFormat("{0}|", (base_imp * impuesto.valorTasaOCuaota).ToStringRoundedCurrency(invoice.Moneda)); //ImporteDR JCRV
+                    }
+                }
+
 
                 cadena.Append("|"); //Finaliza la cadena
 
@@ -709,6 +735,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "XXX"); // Moneda
                 cadena.AppendFormat("{0}|", "0"); //Total
                 cadena.Append("P|"); //tipo de comprobante
+                cadena.AppendFormat("{0}|", "01"); //Exportacion JCRV /*Preguntar que pex */
                 cadena.AppendFormat("{0}|", config.Domicilio.codigoPostal); //LugarExpedición
 
                 //Emisor
@@ -721,6 +748,8 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", payment.Cliente.razonSocial.Trim());
                 if (!payment.Cliente.Domicilio.Pais.idPais.Equals((int)Paises.México)) //Solo cuando es extranjero
                     cadena.AppendFormat("{0}|", payment.Cliente.Domicilio.Pais.codigo);
+                cadena.AppendFormat("{0}|", payment.Cliente.Domicilio.codigoPostal); //Codigo Postal Receptor JCRV
+                cadena.AppendFormat("{0}|", payment.Cliente.Regimene.codigo); // Regimen Receptor JCRV
                 cadena.AppendFormat("{0}|", "P01"); //UsoCFDI
 
                 //Conceptos
@@ -731,9 +760,13 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "Pago");
                 cadena.AppendFormat("{0}|", "0.00");
                 cadena.AppendFormat("{0}|", "0.00");
+                cadena.AppendFormat("{0}|", "01"); //ObjetoImp  JCRV
 
                 //Complemento de pago
-                cadena.AppendFormat("{0}|", "1.0"); //Version Complemento Pago
+                cadena.AppendFormat("{0}|", "2.0"); //Version Complemento Pago
+
+                var totales = payment.AbonosDeFacturas.Sum(p => p.monto.ToRoundedCurrency(p.Moneda));//Totales JCRV
+                cadena.AppendFormat("{0}|", totales.ToDecimalString()); //MontoTotalPagos JCRV 
 
                 //Despues de aqui se debe repetir por cada pago generado(http://www.sat.gob.mx/informacion_fiscal/factura_electronica/Documents/Complementoscfdi/Pagos10.pdf)
                 for (int i = 0; i < payment.AbonosDeFacturas.Count; i++)
@@ -761,13 +794,30 @@ namespace Aprovi.Business.Services
                         else
                             cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
                     }
-                    cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
+                    //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                     var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
                     var abonoParcial = p.monto.ToDocumentCurrency(p.Moneda, invoice.Moneda, payment.tipoDeCambio); //cantidad abonada respecto a la moneda del documento
                     cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado + abonoParcial - invoice.Acreditado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoAnt
                     cadena.AppendFormat("{0}|", abonoParcial.ToStringRoundedCurrency(invoice.Moneda)); //ImpPagadoDocumentoRelacionado
                     cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado - invoice.Acreditado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoInsoluto
+                    cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
+
+                    /** JCRV SECCION DE IMPUESTOS**/
+                    if (invoice.ImpuestoPorFacturas.Count() > 0)
+                    {
+                        foreach(var impuesto in invoice.ImpuestoPorFacturas.ToList())
+                        {
+                            var base_imp = abonoParcial / (1 + impuesto.valorTasaOCuaota);
+                            //cadena.AppendFormat("{0}|", impuesto.@base.ToStringRoundedCurrency(invoice.Moneda)); //BaseDR
+                            cadena.AppendFormat("{0}|", base_imp.ToStringRoundedCurrency(invoice.Moneda)); //BaseDR
+                            cadena.AppendFormat("{0}|", impuesto.codigoImpuesto); //ImpuestoDR
+                            cadena.AppendFormat("{0}|", impuesto.codigoTipoFactor); //TipoFactorDR
+                            cadena.AppendFormat("{0}|", Math.Abs(impuesto.valorTasaOCuaota).ToTdCFDI_Importe()); //TasaOCuotaDR JCRV
+                            cadena.AppendFormat("{0}|", (base_imp * impuesto.valorTasaOCuaota).ToStringRoundedCurrency(invoice.Moneda)); //ImporteDR JCRV
+                        }
+                    }
+
                 }
 
                 cadena.Append("|"); //Finaliza la cadena
@@ -1148,7 +1198,7 @@ namespace Aprovi.Business.Services
                 else
                 {
                     xSchema.Value = "http://www.sat.gob.mx/cfd/4 http://www.sat.gob.mx/sitio_internet/cfd/4/cfdv40.xsd " +
-                 "http://www.sat.gob.mx/Pagos http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos10.xsd";
+                 "http://www.sat.gob.mx/Pagos20 http://www.sat.gob.mx/sitio_internet/cfd/Pagos/Pagos20.xsd";
 
                 }
 
@@ -1251,7 +1301,7 @@ namespace Aprovi.Business.Services
             try
             {
                 XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
-                comprobante.SetAttribute("xmlns:pago10", "http://www.sat.gob.mx/Pagos");
+                comprobante.SetAttribute("xmlns:pago20", "http://www.sat.gob.mx/Pagos20");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
                 comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", abono.TimbresDeAbonosDeFactura.serie);
@@ -1265,6 +1315,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("Total", "0");
                 comprobante.SetAttribute("TipoDeComprobante", "P");
                 comprobante.SetAttribute("LugarExpedicion", config.Domicilio.codigoPostal);
+                comprobante.SetAttribute("Exportacion", "01"); //JCRV Validar dato
 
                 return comprobante;
             }
@@ -1279,7 +1330,7 @@ namespace Aprovi.Business.Services
             try
             {
                 XmlElement comprobante = xml.CreateElement("cfdi", "Comprobante", "http://www.sat.gob.mx/cfd/4");
-                comprobante.SetAttribute("xmlns:pago10", "http://www.sat.gob.mx/Pagos");
+                comprobante.SetAttribute("xmlns:pago20", "http://www.sat.gob.mx/Pagos20");
                 comprobante.SetAttribute("xmlns:xsi", "http://www.w3.org/2001/XMLSchema-instance");
                 comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", pago.serie);
@@ -1293,6 +1344,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("Total", "0");
                 comprobante.SetAttribute("TipoDeComprobante", "P");
                 comprobante.SetAttribute("LugarExpedicion", config.Domicilio.codigoPostal);
+                comprobante.SetAttribute("Exportacion", "01"); //JCRV Validar dato
 
                 return comprobante;
             }
@@ -1423,6 +1475,7 @@ namespace Aprovi.Business.Services
                     }
                     else
                         nodoConcepto.SetAttribute("Descripcion", concepto.Articulo.descripcion);
+
                     nodoConcepto.SetAttribute("ValorUnitario", concepto.precioUnitario.ToStringRoundedCurrency(factura.Moneda));
                     nodoConcepto.SetAttribute("Importe", (concepto.cantidad * concepto.precioUnitario).ToStringRoundedCurrency(factura.Moneda));
                     nodoConcepto.SetAttribute("ObjetoImp", (concepto.Impuestos.Count > 0) ? "01" : "02");
@@ -1445,6 +1498,8 @@ namespace Aprovi.Business.Services
                             foreach (var impuesto in traslados)
                             {
                                 XmlElement nodoImpuesto;
+                                ImpuestoPorFactura imp;
+
                                 nodoImpuesto = xml.CreateElement("cfdi", "Traslado", "http://www.sat.gob.mx/cfd/4");
                                 nodoTrasladados.AppendChild(nodoImpuesto);
                                 var baseImpuesto = Operations.CalculateTaxBase(Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento), concepto.cantidad, impuesto, concepto.Impuestos.ToList()); // Operations.CalculatePriceWithDiscount(concepto.precioUnitario, concepto.descuento) * concepto.cantidad;
@@ -1455,6 +1510,19 @@ namespace Aprovi.Business.Services
                                 var taxes = new List<Impuesto>();
                                 taxes.Add(impuesto);
                                 nodoImpuesto.SetAttribute("Importe", Math.Abs(Operations.CalculateTaxes(baseImpuesto, taxes)).ToTdCFDI_Importe());
+
+                                imp = new ImpuestoPorFactura {
+                                    idFactura = factura.idFactura,
+                                    @base = baseImpuesto.ToStringRoundedCurrency(factura.Moneda).ToDecimal(),
+                                    codigoImpuesto = impuesto.codigo,
+                                    codigoTipoFactor = impuesto.TiposFactor.codigo,
+                                    valorTasaOCuaota = impuesto.valor.ToPorcentageString().ToDecimal(),
+                                    importe = Math.Abs(Operations.CalculateTaxes(baseImpuesto, taxes)).ToTdCFDI_Importe().ToDecimal()
+                                };
+
+                                
+                                _impuestoPorFactura.Add(imp);
+                                _UOW.Save();
                             }
                         }
 
@@ -1533,6 +1601,7 @@ namespace Aprovi.Business.Services
                 nodoConcepto.SetAttribute("Descripcion", "Pago");
                 nodoConcepto.SetAttribute("ValorUnitario", (0.0m).ToStringRoundedCurrency(abono.Moneda));
                 nodoConcepto.SetAttribute("Importe", (0.0m).ToStringRoundedCurrency(abono.Moneda));
+                nodoConcepto.SetAttribute("ObjetoImp", "01"); //JCRV Validar dato
 
                 return nodoConceptos;
             }
@@ -1556,6 +1625,7 @@ namespace Aprovi.Business.Services
                 nodoConcepto.SetAttribute("Descripcion", "Pago");
                 nodoConcepto.SetAttribute("ValorUnitario", "0.00");
                 nodoConcepto.SetAttribute("Importe", "0.00");
+                nodoConcepto.SetAttribute("ObjetoImp", "01"); //JCRV Validar dato
 
                 return nodoConceptos;
             }
@@ -1643,12 +1713,19 @@ namespace Aprovi.Business.Services
             try
             {
                 XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/4");
-                XmlElement nodoPagos = xml.CreateElement("pago10", "Pagos", "http://www.sat.gob.mx/Pagos");
-                XmlElement nodoPago = xml.CreateElement("pago10", "Pago", "http://www.sat.gob.mx/Pagos");
-                XmlElement nodoDoctoRelacionado = xml.CreateElement("pago10", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos");
+                XmlElement nodoPagos = xml.CreateElement("pago20", "Pagos", "http://www.sat.gob.mx/Pagos20");
+                XmlElement nodoPago = xml.CreateElement("pago20", "Pago", "http://www.sat.gob.mx/Pagos20");
+                XmlElement nodoDoctoRelacionado = xml.CreateElement("pago20", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos20");
+                XmlElement nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
+
+                var totales = abono.monto.ToRoundedCurrency(abono.Moneda);//JCRV Totales
+                nodoPagoTotales.SetAttribute("MontoTotalPagos", totales.ToDecimalString());
+                nodoPagos.AppendChild(nodoPagoTotales);
+
                 nodoComplemento.AppendChild(nodoPagos);
 
-                nodoPagos.SetAttribute("Version", "1.0");
+                nodoPagos.SetAttribute("Version", "2.0");
+
                 nodoPagos.AppendChild(nodoPago);
 
                 nodoPago.SetAttribute("FechaPago", abono.fechaHora.ToUTCFormat());
@@ -1663,15 +1740,16 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("Serie", facturaOriginal.serie);
                 nodoDoctoRelacionado.SetAttribute("Folio", facturaOriginal.folio.ToString());
                 nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
+                
                 if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                 {
                     if (facturaOriginal.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", "1");
                     else
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
-
                 }
-                nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
+
+                //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                 var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
                 nodoDoctoRelacionado.SetAttribute("NumParcialidad", numParcialidad.ToString());
 
@@ -1679,6 +1757,37 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("ImpSaldoAnt", (facturaOriginal.Total - facturaOriginal.Abonado + abonoParcial).ToStringRoundedCurrency(facturaOriginal.Moneda)); //ImpSaldoAnt
                 nodoDoctoRelacionado.SetAttribute("ImpPagado", abonoParcial.ToStringRoundedCurrency(facturaOriginal.Moneda));
                 nodoDoctoRelacionado.SetAttribute("ImpSaldoInsoluto", (facturaOriginal.Total - facturaOriginal.Abonado).ToStringRoundedCurrency(facturaOriginal.Moneda));
+                nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
+
+                var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
+                if (impuestos.Count > 0)
+                {
+                    XmlElement nodoImpuestosDR;
+                    XmlElement trasladosDR;
+
+                    nodoImpuestosDR = xml.CreateElement("pago20", "ImpuestosDR", "http://www.sat.gob.mx/Pagos20");
+                    nodoDoctoRelacionado.AppendChild(nodoImpuestosDR);
+
+                    trasladosDR = xml.CreateElement("pago20", "TrasladosDR", "http://www.sat.gob.mx/Pagos20");
+                    nodoImpuestosDR.AppendChild(trasladosDR);
+
+                    foreach (var traslado in impuestos)
+                    {
+                        XmlElement trasladoDR;
+                        var base_imp = abonoParcial / (1 + traslado.valorTasaOCuaota);
+
+                        trasladoDR = xml.CreateElement("pago20", "TrasladoDR", "http://www.sat.gob.mx/Pagos20");
+                        trasladosDR.AppendChild(trasladoDR);
+
+                        trasladoDR.SetAttribute("BaseDR", base_imp.ToStringRoundedCurrency(facturaOriginal.Moneda));
+                        trasladoDR.SetAttribute("ImporteDR", (base_imp * traslado.valorTasaOCuaota).ToStringRoundedCurrency(facturaOriginal.Moneda));
+                        trasladoDR.SetAttribute("ImpuestoDR", traslado.codigoImpuesto);
+                        trasladoDR.SetAttribute("TasaOCuotaDR", Math.Abs(traslado.valorTasaOCuaota).ToTdCFDI_Importe());
+                        trasladoDR.SetAttribute("TipoFactorDR", traslado.codigoTipoFactor);
+                    }
+
+                }
+
 
                 return nodoComplemento;
             }
@@ -1693,21 +1802,27 @@ namespace Aprovi.Business.Services
             try
             {
                 XmlElement nodoComplemento = xml.CreateElement("cfdi", "Complemento", "http://www.sat.gob.mx/cfd/4");
-                XmlElement nodoPagos = xml.CreateElement("pago10", "Pagos", "http://www.sat.gob.mx/Pagos");
+                XmlElement nodoPagos = xml.CreateElement("pago20", "Pagos", "http://www.sat.gob.mx/Pagos20");
 
                 //Esto se repite por cada abono
                 XmlElement nodoPago;
+                XmlElement nodoPagoTotales;
                 XmlElement nodoDoctoRelacionado;
+
+                nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
+                var totales = payment.AbonosDeFacturas.Sum(p => p.monto.ToRoundedCurrency(p.Moneda));//JCRV Totales
+                nodoPagoTotales.SetAttribute("MontoTotalPagos", totales.ToDecimalString() /*ToStringRoundedCurrency(payment.AbonosDeFacturas.First().Moneda)*/);//JCRV
+                nodoPagos.AppendChild(nodoPagoTotales);
 
                 foreach (var abono in payment.AbonosDeFacturas)
                 {
                     var facturaOriginal = new VMFactura(abono.Factura);
 
-                    nodoPago = xml.CreateElement("pago10", "Pago", "http://www.sat.gob.mx/Pagos");
-                    nodoDoctoRelacionado = xml.CreateElement("pago10", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos");
+                    nodoPago = xml.CreateElement("pago20", "Pago", "http://www.sat.gob.mx/Pagos20");
+                    nodoDoctoRelacionado = xml.CreateElement("pago20", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos20");
                     nodoComplemento.AppendChild(nodoPagos);
 
-                    nodoPagos.SetAttribute("Version", "1.0");
+                    nodoPagos.SetAttribute("Version", "2.0");
                     nodoPagos.AppendChild(nodoPago);
 
                     nodoPago.SetAttribute("FechaPago", abono.fechaHora.ToUTCFormat());
@@ -1724,7 +1839,7 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
                     if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
-                    nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
+                    //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                     var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     nodoDoctoRelacionado.SetAttribute("NumParcialidad", numParcialidad.ToString());
 
@@ -1732,6 +1847,37 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("ImpSaldoAnt", (facturaOriginal.Total - facturaOriginal.Abonado + abonoParcial - facturaOriginal.Acreditado).ToStringRoundedCurrency(facturaOriginal.Moneda)); //ImpSaldoAnt
                     nodoDoctoRelacionado.SetAttribute("ImpPagado", abonoParcial.ToStringRoundedCurrency(facturaOriginal.Moneda));
                     nodoDoctoRelacionado.SetAttribute("ImpSaldoInsoluto", (facturaOriginal.Total - facturaOriginal.Abonado - facturaOriginal.Acreditado).ToStringRoundedCurrency(facturaOriginal.Moneda));
+                    nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
+
+                    var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
+                    if (impuestos.Count > 0)
+                    {
+                        XmlElement nodoImpuestosDR;
+                        XmlElement trasladosDR;
+
+                        nodoImpuestosDR = xml.CreateElement("pago20", "ImpuestosDR", "http://www.sat.gob.mx/Pagos20");
+                        nodoDoctoRelacionado.AppendChild(nodoImpuestosDR);
+
+                        trasladosDR = xml.CreateElement("pago20", "TrasladosDR", "http://www.sat.gob.mx/Pagos20");
+                        nodoImpuestosDR.AppendChild(trasladosDR);
+
+                        foreach (var traslado in impuestos)
+                        {
+                            XmlElement trasladoDR;
+                            var base_imp = abonoParcial / (1 + traslado.valorTasaOCuaota);
+
+                            trasladoDR = xml.CreateElement("pago20", "TrasladoDR", "http://www.sat.gob.mx/Pagos20");
+                            trasladosDR.AppendChild(trasladoDR);
+
+                            trasladoDR.SetAttribute("BaseDR", base_imp.ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            trasladoDR.SetAttribute("ImporteDR", (base_imp * traslado.valorTasaOCuaota).ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            trasladoDR.SetAttribute("ImpuestoDR", traslado.codigoImpuesto);
+                            trasladoDR.SetAttribute("TasaOCuotaDR", Math.Abs(traslado.valorTasaOCuaota).ToTdCFDI_Importe());
+                            trasladoDR.SetAttribute("TipoFactorDR", traslado.codigoTipoFactor);
+                        }
+
+                    }
+
                 }
 
                 return nodoComplemento;
@@ -1807,6 +1953,8 @@ namespace Aprovi.Business.Services
                     traslado.SetAttribute("TasaOCuota", imp.valor.ToPorcentageString());
                     traslado.SetAttribute("Importe", imp.Importe.ToStringRoundedCurrency(moneda));
                     traslado.SetAttribute("Base", imp.MontoGravable.ToStringRoundedCurrency(moneda)); //JCRV i.MontoGravable.ToStringRoundedCurrency(creditNote.Moneda)
+
+
                 }
 
                 return traslados;

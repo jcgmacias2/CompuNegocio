@@ -409,20 +409,19 @@
                   <TextRun>
                     <Value>Este documento es una representación impresa de un CFDI</Value>
                     <Style>
-                      <FontStyle>Italic</FontStyle>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>7.24692cm</Top>
+            <Top>7.2822cm</Top>
             <Height>0.6cm</Height>
-            <Width>24.82754cm</Width>
+            <Width>19.94105cm</Width>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -487,7 +486,7 @@
             <Top>3.21776cm</Top>
             <Left>3.61125cm</Left>
             <Height>1cm</Height>
-            <Width>17.85608cm</Width>
+            <Width>16.2861cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
@@ -552,7 +551,7 @@
             <Top>4.39415cm</Top>
             <Left>3.61125cm</Left>
             <Height>1cm</Height>
-            <Width>17.85608cm</Width>
+            <Width>16.2861cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -617,7 +616,7 @@
             <Top>6.10581cm</Top>
             <Left>0.10544cm</Left>
             <Height>1cm</Height>
-            <Width>21.36189cm</Width>
+            <Width>19.79191cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
@@ -650,7 +649,7 @@
             <rd:DefaultName>Textbox2</rd:DefaultName>
             <Top>0cm</Top>
             <Height>0.6cm</Height>
-            <Width>24.82754cm</Width>
+            <Width>20.14441cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -1004,18 +1003,18 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.14123in</Height>
+        <Height>3.16206in</Height>
         <Style />
       </Body>
-      <Width>9.80587in</Width>
+      <Width>7.93675in</Width>
       <Page>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>11in</PageWidth>
-        <LeftMargin>0.19685in</LeftMargin>
-        <RightMargin>0.19685in</RightMargin>
-        <TopMargin>0.19685in</TopMargin>
-        <BottomMargin>0.19685in</BottomMargin>
-        <ColumnSpacing>0.05118in</ColumnSpacing>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style>
           <Border>
             <Color>White</Color>
@@ -1025,6 +1024,6 @@
       </Page>
     </ReportSection>
   </ReportSections>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>5b020ac9-d5d1-48f3-9111-e01abbd9de68</rd:ReportID>
 </Report>

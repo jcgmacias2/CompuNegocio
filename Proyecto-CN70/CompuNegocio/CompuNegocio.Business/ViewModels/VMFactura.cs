@@ -73,6 +73,7 @@ namespace Aprovi.Business.ViewModels
                 this.Usuario1 = invoice.Usuario1;
                 this.idEstatusCrediticio = invoice.idEstatusCrediticio;
                 //this.Acreditado = invoice.NotasDeCreditoes.Sum(n => n.importe.ToDocumentCurrency(n.Moneda, invoice.Moneda, invoice.tipoDeCambio));
+                this.ImpuestoPorFacturas = invoice.ImpuestoPorFacturas;
 
                 this.UpdateAccount();
             }

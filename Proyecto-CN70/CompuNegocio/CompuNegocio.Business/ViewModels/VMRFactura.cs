@@ -78,6 +78,7 @@ namespace Aprovi.Business.ViewModels
             this.PaisReceptor = factura.Cliente.Domicilio.Pais.descripcion;
             this.CodigoPostalReceptor = factura.Cliente.Domicilio.codigoPostal;
             this.UsoCFDI = factura.UsosCFDI.descripcion;
+            this.RegimenFiscalReceptor = factura.Cliente.Regimene.descripcion;
 
             //Notas
             DatosExtraPorFactura datoNota = factura.DatosExtraPorFacturas.FirstOrDefault(x => x.dato == DatoExtra.Nota.ToString());
@@ -165,6 +166,7 @@ namespace Aprovi.Business.ViewModels
         public string PaisReceptor { get; set; }
         public string CodigoPostalReceptor { get; set; }
         public string UsoCFDI { get; set; }
+        public string RegimenFiscalReceptor { get; set; }
 
         #endregion
 

@@ -15,6 +15,8 @@ namespace Aprovi.Data.Core
 
         IUnidadesDeMedidaRepository UnidadesDeMedida { get; }
 
+        IImpuestoPorFacturaRepository ImpuestoPorFactura { get; }
+
         IImpuestosRepository Impuestos { get; }
 
         ITiposDeImpuestoRepository TiposDeImpuesto { get; }
@@ -164,6 +166,8 @@ namespace Aprovi.Data.Core
         IOpcionesCostosRepository OpcionesCostos { get; }
 
         IOrdenesDeCompraRepository OrdenesDeCompra { get; }
+
+        IPeriodicidadRepository Periodicidad { get; }
 
         IViewArticulosVendidosRepository ArticulosVendidos { get; }
 

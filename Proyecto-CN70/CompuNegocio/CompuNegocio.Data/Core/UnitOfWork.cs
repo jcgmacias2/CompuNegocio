@@ -17,6 +17,7 @@ namespace Aprovi.Data.Core
         private CNEntities _context;
         private IUnidadesDeMedidaRepository _unidadesDeMedida;
         private IImpuestosRepository _impuestos;
+        private IImpuestoPorFacturaRepository _impuestoPorFactura;
         private ITiposDeImpuestoRepository _tiposDeImpuesto;
         private IArticulosRepository _articulos;
         private IMonedasRepository _monedas;
@@ -92,6 +93,7 @@ namespace Aprovi.Data.Core
         private IPedimentosRepository _pedimentos;
         private IOpcionesCostosRepository _opcionesCostos;
         private IOrdenesDeCompraRepository _ordenesDeCompra;
+        private IPeriodicidadRepository _periodicidad;
         private IViewArticulosVendidosRepository _articulosVendidos;
         private IViewVentasActivasPorClienteRepository _ventasPorCliente;
         private IViewSaldoDeudorPorClientePorMonedaRepository _saldoDeudorPorClientePorMoneda;
@@ -159,6 +161,16 @@ namespace Aprovi.Data.Core
                 if (_impuestos == null)
                     _impuestos = new ImpuestosRepository(_context);
                 return _impuestos;
+            }
+        }
+
+        public IImpuestoPorFacturaRepository ImpuestoPorFactura
+        {
+            get
+            {
+                if (_impuestoPorFactura == null)
+                    _impuestoPorFactura = new ImpuestoPorFacturaRepository(_context);
+                return _impuestoPorFactura;
             }
         }
 
@@ -459,6 +471,16 @@ namespace Aprovi.Data.Core
                 if (_folios == null)
                     _folios = new ViewSeriesRepository(_context);
                 return _folios;
+            }
+        }
+
+        public IPeriodicidadRepository Periodicidad
+        {
+            get
+            {
+                if (_periodicidad == null)
+                    _periodicidad = new PeriodicidadRepository(_context);
+                return _periodicidad;
             }
         }
 

@@ -409,7 +409,7 @@
                   <TextRun>
                     <Value>Método de pago :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -443,7 +443,7 @@
                   <TextRun>
                     <Value>Subtotal :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -454,8 +454,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.09389cm</Top>
-            <Left>20.4049cm</Left>
+            <Top>0.97637cm</Top>
+            <Left>15.65071cm</Left>
             <Height>0.5cm</Height>
             <Width>1.93146cm</Width>
             <ZIndex>1</ZIndex>
@@ -478,7 +478,7 @@
                   <TextRun>
                     <Value>Trasladados :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -489,8 +489,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>2.09389cm</Top>
-            <Left>19.97419cm</Left>
+            <Top>1.97637cm</Top>
+            <Left>15.22cm</Left>
             <Height>0.5cm</Height>
             <Width>2.36217cm</Width>
             <ZIndex>2</ZIndex>
@@ -513,7 +513,7 @@
                   <TextRun>
                     <Value>Total :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -524,8 +524,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>2.59389cm</Top>
-            <Left>20.4049cm</Left>
+            <Top>2.47637cm</Top>
+            <Left>15.65071cm</Left>
             <Height>0.5cm</Height>
             <Width>1.93146cm</Width>
             <ZIndex>3</ZIndex>
@@ -560,8 +560,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>1.09389cm</Top>
-            <Left>22.19524cm</Left>
+            <Top>0.97637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>4</ZIndex>
@@ -597,8 +597,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>2.09389cm</Top>
-            <Left>22.19524cm</Left>
+            <Top>1.97637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>5</ZIndex>
@@ -634,8 +634,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>2.59389cm</Top>
-            <Left>22.19524cm</Left>
+            <Top>2.47637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>6</ZIndex>
@@ -664,7 +664,7 @@
                   <TextRun>
                     <Value>=First(Fields!MetodoDePago.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -707,7 +707,7 @@
           <Line Name="Line2">
             <Top>0.9175cm</Top>
             <Height>0cm</Height>
-            <Width>24.9069cm</Width>
+            <Width>20.14441cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
@@ -724,7 +724,7 @@
                   <TextRun>
                     <Value>Retenidos :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -735,8 +735,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>1.59389cm</Top>
-            <Left>19.97419cm</Left>
+            <Top>1.47637cm</Top>
+            <Left>15.22cm</Left>
             <Height>0.5cm</Height>
             <Width>2.36217cm</Width>
             <ZIndex>10</ZIndex>
@@ -771,8 +771,8 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox52</rd:DefaultName>
-            <Top>1.59389cm</Top>
-            <Left>22.19524cm</Left>
+            <Top>1.47637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
             <Width>2.5cm</Width>
             <ZIndex>11</ZIndex>
@@ -796,7 +796,7 @@
                   <TextRun>
                     <Value>Importe total con letra :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -831,7 +831,7 @@
                   <TextRun>
                     <Value>=Parameters!ImporteConLetra.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -865,7 +865,7 @@
                   <TextRun>
                     <Value>Forma de Pago :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -900,7 +900,7 @@
                   <TextRun>
                     <Value>=IIF(First(Fields!NumeroDeCuenta.Value, "Generales").Equals(""), First(Fields!FormaDePago.Value, "Generales"), First(Fields!FormaDePago.Value, "Generales") + " Cuenta: " + First(Fields!NumeroDeCuenta.Value, "Generales"))</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -934,7 +934,7 @@
                   <TextRun>
                     <Value>Notas :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
@@ -970,7 +970,7 @@
                   <TextRun>
                     <Value>=First(Fields!Notas.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>7pt</FontSize>
+                      <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -981,7 +981,7 @@
             <Top>0.14111cm</Top>
             <Left>1.40259cm</Left>
             <Height>0.6cm</Height>
-            <Width>23.50431cm</Width>
+            <Width>18.74182cm</Width>
             <ZIndex>17</ZIndex>
             <Visibility>
               <Hidden>=IIf(Len(First(Fields!Notas.Value, "Generales")) = 0,TRUE,FALSE)</Hidden>
@@ -996,53 +996,19 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox35">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Para pagos por Transferencia Electrónica de Fondos  PESOS Cuenta:                       Clabe:                          DOLARES Cuenta:                       Clabe:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>4.0822cm</Top>
-            <Left>3.85676cm</Left>
-            <Height>0.5cm</Height>
-            <Width>21.05014cm</Width>
-            <ZIndex>18</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
         </ReportItems>
-        <Height>1.90164in</Height>
+        <Height>1.83914in</Height>
         <Style />
       </Body>
-      <Width>9.83258in</Width>
+      <Width>7.93675in</Width>
       <Page>
-        <PageHeight>8.5in</PageHeight>
-        <PageWidth>11in</PageWidth>
-        <LeftMargin>0.19685in</LeftMargin>
-        <RightMargin>0.19685in</RightMargin>
-        <TopMargin>0.19685in</TopMargin>
-        <BottomMargin>0.19685in</BottomMargin>
-        <ColumnSpacing>0.05118in</ColumnSpacing>
+        <PageHeight>27.94cm</PageHeight>
+        <PageWidth>21.59cm</PageWidth>
+        <LeftMargin>0.5cm</LeftMargin>
+        <RightMargin>0.5cm</RightMargin>
+        <TopMargin>0.5cm</TopMargin>
+        <BottomMargin>0.5cm</BottomMargin>
+        <ColumnSpacing>0.13cm</ColumnSpacing>
         <Style>
           <Border>
             <Color>White</Color>
@@ -1086,6 +1052,6 @@
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <rd:ReportUnitType>Inch</rd:ReportUnitType>
+  <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>5b020ac9-d5d1-48f3-9111-e01abbd9de68</rd:ReportID>
 </Report>

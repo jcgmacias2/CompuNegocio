@@ -25,6 +25,7 @@ namespace Aprovi.Presenters
         private ILicenciaService _licenses;
         private ICuentaGuardianService _accounts;
 
+
         public ConfigurationPresenter(IConfigurationView view, IConfiguracionService configurationsService, IRegimenService regimesService,
             IUsuarioService userService, ISeguridadService securityService, ICertificadoService certificateService, ISerieService seriesService,
             ICatalogosEstaticosService catalogsService, IClienteService clientsService, IComprobantFiscaleService fiscalReceiptsService, ILicenciaService licensesService, ICuentaGuardianService accounts)
@@ -68,7 +69,7 @@ namespace Aprovi.Presenters
             _view.FilterFormats += FilterFormats;
             _view.AddOrUpdateFormat += AddOrUpdateFormat;
 
-            _view.FillCombo(_catalogs.ListPaises(), _catalogs.ListOpcionesCostos(), _catalogs.ListReportes());
+            _view.FillCombo(_catalogs.ListPaises(), _catalogs.ListOpcionesCostos(), _catalogs.ListReportes(), _catalogs.ListPeriodicidad());
         }
 
         private void FilterFormats()

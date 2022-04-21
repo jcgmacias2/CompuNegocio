@@ -56,9 +56,11 @@ namespace Aprovi.Application.ViewModels
                 IReportViewerView view;
                 ReportViewerPresenter presenter;
 
+                var deviceInfo = @"<DeviceInfo><EmbedFonts>None</EmbedFonts></DeviceInfo>";
+
                 view = new ReportViewerView(this);
                 presenter = new ReportViewerPresenter(view);
-                var report = view.Viewer.LocalReport.Render("PDF");
+                var report = view.Viewer.LocalReport.Render("PDF", deviceInfo);
                 File.WriteAllBytes(fullFilePath, report);
             }
             catch (Exception)

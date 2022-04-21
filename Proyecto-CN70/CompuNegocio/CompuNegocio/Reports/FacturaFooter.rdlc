@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<Report xmlns="http://schemas.microsoft.com/sqlserver/reporting/2016/01/reportdefinition" xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner">
+<Report xmlns:rd="http://schemas.microsoft.com/SQLServer/reporting/reportdesigner" xmlns:cl="http://schemas.microsoft.com/sqlserver/reporting/2010/01/componentdefinition" xmlns="http://schemas.microsoft.com/sqlserver/reporting/2010/01/reportdefinition">
   <Author>Aprovi Software</Author>
   <AutoRefresh>0</AutoRefresh>
   <DataSources>
@@ -24,18 +24,11 @@
       </ConnectionProperties>
       <rd:DataSourceID>1d0ea851-933a-448c-abdf-de7071182610</rd:DataSourceID>
     </DataSource>
-    <DataSource Name="AproviBusinessViewModels3">
-      <ConnectionProperties>
-        <DataProvider>System.Data.DataSet</DataProvider>
-        <ConnectString>/* Local Connection */</ConnectString>
-      </ConnectionProperties>
-      <rd:DataSourceID>aea1ad79-64ed-4189-b5ea-c250ac65161d</rd:DataSourceID>
-    </DataSource>
   </DataSources>
   <DataSets>
     <DataSet Name="Generales">
       <Query>
-        <DataSourceName>AproviBusinessViewModels3</DataSourceName>
+        <DataSourceName>AproviBusinessViewModels</DataSourceName>
         <CommandText>/* Local Query */</CommandText>
       </Query>
       <Fields>
@@ -75,10 +68,6 @@
           <DataField>Cliente</DataField>
           <rd:TypeName>Aprovi.Data.Models.Cliente</rd:TypeName>
         </Field>
-        <Field Name="CodigoCliente">
-          <DataField>CodigoCliente</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="CodigoMoneda">
           <DataField>CodigoMoneda</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -103,14 +92,6 @@
           <DataField>CondicionesDePago</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="DescripcionMoneda">
-          <DataField>DescripcionMoneda</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="DiasCredito">
-          <DataField>DiasCredito</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="Empresa">
           <DataField>Empresa</DataField>
           <rd:TypeName>Aprovi.Data.Models.Empresa</rd:TypeName>
@@ -122,10 +103,6 @@
         <Field Name="EstadoReceptor">
           <DataField>EstadoReceptor</DataField>
           <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="EstatusCrediticio">
-          <DataField>EstatusCrediticio</DataField>
-          <rd:TypeName>Aprovi.Data.Models.EstatusCrediticio</rd:TypeName>
         </Field>
         <Field Name="EstatusDeFactura">
           <DataField>EstatusDeFactura</DataField>
@@ -171,10 +148,6 @@
           <DataField>idEmpresa</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
-        <Field Name="idEstatusCrediticio">
-          <DataField>idEstatusCrediticio</DataField>
-          <rd:TypeName>System.Int32</rd:TypeName>
-        </Field>
         <Field Name="idEstatusDeFactura">
           <DataField>idEstatusDeFactura</DataField>
           <rd:TypeName>System.Int32</rd:TypeName>
@@ -213,7 +186,7 @@
         </Field>
         <Field Name="idVendedor">
           <DataField>idVendedor</DataField>
-          <rd:TypeName>System.Nullable`1[[System.Int32, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]]</rd:TypeName>
+          <rd:TypeName>System.Int32</rd:TypeName>
         </Field>
         <Field Name="MetodoDePago">
           <DataField>MetodoDePago</DataField>
@@ -293,14 +266,6 @@
         </Field>
         <Field Name="RegimenFiscal">
           <DataField>RegimenFiscal</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RegimenFiscal2">
-          <DataField>RegimenFiscal2</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="RegimenFiscalReceptor">
-          <DataField>RegimenFiscalReceptor</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
         <Field Name="RfcEmisor">
@@ -387,14 +352,6 @@
           <DataField>Usuario1</DataField>
           <rd:TypeName>Aprovi.Data.Models.Usuario</rd:TypeName>
         </Field>
-        <Field Name="UsuarioRegistro">
-          <DataField>UsuarioRegistro</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
-        <Field Name="UsuarioVendedor">
-          <DataField>UsuarioVendedor</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
         <Field Name="UUID">
           <DataField>UUID</DataField>
           <rd:TypeName>System.String</rd:TypeName>
@@ -403,15 +360,11 @@
           <DataField>UUIDRelacionado</DataField>
           <rd:TypeName>System.String</rd:TypeName>
         </Field>
-        <Field Name="Vendedor">
-          <DataField>Vendedor</DataField>
-          <rd:TypeName>System.String</rd:TypeName>
-        </Field>
       </Fields>
       <rd:DataSetInfo>
         <rd:DataSetName>Aprovi.Business.ViewModels</rd:DataSetName>
         <rd:TableName>VMRFactura</rd:TableName>
-        <rd:ObjectDataSourceType>Aprovi.Business.ViewModels.VMRFactura, Aprovi.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null</rd:ObjectDataSourceType>
+        <rd:ObjectDataSourceType>Aprovi.Business.ViewModels.VMRFactura, Aprovi.Business, Version=1.0.0.0, Culture=neutral, PublicKeyToken=b45b3402853bc666</rd:ObjectDataSourceType>
       </rd:DataSetInfo>
     </DataSet>
   </DataSets>
@@ -419,43 +372,64 @@
     <ReportSection>
       <Body>
         <ReportItems>
-          <Image Name="Logo">
-            <Source>External</Source>
-            <Value>=Parameters!Logo.Value</Value>
-            <Sizing>Fit</Sizing>
-            <Top>0.28373cm</Top>
-            <Left>0.44964cm</Left>
-            <Height>3.2905cm</Height>
-            <Width>3.77542cm</Width>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-            </Style>
-          </Image>
-          <Textbox Name="Textbox1">
+          <Textbox Name="Textbox30">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CalleEmisor.Value, "Generales") + " " + First(Fields!NumeroExteriorEmisor.Value, "Generales") + First(Fields!NumeroInteriorEmisor.Value, "Generales") + ", " + First(Fields!ColoniaEmisor.Value, "Generales")</Value>
+                    <Value>Método de pago :</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>1.52699cm</Top>
-            <Left>5.84714cm</Left>
-            <Height>0.49417cm</Height>
-            <Width>6.91853cm</Width>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.97637cm</Top>
+            <Left>3.74919cm</Left>
+            <Height>0.5cm</Height>
+            <Width>3.94229cm</Width>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox31">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Subtotal :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>0.97637cm</Top>
+            <Left>15.65071cm</Left>
+            <Height>0.5cm</Height>
+            <Width>1.93146cm</Width>
             <ZIndex>1</ZIndex>
             <Style>
               <Border>
@@ -467,82 +441,65 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox3">
+          <Textbox Name="Textbox33">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Factura</Value>
+                    <Value>Trasladados :</Value>
                     <Style>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>Right</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>0.28373cm</Top>
-            <Left>14.95844cm</Left>
-            <Height>0.6cm</Height>
-            <Width>4.69459cm</Width>
+            <Top>1.97637cm</Top>
+            <Left>15.22cm</Left>
+            <Height>0.5cm</Height>
+            <Width>2.36217cm</Width>
             <ZIndex>2</ZIndex>
             <Style>
               <Border>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
+                <Style>None</Style>
               </Border>
-              <TopBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </TopBorder>
-              <BottomBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </BottomBorder>
-              <LeftBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </LeftBorder>
-              <RightBorder>
-                <Color>Black</Color>
-                <Style>Solid</Style>
-                <Width>1.5pt</Width>
-              </RightBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox6">
+          <Textbox Name="Textbox34">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Serie y Folio:</Value>
+                    <Value>Total :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.39003cm</Top>
-            <Left>14.95844cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.47637cm</Top>
+            <Left>15.65071cm</Left>
             <Height>0.5cm</Height>
-            <Width>1.82153cm</Width>
+            <Width>1.93146cm</Width>
             <ZIndex>3</ZIndex>
             <Style>
               <Border>
@@ -554,18 +511,18 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox7">
+          <Textbox Name="Textbox52">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!FolioFactura.Value, "Generales")</Value>
+                    <Value>=Sum(Fields!Subtotal.Value, "Generales")</Value>
                     <Style>
                       <FontSize>9pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                      <Color>Red</Color>
+                      <Format>'$' #,0.00;('$' #,0.00)</Format>
+                      <Language>en-US</Language>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -574,11 +531,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox7</rd:DefaultName>
-            <Top>1.39003cm</Top>
-            <Left>16.85052cm</Left>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>0.97637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.80251cm</Width>
+            <Width>2.5cm</Width>
             <ZIndex>4</ZIndex>
             <Style>
               <Border>
@@ -588,29 +545,34 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox8">
+          <Textbox Name="Textbox53">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Fecha:</Value>
+                    <Value>=Sum(Fields!TotalTraslados.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <Format>'$' #,0.00;('$' #,0.00)</Format>
+                      <Language>en-US</Language>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>1.89003cm</Top>
-            <Left>14.95844cm</Left>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>1.97637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
-            <Width>1.12416cm</Width>
+            <Width>2.5cm</Width>
             <ZIndex>5</ZIndex>
             <Style>
               <Border>
@@ -620,18 +582,21 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox10">
+          <Textbox Name="Textbox54">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!FechaFactura.Value, "Generales")</Value>
+                    <Value>=Sum(Fields!Total.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <Format>'$' #,0.00;('$' #,0.00)</Format>
+                      <Language>en-US</Language>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -640,44 +605,51 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>1.89003cm</Top>
-            <Left>16.11788cm</Left>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>2.47637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
-            <Width>3.53515cm</Width>
+            <Width>2.5cm</Width>
             <ZIndex>6</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
+              <TopBorder>
+                <Color>Black</Color>
+                <Style>Solid</Style>
+                <Width>1.5pt</Width>
+              </TopBorder>
               <PaddingLeft>2pt</PaddingLeft>
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox12">
+          <Textbox Name="Textbox32">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Lugar de expedición:</Value>
+                    <Value>=First(Fields!MetodoDePago.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>3.64003cm</Top>
-            <Left>0.13214cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.47637cm</Top>
+            <Left>3.82384cm</Left>
             <Height>0.5cm</Height>
-            <Width>3.32903cm</Width>
+            <Width>7.14374cm</Width>
             <ZIndex>7</ZIndex>
             <Style>
               <Border>
@@ -689,29 +661,28 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox13">
+          <Textbox Name="Textbox35">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CodigoPostalEmisor.Value, "Generales")</Value>
+                    <Value>Este documento es una representación impresa de un CFDI</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Left</TextAlign>
+                  <TextAlign>Center</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>3.64003cm</Top>
-            <Left>5.36617cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.37243cm</Width>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>12.0447cm</Top>
+            <Height>0.6cm</Height>
+            <Width>19.94105cm</Width>
             <ZIndex>8</ZIndex>
             <Style>
               <Border>
@@ -723,63 +694,43 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox14">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CiudadEmisor.Value, "Generales") + ", " + First(Fields!EstadoEmisor.Value, "Generales") + ", " + First(Fields!PaisEmisor.Value, "Generales") + " C.P. " + First(Fields!CodigoPostalEmisor.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>9pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox1</rd:DefaultName>
-            <Top>2.09172cm</Top>
-            <Left>5.84714cm</Left>
-            <Height>0.49417cm</Height>
-            <Width>6.91853cm</Width>
+          <Image Name="CBB">
+            <Source>External</Source>
+            <Value>=Parameters!cbb.Value</Value>
+            <Sizing>FitProportional</Sizing>
+            <Top>1.01748cm</Top>
+            <Left>0.18037cm</Left>
+            <Height>3.5cm</Height>
+            <Width>3.5cm</Width>
             <ZIndex>9</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
               </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
             </Style>
-          </Textbox>
-          <Textbox Name="Textbox22">
+          </Image>
+          <Textbox Name="Textbox36">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RazonSocialEmisor.Value, "Generales")</Value>
+                    <Value>Sello digital del CFDI :</Value>
                     <Style>
+                      <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Center</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox22</rd:DefaultName>
-            <Top>0.28373cm</Top>
-            <Left>5.84714cm</Left>
-            <Height>0.6cm</Height>
-            <Width>6.91853cm</Width>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>7.98026cm</Top>
+            <Left>0.09322cm</Left>
+            <Height>0.5cm</Height>
+            <Width>3.29375cm</Width>
             <ZIndex>10</ZIndex>
             <Style>
               <Border>
@@ -791,29 +742,28 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox23">
-            <CanGrow>true</CanGrow>
+          <Textbox Name="Textbox37">
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RfcEmisor.Value, "Generales")</Value>
+                    <Value>=First(Fields!SelloDigital.Value, "Generales")</Value>
                     <Style>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Center</TextAlign>
+                  <TextAlign>General</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox22</rd:DefaultName>
-            <Top>0.89172cm</Top>
-            <Left>5.84714cm</Left>
-            <Height>0.6cm</Height>
-            <Width>6.91853cm</Width>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>7.98026cm</Top>
+            <Left>3.61125cm</Left>
+            <Height>1cm</Height>
+            <Width>16.2861cm</Width>
             <ZIndex>11</ZIndex>
             <Style>
               <Border>
@@ -825,14 +775,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox15">
+          <Textbox Name="Textbox38">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Régimen Fiscal:</Value>
+                    <Value>Sello del SAT :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -843,10 +793,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.64003cm</Top>
-            <Left>0.13214cm</Left>
+            <Top>9.1329cm</Top>
+            <Left>0.09322cm</Left>
             <Height>0.5cm</Height>
-            <Width>3.26021cm</Width>
+            <Width>3.29375cm</Width>
             <ZIndex>12</ZIndex>
             <Style>
               <Border>
@@ -858,29 +808,27 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox16">
+          <Textbox Name="Textbox39">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RegimenFiscal.Value, "Generales")</Value>
+                    <Value>=First(Fields!SelloSAT.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>6pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.64003cm</Top>
-            <Left>3.46117cm</Left>
-            <Height>0.5cm</Height>
-            <Width>7.717cm</Width>
+            <Top>9.15665cm</Top>
+            <Left>3.61125cm</Left>
+            <Height>1cm</Height>
+            <Width>16.2861cm</Width>
             <ZIndex>13</ZIndex>
             <Style>
               <Border>
@@ -892,26 +840,79 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Line Name="Line1">
-            <Top>5.162cm</Top>
-            <Left>0.01161in</Left>
-            <Height>0cm</Height>
-            <Width>20.1287cm</Width>
-            <ZIndex>14</ZIndex>
-            <Style>
-              <Border>
-                <Style>Solid</Style>
-              </Border>
-            </Style>
-          </Line>
-          <Textbox Name="Textbox4">
+          <Textbox Name="Textbox40">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Cliente</Value>
+                    <Value>Cadena Original del Complemento de Certificadión Digital del SAT :</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>10.26248cm</Top>
+            <Left>0.09322cm</Left>
+            <Height>0.5cm</Height>
+            <Width>9.91172cm</Width>
+            <ZIndex>14</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox41">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!CadenaOriginalTimbre.Value, "Generales")</Value>
+                    <Style>
+                      <FontSize>6pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>10.86831cm</Top>
+            <Left>0.10544cm</Left>
+            <Height>1cm</Height>
+            <Width>19.79191cm</Width>
+            <ZIndex>15</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox42">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Certificación</Value>
                     <Style>
                       <FontWeight>Bold</FontWeight>
                     </Style>
@@ -923,11 +924,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox2</rd:DefaultName>
-            <Top>5.19728cm</Top>
-            <Left>0.01161in</Left>
+            <Top>4.69387cm</Top>
             <Height>0.6cm</Height>
-            <Width>20.1287cm</Width>
-            <ZIndex>15</ZIndex>
+            <Width>20.14441cm</Width>
+            <ZIndex>16</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -948,14 +948,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox17">
+          <Textbox Name="Textbox43">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Razón Social :</Value>
+                    <Value>Número de Serie del Certificado de Sello Digital :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -966,43 +966,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>6.20753cm</Top>
-            <Left>0.44964cm</Left>
+            <Top>5.32915cm</Top>
+            <Left>0.09322cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.59875cm</Width>
-            <ZIndex>16</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox18">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>R.F.C. :</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>6.70753cm</Top>
-            <Left>0.44964cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.59875cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>17</ZIndex>
             <Style>
               <Border>
@@ -1014,14 +981,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox19">
+          <Textbox Name="Textbox44">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Domicilio :</Value>
+                    <Value>Número de Serie del Certificado del SAT:</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                       <FontWeight>Bold</FontWeight>
@@ -1032,10 +999,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>7.20753cm</Top>
-            <Left>0.44964cm</Left>
+            <Top>5.86443cm</Top>
+            <Left>0.09322cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.59875cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>18</ZIndex>
             <Style>
               <Border>
@@ -1047,29 +1014,28 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox20">
+          <Textbox Name="Textbox45">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RazonSocialReceptor.Value, "Generales")</Value>
+                    <Value>Fecha y Hora de Certificación :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>6.20753cm</Top>
-            <Left>3.08367cm</Left>
+            <Top>6.36443cm</Top>
+            <Left>0.09322cm</Left>
             <Height>0.5cm</Height>
-            <Width>9.76548cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>19</ZIndex>
             <Style>
               <Border>
@@ -1081,29 +1047,28 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox21">
+          <Textbox Name="Textbox46">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RfcReceptor.Value, "Generales")</Value>
+                    <Value>Folio Fiscal :</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>6.70753cm</Top>
-            <Left>3.08367cm</Left>
+            <Top>6.86443cm</Top>
+            <Left>0.09322cm</Left>
             <Height>0.5cm</Height>
-            <Width>9.76548cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>20</ZIndex>
             <Style>
               <Border>
@@ -1115,14 +1080,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox24">
+          <Textbox Name="Textbox47">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CalleReceptor.Value, "Generales") + " " + First(Fields!NumeroExteriorReceptor.Value, "Generales") + " " + First(Fields!NumeroInteriorReceptor.Value, "Generales") + " " + First(Fields!ColoniaReceptor.Value, "Generales") + " " + First(Fields!CiudadReceptor.Value, "Generales") + ", " + First(Fields!EstadoReceptor.Value, "Generales") + ", " +First(Fields!PaisReceptor.Value, "Generales") + " C.P. " + First(Fields!CodigoPostalReceptor.Value, "Generales")</Value>
+                    <Value>=First(Fields!NumeroCSD.Value, "Generales")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1134,10 +1099,10 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>7.20753cm</Top>
-            <Left>3.08367cm</Left>
+            <Top>5.32915cm</Top>
+            <Left>7.63794cm</Left>
             <Height>0.5cm</Height>
-            <Width>13.09186cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>21</ZIndex>
             <Style>
               <Border>
@@ -1149,27 +1114,29 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox9">
+          <Textbox Name="Textbox48">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Tipo Comprobante:</Value>
+                    <Value>=First(Fields!NumeroCertificadoSAT.Value, "Generales")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>0.89003cm</Top>
-            <Left>14.95845cm</Left>
+            <Top>5.82915cm</Top>
+            <Left>7.63794cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.60583cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>22</ZIndex>
             <Style>
               <Border>
@@ -1181,29 +1148,29 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox11">
+          <Textbox Name="Textbox49">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!TipoDeComprobante.Value, "Generales")</Value>
+                    <Value>=First(Fields!FechaHoraTimbrado.Value, "Generales")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>0.89003cm</Top>
-            <Left>17.56428cm</Left>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>6.32915cm</Top>
+            <Left>7.63794cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.08876cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>23</ZIndex>
             <Style>
               <Border>
@@ -1215,14 +1182,14 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox51">
+          <Textbox Name="Textbox50">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Tipo de Cambio:</Value>
+                    <Value>=First(Fields!UUID.Value, "Generales")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
@@ -1232,14 +1199,11 @@
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.39003cm</Top>
-            <Left>14.95844cm</Left>
+            <Top>6.82915cm</Top>
+            <Left>7.63794cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.60584cm</Width>
+            <Width>7.36833cm</Width>
             <ZIndex>24</ZIndex>
-            <Visibility>
-              <Hidden>=First(Fields!CodigoMoneda.Value, "Generales").Equals("MXN")</Hidden>
-            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1250,18 +1214,28 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox55">
+          <Line Name="Line2">
+            <Top>0.9175cm</Top>
+            <Height>0cm</Height>
+            <Width>20.14441cm</Width>
+            <ZIndex>25</ZIndex>
+            <Style>
+              <Border>
+                <Style>Solid</Style>
+              </Border>
+            </Style>
+          </Line>
+          <Textbox Name="Textbox58">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=Sum(Fields!tipoDeCambio.Value, "Generales")</Value>
+                    <Value>Retenidos :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
-                      <Format>'$' #,0.00;('$' #,0.00)</Format>
-                      <Language>en-US</Language>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1270,48 +1244,11 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>2.39003cm</Top>
-            <Left>17.56428cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.47637cm</Top>
+            <Left>15.22cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.12403cm</Width>
-            <ZIndex>25</ZIndex>
-            <Visibility>
-              <Hidden>=First(Fields!CodigoMoneda.Value, "Generales").Equals("MXN")</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox56">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!CondicionesDePago.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.14003cm</Top>
-            <Left>5.36617cm</Left>
-            <Height>0.5cm</Height>
-            <Width>3.35692cm</Width>
+            <Width>2.36217cm</Width>
             <ZIndex>26</ZIndex>
             <Style>
               <Border>
@@ -1323,28 +1260,31 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox57">
+          <Textbox Name="Textbox59">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Identidad de receptor extrajnero:</Value>
+                    <Value>=Sum(Fields!TotalRetenidos.Value, "Generales")</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
+                      <FontSize>9pt</FontSize>
+                      <Format>'$' #,0.00;('$' #,0.00)</Format>
+                      <Language>en-US</Language>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Right</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.14003cm</Top>
-            <Left>0.13214cm</Left>
+            <rd:DefaultName>Textbox52</rd:DefaultName>
+            <Top>1.47637cm</Top>
+            <Left>17.44105cm</Left>
             <Height>0.5cm</Height>
-            <Width>5.05764cm</Width>
+            <Width>2.5cm</Width>
             <ZIndex>27</ZIndex>
             <Style>
               <Border>
@@ -1354,29 +1294,33 @@
               <PaddingRight>2pt</PaddingRight>
               <PaddingTop>2pt</PaddingTop>
               <PaddingBottom>2pt</PaddingBottom>
+              <rd:FormatSymbolCulture>en-US</rd:FormatSymbolCulture>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox64">
+          <Textbox Name="Textbox60">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Moneda:</Value>
+                    <Value>Importe total con letra :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>2.89003cm</Top>
-            <Left>14.95844cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>1.97637cm</Top>
+            <Left>3.74919cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.60584cm</Width>
+            <Width>3.94229cm</Width>
             <ZIndex>28</ZIndex>
             <Style>
               <Border>
@@ -1388,29 +1332,29 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox65">
+          <Textbox Name="Textbox61">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!CodigoMoneda.Value, "Generales")</Value>
+                    <Value>=Parameters!ImporteConLetra.Value</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
                 <Style>
-                  <TextAlign>Right</TextAlign>
+                  <TextAlign>Left</TextAlign>
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>2.89003cm</Top>
-            <Left>17.56428cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.47637cm</Top>
+            <Left>3.82384cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.12403cm</Width>
+            <Width>9.04874cm</Width>
             <ZIndex>29</ZIndex>
             <Style>
               <Border>
@@ -1422,28 +1366,30 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox66">
+          <Textbox Name="Textbox62">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>Uso CFDI :</Value>
+                    <Value>Forma de Pago :</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                       <FontWeight>Bold</FontWeight>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style />
+                <Style>
+                  <TextAlign>Left</TextAlign>
+                </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>7.70753cm</Top>
-            <Left>0.44964cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>2.97637cm</Top>
+            <Left>3.74919cm</Left>
             <Height>0.5cm</Height>
-            <Width>2.59875cm</Width>
+            <Width>3.94229cm</Width>
             <ZIndex>30</ZIndex>
             <Style>
               <Border>
@@ -1455,16 +1401,16 @@
               <PaddingBottom>2pt</PaddingBottom>
             </Style>
           </Textbox>
-          <Textbox Name="Textbox67">
+          <Textbox Name="Textbox63">
             <CanGrow>true</CanGrow>
             <KeepTogether>true</KeepTogether>
             <Paragraphs>
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!UsoCFDI.Value, "Generales")</Value>
+                    <Value>=IIF(First(Fields!NumeroDeCuenta.Value, "Generales").Equals(""), First(Fields!FormaDePago.Value, "Generales"), First(Fields!FormaDePago.Value, "Generales") + " Cuenta: " + First(Fields!NumeroDeCuenta.Value, "Generales"))</Value>
                     <Style>
-                      <FontSize>8pt</FontSize>
+                      <FontSize>9pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
@@ -1473,319 +1419,12 @@
                 </Style>
               </Paragraph>
             </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>7.70753cm</Top>
-            <Left>3.08367cm</Left>
+            <rd:DefaultName>Textbox2</rd:DefaultName>
+            <Top>3.47637cm</Top>
+            <Left>3.82384cm</Left>
             <Height>0.5cm</Height>
-            <Width>13.09186cm</Width>
+            <Width>14.23867cm</Width>
             <ZIndex>31</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox68">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Tipo de relación:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.14003cm</Top>
-            <Left>8.82892cm</Left>
-            <Height>0.5cm</Height>
-            <Width>3.04681cm</Width>
-            <ZIndex>32</ZIndex>
-            <Visibility>
-              <Hidden>=First(Fields!UUIDRelacionado.Value, "Generales").Equals("")</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox69">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>CFDI Relacionado:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>3.64003cm</Top>
-            <Left>8.79364cm</Left>
-            <Height>0.5cm</Height>
-            <Width>3.04681cm</Width>
-            <ZIndex>33</ZIndex>
-            <Visibility>
-              <Hidden>=First(Fields!UUIDRelacionado.Value, "Generales").Equals("")</Hidden>
-            </Visibility>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox70">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!UUIDRelacionado.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.14003cm</Top>
-            <Left>11.84045cm</Left>
-            <Height>0.5cm</Height>
-            <Width>6.41951cm</Width>
-            <ZIndex>34</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox71">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!TipoDeRelacion.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>3.64003cm</Top>
-            <Left>11.84045cm</Left>
-            <Height>0.5cm</Height>
-            <Width>6.41951cm</Width>
-            <ZIndex>35</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox85">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Orden de compra:</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>4.59144cm</Top>
-            <Left>14.65857cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.9057cm</Width>
-            <ZIndex>36</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox89">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!ordenDeCompra.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>4.59144cm</Top>
-            <Left>17.59955cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.08876cm</Width>
-            <ZIndex>37</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox86">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Vendedor :</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>6.18533cm</Top>
-            <Left>14.65858cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.01388cm</Width>
-            <ZIndex>38</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox90">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>=First(Fields!Vendedor.Value, "Generales")</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style>
-                  <TextAlign>Right</TextAlign>
-                </Style>
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox10</rd:DefaultName>
-            <Top>6.18533cm</Top>
-            <Left>16.84885cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.83947cm</Width>
-            <ZIndex>39</ZIndex>
-            <Style>
-              <Border>
-                <Style>None</Style>
-              </Border>
-              <PaddingLeft>2pt</PaddingLeft>
-              <PaddingRight>2pt</PaddingRight>
-              <PaddingTop>2pt</PaddingTop>
-              <PaddingBottom>2pt</PaddingBottom>
-            </Style>
-          </Textbox>
-          <Textbox Name="Textbox72">
-            <CanGrow>true</CanGrow>
-            <KeepTogether>true</KeepTogether>
-            <Paragraphs>
-              <Paragraph>
-                <TextRuns>
-                  <TextRun>
-                    <Value>Regimen Fiscal :</Value>
-                    <Style>
-                      <FontSize>8pt</FontSize>
-                      <FontWeight>Bold</FontWeight>
-                    </Style>
-                  </TextRun>
-                </TextRuns>
-                <Style />
-              </Paragraph>
-            </Paragraphs>
-            <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>8.24281cm</Top>
-            <Left>0.44964cm</Left>
-            <Height>0.5cm</Height>
-            <Width>2.59875cm</Width>
-            <ZIndex>40</ZIndex>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1803,23 +1442,125 @@
               <Paragraph>
                 <TextRuns>
                   <TextRun>
-                    <Value>=First(Fields!RegimenFiscalReceptor.Value, "Generales")</Value>
+                    <Value>RFC de Proveedor de Certificación:</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox6</rd:DefaultName>
+            <Top>7.33915cm</Top>
+            <Left>0.09322cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.36833cm</Width>
+            <ZIndex>32</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox74">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!RFCProveedorCertificacion.Value, "Generales")</Value>
                     <Style>
                       <FontSize>8pt</FontSize>
                     </Style>
                   </TextRun>
                 </TextRuns>
-                <Style>
-                  <TextAlign>Left</TextAlign>
-                </Style>
+                <Style />
               </Paragraph>
             </Paragraphs>
             <rd:DefaultName>Textbox6</rd:DefaultName>
-            <Top>8.20753cm</Top>
-            <Left>3.08367cm</Left>
-            <Height>0.53528cm</Height>
-            <Width>13.09186cm</Width>
-            <ZIndex>41</ZIndex>
+            <Top>7.30387cm</Top>
+            <Left>7.63794cm</Left>
+            <Height>0.5cm</Height>
+            <Width>7.36833cm</Width>
+            <ZIndex>33</ZIndex>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox77">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>Notas :</Value>
+                    <Style>
+                      <FontSize>9pt</FontSize>
+                      <FontWeight>Bold</FontWeight>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox77</rd:DefaultName>
+            <Top>0.14111cm</Top>
+            <Left>0.09322cm</Left>
+            <Height>0.6cm</Height>
+            <Width>1.30937cm</Width>
+            <ZIndex>34</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(Len(First(Fields!Notas.Value, "Generales")) = 0,TRUE,FALSE)</Hidden>
+            </Visibility>
+            <Style>
+              <Border>
+                <Style>None</Style>
+              </Border>
+              <PaddingLeft>2pt</PaddingLeft>
+              <PaddingRight>2pt</PaddingRight>
+              <PaddingTop>2pt</PaddingTop>
+              <PaddingBottom>2pt</PaddingBottom>
+            </Style>
+          </Textbox>
+          <Textbox Name="Textbox81">
+            <CanGrow>true</CanGrow>
+            <KeepTogether>true</KeepTogether>
+            <Paragraphs>
+              <Paragraph>
+                <TextRuns>
+                  <TextRun>
+                    <Value>=First(Fields!Notas.Value, "Generales")</Value>
+                    <Style>
+                      <FontSize>8pt</FontSize>
+                    </Style>
+                  </TextRun>
+                </TextRuns>
+                <Style />
+              </Paragraph>
+            </Paragraphs>
+            <rd:DefaultName>Textbox81</rd:DefaultName>
+            <Top>0.14111cm</Top>
+            <Left>1.40259cm</Left>
+            <Height>0.6cm</Height>
+            <Width>18.74182cm</Width>
+            <ZIndex>35</ZIndex>
+            <Visibility>
+              <Hidden>=IIf(Len(First(Fields!Notas.Value, "Generales")) = 0,TRUE,FALSE)</Hidden>
+            </Visibility>
             <Style>
               <Border>
                 <Style>None</Style>
@@ -1831,14 +1572,10 @@
             </Style>
           </Textbox>
         </ReportItems>
-        <Height>3.50968in</Height>
-        <Style>
-          <Border>
-            <Style>None</Style>
-          </Border>
-        </Style>
+        <Height>5.05789in</Height>
+        <Style />
       </Body>
-      <Width>7.9363in</Width>
+      <Width>7.93675in</Width>
       <Page>
         <PageHeight>27.94cm</PageHeight>
         <PageWidth>21.59cm</PageWidth>
@@ -1857,24 +1594,15 @@
     </ReportSection>
   </ReportSections>
   <ReportParameters>
-    <ReportParameter Name="Logo">
+    <ReportParameter Name="ImporteConLetra">
+      <DataType>String</DataType>
+      <Prompt>ReportParameter1</Prompt>
+    </ReportParameter>
+    <ReportParameter Name="cbb">
       <DataType>String</DataType>
       <Prompt>ReportParameter1</Prompt>
     </ReportParameter>
   </ReportParameters>
-  <ReportParametersLayout>
-    <GridLayoutDefinition>
-      <NumberOfColumns>1</NumberOfColumns>
-      <NumberOfRows>1</NumberOfRows>
-      <CellDefinitions>
-        <CellDefinition>
-          <ColumnIndex>0</ColumnIndex>
-          <RowIndex>0</RowIndex>
-          <ParameterName>Logo</ParameterName>
-        </CellDefinition>
-      </CellDefinitions>
-    </GridLayoutDefinition>
-  </ReportParametersLayout>
   <rd:ReportUnitType>Cm</rd:ReportUnitType>
   <rd:ReportID>5b020ac9-d5d1-48f3-9111-e01abbd9de68</rd:ReportID>
 </Report>

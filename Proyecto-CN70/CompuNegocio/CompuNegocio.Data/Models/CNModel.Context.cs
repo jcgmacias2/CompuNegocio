@@ -260,5 +260,7 @@ namespace Aprovi.Data.Models
         public virtual DbSet<VwTimbresPorPago> VwTimbresPorPagos { get; set; }
         public virtual DbSet<VwTimbresPorParcialidade> VwTimbresPorParcialidades { get; set; }
         public virtual DbSet<VwVentasActivasPorCliente> VwVentasActivasPorClientes { get; set; }
+        public virtual DbSet<Periodicidad> Periodicidads { get; set; }
+        public virtual DbSet<ImpuestoPorFactura> ImpuestoPorFacturas { get; set; }
     }
 }

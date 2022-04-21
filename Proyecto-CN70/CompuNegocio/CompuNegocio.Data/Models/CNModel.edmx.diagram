@@ -457,6 +457,10 @@
         <AssociationConnector Association="CNModel.ImpuestosPorDetalleDeRemision" />
         <AssociationConnector Association="CNModel.PedimentoPorAjustes" />
         <AssociationConnector Association="CNModel.PedimentoPorCompras" />
+        <EntityTypeShape EntityType="CNModel.Periodicidad" Width="1.5" PointX="23.375" PointY="30.875" />
+        <AssociationConnector Association="CNModel.fk_Configuraciones_Periodicidad" />
+        <EntityTypeShape EntityType="CNModel.ImpuestoPorFactura" Width="1.5" PointX="18.5" PointY="104.375" />
+        <AssociationConnector Association="CNModel.FK__ImpuestoPorFactura__idFactura" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

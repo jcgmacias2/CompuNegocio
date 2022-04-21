@@ -26,6 +26,7 @@ namespace Aprovi.Business.Services
         private ISeccionesRepository _secciones;
         private IComisionesRepository _comisiones;
         private IReportesRepository _reportes;
+        private IPeriodicidadRepository _periodicidad;
 
         public CatalogosEstaticosService(IUnitOfWork unitOfWork)
         {
@@ -45,6 +46,7 @@ namespace Aprovi.Business.Services
             _secciones = _UOW.Secciones;
             _comisiones = _UOW.Comisiones;
             _reportes = _UOW.Reportes;
+            _periodicidad = _UOW.Periodicidad;
         }
 
         public List<TiposDeImpuesto> ListTiposDeImpuesto()
@@ -269,6 +271,18 @@ namespace Aprovi.Business.Services
             try
             {
                 return Enum.GetValues(typeof(Opciones_Costos)).Cast<Opciones_Costos>().Select(x => (object)new { Value = (int)x, Text = x.ToString().Replace("_", " ") }).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public List<Periodicidad> ListPeriodicidad()
+        {
+            try
+            {
+                return _periodicidad.List().ToList();
             }
             catch (Exception)
             {

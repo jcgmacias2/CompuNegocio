@@ -121,5 +121,11 @@ namespace Aprovi.Business.Services
         /// </summary>
         /// <returns>Lista de opciones de costos</returns>
         List<object> ListOpcionesCostos();
+
+        /// <summary>
+        /// Provee la lista de opciones de Periodicidad
+        /// </summary>
+        /// <returns>Lista de opciones de Periodicidad</returns>
+        List<Periodicidad> ListPeriodicidad();
     }
 }
