@@ -705,7 +705,6 @@ namespace Aprovi.Business.Services
                     }
                 }
 
-
                 cadena.Append("|"); //Finaliza la cadena
 
                 return cadena.ToString().Replace("  ", " ");
@@ -1760,6 +1759,8 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
 
                 var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
+                var retenciones = facturaOriginal.Impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido)).ToList(); //JCRV  Obtencion de Retenciones
+
                 if (impuestos.Count > 0)
                 {
                     XmlElement nodoImpuestosDR;

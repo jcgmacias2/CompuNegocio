@@ -142,5 +142,15 @@ namespace Aprovi.Views.UI
         {
             dgRemisiones.ItemsSource = billsOfSale;
         }
+
+        public DateTime Start
+        {
+            get { return dpFechaIni.SelectedDate.GetValueOrDefault(); }
+        }
+
+        public DateTime End
+        {
+            get { return dpFechaFin.SelectedDate.GetValueOrDefault(); }
+        }
     }
 }

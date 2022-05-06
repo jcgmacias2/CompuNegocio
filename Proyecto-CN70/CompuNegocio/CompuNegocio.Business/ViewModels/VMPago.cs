@@ -76,6 +76,17 @@ namespace Aprovi.Business.ViewModels
             var pagado = abono.monto.ToDocumentCurrency(abono.Moneda, abono.Factura.Moneda, abono.tipoDeCambio);
             DocumentosRelacionados = new List<VMCFDIRelacionado>();
             DocumentosRelacionados.Add(new VMCFDIRelacionado(abono.Factura, abono.idAbonoDeFactura, saldoAnterior, pagado));
+
+            if (abono.Factura.ImpuestoPorFacturas.ToList().Count() > 0) {
+
+                pago_impuestos = new List<VMImpuestoPorFactura>();
+
+                foreach (var imp in abono.Factura.ImpuestoPorFacturas.ToList()) {
+                    var base_imp = pagado / (1 + imp.valorTasaOCuaota);
+                    var tipo = imp.codigoImpuesto.Equals("00" + TipoDeImpuesto.Trasladado) ? "Traslado" : "Retenido";
+                    pago_impuestos.Add(new VMImpuestoPorFactura(imp, abono, tipo, base_imp));
+                }
+            }
         }
 
         #region Generales
@@ -145,6 +156,7 @@ namespace Aprovi.Business.ViewModels
         #endregion
 
         public List<VMCFDIRelacionado> DocumentosRelacionados { get; set; }
+        public List<VMImpuestoPorFactura> pago_impuestos { get; set; }
 
     }
 }
