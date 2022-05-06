@@ -319,6 +319,7 @@
     <Compile Include="ViewModels\VMFacturaConSaldo.cs" />
     <Compile Include="ViewModels\VMFlujoPorArticulo.cs" />
     <Compile Include="ViewModels\VMImpuesto.cs" />
+    <Compile Include="ViewModels\VMImpuestoPorFactura.cs" />
     <Compile Include="ViewModels\VMInventario.cs" />
     <Compile Include="ViewModels\VMOperacion.cs" />
     <Compile Include="ViewModels\VMPago.cs" />
