@@ -14,11 +14,11 @@ namespace Aprovi.Business.ViewModels
         public VMImpuestoPorFactura(ImpuestoPorFactura impuesto, AbonosDeFactura abono, string tipo, decimal base_imp)
         {
             this.Tipo = tipo;
-            this.Base = base_imp.ToStringRoundedCurrency(abono.Moneda);
+            this.Base = Math.Abs(base_imp).ToTdCFDI_Importe();//.ToStringRoundedCurrency(abono.Moneda);
             this.Impuesto = impuesto.codigoImpuesto;
             this.Tipo_Factor = impuesto.codigoTipoFactor;
             this.Tasa_Cuota = Math.Abs(impuesto.valorTasaOCuaota).ToTdCFDI_Importe();
-            this.Importe = (base_imp * impuesto.importe).ToStringRoundedCurrency(abono.Moneda);
+            this.Importe = Math.Abs(base_imp * impuesto.valorTasaOCuaota).ToTdCFDI_Importe();//.ToStringRoundedCurrency(abono.Moneda);
         }
 
         public string Tipo { get; set; }

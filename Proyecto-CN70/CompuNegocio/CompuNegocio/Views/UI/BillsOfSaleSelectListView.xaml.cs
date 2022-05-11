@@ -30,6 +30,7 @@ namespace Aprovi.Views.UI
         public event Action Search;
         public event Action SelectAll;
         public event Action DeselectAll;
+        public event Action SearchDate;
 
         public BillsOfSaleSelectListView()
         {
@@ -49,6 +50,7 @@ namespace Aprovi.Views.UI
             btnFinal.Click += btnFinal_Click;
             btnSeleccionarTodo.Click += BtnSeleccionarTodoOnClick;
             btnDeseleccionarTodo.Click += BtnDeseleccionarTodoOnClick;
+            btnBuscarDate.Click += btnBuscarDate_Click;
 
             base.Grid = dgRemisiones;
             base.SearchBox = txtBusqueda;
@@ -116,6 +118,12 @@ namespace Aprovi.Views.UI
         {
             if (Select.isValid())
                 Select();
+        }
+
+        private void btnBuscarDate_Click(object sender, RoutedEventArgs e)
+        {
+            if (SearchDate.isValid())
+                SearchDate();
         }
 
         public List<VMRemision> SelectedBillsOfSale

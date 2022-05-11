@@ -315,6 +315,18 @@ namespace Aprovi.Business.Services
             }
         }
 
+        public List<VwResumenPorRemision> ActiveWithDateLike(DateTime start, DateTime end)
+        {
+            try
+            {
+                return _billsOfSaleSummary.ActiveWithDateLike(start, end);
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public VMFactura ToInvoice(ICollection<VMRemision> billsOfSale, string serie, int folio, decimal exchangeRate, Cliente customer, Moneda currency, Regimene regimen, MetodosPago paymentMethod, UsosCFDI cfdiUsage, Empresa company, Usuario user, FormasPago formaPago)
         {
             AbonosDeFactura abono;

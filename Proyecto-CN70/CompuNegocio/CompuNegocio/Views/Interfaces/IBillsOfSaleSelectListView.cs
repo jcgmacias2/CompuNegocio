@@ -14,9 +14,12 @@ namespace Aprovi.Views
         event Action Search;
         event Action SelectAll;
         event Action DeselectAll;
+        event Action SearchDate;
 
         List<VMRemision> SelectedBillsOfSale { get; }
         List<VMRemision> BillsOfSale { get; }
+        DateTime Start { get; }
+        DateTime End { get; }
 
         void Show(List<VMRemision> billsOfSale);
     }

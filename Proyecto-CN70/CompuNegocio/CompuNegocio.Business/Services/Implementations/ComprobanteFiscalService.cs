@@ -1786,9 +1786,7 @@ namespace Aprovi.Business.Services
                         trasladoDR.SetAttribute("TasaOCuotaDR", Math.Abs(traslado.valorTasaOCuaota).ToTdCFDI_Importe());
                         trasladoDR.SetAttribute("TipoFactorDR", traslado.codigoTipoFactor);
                     }
-
                 }
-
 
                 return nodoComplemento;
             }

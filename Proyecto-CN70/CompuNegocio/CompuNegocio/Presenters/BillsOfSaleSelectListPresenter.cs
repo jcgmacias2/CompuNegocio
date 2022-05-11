@@ -24,6 +24,7 @@ namespace Aprovi.Presenters
             _view.Search += Search;
             _view.SelectAll += ViewOnSelectAll;
             _view.DeselectAll += ViewOnDeselectAll;
+            _view.SearchDate += SearchDate;
 
             //Estos eventos estan implementados en la clase base BaseListPresenter
             _view.Select += Select;
@@ -76,6 +77,39 @@ namespace Aprovi.Presenters
                     billsOfSale = _billsOfSale.ActiveWithFolioOrClientLike(_view.Parameter);
                 else
                     billsOfSale = _billsOfSale.ListActive();
+
+                _view.Show(billsOfSale.Select(bos => new VMRemision(bos)).ToList());
+
+                if (billsOfSale.Count > 0)
+                    _view.GoToRecord(0);
+
+            }
+            catch (Exception ex)
+            {
+                _view.ShowError(ex.Message);
+            }
+        }
+
+        private void SearchDate()
+        {
+            List<VwResumenPorRemision> billsOfSale;
+
+            try
+            {
+
+                if (_view.Start > DateTime.Now)
+                {
+                    _view.ShowError("La fecha de inicio no puede ser mayor al dia de hoy");
+                    return;
+                }
+
+                if (_view.End < _view.Start)
+                {
+                    _view.ShowError("La fecha de fin no puede ser menor que la de inicio");
+                    return;
+                }
+
+                billsOfSale = _billsOfSale.ActiveWithDateLike(_view.Start, _view.End);
 
                 _view.Show(billsOfSale.Select(bos => new VMRemision(bos)).ToList());
 

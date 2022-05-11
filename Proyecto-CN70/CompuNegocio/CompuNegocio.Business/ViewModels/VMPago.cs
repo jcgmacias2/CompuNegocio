@@ -77,13 +77,13 @@ namespace Aprovi.Business.ViewModels
             DocumentosRelacionados = new List<VMCFDIRelacionado>();
             DocumentosRelacionados.Add(new VMCFDIRelacionado(abono.Factura, abono.idAbonoDeFactura, saldoAnterior, pagado));
 
+            pago_impuestos = new List<VMImpuestoPorFactura>();
+
             if (abono.Factura.ImpuestoPorFacturas.ToList().Count() > 0) {
-
-                pago_impuestos = new List<VMImpuestoPorFactura>();
-
+                
                 foreach (var imp in abono.Factura.ImpuestoPorFacturas.ToList()) {
                     var base_imp = pagado / (1 + imp.valorTasaOCuaota);
-                    var tipo = imp.codigoImpuesto.Equals("00" + TipoDeImpuesto.Trasladado) ? "Traslado" : "Retenido";
+                    var tipo = imp.codigoImpuesto.Equals("002") ? "Traslado" : "Retenido";
                     pago_impuestos.Add(new VMImpuestoPorFactura(imp, abono, tipo, base_imp));
                 }
             }

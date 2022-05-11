@@ -15,5 +15,7 @@ namespace Aprovi.Data.Repositories
         List<VwResumenPorRemision> ListActive();
 
         List<VwResumenPorRemision> ActiveWithFolioOrClientLike(string value);
+
+        List<VwResumenPorRemision> ActiveWithDateLike(DateTime start, DateTime end);
     }
 }

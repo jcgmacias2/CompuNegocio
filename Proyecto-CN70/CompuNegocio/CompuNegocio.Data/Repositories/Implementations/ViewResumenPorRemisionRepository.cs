@@ -24,6 +24,18 @@ namespace Aprovi.Data.Repositories
             }
         }
 
+        public List<VwResumenPorRemision> ActiveWithDateLike(DateTime start, DateTime end)
+        {
+            try
+            {
+                return _dbSet.Where(r => r.idEstatusDeRemision.Equals((int)StatusDeRemision.Registrada) && r.fechaHora >= start && r.fechaHora <= end).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
         public List<VwResumenPorRemision> List(int idCliente, DateTime inicio, DateTime fin, bool soloConDeuda)
         {
             try

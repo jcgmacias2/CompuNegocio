@@ -868,9 +868,13 @@ namespace Aprovi.Application.Helpers
                 var relacionados = new List<VMCFDIRelacionado>();
                 payment.DocumentosRelacionados.ForEach(d => relacionados.Add(d));
 
+                var pago_impuestos = new List<VMImpuestoPorFactura>();
+                payment.pago_impuestos.ForEach(d => pago_impuestos.Add(d));
+
                 //Agrego todos los data sources a la lista "data"
                 data.Add(new ReportDataSource("Pago", pago));
                 data.Add(new ReportDataSource("Relacionados", relacionados));
+                data.Add(new ReportDataSource("pago_impuestos", pago_impuestos));
 
                 report = new VMReporte("ComprobanteDePago", Reports.ReportsPrinter, data, source);
 

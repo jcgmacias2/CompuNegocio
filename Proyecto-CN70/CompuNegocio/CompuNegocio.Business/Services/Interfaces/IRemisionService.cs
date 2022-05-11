@@ -111,6 +111,14 @@ namespace Aprovi.Business.Services
         List<VwResumenPorRemision> ActiveWithFolioOrClientLike(string value);
 
         /// <summary>
+        /// Enlista todas las remisiones por un rango de fecha y estan vigentes sin facturar
+        /// </summary>
+        /// <param name="start">Fecha inicial a buscar</param>
+        /// <param name="end">Fecha final a buscar </param>
+        /// <returns>Lista de remisiones que coincidan con la búsqueda</returns>
+        List<VwResumenPorRemision> ActiveWithDateLike(DateTime start, DateTime end);
+
+        /// <summary>
         /// Convierte una lista de remisiones a una sola factura
         /// </summary>
         /// <param name="billsOfSale"></param>
