@@ -828,9 +828,13 @@ namespace Aprovi.Application.Helpers
                 var generales = new List<VMRAbonosFacturas>();
                 generales.Add(payment);
 
+                var pago_impuestos = new List<VMImpuestoPorFactura>();
+                payments.ForEach(d => pago_impuestos = d.pago_impuestos);
+
                 //Agrego todos los data sources a la lista "data"
                 data.Add(new ReportDataSource("Generales", generales));
                 data.Add(new ReportDataSource("Detalle", payments));
+                data.Add(new ReportDataSource("pago_impuestos", pago_impuestos));
 
                 report = new VMReporte("PagoExtended", Reports.ReportsPrinter, data, source, (obj, args) =>
                 {

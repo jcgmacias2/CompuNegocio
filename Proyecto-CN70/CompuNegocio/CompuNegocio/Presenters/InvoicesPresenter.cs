@@ -8,6 +8,7 @@ using Aprovi.Views;
 using Aprovi.Views.UI;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Linq;
 namespace Aprovi.Presenters
 {
@@ -990,6 +991,15 @@ namespace Aprovi.Presenters
                 //Le agrego quien la registra
                 invoice.idUsuarioRegistro = Session.LoggedUser.idUsuario;
                 invoice.Usuario = Session.LoggedUser;
+
+                /* JCRV Se agrega que se muestra la ruta de donde se esta leyendo el archivo de configuracion */
+                var config_path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).FilePath;
+                var usuario = Session.Configuration.usuarioPAC;
+                var pass = Session.Configuration.contraseñaPAC;
+                var csd = ConfigurationManager.AppSettings["CSD"].ToString();
+                var msg = "UsuarioPAC: " + usuario + "\n\ncontraseñaPAC " + pass + "\n\nRuta CSD: " + csd + "\n\n"; 
+                _view.ShowMessage(msg+"path de configuracion: " + config_path);
+                /* Borrar */
 
                 //Actualizo la cuenta
                 invoice.UpdateAccount();

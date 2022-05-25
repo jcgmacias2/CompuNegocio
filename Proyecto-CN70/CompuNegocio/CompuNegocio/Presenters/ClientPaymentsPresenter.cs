@@ -561,14 +561,11 @@ namespace Aprovi.Presenters
                 //Se debe enviar el cfdi de los abonos timbrados (si aplica)
                 try
                 {
+                    var paymentReporte = Reports.FillReport(new VMRAbonosFacturas(paymentDocument, _invoicePayments.GetPaymentsForReport(paymentDocument.AbonosDeFacturas.ToList()), Session.Configuration));
+                    paymentReporte.Export(string.Format("{0}\\{1}{2}.pdf", Session.Configuration.CarpetaPdf, paymentDocument.serie, paymentDocument.folio));
                     //Aqui debo enviar el correo si Guardian esta activado
                     if (Modulos.Envio_De_Correos.IsActive())
-                    {
-                        var paymentReporte = Reports.FillReport(new VMRAbonosFacturas(paymentDocument, _invoicePayments.GetPaymentsForReport(paymentDocument.AbonosDeFacturas.ToList()), Session.Configuration));
-                        paymentReporte.Export(string.Format("{0}\\{1}{2}.pdf", Session.Configuration.CarpetaPdf, paymentDocument.serie, paymentDocument.folio));
-
                         _mailer.SendMail(paymentDocument);
-                    }
                 }
                 catch (Exception ex)
                 {
@@ -604,14 +601,11 @@ namespace Aprovi.Presenters
                 //Se debe enviar el cfdi de los abonos timbrados (si aplica)
                 try
                 {
+                    var paymentReporte = Reports.FillReport(new VMRAbonosFacturas(paymentDocument, _invoicePayments.GetPaymentsForReport(paymentDocument.AbonosDeFacturas.ToList()), Session.Configuration));
+                    paymentReporte.Export(string.Format("{0}\\{1}{2}.pdf", Session.Configuration.CarpetaPdf, paymentDocument.serie, paymentDocument.folio));
                     //Aqui debo enviar el correo si Guardian esta activado
                     if (Modulos.Envio_De_Correos.IsActive())
-                    {
-                        var paymentReporte = Reports.FillReport(new VMRAbonosFacturas(paymentDocument, _invoicePayments.GetPaymentsForReport(paymentDocument.AbonosDeFacturas.ToList()), Session.Configuration));
-                        paymentReporte.Export(string.Format("{0}\\{1}{2}.pdf", Session.Configuration.CarpetaPdf, paymentDocument.serie, paymentDocument.folio));
-
                         _mailer.SendMail(paymentDocument);
-                    }
                 }
                 catch (Exception ex)
                 {

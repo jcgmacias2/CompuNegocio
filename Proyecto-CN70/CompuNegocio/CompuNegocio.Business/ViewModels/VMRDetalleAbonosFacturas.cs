@@ -20,6 +20,7 @@ namespace Aprovi.Business.ViewModels
         public string CuentaBeneficio { get; set; }
         public string Moneda { get; set; }
         public int IdMoneda { get; set; }
+        public List<VMImpuestoPorFactura> pago_impuestos { get; set; }
 
         public VMRDetalleAbonosFacturas(AbonosDeFactura abono, int numeroPago)
         {
@@ -39,6 +40,19 @@ namespace Aprovi.Business.ViewModels
             SaldoAnterior = (invoice.Total - invoice.Abonado + abonoParcial - invoice.Acreditado).ToDocumentCurrency(abono.Factura.Moneda,abono.Moneda,abono.tipoDeCambio); 
             SaldoPagado = abono.monto;
             SaldoPendiente = (invoice.Total - invoice.Abonado - invoice.Acreditado).ToDocumentCurrency(abono.Factura.Moneda,abono.Moneda, abono.tipoDeCambio);
+
+            pago_impuestos = new List<VMImpuestoPorFactura>();
+
+            if (abono.Factura.ImpuestoPorFacturas.ToList().Count() > 0)
+            {
+
+                foreach (var imp in abono.Factura.ImpuestoPorFacturas.ToList())
+                {
+                    var base_imp = abono.monto.ToDocumentCurrency(abono.Moneda, abono.Factura.Moneda, abono.tipoDeCambio) / (1 + imp.valorTasaOCuaota);
+                    var tipo = imp.codigoImpuesto.Equals("002") ? "Traslado" : "Retenido";
+                    pago_impuestos.Add(new VMImpuestoPorFactura(imp, abono, tipo, base_imp));
+                }
+            }
         }
     }
 }
