@@ -453,7 +453,7 @@ namespace Aprovi.Business.Services
 
                     cadena.AppendFormat("{0}|", concepto.precioUnitario.ToStringRoundedCurrency(invoice.Moneda));
                     cadena.AppendFormat("{0}|", (concepto.cantidad * concepto.precioUnitario).ToStringRoundedCurrency(invoice.Moneda));
-                    cadena.AppendFormat("{0}|", (concepto.Impuestos.Count > 0) ? "01" : "02"); //ObjetoImp JCRV
+                    cadena.AppendFormat("{0}|", (concepto.Impuestos.Count > 0) ? "02" : "01"); //ObjetoImp JCRV
 
                     if (concepto.Impuestos.Count > 0)
                     {
@@ -657,7 +657,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "Pago");
                 cadena.AppendFormat("{0}|", "0.0");
                 cadena.AppendFormat("{0}|", "0.0");
-                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
+                cadena.AppendFormat("{0}|", "01")); //ObjetoImpDR JCRV
 
                 //Complemento de pago
                 cadena.AppendFormat("{0}|", "2.0"); //Version Complemento Pago
@@ -1477,7 +1477,7 @@ namespace Aprovi.Business.Services
 
                     nodoConcepto.SetAttribute("ValorUnitario", concepto.precioUnitario.ToStringRoundedCurrency(factura.Moneda));
                     nodoConcepto.SetAttribute("Importe", (concepto.cantidad * concepto.precioUnitario).ToStringRoundedCurrency(factura.Moneda));
-                    nodoConcepto.SetAttribute("ObjetoImp", (concepto.Impuestos.Count > 0) ? "01" : "02");
+                    nodoConcepto.SetAttribute("ObjetoImp", (concepto.Impuestos.Count > 0) ? "02" : "01");
                     /* ObjetoImporte  JCRV */
 
                     XmlElement nodoImpuestos;
