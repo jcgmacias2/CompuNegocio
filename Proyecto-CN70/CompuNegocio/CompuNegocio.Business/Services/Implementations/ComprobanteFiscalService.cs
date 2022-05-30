@@ -647,7 +647,7 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.Pais.codigo);
                 cadena.AppendFormat("{0}|", invoice.Cliente.Domicilio.codigoPostal); //Codigo Postal Receptor JCRV
                 cadena.AppendFormat("{0}|", invoice.Cliente.Regimene.codigo); // Regimen Receptor JCRV
-                cadena.AppendFormat("{0}|", "P01"); //UsoCFDI
+                cadena.AppendFormat("{0}|", "CP01"); //UsoCFDI
 
                 //Conceptos
                 //Por el momento es solo un concepto a la vez
@@ -657,7 +657,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "Pago");
                 cadena.AppendFormat("{0}|", "0.0");
                 cadena.AppendFormat("{0}|", "0.0");
-                cadena.AppendFormat("{0}|", "01")); //ObjetoImpDR JCRV
+                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
 
                 //Complemento de pago
                 cadena.AppendFormat("{0}|", "2.0"); //Version Complemento Pago
@@ -749,7 +749,7 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", payment.Cliente.Domicilio.Pais.codigo);
                 cadena.AppendFormat("{0}|", payment.Cliente.Domicilio.codigoPostal); //Codigo Postal Receptor JCRV
                 cadena.AppendFormat("{0}|", payment.Cliente.Regimene.codigo); // Regimen Receptor JCRV
-                cadena.AppendFormat("{0}|", "P01"); //UsoCFDI
+                cadena.AppendFormat("{0}|", "CP01"); //UsoCFDI
 
                 //Conceptos
                 //Por el momento es solo un concepto a la vez
@@ -848,7 +848,7 @@ namespace Aprovi.Business.Services
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, invoice.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, new UsosCFDI() { codigo = "P01" }, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, new UsosCFDI() { codigo = "CP01" }, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, invoice, payment));
 
@@ -873,7 +873,7 @@ namespace Aprovi.Business.Services
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config, payment.Regimene));
-                nodoComprobante.AppendChild(Receptor(xmlDoc, payment.Cliente, new UsosCFDI() { codigo = "P01" }, payment.Cliente.Domicilio, payment.Cliente.Regimene));
+                nodoComprobante.AppendChild(Receptor(xmlDoc, payment.Cliente, new UsosCFDI() { codigo = "CP01" }, payment.Cliente.Domicilio, payment.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, payment));
 
