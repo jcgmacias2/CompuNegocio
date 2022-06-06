@@ -373,7 +373,7 @@ namespace Aprovi.Business.Services
                 cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", invoice.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", invoice.folio.ToString().Trim()); // Folio
-                cadena.AppendFormat("{0}|", invoice.fechaHora.ToUTCFormat()); // Fecha
+                cadena.AppendFormat("{0}|", invoice.fechaHora.AddHours(-6).ToUTCFormat()); // Fecha
                 if (invoice.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(invoice)))
                 {
                     //Si hay un cfdi de egresos a venta futura asociado, debe ser la clave 23 (novacion)
@@ -626,7 +626,7 @@ namespace Aprovi.Business.Services
                 cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", payment.TimbresDeAbonosDeFactura.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", payment.TimbresDeAbonosDeFactura.folio.ToString().Trim()); // Folio
-                cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); // Fecha
+                cadena.AppendFormat("{0}|", payment.fechaHora.AddHours(-6).ToUTCFormat()); // Fecha
                 cadena.AppendFormat("{0}|", payment.TimbresDeAbonosDeFactura.noCertificado.Trim()); // NoCertificado
                 cadena.AppendFormat("{0}|", "0"); //Subtotal antes de impuestos y descuentos
                 cadena.AppendFormat("{0}|", "XXX"); // Moneda
@@ -670,20 +670,18 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", payment.Moneda.codigo); //MonedaP
                 if (!payment.idMoneda.Equals((int)Monedas.Pesos)) // tipoCambio
                     cadena.AppendFormat("{0}|", payment.tipoDeCambio.ToDecimalString()); //TipoCambioP
-                else
-                    cadena.AppendFormat("{0}|", "1"); //TipoCambioP
                 cadena.AppendFormat("{0}|", payment.monto.ToDecimalString()); //Monto
                 cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.folio.ToString()); //FolioDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.Moneda.codigo); //MonedaDocumentoRelacionado
-                //if (!invoice.idMoneda.Equals(payment.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
-                //{
+                if (!invoice.idMoneda.Equals(payment.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
+                {
                     if (invoice.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
                         cadena.AppendFormat("{0}|", "1"); //MonedaPago
                     else
                         cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
-                //}
+                }
                 //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                 var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                 cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
@@ -730,7 +728,7 @@ namespace Aprovi.Business.Services
                 cadena.Append("4.0|"); // Version 
                 cadena.AppendFormat("{0}|", payment.serie.Trim()); // Serie
                 cadena.AppendFormat("{0}|", payment.folio.ToString().Trim()); // Folio
-                cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); // Fecha
+                cadena.AppendFormat("{0}|", payment.fechaHora.AddHours(-6).ToUTCFormat()); // Fecha
                 cadena.AppendFormat("{0}|", payment.TimbresDePago.noCertificado.Trim()); // NoCertificado
                 cadena.AppendFormat("{0}|", "0"); //Subtotal antes de impuestos y descuentos
                 cadena.AppendFormat("{0}|", "XXX"); // Moneda
@@ -781,20 +779,18 @@ namespace Aprovi.Business.Services
                     //Aqui se debe agregar el tipo de cambio si es que aplica
                     if (p.idMoneda != (int)Monedas.Pesos)
                         cadena.AppendFormat("{0}|", p.tipoDeCambio); //TipoCambioP
-                    else
-                        cadena.AppendFormat("{0}|", "1"); //TipoCambioP
                     cadena.AppendFormat("{0}|", p.monto.ToDecimalString()); //Monto
                     cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.folio.ToString()); //FolioDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.Moneda.codigo); //MonedaDocumentoRelacionado
-                    //if (!invoice.idMoneda.Equals(p.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
-                    //{
+                    if (!invoice.idMoneda.Equals(p.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
+                    {
                         if (invoice.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
                             cadena.AppendFormat("{0}|", "1"); //MonedaPago
                         else
                             cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
-                    //}
+                    }
                     //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                     var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
@@ -1222,7 +1218,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", factura.serie);
                 comprobante.SetAttribute("Folio", factura.folio.ToString());
-                comprobante.SetAttribute("Fecha", factura.fechaHora.ToUTCFormat());
+                comprobante.SetAttribute("Fecha", factura.fechaHora.AddHours(-6).ToUTCFormat());
                 comprobante.SetAttribute("Sello", factura.sello);
                 //<xs:documentation>Atributo condicional para expresar la clave de la forma de pago de los bienes o servicios amparados por el comprobante, Si no se conoce la forma de pago este atributo se debe omitir.</xs:documentation>
                 if (factura.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(factura)))
@@ -1307,7 +1303,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", abono.TimbresDeAbonosDeFactura.serie);
                 comprobante.SetAttribute("Folio", abono.TimbresDeAbonosDeFactura.folio.ToString());
-                comprobante.SetAttribute("Fecha", abono.fechaHora.ToUTCFormat());
+                comprobante.SetAttribute("Fecha", abono.fechaHora.AddHours(-6).ToUTCFormat());
                 comprobante.SetAttribute("Sello", abono.TimbresDeAbonosDeFactura.sello);
                 comprobante.SetAttribute("NoCertificado", abono.TimbresDeAbonosDeFactura.noCertificado);
                 comprobante.SetAttribute("Certificado", config.Certificados.FirstOrDefault(c => c.numero.Equals(abono.TimbresDeAbonosDeFactura.noCertificado)).certificadoBase64);
@@ -1336,7 +1332,7 @@ namespace Aprovi.Business.Services
                 comprobante.SetAttribute("Version", "4.0");
                 comprobante.SetAttribute("Serie", pago.serie);
                 comprobante.SetAttribute("Folio", pago.folio.ToString());
-                comprobante.SetAttribute("Fecha", pago.fechaHora.ToUTCFormat());
+                comprobante.SetAttribute("Fecha", pago.fechaHora.AddHours(-6).ToUTCFormat());
                 comprobante.SetAttribute("Sello", pago.TimbresDePago.sello);
                 comprobante.SetAttribute("NoCertificado", pago.TimbresDePago.noCertificado);
                 comprobante.SetAttribute("Certificado", config.Certificados.FirstOrDefault(c => c.numero.Equals(pago.TimbresDePago.noCertificado)).certificadoBase64);
@@ -1734,8 +1730,6 @@ namespace Aprovi.Business.Services
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                 if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                     nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
-                else
-                    nodoPago.SetAttribute("TipoCambioP", "1");
                 nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                 nodoPago.AppendChild(nodoDoctoRelacionado);
@@ -1744,13 +1738,13 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("Folio", facturaOriginal.folio.ToString());
                 nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
                 
-                //if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
-                //{
+                if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
+                {
                     if (facturaOriginal.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", "1");
                     else
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
-                //}
+                }
 
                 //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                 var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
@@ -1833,8 +1827,6 @@ namespace Aprovi.Business.Services
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                     if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                         nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
-                    else
-                        nodoPago.SetAttribute("TipoCambioP", "1");
                     nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                     nodoPago.AppendChild(nodoDoctoRelacionado);
@@ -1844,8 +1836,6 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
                     if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
-                    else
-                        nodoDoctoRelacionado.SetAttribute("TipoCambioDR", "1");
                     //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                     var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     nodoDoctoRelacionado.SetAttribute("NumParcialidad", numParcialidad.ToString());
