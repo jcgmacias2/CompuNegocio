@@ -657,7 +657,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", "Pago");
                 cadena.AppendFormat("{0}|", "0.0");
                 cadena.AppendFormat("{0}|", "0.0");
-                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
+                cadena.AppendFormat("{0}|", "01"); //ObjetoImp JCRV
 
                 //Complemento de pago
                 cadena.AppendFormat("{0}|", "2.0"); //Version Complemento Pago
@@ -691,7 +691,7 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado + abonoParcial).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoAnt
                 cadena.AppendFormat("{0}|", abonoParcial.ToStringRoundedCurrency(invoice.Moneda)); //ImpPagadoDocumentoRelacionado
                 cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoInsoluto
-                cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
+                cadena.AppendFormat("{0}|", invoice.ImpuestoPorFacturas.Count() > 0 ? "02" : "01"); //ObjetoImpDR JCRV validar que valor poner*****************
 
                 if (invoice.ImpuestoPorFacturas.Count() > 0) 
                 { 
@@ -802,7 +802,7 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado + abonoParcial - invoice.Acreditado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoAnt
                     cadena.AppendFormat("{0}|", abonoParcial.ToStringRoundedCurrency(invoice.Moneda)); //ImpPagadoDocumentoRelacionado
                     cadena.AppendFormat("{0}|", (invoice.Total - invoice.Abonado - invoice.Acreditado).ToStringRoundedCurrency(invoice.Moneda)); //ImpSaldoInsoluto
-                    cadena.AppendFormat("{0}|", "01"); //ObjetoImpDR JCRV
+                    cadena.AppendFormat("{0}|", invoice.ImpuestoPorFacturas.Count() > 0 ? "02" : "01"); //ObjetoImpDR JCRV
 
                     /** JCRV SECCION DE IMPUESTOS**/
                     if (invoice.ImpuestoPorFacturas.Count() > 0)
@@ -1760,9 +1760,10 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("ImpSaldoAnt", (facturaOriginal.Total - facturaOriginal.Abonado + abonoParcial).ToStringRoundedCurrency(facturaOriginal.Moneda)); //ImpSaldoAnt
                 nodoDoctoRelacionado.SetAttribute("ImpPagado", abonoParcial.ToStringRoundedCurrency(facturaOriginal.Moneda));
                 nodoDoctoRelacionado.SetAttribute("ImpSaldoInsoluto", (facturaOriginal.Total - facturaOriginal.Abonado).ToStringRoundedCurrency(facturaOriginal.Moneda));
-                nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
 
                 var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
+                nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", impuestos.Count > 0 ? "02" : "01"); //ObjetoImpDR JCRV validar que valor poner*****************
+
                 var retenciones = facturaOriginal.Impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido)).ToList(); //JCRV  Obtencion de Retenciones
 
                 if (impuestos.Count > 0)
@@ -1852,9 +1853,10 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("ImpSaldoAnt", (facturaOriginal.Total - facturaOriginal.Abonado + abonoParcial - facturaOriginal.Acreditado).ToStringRoundedCurrency(facturaOriginal.Moneda)); //ImpSaldoAnt
                     nodoDoctoRelacionado.SetAttribute("ImpPagado", abonoParcial.ToStringRoundedCurrency(facturaOriginal.Moneda));
                     nodoDoctoRelacionado.SetAttribute("ImpSaldoInsoluto", (facturaOriginal.Total - facturaOriginal.Abonado - facturaOriginal.Acreditado).ToStringRoundedCurrency(facturaOriginal.Moneda));
-                    nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", "01"); //ObjetoImpDR JCRV validar que valor poner*****************
 
                     var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
+                    nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", impuestos.Count > 0 ? "02" : "01"); //ObjetoImpDR JCRV*****************
+
                     if (impuestos.Count > 0)
                     {
                         XmlElement nodoImpuestosDR;
