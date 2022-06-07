@@ -670,6 +670,8 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", payment.Moneda.codigo); //MonedaP
                 if (!payment.idMoneda.Equals((int)Monedas.Pesos)) // tipoCambio
                     cadena.AppendFormat("{0}|", payment.tipoDeCambio.ToDecimalString()); //TipoCambioP
+                else
+                    cadena.AppendFormat("{0}|", "1"); //TipoCambioP
                 cadena.AppendFormat("{0}|", payment.monto.ToDecimalString()); //Monto
                 cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
@@ -779,6 +781,8 @@ namespace Aprovi.Business.Services
                     //Aqui se debe agregar el tipo de cambio si es que aplica
                     if (p.idMoneda != (int)Monedas.Pesos)
                         cadena.AppendFormat("{0}|", p.tipoDeCambio); //TipoCambioP
+                    else
+                        cadena.AppendFormat("{0}|", "1"); //TipoCambioP
                     cadena.AppendFormat("{0}|", p.monto.ToDecimalString()); //Monto
                     cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
@@ -1730,6 +1734,8 @@ namespace Aprovi.Business.Services
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                 if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                     nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
+                else
+                    nodoPago.SetAttribute("TipoCambioP", "1");
                 nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                 nodoPago.AppendChild(nodoDoctoRelacionado);
@@ -1827,6 +1833,8 @@ namespace Aprovi.Business.Services
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                     if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                         nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
+                    else
+                        nodoPago.SetAttribute("TipoCambioP", "1");
                     nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                     nodoPago.AppendChild(nodoDoctoRelacionado);
