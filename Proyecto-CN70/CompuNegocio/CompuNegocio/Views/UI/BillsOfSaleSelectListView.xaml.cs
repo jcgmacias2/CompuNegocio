@@ -1,4 +1,5 @@
 ﻿using Aprovi.Data.Models;
+using Aprovi.Application.Helpers;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,6 +52,10 @@ namespace Aprovi.Views.UI
             btnSeleccionarTodo.Click += BtnSeleccionarTodoOnClick;
             btnDeseleccionarTodo.Click += BtnDeseleccionarTodoOnClick;
             btnBuscarDate.Click += btnBuscarDate_Click;
+            chkGlobalInvoice.Click += chkGlobalInvoice_Click;
+            dpFechaIni.SelectedDateChanged += dpFechaIni_dateChange;
+
+            lbl_periodicidad_cfg.Content = Session.Configuration.Periodicidad.descripcion;
 
             base.Grid = dgRemisiones;
             base.SearchBox = txtBusqueda;
@@ -126,6 +131,24 @@ namespace Aprovi.Views.UI
                 SearchDate();
         }
 
+        private void chkGlobalInvoice_Click(object sender, RoutedEventArgs e)
+        {
+            if (chkGlobalInvoice.IsChecked.GetValueOrDefault(false)){
+                //Diario, Semanal, Quincenal, Mensual, Bimestras
+                //if (Session.Configuration.idPeriodicidad == 1 || Session.Configuration.idPeriodicidad == 2 || Session.Configuration.idPeriodicidad == 3 || Session.Configuration.idPeriodicidad == 4 || Session.Configuration.idPeriodicidad == 5) {
+                    dpFechaIni.IsEnabled = true;
+                    dpFechaFin.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
+                    lbl_endDate.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
+                    //btnBuscarDate.IsEnabled = true;
+                //}
+            }
+            else{
+                dpFechaIni.IsEnabled = false;
+                dpFechaFin.IsEnabled = false;
+                btnBuscarDate.IsEnabled = false;
+            };
+        }
+
         public List<VMRemision> SelectedBillsOfSale
         {
             get
@@ -160,5 +183,59 @@ namespace Aprovi.Views.UI
         {
             get { return dpFechaFin.SelectedDate.GetValueOrDefault(); }
         }
+
+        private void dpFechaIni_dateChange(object sender, SelectionChangedEventArgs e)
+        {
+            if (dpFechaIni.IsEnabled)
+            {
+                var fecha = dpFechaIni.SelectedDate.Value.Date;
+
+                if (Session.Configuration.idPeriodicidad == 2)
+                {
+                    dpFechaFin.SelectedDate = fecha;
+                    btnBuscarDate.IsEnabled = true;
+                }
+
+                if (Session.Configuration.idPeriodicidad == 2)
+                {
+                    if (dpFechaIni.SelectedDate.Value.Date.DayOfWeek != DayOfWeek.Monday)
+                    {
+                        MessageBox.Show("Debe seleccionar un lunes");
+                    }
+                    else
+                    {
+                        dpFechaFin.SelectedDate = fecha.AddDays(6);
+                        btnBuscarDate.IsEnabled = true;
+                    }
+                }
+
+                if (Session.Configuration.idPeriodicidad == 3)
+                {
+                    if (dpFechaIni.SelectedDate.Value.Date.Day != 1 && dpFechaIni.SelectedDate.Value.Date.Day != 15) 
+                    { 
+                        MessageBox.Show("Debe seleccionar el día 1 o 15 del mes.");
+                    }
+                    else
+                    {
+                        dpFechaFin.SelectedDate = fecha.Day == 1 ? fecha.AddDays(14) : fecha.AddMonths(1).AddDays(-15);
+                        btnBuscarDate.IsEnabled = true;
+                    }
+                }
+
+                if (Session.Configuration.idPeriodicidad == 4 || Session.Configuration.idPeriodicidad == 5)
+                {
+                    if (dpFechaIni.SelectedDate.Value.Date.Day != 1)
+                    {
+                        MessageBox.Show("Debe seleccionar el día 1 del mes.");
+                    }
+                    else
+                    {
+                        dpFechaFin.SelectedDate = Session.Configuration.idPeriodicidad == 4 ? fecha.AddMonths(1).AddDays(-1) : fecha.AddMonths(2).AddDays(-1);
+                        btnBuscarDate.IsEnabled = true;
+                    }
+                }
+            }
+        }
+
     }
 }

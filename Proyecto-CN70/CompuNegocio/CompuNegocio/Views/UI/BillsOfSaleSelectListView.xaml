@@ -10,11 +10,15 @@
         WindowStartupLocation="CenterScreen"
         Style="{StaticResource WindowBorder}"
         FocusManager.FocusedElement="{Binding ElementName=txtBusqueda}"
-        Height="473" Width="650">
-    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True" Margin="0,0,0,-1">
-        <DataGrid x:Name="dgRemisiones" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,71,0,0" VerticalAlignment="Top" Height="210" Width="570"
+        Height="519" Width="650">
+    <Grid Background="{StaticResource GrayBrownToWhiteGradient}" hlp:EnterKeyTraversal.IsEnabled="True" Margin="1,2,-1,2">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="312*"/>
+            <RowDefinition Height="185*"/>
+        </Grid.RowDefinitions>
+        <DataGrid x:Name="dgRemisiones" AutoGenerateColumns="False" HorizontalAlignment="Left" Margin="10,115,0,0" VerticalAlignment="Top" Height="210" Width="570"
                   CanUserReorderColumns="False" CanUserResizeColumns="False" CanUserResizeRows="False" CanUserSortColumns="True" CanUserAddRows="False" CanUserDeleteRows="False"
-                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden">
+                  ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.HorizontalScrollBarVisibility="Hidden" Grid.RowSpan="2">
             <DataGrid.Columns>
                 <DataGridTextColumn Width="80" Header="Folio" Binding="{Binding folio}" IsReadOnly="True"/>
                 <DataGridTextColumn Width="150" Header="Razón Social" Binding="{Binding Cliente.razonSocial}" IsReadOnly="True"/>
@@ -24,23 +28,30 @@
                 <DataGridCheckBoxColumn Width="40" Header="" Binding="{Binding Selected}" IsReadOnly="False"/>
             </DataGrid.Columns>
         </DataGrid>
-        <Button x:Name="btnSeleccionarTodo" Content="Inicio" Style="{StaticResource ImageButton}" Margin="585,102,0,0" Tag="{StaticResource ImgSave}"/>
-        <Button x:Name="btnDeseleccionarTodo" Content="Inicio" Style="{StaticResource ImageButton}" Margin="585,204,0,0" Tag="{StaticResource ImgClose}"/>
-        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="10,286,0,0" VerticalAlignment="Top" Width="615"/>
-        <Button x:Name="btnInicio" Content="Inicio" Style="{StaticResource BlockButton}" Margin="15,291,0,0" Tag="{StaticResource ImgGoFirst}"/>
-        <Button x:Name="btnAnterior" Content="Anterior" Style="{StaticResource BlockButton}" Margin="80,291,0,0" Tag="{StaticResource ImgGoPrevious}"/>
-        <Button x:Name="btnSiguiente" Content="Siguiente" Style="{StaticResource BlockButton}" Margin="145,291,0,0" Tag="{StaticResource ImgGoNext}"/>
-        <Button x:Name="btnFinal" Content="Final" Style="{StaticResource BlockButton}" Margin="210,291,0,0" Tag="{StaticResource ImgGoLast}"/>
-        <TextBox x:Name="txtBusqueda" HorizontalAlignment="Left" Height="23" Margin="275,312,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275"/>
-        <Button x:Name="btnBuscar" Content="Buscar" Style="{StaticResource BlockButton}" Margin="555,291,0,0" Tag="{StaticResource ImgSearch}"/>
+        <Button x:Name="btnSeleccionarTodo" Content="Inicio" Style="{StaticResource ImageButton}" Margin="585,146,0,0" Tag="{StaticResource ImgSave}"/>
+        <Button x:Name="btnDeseleccionarTodo" Content="Inicio" Style="{StaticResource ImageButton}" Margin="585,249,0,0" Tag="{StaticResource ImgClose}"/>
+        <Border BorderBrush="Black" BorderThickness="1" HorizontalAlignment="Left" Height="70" Margin="10,18,0,0" VerticalAlignment="Top" Width="615" Grid.Row="1"/>
+        <Button x:Name="btnInicio" Content="Inicio" Style="{StaticResource BlockButton}" Margin="15,23,0,0" Tag="{StaticResource ImgGoFirst}" Grid.Row="1"/>
+        <Button x:Name="btnAnterior" Content="Anterior" Style="{StaticResource BlockButton}" Margin="80,23,0,0" Tag="{StaticResource ImgGoPrevious}" Grid.Row="1"/>
+        <Button x:Name="btnSiguiente" Content="Siguiente" Style="{StaticResource BlockButton}" Margin="145,23,0,0" Tag="{StaticResource ImgGoNext}" Grid.Row="1"/>
+        <Button x:Name="btnFinal" Content="Final" Style="{StaticResource BlockButton}" Margin="210,23,0,0" Tag="{StaticResource ImgGoLast}" Grid.Row="1"/>
+        <TextBox x:Name="txtBusqueda" HorizontalAlignment="Left" Height="23" Margin="275,44,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="275" Grid.Row="1"/>
+        <Button x:Name="btnBuscar" Content="Buscar" Style="{StaticResource BlockButton}" Margin="555,23,0,0" Tag="{StaticResource ImgSearch}" Grid.Row="1"/>
 
-        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="260,366,0,0" Tag="{StaticResource ImgClose}"/>
-        <Button x:Name="btnSeleccionar" Content="Seleccionar" Style="{StaticResource BlockButton}" Margin="330,366,0,0" Tag="{StaticResource ImgSave}"/>
-        <DatePicker x:Name="dpFechaIni" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="92,20,0,0" Width="113"/>
-        <Label Style="{StaticResource LabelSmall}" Content="Fecha inicial:" Margin="10,20,0,0"/>
-        <DatePicker x:Name="dpFechaFin" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="324,20,0,0" Width="113"/>
-        <Label Style="{StaticResource LabelSmall}" Content="Fecha final:" Margin="249,20,0,0"/>
-        <Button x:Name="btnBuscarDate" Content="Buscar" Style="{StaticResource BlockButton}" Margin="455,10,0,0" Tag="{StaticResource ImgSearch}" Height="42" Width="57" Click="btnBuscarDate_Click"/>
+        <Button x:Name="btnCerrar" Content="Cerrar" Style="{StaticResource BlockButton}" Margin="260,98,0,0" Tag="{StaticResource ImgClose}" Grid.Row="1"/>
+        <Button x:Name="btnSeleccionar" Content="Seleccionar" Style="{StaticResource BlockButton}" Margin="330,98,0,0" Tag="{StaticResource ImgSave}" Grid.Row="1"/>
+        <DatePicker x:Name="dpFechaIni" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="222,55,0,0" Width="113" FirstDayOfWeek="Monday" IsEnabled="False"/>
+        <Label Style="{StaticResource LabelSmall}" Content="Fecha inicial:" Margin="140,55,0,0"/>
+        <DatePicker x:Name="dpFechaFin" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="430,54,0,0" Width="113" IsEnabled="False" FirstDayOfWeek="Monday" IsDropDownOpen="True"/>
+        <Label Name="lbl_endDate" Style="{StaticResource LabelSmall}" Content="Fecha final:" Margin="355,54,0,0"/>
+        <Button x:Name="btnBuscarDate" Content="Buscar" Style="{StaticResource BlockButton}" Margin="558,32,0,0" Tag="{StaticResource ImgSearch}" Height="62" Width="57" Click="btnBuscarDate_Click" IsEnabled="False">
+            <Button.Background>
+                <ImageBrush/>
+            </Button.Background>
+        </Button>
+        <CheckBox x:Name="chkGlobalInvoice" Content="Factura Global" HorizontalAlignment="Left" Margin="15,61,0,0" VerticalAlignment="Top"/>
+        <Label Content="Periodicidad: " HorizontalAlignment="Left" Margin="8,18,0,0" VerticalAlignment="Top"/>
+        <Label x:Name="lbl_periodicidad_cfg" HorizontalAlignment="Left" Margin="93,18,0,0" VerticalAlignment="Top"/>
     </Grid>
 </base:BaseListView>
 

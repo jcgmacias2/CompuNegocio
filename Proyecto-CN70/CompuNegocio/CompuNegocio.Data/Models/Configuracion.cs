@@ -30,6 +30,8 @@ namespace Aprovi.Data.Models
             this.idOpcionCostoDisminuye = config.idOpcionCostoDisminuye;
             this.idOpcionCostoAumenta = config.idOpcionCostoAumenta;
             this.FormatosPorConfiguracions = config.FormatosPorConfiguracions;
+            this.idPeriodicidad = config.Periodicidad.idPeriodicidad;
+            this.Periodicidad = config.Periodicidad;
         }
 
         public Configuracion(Configuracione config, Estacione station, bool useScanner, string scannerCode, bool useDrawer) : base()
@@ -56,6 +58,8 @@ namespace Aprovi.Data.Models
             this.idOpcionCostoDisminuye = config.idOpcionCostoDisminuye;
             this.idOpcionCostoAumenta = config.idOpcionCostoAumenta;
             this.FormatosPorConfiguracions = config.FormatosPorConfiguracions;
+            this.idPeriodicidad = config.Periodicidad.idPeriodicidad;
+            this.Periodicidad = config.Periodicidad;
         }
 
         public Estacione Estacion { get; set; }
