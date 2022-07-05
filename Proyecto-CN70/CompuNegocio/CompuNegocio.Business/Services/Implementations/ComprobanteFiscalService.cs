@@ -677,13 +677,19 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.folio.ToString()); //FolioDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.Moneda.codigo); //MonedaDocumentoRelacionado
+
+                /*
                 if (!invoice.idMoneda.Equals(payment.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                 {
                     if (invoice.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
                         cadena.AppendFormat("{0}|", "1"); //MonedaPago
                     else
                         cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
-                }
+                }*/
+
+                /*JCRV Para Pago20 se cambia TipoCambioDR por EquivalenciaDR */
+                cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(payment.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1.00"));
+
                 //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                 var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                 cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
@@ -788,6 +794,8 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.folio.ToString()); //FolioDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.Moneda.codigo); //MonedaDocumentoRelacionado
+                    
+                    /*
                     if (!invoice.idMoneda.Equals(p.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                     {
                         if (invoice.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
@@ -795,6 +803,11 @@ namespace Aprovi.Business.Services
                         else
                             cadena.AppendFormat("{0}|", invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda)); //MonedaPago
                     }
+                    */
+
+                    /*JCRV Para Pago20 se cambia TipoCambioDR por EquivalenciaDR */
+                    cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(p.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1.00"));
+
                     //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                     var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     cadena.AppendFormat("{0}|", numParcialidad.ToString()); //NumParcialidad
@@ -1742,8 +1755,13 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("IdDocumento", facturaOriginal.TimbresDeFactura.UUID);
                 nodoDoctoRelacionado.SetAttribute("Serie", facturaOriginal.serie);
                 nodoDoctoRelacionado.SetAttribute("Folio", facturaOriginal.folio.ToString());
+
                 nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
-                
+
+                /*JCRV Se Agrega EquivalenciaDR*/
+                nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1.00"));
+
+                /* En la documentacion se indica que se reemplaza TipoCambioDR por EquivalenciaDR
                 if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                 {
                     if (facturaOriginal.Moneda.codigo.Equals("MXN")) //CRP220 si el valor del atributo MonedaDR es MXN y el valor MonedaP es diferente, el atributo TipoCambioDR debe tener el valor 1
@@ -1751,6 +1769,7 @@ namespace Aprovi.Business.Services
                     else
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
                 }
+                */
 
                 //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                 var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
@@ -1843,8 +1862,14 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("Serie", facturaOriginal.serie);
                     nodoDoctoRelacionado.SetAttribute("Folio", facturaOriginal.folio.ToString());
                     nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
+                    
+                    /*JCRV Se Agrega EquivalenciaDR*/
+                    nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1.00"));
+                    
+                    /*
                     if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
                         nodoDoctoRelacionado.SetAttribute("TipoCambioDR", facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda));
+                    */
                     //nodoDoctoRelacionado.SetAttribute("MetodoDePagoDR", facturaOriginal.MetodosPago.codigo);
                     var numParcialidad = facturaOriginal.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= abono.fechaHora.ToNextMidnight()); // Abonos anteriores 
                     nodoDoctoRelacionado.SetAttribute("NumParcialidad", numParcialidad.ToString());
