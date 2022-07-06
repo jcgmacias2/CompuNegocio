@@ -688,7 +688,7 @@ namespace Aprovi.Business.Services
                 }*/
 
                 /*JCRV Para Pago20 se cambia TipoCambioDR por EquivalenciaDR */
-                cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(payment.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1.00"));
+                cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(payment.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1"));
 
                 //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                 var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
@@ -806,7 +806,7 @@ namespace Aprovi.Business.Services
                     */
 
                     /*JCRV Para Pago20 se cambia TipoCambioDR por EquivalenciaDR */
-                    cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(p.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1.00"));
+                    cadena.AppendFormat("{0}|", (!invoice.idMoneda.Equals(p.idMoneda) ? invoice.tipoDeCambio.ToStringRoundedCurrency(invoice.Moneda) : "1"));
 
                     //cadena.AppendFormat("{0}|", invoice.MetodosPago.codigo); //MetodoDePagoDocumentoRelacionado
                     var numParcialidad = invoice.AbonosDeFacturas.Count(a => a.idEstatusDeAbono != (int)StatusDeAbono.Cancelado && a.fechaHora <= payment.fechaHora.ToNextMidnight()); // Abonos anteriores 
@@ -1759,7 +1759,7 @@ namespace Aprovi.Business.Services
                 nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
 
                 /*JCRV Se Agrega EquivalenciaDR*/
-                nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1.00"));
+                nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1"));
 
                 /* En la documentacion se indica que se reemplaza TipoCambioDR por EquivalenciaDR
                 if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
@@ -1864,7 +1864,7 @@ namespace Aprovi.Business.Services
                     nodoDoctoRelacionado.SetAttribute("MonedaDR", facturaOriginal.Moneda.codigo);
                     
                     /*JCRV Se Agrega EquivalenciaDR*/
-                    nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1.00"));
+                    nodoDoctoRelacionado.SetAttribute("EquivalenciaDR", (facturaOriginal.Moneda.codigo != abono.Moneda.codigo ? facturaOriginal.tipoDeCambio.ToStringRoundedCurrency(facturaOriginal.Moneda) : "1"));
                     
                     /*
                     if (!facturaOriginal.idMoneda.Equals(abono.idMoneda)) //Cuando son distintas debe agregarse tipo de cambio
