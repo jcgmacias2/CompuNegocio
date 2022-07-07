@@ -139,7 +139,7 @@ namespace Aprovi.Views.UI
                     dpFechaIni.IsEnabled = true;
                     dpFechaFin.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
                     lbl_endDate.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
-                    //btnBuscarDate.IsEnabled = true;
+                    btnBuscarDate.IsEnabled = Session.Configuration.idPeriodicidad == 1 ? true : false;
                 //}
             }
             else{
