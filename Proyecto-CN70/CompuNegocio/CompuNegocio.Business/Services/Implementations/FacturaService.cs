@@ -184,6 +184,7 @@ namespace Aprovi.Business.Services
                     {
                         Remisione remision = _billsOfSale.Find((object) r.idRemision);
                         remision.idFactura = local.idFactura;
+                        remision.idEstatusDeRemision = (int) StatusDeRemision.Facturada; //Se agrega que actualice el campo de EstatusDeRemision a Facturada(2) - JCRV
                     }
 
                     _UOW.Save();
