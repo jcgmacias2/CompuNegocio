@@ -28,6 +28,10 @@ namespace Aprovi.Data.Repositories
 
         List<Remisione> ListBySeller(DateTime fechaInicio, DateTime fechaFin, Usuario user);
 
+        List<Remisione> ListByInvoice(int factura);
+
+        void restoreRemision(List<Remisione> remisiones);
+
         void DeleteDetail(DetallesDeRemision detail);
     }
 }

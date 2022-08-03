@@ -308,6 +308,7 @@ namespace Aprovi.Business.Services
             try
             {
                 var invoice = _invoices.Find(idInvoice);
+                var remisiones = _billsOfSale.ListByInvoice(idInvoice);
 
                 //Si ya esta cancelada, tiro excepción
                 if (invoice.idEstatusDeFactura.Equals((int)StatusDeFactura.Anulada) || invoice.idEstatusDeFactura.Equals((int)StatusDeFactura.Cancelada))
@@ -332,6 +333,10 @@ namespace Aprovi.Business.Services
                     invoice.idEstatusDeFactura = (int)StatusDeFactura.Anulada;
                     invoice.EstatusDeFactura = null;
 
+                    //JCRV - Si la factura esta ligada a una o mas remisiones, se elimina relacion y se regresa su estatus a Registrada, para poder ser facturada de nuevo.
+                    if (remisiones.isValid() && !remisiones.IsEmpty())
+                        _billsOfSale.restoreRemision(remisiones);
+
                     _UOW.Save();
                     //Por tanto aquí se acaba el flujo
                     return invoice;
@@ -340,6 +345,10 @@ namespace Aprovi.Business.Services
                 //Si llega aquí debe estar Timbrada y requiere cancelación fiscal
                 if (!invoice.idEstatusDeFactura.Equals((int)StatusDeFactura.Timbrada))
                     throw new Exception("Estado de la factura desconocido");
+
+                //JCRV - Si la factura esta ligada a una o mas remisiones, se elimina relacion y se regresa su estatus a Registrada, para poder ser facturada de nuevo.
+                if (remisiones.isValid() && !remisiones.IsEmpty())
+                    _billsOfSale.restoreRemision(remisiones);
 
                 var config = _config.GetDefault();
                 invoice.TimbresDeFactura.CancelacionesDeTimbresDeFactura = new CancelacionesDeTimbresDeFactura();

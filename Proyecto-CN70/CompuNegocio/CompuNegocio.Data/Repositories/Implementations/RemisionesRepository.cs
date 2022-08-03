@@ -159,5 +159,36 @@ namespace Aprovi.Data.Repositories
                 throw;
             }
         }
+
+        public List<Remisione> ListByInvoice(int factura)
+        {
+            try
+            {
+                return _dbSet.Where(r => r.idFactura == factura).ToList();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        public void restoreRemision(List<Remisione> remisiones)
+        {
+            try
+            {
+                foreach (Remisione rem in remisiones)
+                {
+                    var reg = _context.Remisiones.SingleOrDefault(r => r.idRemision.Equals(rem.idRemision));
+                    reg.idFactura = null;
+                    reg.idEstatusDeRemision = (int)StatusDeRemision.Registrada;
+                }
+
+                _context.SaveChanges();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

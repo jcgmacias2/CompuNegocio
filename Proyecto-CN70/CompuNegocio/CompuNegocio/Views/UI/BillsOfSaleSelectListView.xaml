@@ -42,7 +42,7 @@
         <Button x:Name="btnSeleccionar" Content="Seleccionar" Style="{StaticResource BlockButton}" Margin="330,98,0,0" Tag="{StaticResource ImgSave}" Grid.Row="1"/>
         <DatePicker x:Name="dpFechaIni" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="222,55,0,0" Width="113" FirstDayOfWeek="Monday" IsEnabled="False"/>
         <Label Style="{StaticResource LabelSmall}" Content="Fecha inicial:" Margin="140,55,0,0"/>
-        <DatePicker x:Name="dpFechaFin" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="430,54,0,0" Width="113" IsEnabled="False" FirstDayOfWeek="Monday" IsDropDownOpen="True"/>
+        <DatePicker x:Name="dpFechaFin" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="430,54,0,0" Width="113" IsEnabled="False" FirstDayOfWeek="Monday" IsDropDownOpen="True" Visibility="Hidden"/>
         <Label Name="lbl_endDate" Style="{StaticResource LabelSmall}" Content="Fecha final:" Margin="355,54,0,0"/>
         <Button x:Name="btnBuscarDate" Content="Buscar" Style="{StaticResource BlockButton}" Margin="558,32,0,0" Tag="{StaticResource ImgSearch}" Height="62" Width="57" Click="btnBuscarDate_Click" IsEnabled="False">
             <Button.Background>
@@ -52,6 +52,7 @@
         <CheckBox x:Name="chkGlobalInvoice" Content="Factura Global" HorizontalAlignment="Left" Margin="15,61,0,0" VerticalAlignment="Top"/>
         <Label Content="Periodicidad: " HorizontalAlignment="Left" Margin="8,18,0,0" VerticalAlignment="Top"/>
         <Label x:Name="lbl_periodicidad_cfg" HorizontalAlignment="Left" Margin="93,18,0,0" VerticalAlignment="Top"/>
+        <DatePicker x:Name="dpFechaFin_show" SelectedDate="{x:Static sys:DateTime.Now}"  Style="{StaticResource DatePickerSmall}" Height="23" Margin="430,55,0,0" Width="113" IsEnabled="False" FirstDayOfWeek="Monday" IsDropDownOpen="True"/>
     </Grid>
 </base:BaseListView>
 

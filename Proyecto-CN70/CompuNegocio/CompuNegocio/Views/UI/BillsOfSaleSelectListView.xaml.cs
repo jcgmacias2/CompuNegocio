@@ -137,7 +137,7 @@ namespace Aprovi.Views.UI
                 //Diario, Semanal, Quincenal, Mensual, Bimestras
                 //if (Session.Configuration.idPeriodicidad == 1 || Session.Configuration.idPeriodicidad == 2 || Session.Configuration.idPeriodicidad == 3 || Session.Configuration.idPeriodicidad == 4 || Session.Configuration.idPeriodicidad == 5) {
                     dpFechaIni.IsEnabled = true;
-                    dpFechaFin.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
+                    dpFechaFin_show.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
                     lbl_endDate.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
                     btnBuscarDate.IsEnabled = Session.Configuration.idPeriodicidad == 1 ? true : false;
                 //}
@@ -145,6 +145,7 @@ namespace Aprovi.Views.UI
             else{
                 dpFechaIni.IsEnabled = false;
                 dpFechaFin.IsEnabled = false;
+                dpFechaFin_show.IsEnabled = false;
                 btnBuscarDate.IsEnabled = false;
             };
         }
@@ -190,47 +191,51 @@ namespace Aprovi.Views.UI
             {
                 var fecha = dpFechaIni.SelectedDate.Value.Date;
 
-                if (Session.Configuration.idPeriodicidad == 2)
+                if (Session.Configuration.idPeriodicidad == 1)
                 {
-                    dpFechaFin.SelectedDate = fecha;
+                    dpFechaFin.SelectedDate = fecha.AddHours(24);
+                    dpFechaFin_show.SelectedDate = fecha;
                     btnBuscarDate.IsEnabled = true;
                 }
 
                 if (Session.Configuration.idPeriodicidad == 2)
                 {
-                    if (dpFechaIni.SelectedDate.Value.Date.DayOfWeek != DayOfWeek.Monday)
+                    if (fecha.DayOfWeek != DayOfWeek.Monday)
                     {
                         MessageBox.Show("Debe seleccionar un lunes");
                     }
                     else
                     {
-                        dpFechaFin.SelectedDate = fecha.AddDays(6);
+                        dpFechaFin.SelectedDate = fecha.AddDays(7);
+                        dpFechaFin_show.SelectedDate = fecha.AddDays(6);
                         btnBuscarDate.IsEnabled = true;
                     }
                 }
 
                 if (Session.Configuration.idPeriodicidad == 3)
                 {
-                    if (dpFechaIni.SelectedDate.Value.Date.Day != 1 && dpFechaIni.SelectedDate.Value.Date.Day != 15) 
+                    if (fecha.Day != 1 && fecha.Day != 15) 
                     { 
                         MessageBox.Show("Debe seleccionar el día 1 o 15 del mes.");
                     }
                     else
                     {
-                        dpFechaFin.SelectedDate = fecha.Day == 1 ? fecha.AddDays(14) : fecha.AddMonths(1).AddDays(-15);
+                        dpFechaFin.SelectedDate = fecha.Day == 1 ? fecha.AddDays(15) : fecha.AddMonths(1).AddDays(-14);
+                        dpFechaFin_show.SelectedDate = fecha.Day == 1 ? fecha.AddDays(14) : fecha.AddMonths(1).AddDays(-15);
                         btnBuscarDate.IsEnabled = true;
                     }
                 }
 
                 if (Session.Configuration.idPeriodicidad == 4 || Session.Configuration.idPeriodicidad == 5)
                 {
-                    if (dpFechaIni.SelectedDate.Value.Date.Day != 1)
+                    if (fecha.Day != 1)
                     {
                         MessageBox.Show("Debe seleccionar el día 1 del mes.");
                     }
                     else
                     {
-                        dpFechaFin.SelectedDate = Session.Configuration.idPeriodicidad == 4 ? fecha.AddMonths(1).AddDays(-1) : fecha.AddMonths(2).AddDays(-1);
+                        dpFechaFin.SelectedDate = Session.Configuration.idPeriodicidad == 4 ? fecha.AddMonths(1) : fecha.AddMonths(2);
+                        dpFechaFin_show.SelectedDate = Session.Configuration.idPeriodicidad == 4 ? fecha.AddMonths(1).AddDays(-1) : fecha.AddMonths(2).AddDays(-1);
                         btnBuscarDate.IsEnabled = true;
                     }
                 }
