@@ -923,6 +923,7 @@ namespace Aprovi.Presenters
                 {
                     var receipt = new VMAcuse(invoice, Session.Configuration);
                     var report = Reports.FillReport(receipt);
+                    _view.ShowMessage("Se requiere el siguiente archivo para generar Acuse de Cancelacion:\n\n"+report.Archivo); //JCRV Para ver que documento y en donde se esta buscando
                     report.Export(string.Format("{0}\\{1}{2}-Acuse Cancelación.pdf", Session.Configuration.CarpetaPdf, invoice.serie, invoice.folio));
                 }
                 //Inicializo nuevamente
