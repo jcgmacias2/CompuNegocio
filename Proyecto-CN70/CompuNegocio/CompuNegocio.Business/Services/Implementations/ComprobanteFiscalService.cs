@@ -316,10 +316,11 @@ namespace Aprovi.Business.Services
                 result = (JObject)respuesta["result"];
                 if (!((string)result["retcode"]).Equals("1"))
                 {
-                    throw new Exception((string)result["error"]);
+                    throw new Exception("Error al realizar la cancelacion en itimbre: "+(string)result["error"]);
                 }
 
                 return (string)result["acuse"];
+                //return "<s:Envelope xmlns:s=\"http://schemas.xmlsoap.org/soap/envelope/\"><s:Body xmlns:xsi=\"http://www.w3.org/2001/XMLSchema-instance\" xmlns:xsd=\"http://www.w3.org/2001/XMLSchema\"><CancelaCFDResponse xmlns=\"http://cancelacfd.sat.gob.mx\"><CancelaCFDResult Fecha=\"2018-12-20T12:22:28.2969987\" RfcEmisor=\"CSO1211145F0\"><Folios><UUID>A19143A8-D876-464F-8346-BA5F2DE69DAD</UUID><EstatusUUID>201</EstatusUUID></Folios><Signature Id=\"SelloSAT\" xmlns=\"http://www.w3.org/2000/09/xmldsig#\"><SignedInfo><CanonicalizationMethod Algorithm=\"http://www.w3.org/TR/2001/REC-xml-c14n-20010315\"/><SignatureMethod Algorithm=\"http://www.w3.org/2001/04/xmldsig-more#hmac-sha512\"/><Reference URI=\"\"><Transforms><Transform Algorithm=\"http://www.w3.org/TR/1999/REC-xpath-19991116\"><XPath>not(ancestor-or-self::*[local-name()='Signature'])</XPath></Transform></Transforms><DigestMethod Algorithm=\"http://www.w3.org/2001/04/xmlenc#sha512\"/><DigestValue>fpbCj0jw4uuZnhzSmjzsKk3l5qOoHcA4otBiE7ojXAWl8o7SWMcmVvh8QUQhk0UG7cqZ37UtIl0fL45s7yYewg==</DigestValue></Reference></SignedInfo><SignatureValue>iKiN8sgKX419KQ3T3lT2FVSrfx+SBCIg2/7uy4as0DD/lZgKjTajQnOreHIBnfMXVf59nRwhlaZJ5V1nTREXSw==</SignatureValue><KeyInfo><KeyName>00001088888800000031</KeyName><KeyValue><RSAKeyValue><Modulus>ujwIJaMKWWmawqDpHx/OS10pXzEh2SQhY02y64v9Q0+I+0dGlIrjFJeGrsHqAT3JoYnh38Dxwta98t/7++dh2hOgiZEwRignWRIlOgM1MefBHEyY+hi4vHpZgPKq/hJVfHf9nOvlb5UgIHMTCEwrDp3qk9O5XtTEycnWwiqleG0c1J9sfbRxC0gYBHsNTH85OEtSXYMkiWNYNnFbIc7B0sgp2y18jUxUCNFBMMTV0tz2sxRF+V4hblaPjI75RWmvs9E4lD7MVmW3z7LIlSajuSL8eOqoerSkQhPBABIeQenEPQwRTt3ej3XpVaBsOmagIPZZI3RvOVh+5mcXDE5txQ==</Modulus><Exponent>AQAB</Exponent></RSAKeyValue></KeyValue></KeyInfo></Signature></CancelaCFDResult></CancelaCFDResponse></s:Body></s:Envelope>";
             }
             catch (Exception)
             {
