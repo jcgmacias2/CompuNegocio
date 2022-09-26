@@ -353,7 +353,7 @@ namespace Aprovi.Business.Services
                 var config = _config.GetDefault();
                 invoice.TimbresDeFactura.CancelacionesDeTimbresDeFactura = new CancelacionesDeTimbresDeFactura();
                 invoice.TimbresDeFactura.CancelacionesDeTimbresDeFactura.fechaHora = DateTime.Now;
-                invoice.TimbresDeFactura.CancelacionesDeTimbresDeFactura.acuse = _fiscalReceipts.Cancelar(invoice.TimbresDeFactura.UUID, config);
+                invoice.TimbresDeFactura.CancelacionesDeTimbresDeFactura.acuse = _fiscalReceipts.Cancelar(invoice.TimbresDeFactura.UUID, invoice.noCertificado, config);
                 invoice.idEstatusDeFactura = (int)StatusDeFactura.Cancelada;
                 invoice.EstatusDeFactura = null;
                 _UOW.Save();

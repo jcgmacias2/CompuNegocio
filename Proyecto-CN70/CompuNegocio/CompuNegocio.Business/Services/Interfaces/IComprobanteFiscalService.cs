@@ -108,7 +108,7 @@ namespace Aprovi.Business.Services
         /// <param name="uuid">UUID del comprobante a cancelar</param>
         /// <param name="config">Configuración actual del emisor</param>
         /// <returns>Acuse de cancelación</returns>
-        string Cancelar(string uuid, Configuracion config);
+        string Cancelar(string uuid, string nocertificado, Configuracion config);
 
         /// <summary>
         /// Genera el xml del acuse de cancelación

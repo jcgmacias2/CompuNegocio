@@ -260,7 +260,7 @@ namespace Aprovi.Business.Services
             }
         }
 
-        public string Cancelar(string uuid, Configuracion config)
+        public string Cancelar(string uuid, string nocertificado, Configuracion config)
         {
             //q = {"id":1001,"method":"cfd2cfdi","params":{"user":"miemail@midominio.com","pass":"cabb17fb8536180e11af6dff0da42132","RFC":"EEM010101XYZ","pfx_pass":"Clave de mi archivo PFX","pfx_pem":"Archivo PFX de mi CSD","folios":["25916C58-672A-43CD-96EE-F14E0FDD4378"]}}
 
@@ -270,7 +270,7 @@ namespace Aprovi.Business.Services
             JArray timbreFolios;
             JObject respuesta;
             JObject result;
-            X509Certificate2 certificate;
+            //X509Certificate2 certificate;
             byte[] content;
 
             result = null;
@@ -284,13 +284,14 @@ namespace Aprovi.Business.Services
             timbreParams["user"] = config.usuarioPAC;
             timbreParams["pass"] = config.contraseñaPAC;
             timbreParams["RFC"] = config.rfc.ToUpper();
-            timbreParams["pfx_pass"] = pass;
-            certificate = new X509Certificate2(pfxFile, pass, X509KeyStorageFlags.Exportable);
-            timbreParams["pfx_pem"] = Convert.ToBase64String(certificate.Export(X509ContentType.Pkcs12, pass));
+            timbreParams["NoCertificado"] = nocertificado;
+            //timbreParams["pfx_pass"] = pass;
+            //certificate = new X509Certificate2(pfxFile, pass, X509KeyStorageFlags.Exportable);
+            //timbreParams["pfx_pem"] = Convert.ToBase64String(certificate.Export(X509ContentType.Pkcs12, pass));
             timbreParams["folios"] = timbreFolios;
 
             timbreRequest = new JObject();
-            timbreRequest["id"] = uuid;
+            //timbreRequest["id"] = uuid;
             timbreRequest["method"] = "cancelarCFDI";
             timbreRequest["params"] = timbreParams;
 

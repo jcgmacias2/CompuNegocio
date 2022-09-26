@@ -279,7 +279,7 @@ namespace Aprovi.Business.Services
                     local.idEstatusDePago = (int)StatusDePago.Cancelado;
                     local.TimbresDePago.CancelacionesDeTimbresDePago = new CancelacionesDeTimbresDePago();
                     local.TimbresDePago.CancelacionesDeTimbresDePago.fechaHora = DateTime.Now;
-                    local.TimbresDePago.CancelacionesDeTimbresDePago.acuse = _fiscalReceipts.Cancelar(local.TimbresDePago.UUID, config);
+                    local.TimbresDePago.CancelacionesDeTimbresDePago.acuse = _fiscalReceipts.Cancelar(local.TimbresDePago.UUID, local.TimbresDePago.noCertificado, config);
                     //Genero el acuse de cancelación
                     _fiscalReceipts.CreateAcuse(string.Format("{0}\\{1}{2}-Acuse de cancelación.xml", config.CarpetaXml, local.serie, local.folio), local.TimbresDePago.CancelacionesDeTimbresDePago.acuse);
                 }

@@ -124,7 +124,7 @@ namespace Aprovi.Business.Services
                 {
                     local.TimbresDeAbonosDeFactura.CancelacionesDeTimbreDeAbonosDeFactura = new CancelacionesDeTimbreDeAbonosDeFactura();
                     local.TimbresDeAbonosDeFactura.CancelacionesDeTimbreDeAbonosDeFactura.fechaHora = DateTime.Now;
-                    local.TimbresDeAbonosDeFactura.CancelacionesDeTimbreDeAbonosDeFactura.acuse = _fiscalReceipts.Cancelar(local.TimbresDeAbonosDeFactura.UUID, config);
+                    local.TimbresDeAbonosDeFactura.CancelacionesDeTimbreDeAbonosDeFactura.acuse = _fiscalReceipts.Cancelar(local.TimbresDeAbonosDeFactura.UUID, local.TimbresDeAbonosDeFactura.noCertificado, config);
                     //Genero el acuse de cancelación
                     _fiscalReceipts.CreateAcuse(string.Format("{0}\\{1}{2}-Acuse de cancelación.xml", config.CarpetaXml, local.TimbresDeAbonosDeFactura.serie, local.TimbresDeAbonosDeFactura.folio), local.TimbresDeAbonosDeFactura.CancelacionesDeTimbreDeAbonosDeFactura.acuse);
                 }

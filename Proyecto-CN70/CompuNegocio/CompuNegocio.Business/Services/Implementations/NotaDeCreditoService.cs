@@ -228,7 +228,7 @@ namespace Aprovi.Business.Services
                 var config = _config.GetDefault();
                 creditNote.TimbresDeNotasDeCredito.CancelacionesDeTimbresDeNotasDeCredito = new CancelacionesDeTimbresDeNotasDeCredito();
                 creditNote.TimbresDeNotasDeCredito.CancelacionesDeTimbresDeNotasDeCredito.fechaHora = DateTime.Now;
-                creditNote.TimbresDeNotasDeCredito.CancelacionesDeTimbresDeNotasDeCredito.acuse = _fiscalReceipts.Cancelar(creditNote.TimbresDeNotasDeCredito.UUID, config);
+                creditNote.TimbresDeNotasDeCredito.CancelacionesDeTimbresDeNotasDeCredito.acuse = _fiscalReceipts.Cancelar(creditNote.TimbresDeNotasDeCredito.UUID, creditNote.TimbresDeNotasDeCredito.noCertificado, config);
                 creditNote.idEstatusDeNotaDeCredito = (int)StatusDeNotaDeCredito.Cancelada;
                 creditNote.EstatusDeNotaDeCredito = null;
 
