@@ -420,10 +420,18 @@ namespace Aprovi.Business.Services
                     }
                 }
 
+                //Periodicidad
+                if (invoice.Periodicidad.EsFacturaGlobal)
+                {
+                    cadena.AppendFormat("{0}|", invoice.Periodicidad.CodigoPeriodicidad);
+                    cadena.AppendFormat("{0}|", invoice.Periodicidad.Mes);
+                    cadena.AppendFormat("{0}|", invoice.Periodicidad.Year);
+                }
+
                 //Emisor
                 cadena.AppendFormat("{0}|", config.rfc);
                 cadena.AppendFormat("{0}|", config.razonSocial.Trim());
-                cadena.AppendFormat("{0}|", invoice.Regimene.codigo);
+                cadena.AppendFormat("{0}|", config.CodigoRegimen);
 
                 //Receptor
                 cadena.AppendFormat("{0}|", invoice.Cliente.rfc.Trim());
@@ -556,7 +564,9 @@ namespace Aprovi.Business.Services
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, false));
                 if (invoice.idComprobanteOriginal.isValid() || invoice.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(invoice)))
                     CFDIRelacionados(xmlDoc, invoice).ForEach(x => nodoComprobante.AppendChild(x));
-                nodoComprobante.AppendChild(Emisor(xmlDoc, config, invoice.Regimene));
+                if (invoice.Periodicidad.EsFacturaGlobal)
+                    nodoComprobante.AppendChild(CFDIInformacionGlobal(xmlDoc, invoice));
+                nodoComprobante.AppendChild(Emisor(xmlDoc, config));
                 nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, invoice.UsosCFDI, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, invoice));
                 if (invoice.Impuestos.Count > 0)
@@ -640,7 +650,8 @@ namespace Aprovi.Business.Services
                 //Emisor
                 cadena.AppendFormat("{0}|", config.rfc);
                 cadena.AppendFormat("{0}|", config.razonSocial.Trim());
-                cadena.AppendFormat("{0}|", invoice.Regimene.codigo);
+                //cadena.AppendFormat("{0}|", invoice.Regimene.codigo);
+                cadena.AppendFormat("{0}|", config.CodigoRegimen);
 
                 //Receptor
                 cadena.AppendFormat("{0}|", invoice.Cliente.rfc.Trim());
@@ -750,7 +761,8 @@ namespace Aprovi.Business.Services
                 //Emisor
                 cadena.AppendFormat("{0}|", config.rfc);
                 cadena.AppendFormat("{0}|", config.razonSocial.Trim());
-                cadena.AppendFormat("{0}|", payment.Regimene.codigo);
+                //cadena.AppendFormat("{0}|", payment.Regimene.codigo);
+                cadena.AppendFormat("{0}|", config.CodigoRegimen);
 
                 //Receptor
                 cadena.AppendFormat("{0}|", payment.Cliente.rfc.Trim());
@@ -864,7 +876,7 @@ namespace Aprovi.Business.Services
                 XmlElement nodoComprobante = Comprobante(xmlDoc, payment, config);
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
-                nodoComprobante.AppendChild(Emisor(xmlDoc, config, invoice.Regimene));
+                nodoComprobante.AppendChild(Emisor(xmlDoc, config));
                 nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, new UsosCFDI() { codigo = "CP01" }, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, invoice, payment));
@@ -889,7 +901,7 @@ namespace Aprovi.Business.Services
                 XmlElement nodoComprobante = Comprobante(xmlDoc, payment, config);
                 xmlDoc.AppendChild(nodoComprobante);
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, true));
-                nodoComprobante.AppendChild(Emisor(xmlDoc, config, payment.Regimene));
+                nodoComprobante.AppendChild(Emisor(xmlDoc, config));
                 nodoComprobante.AppendChild(Receptor(xmlDoc, payment.Cliente, new UsosCFDI() { codigo = "CP01" }, payment.Cliente.Domicilio, payment.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, payment));
                 nodoComprobante.AppendChild(Pagos(xmlDoc, payment));
@@ -975,7 +987,8 @@ namespace Aprovi.Business.Services
                 //Emisor
                 cadena.AppendFormat("{0}|", config.rfc);
                 cadena.AppendFormat("{0}|", config.razonSocial.Trim());
-                cadena.AppendFormat("{0}|", creditNote.Regimene.codigo);
+                //cadena.AppendFormat("{0}|", creditNote.Regimene.codigo);
+                cadena.AppendFormat("{0}|", config.CodigoRegimen);
 
                 //Receptor
                 cadena.AppendFormat("{0}|", creditNote.Cliente.rfc.Trim());
@@ -1179,7 +1192,7 @@ namespace Aprovi.Business.Services
                 {
                     nodoComprobante.AppendChild(CFDIRelacionados(xmlDoc, creditNote.Factura));
                 }
-                nodoComprobante.AppendChild(Emisor(xmlDoc, config, creditNote.Regimene));
+                nodoComprobante.AppendChild(Emisor(xmlDoc, config));
                 nodoComprobante.AppendChild(Receptor(xmlDoc, creditNote.Cliente, new UsosCFDI() { codigo = "G02" }, creditNote.Cliente.Domicilio, creditNote.Cliente.Regimene));
                 nodoComprobante.AppendChild(Conceptos(xmlDoc, creditNote));
                 if (creditNote.Impuestos.Count > 0)
@@ -1430,14 +1443,32 @@ namespace Aprovi.Business.Services
             }
         }
 
-        private XmlElement Emisor(XmlDocument xml, Configuracion config, Regimene regimen)
+        private XmlElement CFDIInformacionGlobal(XmlDocument xml, VMFactura invoice)
+        {
+            try
+            {
+                XmlElement nodoCfdiInformacionGlobal = xml.CreateElement("cfdi", "InformacionGlobal", "http://www.sat.gob.mx/cfd/4");
+                nodoCfdiInformacionGlobal.SetAttribute("Periodicidad", invoice.Periodicidad.CodigoPeriodicidad);
+                nodoCfdiInformacionGlobal.SetAttribute("Meses", invoice.Periodicidad.Mes);
+                nodoCfdiInformacionGlobal.SetAttribute("Año", invoice.Periodicidad.Year);
+
+                return nodoCfdiInformacionGlobal;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
+
+        private XmlElement Emisor(XmlDocument xml, Configuracion config)
         {
             try
             {
                 XmlElement emisor = xml.CreateElement("cfdi", "Emisor", "http://www.sat.gob.mx/cfd/4");
                 emisor.SetAttribute("Rfc", config.rfc);
                 emisor.SetAttribute("Nombre", config.razonSocial);
-                emisor.SetAttribute("RegimenFiscal", regimen.codigo);
+                //emisor.SetAttribute("RegimenFiscal", regimen.codigo);
+                emisor.SetAttribute("RegimenFiscal", config.CodigoRegimen);
                 return emisor;
             }
             catch (Exception)

@@ -36,8 +36,9 @@ namespace Aprovi.Presenters
         private INotaDeCreditoService _creditNotes;
         private INotaDeDescuentoService _discountNotes;
         private List<VMRemision> _selectedBillsOfSale;
+        private VMPeriodicidad _periodicidad;
 
-        public InvoiceBillsOfSalePresenter(IInvoiceBillsOfSaleView view, ICatalogosEstaticosService catalogs, IConfiguracionService configs,IUsosCFDIService cfdiUsages, IClienteService customers, IRemisionService billsOfSale, IFacturaService invoices, IArticuloService items, IAbonoDeFacturaService invoicePayments, IListaDePrecioService pricesList, ICuentaBancariaService bankAccounts, ICuentaPredialService predialAccounts, IEnvioDeCorreoService emailService, ICotizacionService quotes, IPedimentoService customs, IUsuarioService users, ISeguridadService security,IPagoService payments, INotaDeCreditoService creditNotes, INotaDeDescuentoService discountNotes, List<VMRemision> selectedBillsOfSale)
+        public InvoiceBillsOfSalePresenter(IInvoiceBillsOfSaleView view, ICatalogosEstaticosService catalogs, IConfiguracionService configs,IUsosCFDIService cfdiUsages, IClienteService customers, IRemisionService billsOfSale, IFacturaService invoices, IArticuloService items, IAbonoDeFacturaService invoicePayments, IListaDePrecioService pricesList, ICuentaBancariaService bankAccounts, ICuentaPredialService predialAccounts, IEnvioDeCorreoService emailService, ICotizacionService quotes, IPedimentoService customs, IUsuarioService users, ISeguridadService security, IPagoService payments, INotaDeCreditoService creditNotes, INotaDeDescuentoService discountNotes, List<VMRemision> selectedBillsOfSale, VMPeriodicidad periodicidad)
         {
             _view = view;
             _catalogs = catalogs;
@@ -59,6 +60,7 @@ namespace Aprovi.Presenters
             _payments = payments;
             _creditNotes = creditNotes;
             _discountNotes = discountNotes;
+            _periodicidad = periodicidad;
 
             _view.Save += Save;
             _view.Quit += Quit;
@@ -256,6 +258,7 @@ namespace Aprovi.Presenters
 
                 //Se anexan las remisiones relacionadas
                 invoice.Remisiones = _selectedBillsOfSale.Cast<Remisione>().ToList();
+                invoice.Periodicidad = _periodicidad;
 
                 invoice.UpdateAccount();
 

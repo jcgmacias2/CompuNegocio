@@ -76,7 +76,9 @@ namespace Aprovi.Data.Models
 
         public Ambiente Mode { get; set; }
 
-        public string Regimen { get { return this.Regimenes.First().descripcion; } }
+        //public string Regimen { get { return this.Regimenes.First().descripcion; } }
+        public string Regimen { get { return this.Regimenes.Where(r => r.aplicaEmisor.Equals(1)).First().descripcion; } }
+        public string CodigoRegimen { get { return this.Regimenes.Where(r => r.aplicaEmisor.Equals(1)).First().codigo; } }
 
         public bool Escaner { get; set; }
 

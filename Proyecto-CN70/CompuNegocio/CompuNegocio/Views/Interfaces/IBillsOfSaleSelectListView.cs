@@ -17,6 +17,7 @@ namespace Aprovi.Views
         event Action SearchDate;
 
         List<VMRemision> SelectedBillsOfSale { get; }
+        VMPeriodicidad Periodicidad { get; }
         List<VMRemision> BillsOfSale { get; }
         DateTime Start { get; }
         DateTime End { get; }

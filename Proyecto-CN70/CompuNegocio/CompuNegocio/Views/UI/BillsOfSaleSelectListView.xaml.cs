@@ -136,10 +136,12 @@ namespace Aprovi.Views.UI
             if (chkGlobalInvoice.IsChecked.GetValueOrDefault(false)){
                 //Diario, Semanal, Quincenal, Mensual, Bimestras
                 //if (Session.Configuration.idPeriodicidad == 1 || Session.Configuration.idPeriodicidad == 2 || Session.Configuration.idPeriodicidad == 3 || Session.Configuration.idPeriodicidad == 4 || Session.Configuration.idPeriodicidad == 5) {
-                    dpFechaIni.IsEnabled = true;
-                    dpFechaFin_show.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
-                    lbl_endDate.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
-                    btnBuscarDate.IsEnabled = Session.Configuration.idPeriodicidad == 1 ? true : false;
+                dpFechaIni.IsEnabled = true;
+                dpFechaFin_show.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
+                lbl_endDate.Opacity = Session.Configuration.idPeriodicidad == 1 ? 0 : 50;
+                btnBuscarDate.IsEnabled = Session.Configuration.idPeriodicidad == 1 ? true : false;
+
+                determina_fecha();
                 //}
             }
             else{
@@ -185,7 +187,31 @@ namespace Aprovi.Views.UI
             get { return dpFechaFin.SelectedDate.GetValueOrDefault(); }
         }
 
+        public VMPeriodicidad Periodicidad
+        {
+            get
+            {
+                var year = "";
+                var mes = "";
+                
+                if (dpFechaIni.IsEnabled)
+                {
+                    var fecha = dpFechaIni.SelectedDate.Value.Date;
+                    mes = fecha.Month.ToString();
+                    year = fecha.Year.ToString();
+                }
+                
+                VMPeriodicidad periodicidad = new VMPeriodicidad(chkGlobalInvoice.IsChecked.GetValueOrDefault(false), Session.Configuration.Periodicidad.codigo, mes, year);
+                return periodicidad;
+            }
+        }
+
         private void dpFechaIni_dateChange(object sender, SelectionChangedEventArgs e)
+        {
+            determina_fecha();
+        }
+
+        private void determina_fecha()
         {
             if (dpFechaIni.IsEnabled)
             {
@@ -214,8 +240,8 @@ namespace Aprovi.Views.UI
 
                 if (Session.Configuration.idPeriodicidad == 3)
                 {
-                    if (fecha.Day != 1 && fecha.Day != 15) 
-                    { 
+                    if (fecha.Day != 1 && fecha.Day != 15)
+                    {
                         MessageBox.Show("Debe seleccionar el día 1 o 15 del mes.");
                     }
                     else

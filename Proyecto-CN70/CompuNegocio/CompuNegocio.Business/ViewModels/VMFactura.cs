@@ -215,5 +215,7 @@ namespace Aprovi.Business.ViewModels
         public decimal Abonado { get; set; }
         public decimal Saldo { get { return Total - Abonado - Acreditado; } }
         public decimal Acreditado { get; set; }
+
+        public VMPeriodicidad Periodicidad { get; set; }
     }
 }

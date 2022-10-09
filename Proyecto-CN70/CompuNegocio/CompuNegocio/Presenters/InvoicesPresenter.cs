@@ -923,7 +923,7 @@ namespace Aprovi.Presenters
                 {
                     var receipt = new VMAcuse(invoice, Session.Configuration);
                     var report = Reports.FillReport(receipt);
-                    _view.ShowMessage("Se requiere el siguiente archivo para generar Acuse de Cancelacion:\n\n"+report.Archivo); //JCRV Para ver que documento y en donde se esta buscando
+                    //_view.ShowMessage("Se requiere el siguiente archivo para generar Acuse de Cancelacion:\n\n"+report.Archivo); //JCRV Para ver que documento y en donde se esta buscando
                     report.Export(string.Format("{0}\\{1}{2}-Acuse Cancelación.pdf", Session.Configuration.CarpetaPdf, invoice.serie, invoice.folio));
                 }
                 //Inicializo nuevamente
@@ -993,14 +993,14 @@ namespace Aprovi.Presenters
                 invoice.idUsuarioRegistro = Session.LoggedUser.idUsuario;
                 invoice.Usuario = Session.LoggedUser;
 
-                /* JCRV Se agrega que se muestra la ruta de donde se esta leyendo el archivo de configuracion */
+                /* JCRV Se agrega que se muestra la ruta de donde se esta leyendo el archivo de configuracion 
                 var config_path = ConfigurationManager.OpenExeConfiguration(ConfigurationUserLevel.None).FilePath;
                 var usuario = Session.Configuration.usuarioPAC;
                 var pass = Session.Configuration.contraseñaPAC;
                 var csd = ConfigurationManager.AppSettings["CSD"].ToString();
                 var msg = "UsuarioPAC: " + usuario + "\n\ncontraseñaPAC " + pass + "\n\nRuta CSD: " + csd + "\n\n"; 
                 _view.ShowMessage(msg+"path de configuracion: " + config_path);
-                /* Borrar */
+                 Borrar */
 
                 //Actualizo la cuenta
                 invoice.UpdateAccount();
@@ -1064,8 +1064,11 @@ namespace Aprovi.Presenters
                     }
                 }
 
+                var periodicidad = invoice.Periodicidad;
+
                 //Agrego la factura
                 invoice = new VMFactura(_invoices.Add(invoice));
+                invoice.Periodicidad = periodicidad;
 
                 //Timbro la factura
                 invoice = new VMFactura(_invoices.Stamp(invoice, requiresAddenda));

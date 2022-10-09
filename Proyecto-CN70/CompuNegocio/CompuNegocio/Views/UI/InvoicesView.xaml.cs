@@ -389,7 +389,8 @@ namespace Aprovi.Views.UI
                     NotasDeDescuentoes = _discountNotes,
                     Total = txtTotalDocumento.Text.ToDecimalOrDefault(),
                     Abonado = txtTotalAbonado.Text.ToDecimalOrDefault(),
-                    Acreditado = txtTotalNotas.Text.ToDecimalOrDefault()
+                    Acreditado = txtTotalNotas.Text.ToDecimalOrDefault(),
+                    Periodicidad = _invoice.Periodicidad
                 };
             }
         }

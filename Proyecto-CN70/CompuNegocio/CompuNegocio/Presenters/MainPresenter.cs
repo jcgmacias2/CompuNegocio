@@ -731,8 +731,10 @@ namespace Aprovi.Presenters
                 IInvoiceBillsOfSaleView toInvoiceView;
                 InvoiceBillsOfSalePresenter toInvoicePresenter;
 
+                var periodicidad = viewSelectList.Periodicidad;
+
                 toInvoiceView = new InvoiceBillsOfSaleView();
-                toInvoicePresenter = new InvoiceBillsOfSalePresenter(toInvoiceView, _container.Resolve<ICatalogosEstaticosService>(), _container.Resolve<IConfiguracionService>(), _container.Resolve<IUsosCFDIService>(), _container.Resolve<IClienteService>(), _container.Resolve<IRemisionService>(), _container.Resolve<IFacturaService>(), _container.Resolve<IArticuloService>(), _container.Resolve<IAbonoDeFacturaService>(), _container.Resolve<IListaDePrecioService>(), _container.Resolve<ICuentaBancariaService>(), _container.Resolve<ICuentaPredialService>(), _container.Resolve<IEnvioDeCorreoService>(), _container.Resolve<ICotizacionService>(), _container.Resolve<IPedimentoService>(), _container.Resolve<IUsuarioService>(), _container.Resolve<ISeguridadService>(), _container.Resolve<IPagoService>(), _container.Resolve<INotaDeCreditoService>(), _container.Resolve<INotaDeDescuentoService>(), viewSelectList.SelectedBillsOfSale);
+                toInvoicePresenter = new InvoiceBillsOfSalePresenter(toInvoiceView, _container.Resolve<ICatalogosEstaticosService>(), _container.Resolve<IConfiguracionService>(), _container.Resolve<IUsosCFDIService>(), _container.Resolve<IClienteService>(), _container.Resolve<IRemisionService>(), _container.Resolve<IFacturaService>(), _container.Resolve<IArticuloService>(), _container.Resolve<IAbonoDeFacturaService>(), _container.Resolve<IListaDePrecioService>(), _container.Resolve<ICuentaBancariaService>(), _container.Resolve<ICuentaPredialService>(), _container.Resolve<IEnvioDeCorreoService>(), _container.Resolve<ICotizacionService>(), _container.Resolve<IPedimentoService>(), _container.Resolve<IUsuarioService>(), _container.Resolve<ISeguridadService>(), _container.Resolve<IPagoService>(), _container.Resolve<INotaDeCreditoService>(), _container.Resolve<INotaDeDescuentoService>(), viewSelectList.SelectedBillsOfSale, periodicidad);
 
                 toInvoiceView.ShowWindow();
             }
