@@ -27,7 +27,7 @@ namespace Aprovi.Business.ViewModels
             this.FormaDePago = maxAbono.isValid() ? string.Format("{0} {1}", maxAbono.FormasPago.codigo, maxAbono.FormasPago.descripcion) : "99 - Por definir";
             this.NumeroDeCuenta = maxAbono.isValid() && maxAbono.CuentasBancaria.isValid()? maxAbono.CuentasBancaria.numeroDeCuenta : string.Empty;
             this.MetodoDePago = string.Format("{0} {1}", factura.MetodosPago.codigo, factura.MetodosPago.descripcion);
-            this.RegimenFiscal = factura.Regimene.descripcion;
+            //this.RegimenFiscal = factura.Regimene.descripcion;
             this.ordenDeCompra = factura.ordenDeCompra;
             this.Vendedor = user.nombreDeUsuario;
             this.Moneda = factura.Moneda;
@@ -65,6 +65,7 @@ namespace Aprovi.Business.ViewModels
             this.EstadoEmisor = emisor.Domicilio.estado;
             this.PaisEmisor = emisor.Domicilio.Pais.descripcion;
             this.CodigoPostalEmisor = emisor.Domicilio.codigoPostal;
+            this.RegimenFiscal = emisor.Regimen;
 
             //Receptor
             this.RfcReceptor = factura.Cliente.rfc;
