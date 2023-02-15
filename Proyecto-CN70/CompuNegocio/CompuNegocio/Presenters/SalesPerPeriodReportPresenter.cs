@@ -92,8 +92,8 @@ namespace Aprovi.Presenters
                 view.Preview();
             }
             catch (Exception ex)
-            {
-                _view.ShowError(ex.Message);
+            {/* JCRV Para Probar, despues regresar a como estaba: ex.Message */
+                _view.ShowError(ex);
             }
         }
 

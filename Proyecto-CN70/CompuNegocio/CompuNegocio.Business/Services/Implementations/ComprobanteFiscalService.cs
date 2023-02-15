@@ -14,10 +14,12 @@ using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Web;
+using System.Windows;
 using System.Xml;
 using System.Xml.Linq;
 using System.Xml.Serialization;
 using System.Xml.Xsl;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Aprovi.Business.Services
 {
@@ -296,6 +298,8 @@ namespace Aprovi.Business.Services
             timbreRequest["params"] = timbreParams;
 
             content = Encoding.UTF8.GetBytes(string.Format("q={0}", HttpUtility.UrlEncode(JsonConvert.SerializeObject(timbreRequest))));
+
+            MessageBox.Show("Datos de cancelación que se mandan a itimbre: " + timbreRequest.ToString(), "Datos de Cancelacion", MessageBoxButton.OK, MessageBoxImage.Information);
 
             //La configuración me dice el ambiente en el que estoy trabajando
             if (config.Mode.Equals(Ambiente.Production))

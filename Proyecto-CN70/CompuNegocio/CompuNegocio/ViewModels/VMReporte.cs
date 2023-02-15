@@ -10,6 +10,9 @@ using Aprovi.Presenters;
 using Aprovi.Views.UI;
 using System.IO;
 
+using System.Windows;
+using MessageBox = System.Windows.MessageBox;
+
 namespace Aprovi.Application.ViewModels
 {
     public class VMReporte
@@ -28,6 +31,8 @@ namespace Aprovi.Application.ViewModels
             Datos = datos;
             Parametros = parametros;
             SubreportHandler = null;
+
+            MessageBox.Show("Validar que el archivo de reporte se encuentre en la siguiente ruta: "+ Archivo, "Aprovi", MessageBoxButton.OK, MessageBoxImage.Information);
         }
 
         public VMReporte(string archivo, string impresora, List<ReportDataSource> datos, List<ReportParameter> parametros, Action<object, SubreportProcessingEventArgs> subReportInit)

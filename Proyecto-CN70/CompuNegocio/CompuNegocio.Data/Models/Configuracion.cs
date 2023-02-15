@@ -1,7 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-
+using System.Windows;
+using MessageBox = System.Windows.MessageBox;
 
 namespace Aprovi.Data.Models
 {
@@ -30,8 +31,14 @@ namespace Aprovi.Data.Models
             this.idOpcionCostoDisminuye = config.idOpcionCostoDisminuye;
             this.idOpcionCostoAumenta = config.idOpcionCostoAumenta;
             this.FormatosPorConfiguracions = config.FormatosPorConfiguracions;
-            this.idPeriodicidad = config.Periodicidad.idPeriodicidad;
-            this.Periodicidad = config.Periodicidad;
+            try
+            {
+                this.idPeriodicidad = config.Periodicidad.idPeriodicidad;
+                this.Periodicidad = config.Periodicidad;
+            }
+            catch (Exception ex) {
+                MessageBox.Show("Configurar periodicidad en tabla de configuraciones.", "Aprovi", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         public Configuracion(Configuracione config, Estacione station, bool useScanner, string scannerCode, bool useDrawer) : base()
