@@ -147,6 +147,78 @@ namespace Aprovi.Business.Services
             }
         }
 
+        public XmlDocument Timbrar_v2(XmlDocument xmlComprobante, Configuracion config)
+        {
+            try
+            {
+                HttpWebRequest webRequest;
+                Stream requestWriter;
+                JObject timbreRequest;
+                JObject timbreParams;
+                JObject respuesta;
+                JObject result;
+                byte[] content;
+                string data;
+
+                result = null;
+
+                timbreParams = new JObject();
+                timbreParams["user"] = "compunegocio@aprovi.com.mx";
+                timbreParams["pass"] = "280e1317a494292c6300673d2bd92b26";
+                timbreParams["RFC"] = "DMC990521690";
+                timbreParams["xmldata"] = xmlComprobante.OuterXml;
+
+                timbreRequest = new JObject();
+                if (config.Mode.Equals(Ambiente.Production))
+                    timbreRequest["id"] = "101";
+                else
+                    timbreRequest["id"] = string.Format("Mario{0}{1}{2}", config.rfc, ((XmlElement)xmlComprobante.GetElementsByTagName("cfdi:Comprobante")[0]).Attributes["Serie"].Value, ((XmlElement)xmlComprobante.GetElementsByTagName("cfdi:Comprobante")[0]).Attributes["Folio"].Value);
+                
+                timbreRequest["method"] = "cfd2cfdi";
+                timbreRequest["params"] = timbreParams;
+
+                var jsonEncode = HttpUtility.UrlEncode(JsonConvert.SerializeObject(timbreRequest));
+                content = Encoding.UTF8.GetBytes(string.Format("q={0}", HttpUtility.UrlEncode(JsonConvert.SerializeObject(timbreRequest))));
+
+                //La configuración me dice el ambiente en el que estoy trabajando
+                if (config.Mode.Equals(Ambiente.Production))
+                    webRequest = (HttpWebRequest)WebRequest.Create("https://portalws.itimbre.com/itimbre.php");
+                else //Pruebas 4.0
+                    webRequest = (HttpWebRequest)WebRequest.Create("https://portalws.itimbre.com/itimbreprueba.php");
+
+                webRequest.Method = "POST";
+                webRequest.ContentType = "application/x-www-form-urlencoded";
+                webRequest.ContentLength = content.Length;
+
+                requestWriter = webRequest.GetRequestStream();
+                requestWriter.Write(content, 0, content.Length);
+                requestWriter.Close();
+
+                respuesta = JObject.Parse(new StreamReader(webRequest.GetResponse().GetResponseStream()).ReadToEnd());
+                result = (JObject)respuesta["result"];
+                switch (((string)result["retcode"]))
+                {
+                    case "1":
+                        data = (string)result["data"];
+                        break;
+                    case "307":
+                        data = RecuperarTimbre(xmlComprobante, config); //No le digo nada al usuario, solo lo recupero
+                        break;
+                    default:
+                        throw new Exception((string)result["error"]);
+                }
+
+                xmlComprobante.LoadXml(data);
+
+                return xmlComprobante;
+            }
+            catch (Exception)
+            {
+                xmlComprobante.Save(string.Format("{0}\\Error{1}-{2}-{3}.xml", _app.ReadSetting("Xml").ToString(), DateTime.Now.DayOfYear, DateTime.Now.Minute, DateTime.Now.Second));
+                throw;
+            }
+        }
+
         public string RecuperarTimbre(XmlDocument xmlComprobante, Configuracion config)
         {
             HttpWebRequest webRequest;
@@ -1271,7 +1343,7 @@ namespace Aprovi.Business.Services
                 else
                     comprobante.SetAttribute("FormaPago", "99");
                 comprobante.SetAttribute("NoCertificado", factura.noCertificado);
-                comprobante.SetAttribute("Certificado", config.Certificados.FirstOrDefault(c => c.numero.Equals(factura.noCertificado)).certificadoBase64);
+                comprobante.SetAttribute("Certificado", "");// config.Certificados.FirstOrDefault(c => c.numero.Equals(factura.noCertificado)).certificadoBase64);
                 if (factura.Cliente.condicionDePago.isValid())
                     comprobante.SetAttribute("CondicionesDePago", factura.Cliente.condicionDePago.Trim());
                 comprobante.SetAttribute("SubTotal", factura.Subtotal.ToDecimalString());

@@ -93,6 +93,7 @@ namespace Aprovi.Business.Services
         /// <param name="config">Configuración actual del emisor</param>
         /// <returns>Comprobante xml con timbre</returns>
         XmlDocument Timbrar(XmlDocument xmlComprobante, Configuracion config);
+        XmlDocument Timbrar_v2(XmlDocument xmlComprobante, Configuracion config);
 
         /// <summary>
         /// Recupera un timbre existente

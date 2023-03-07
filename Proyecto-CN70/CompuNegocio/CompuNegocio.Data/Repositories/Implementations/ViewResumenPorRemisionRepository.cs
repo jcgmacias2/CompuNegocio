@@ -59,7 +59,7 @@ namespace Aprovi.Data.Repositories
         {
             try
             {
-                return _dbSet.Where(r => r.idEstatusDeRemision.Equals((int)StatusDeRemision.Registrada)).ToList();
+                return _dbSet.Where(r => r.idEstatusDeRemision.Equals((int)StatusDeRemision.Registrada)).Take(100).ToList();
             }
             catch (Exception)
             {

@@ -82,6 +82,14 @@ namespace Aprovi.Business.Services
         {
             try
             {
+
+                if(invoice.Cliente.rfc == "XAXX010101000")
+                {
+                    if(invoice.Cliente.UsosCFDI.codigo != "S01")
+                    {
+                        throw new Exception("El uso del CFDI para publico en general debe de ser S01.");
+                    }
+                }
                 //Se obtiene la cotizacion de la que viene la factura
                 Cotizacione cotizacion = null;
                 List<Remisione> remisiones = null;
@@ -110,12 +118,15 @@ namespace Aprovi.Business.Services
 
                 //Antes de registrarla obtengo el numero de certificado que se utilizara para sellarla
                 invoice.noCertificado = config.Certificados.First(c => c.activo).numero;
+                //invoice.noCertificado = "";
 
                 //Obtengo la cadena original
-                invoice.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, config);
+                //invoice.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, config);
+                invoice.cadenaOriginal = "";
 
                 //Obtengo el sello de esa cadena
-                invoice.sello = _fiscalReceipts.GetSello(invoice.cadenaOriginal, config);
+                //invoice.sello = _fiscalReceipts.GetSello(invoice.cadenaOriginal, config);
+                invoice.sello = "";
 
                 //Le agrego estado
                 invoice.idEstatusDeFactura = (int)StatusDeFactura.Pendiente_de_timbrado;
@@ -209,18 +220,21 @@ namespace Aprovi.Business.Services
 
                 //Antes de registrarla obtengo el numero de certificado que se utilizara para sellarla por si se actualizó
                 invoice.noCertificado = config.Certificados.FirstOrDefault(c => c.activo).numero;
+                //invoice.noCertificado = "";
 
                 //Obtengo la cadena original
-                invoice.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, config);
+                //invoice.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, config);
+                invoice.cadenaOriginal = "";
 
                 //Obtengo el sello de esa cadena
-                invoice.sello = _fiscalReceipts.GetSello(invoice.cadenaOriginal, config);
+                //invoice.sello = _fiscalReceipts.GetSello(invoice.cadenaOriginal, config);
+                invoice.sello = "";
 
                 //Genero el xml
                 var xml = _fiscalReceipts.CreateCFDI(invoice, config, requiresAddenda);
 
                 //Timbro el xml
-                xml = _fiscalReceipts.Timbrar(xml, config);
+                xml = _fiscalReceipts.Timbrar_v2(xml, config);
 
                 //Si pudo timbrar entonces obtengo el registro original de la factura
                 _UOW.Reload();
