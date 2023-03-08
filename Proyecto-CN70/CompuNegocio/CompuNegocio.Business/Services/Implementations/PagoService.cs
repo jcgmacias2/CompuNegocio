@@ -157,16 +157,19 @@ namespace Aprovi.Business.Services
                 payment.TimbresDePago.noCertificado = config.Certificados.FirstOrDefault(c => c.activo).numero;
 
                 //Obtengo la cadena original
-                payment.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(payment, config);
+                //payment.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(payment, config);
+                payment.cadenaOriginal = "";
 
                 //Obtengo el sello de esa cadena
-                payment.TimbresDePago.sello = _fiscalReceipts.GetSello(payment.cadenaOriginal, config);
+                //payment.TimbresDePago.sello = _fiscalReceipts.GetSello(payment.cadenaOriginal, config);
+                payment.TimbresDePago.sello = "";
 
                 //Genero el xml
                 var xml = _fiscalReceipts.CreateCFDI(payment, config);
 
                 //Timbro el xml
-                xml = _fiscalReceipts.Timbrar(xml, config);
+                //xml = _fiscalReceipts.Timbrar(xml, config);
+                xml = _fiscalReceipts.Timbrar_v2(xml, config);
 
                 //Se guardan el sello y numero de certificado para agregarlos posteriormente
                 var cadena = payment.cadenaOriginal;

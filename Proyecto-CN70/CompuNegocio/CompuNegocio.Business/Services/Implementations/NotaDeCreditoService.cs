@@ -119,16 +119,19 @@ namespace Aprovi.Business.Services
                 creditNote.TimbresDeNotasDeCredito.noCertificado = config.Certificados.FirstOrDefault(c => c.activo).numero;
 
                 //Obtengo la cadena original
-                creditNote.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(creditNote, config);
+                //creditNote.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(creditNote, config);
+                creditNote.cadenaOriginal = "";
 
                 //Obtengo el sello de esa cadena
-                creditNote.TimbresDeNotasDeCredito.sello = _fiscalReceipts.GetSello(creditNote.cadenaOriginal, config);
+                //creditNote.TimbresDeNotasDeCredito.sello = _fiscalReceipts.GetSello(creditNote.cadenaOriginal, config);
+                creditNote.TimbresDeNotasDeCredito.sello = "";
 
                 //Genero el xml
                 var xml = _fiscalReceipts.CreateCFDI(creditNote, config);
 
                 //Timbro el xml
-                xml = _fiscalReceipts.Timbrar(xml, config);
+                //xml = _fiscalReceipts.Timbrar(xml, config);
+                xml = _fiscalReceipts.Timbrar_v2(xml, config);
 
                 //Si pudo timbrar entonces obtengo el registro original de la factura
                 _UOW.Reload();
