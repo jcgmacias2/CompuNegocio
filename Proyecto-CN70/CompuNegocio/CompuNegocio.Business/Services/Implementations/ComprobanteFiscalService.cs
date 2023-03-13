@@ -744,8 +744,8 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", (1.0m).ToDecimalString());
                 cadena.AppendFormat("{0}|", "ACT");
                 cadena.AppendFormat("{0}|", "Pago");
-                cadena.AppendFormat("{0}|", "0.0");
-                cadena.AppendFormat("{0}|", "0.0");
+                cadena.AppendFormat("{0}|", "0");
+                cadena.AppendFormat("{0}|", "0");
                 cadena.AppendFormat("{0}|", "01"); //ObjetoImp JCRV
 
                 //Complemento de pago
@@ -1722,8 +1722,8 @@ namespace Aprovi.Business.Services
                 nodoConcepto.SetAttribute("Cantidad", (1.0m).ToDecimalString());
                 nodoConcepto.SetAttribute("ClaveUnidad", "ACT");
                 nodoConcepto.SetAttribute("Descripcion", "Pago");
-                nodoConcepto.SetAttribute("ValorUnitario", (0.0m).ToStringRoundedCurrency(abono.Moneda));
-                nodoConcepto.SetAttribute("Importe", (0.0m).ToStringRoundedCurrency(abono.Moneda));
+                nodoConcepto.SetAttribute("ValorUnitario", "0");
+                nodoConcepto.SetAttribute("Importe", "0");
                 nodoConcepto.SetAttribute("ObjetoImp", "01"); //JCRV Validar dato
 
                 return nodoConceptos;
