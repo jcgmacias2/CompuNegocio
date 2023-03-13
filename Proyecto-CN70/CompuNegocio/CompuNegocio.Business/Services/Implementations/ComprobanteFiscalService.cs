@@ -640,7 +640,7 @@ namespace Aprovi.Business.Services
                 nodoComprobante.Attributes.Append(Schema(xmlDoc, false));
                 if (invoice.idComprobanteOriginal.isValid() || invoice.NotasDeCreditoes.Any(x => x.IsPreSaleCreditNote(invoice)))
                     CFDIRelacionados(xmlDoc, invoice).ForEach(x => nodoComprobante.AppendChild(x));
-                if (invoice.Periodicidad.EsFacturaGlobal)
+                if (invoice.Cliente.rfc == "XAXX010101000" && !invoice.Periodicidad.Equals(null) && invoice.Periodicidad.EsFacturaGlobal) //RVC Pendiente ver como manejar la factura global desde la pantalla de ventas/facturacion
                     nodoComprobante.AppendChild(CFDIInformacionGlobal(xmlDoc, invoice));
                 nodoComprobante.AppendChild(Emisor(xmlDoc, config));
                 nodoComprobante.AppendChild(Receptor(xmlDoc, invoice.Cliente, invoice.UsosCFDI, invoice.Cliente.Domicilio, invoice.Cliente.Regimene));
