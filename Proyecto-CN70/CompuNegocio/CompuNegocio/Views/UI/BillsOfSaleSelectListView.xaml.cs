@@ -197,7 +197,7 @@ namespace Aprovi.Views.UI
                 if (dpFechaIni.IsEnabled)
                 {
                     var fecha = dpFechaIni.SelectedDate.Value.Date;
-                    mes = fecha.Month.ToString();
+                    mes = fecha.Month.ToString("00");
                     year = fecha.Year.ToString();
                 }
                 
