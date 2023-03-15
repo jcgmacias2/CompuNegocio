@@ -163,9 +163,9 @@ namespace Aprovi.Business.Services
                 result = null;
 
                 timbreParams = new JObject();
-                timbreParams["user"] = "compunegocio@aprovi.com.mx";
-                timbreParams["pass"] = "280e1317a494292c6300673d2bd92b26";
-                timbreParams["RFC"] = "DMC990521690";
+                timbreParams["user"] = config.usuarioPAC;
+                timbreParams["pass"] = config.contraseñaPAC;
+                timbreParams["RFC"] = config.rfc;
                 timbreParams["xmldata"] = xmlComprobante.OuterXml;
 
                 timbreRequest = new JObject();
