@@ -16,5 +16,7 @@ namespace Aprovi.Data.Repositories
         List<Factura> ListBySeller(DateTime fechaInicio, DateTime fechaFin, Usuario user);
 
         List<Factura> WithFolioOrClientLike(string value, int? idEstatus);
+
+        Factura getFactura(int idFactura);
     }
 }

@@ -78,5 +78,17 @@ namespace Aprovi.Data.Repositories
                 throw;
             }
         }
+
+        public Factura getFactura(int idFactura)
+        {
+            try
+            {
+                return _dbSet.Where(a => a.idFactura == idFactura).FirstOrDefault();
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+        }
     }
 }

@@ -20,6 +20,7 @@ namespace Aprovi.Business.Services
         private IViewFoliosPorAbonosRepository _foliosPorAbonos;
         private ITimbresDeAbonosDeFacturaRepository _stamps;
         private IViewListaParcialidadesRepository _paymentsList;
+        
 
         public AbonoDeFacturaService(IUnitOfWork unitOfWork, IConfiguracionService config, IComprobantFiscaleService fiscalReceipts, ISerieService series)
         {
@@ -197,16 +198,24 @@ namespace Aprovi.Business.Services
                 payment.TimbresDeAbonosDeFactura.noCertificado = config.Certificados.FirstOrDefault(c => c.activo).numero;
 
                 //Obtengo la cadena original
-                payment.TimbresDeAbonosDeFactura.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, payment, config);
+                //payment.TimbresDeAbonosDeFactura.cadenaOriginal = _fiscalReceipts.GetCadenaOriginal(invoice, payment, config);
+                payment.TimbresDeAbonosDeFactura.cadenaOriginal = "";
 
                 //Obtengo el sello de esa cadena
-                payment.TimbresDeAbonosDeFactura.sello = _fiscalReceipts.GetSello(payment.TimbresDeAbonosDeFactura.cadenaOriginal, config);
+                //payment.TimbresDeAbonosDeFactura.sello = _fiscalReceipts.GetSello(payment.TimbresDeAbonosDeFactura.cadenaOriginal, config);
+                payment.TimbresDeAbonosDeFactura.sello = "";
 
                 //Genero el xml
+                if(invoice.TimbresDeFactura == null)
+                {
+                    throw new Exception("Se debe de Timbrar la factura primero, para poder continuar.");
+                }
+
                 var xml = _fiscalReceipts.CreateCFDI(invoice, payment, config);
 
                 //Timbro el xml
-                xml = _fiscalReceipts.Timbrar(xml, config);
+                //xml = _fiscalReceipts.Timbrar(xml, config);
+                xml = _fiscalReceipts.Timbrar_v2(xml, config);
 
                 //Si pudo timbrar entonces agrego el timbre al abono, ya que aún necesito generar el cbb
                 var stamp = _fiscalReceipts.GetTimbreAbono(xml);

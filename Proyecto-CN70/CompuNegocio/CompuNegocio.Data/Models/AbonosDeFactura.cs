@@ -36,5 +36,16 @@ namespace Aprovi.Data.Models
         public virtual Factura Factura { get; set; }
         public virtual Pago Pago { get; set; }
         public virtual CambioDivisa CambioDivisa { get; set; }
+
+    }
+
+    public class ImpuestosPago
+    {
+        public string tipo { get; set; }
+        public double basep { get; set; }
+        public string impuestop { get; set; }
+        public string factorp { get; set; }
+        public decimal tasaCuota { get; set; }
+        public double importep { get; set; }
     }
 }

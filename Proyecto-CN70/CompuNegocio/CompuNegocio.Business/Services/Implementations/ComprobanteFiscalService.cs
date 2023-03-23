@@ -31,6 +31,7 @@ namespace Aprovi.Business.Services
         private IDirectorioRepository _directorio;
         private ISeccionesRepository _secciones;
         private IImpuestoPorFacturaRepository _impuestoPorFactura;
+        private IFacturasRepository _invoices;
 
         public ComprobanteFiscalService(IUnitOfWork unitOfWork)
         {
@@ -40,6 +41,7 @@ namespace Aprovi.Business.Services
             _directorio = _UOW.Directorio;
             _secciones = _UOW.Secciones;
             _impuestoPorFactura = _UOW.ImpuestoPorFactura;
+            _invoices = _UOW.Facturas;
         }
 
         #region Generales
@@ -1840,6 +1842,7 @@ namespace Aprovi.Business.Services
                 XmlElement nodoPago = xml.CreateElement("pago20", "Pago", "http://www.sat.gob.mx/Pagos20");
                 XmlElement nodoDoctoRelacionado = xml.CreateElement("pago20", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos20");
                 XmlElement nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
+                XmlElement impuestosP = xml.CreateElement("pago20", "ImpuestosP", "http://www.sat.gob.mx/Pagos20");
 
                 var totales = abono.monto.ToRoundedCurrency(abono.Moneda);//JCRV Totales
                 nodoPagoTotales.SetAttribute("MontoTotalPagos", totales.ToDecimalString());
@@ -1892,7 +1895,7 @@ namespace Aprovi.Business.Services
                 var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
                 nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", impuestos.Count > 0 ? "02" : "01"); //ObjetoImpDR JCRV validar que valor poner*****************
 
-                var retenciones = facturaOriginal.Impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Retenido)).ToList(); //JCRV  Obtencion de Retenciones
+                List<ImpuestosPago> impuestop = new List<ImpuestosPago>();
 
                 if (impuestos.Count > 0)
                 {
@@ -1905,9 +1908,12 @@ namespace Aprovi.Business.Services
                     trasladosDR = xml.CreateElement("pago20", "TrasladosDR", "http://www.sat.gob.mx/Pagos20");
                     nodoImpuestosDR.AppendChild(trasladosDR);
 
+                    //var traslados = concepto.Impuestos.Where(i => i.idTipoDeImpuesto.Equals((int)TipoDeImpuesto.Trasladado));
+
                     foreach (var traslado in impuestos)
                     {
                         XmlElement trasladoDR;
+
                         var base_imp = abonoParcial / (1 + traslado.valorTasaOCuaota);
 
                         trasladoDR = xml.CreateElement("pago20", "TrasladoDR", "http://www.sat.gob.mx/Pagos20");
@@ -1918,7 +1924,77 @@ namespace Aprovi.Business.Services
                         trasladoDR.SetAttribute("ImpuestoDR", traslado.codigoImpuesto);
                         trasladoDR.SetAttribute("TasaOCuotaDR", Math.Abs(traslado.valorTasaOCuaota).ToTdCFDI_Importe());
                         trasladoDR.SetAttribute("TipoFactorDR", traslado.codigoTipoFactor);
+
+                        bool existe = (from i in impuestop where i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor select i).Count() > 0;
+
+                        if (existe)
+                        {
+                            impuestop.Where(i => i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor).ToList().ForEach(i => i.basep += base_imp.ToDouble());
+                            impuestop.Where(i => i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor).ToList().ForEach(i => i.importep += (base_imp * traslado.valorTasaOCuaota).ToDouble());
+                        }
+                        else
+                        {
+                            impuestop.Add(new ImpuestosPago
+                            {
+                                basep = base_imp.ToDouble(),
+                                factorp = traslado.codigoTipoFactor,
+                                importep = (base_imp * traslado.valorTasaOCuaota).ToDouble(),
+                                impuestop = traslado.codigoImpuesto,
+                                tasaCuota = Math.Abs(traslado.valorTasaOCuaota),
+                                tipo = "Traslado",
+                            });
+                        }
                     }
+
+                    if (impuestop.Count > 0)
+                    {
+                        XmlElement trasladosP;
+
+                        impuestosP = xml.CreateElement("pago20", "ImpuestosP", "http://www.sat.gob.mx/Pagos20");
+                        trasladosP = xml.CreateElement("pago20", "TrasladosP", "http://www.sat.gob.mx/Pagos20");
+
+
+                        nodoPago.AppendChild(impuestosP);
+                        impuestosP.AppendChild(trasladosP);
+
+
+                        foreach (var traslado in impuestop)
+                        {
+                            XmlElement trasladoP;
+                            trasladoP = xml.CreateElement("pago20", "TrasladoP", "http://www.sat.gob.mx/Pagos20");
+                            trasladosP.AppendChild(trasladoP);
+
+                            trasladoP.SetAttribute("BaseP", traslado.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            trasladoP.SetAttribute("ImpuestoP", traslado.impuestop);
+                            trasladoP.SetAttribute("TipoFactorP", traslado.factorp);
+                            trasladoP.SetAttribute("TasaOCuotaP", traslado.tasaCuota.ToDecimal().ToTdCFDI_Importe());
+                            trasladoP.SetAttribute("ImporteP", traslado.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                        }
+
+                        foreach (var tasa in impuestop)
+                        {
+                            if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.000000" && tasa.impuestop == "002")
+                            {
+                                nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA0", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA0", "0");
+                            }
+                            else if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.080000" && tasa.impuestop == "002")
+                            {
+                                nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA8", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA8", tasa.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            }
+                            else if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.160000" && tasa.impuestop == "002")
+                            {
+                                nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA16", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA16", tasa.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            }
+                            else if (tasa.factorp == "Exento")
+                            {
+                                nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVAExento", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            }
+                        }
+                    }
+
                 }
 
                 return nodoComplemento;
@@ -1940,6 +2016,7 @@ namespace Aprovi.Business.Services
                 XmlElement nodoPago;
                 XmlElement nodoPagoTotales;
                 XmlElement nodoDoctoRelacionado;
+                XmlElement impuestosP;
 
                 nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
                 var totales = payment.AbonosDeFacturas.Sum(p => p.monto.ToRoundedCurrency(p.Moneda));//JCRV Totales
@@ -1948,7 +2025,9 @@ namespace Aprovi.Business.Services
 
                 foreach (var abono in payment.AbonosDeFacturas)
                 {
-                    var facturaOriginal = new VMFactura(abono.Factura);
+                    //var facturaOriginal = new VMFactura(abono.Factura);
+                    var f = _invoices.getFactura(abono.idFactura);
+                    var facturaOriginal = new VMFactura(f);// new VMFactura(abono.idFactura);
 
                     nodoPago = xml.CreateElement("pago20", "Pago", "http://www.sat.gob.mx/Pagos20");
                     nodoDoctoRelacionado = xml.CreateElement("pago20", "DoctoRelacionado", "http://www.sat.gob.mx/Pagos20");
@@ -1991,6 +2070,8 @@ namespace Aprovi.Business.Services
                     var impuestos = facturaOriginal.ImpuestoPorFacturas.ToList();
                     nodoDoctoRelacionado.SetAttribute("ObjetoImpDR", impuestos.Count > 0 ? "02" : "01"); //ObjetoImpDR JCRV*****************
 
+                    List<ImpuestosPago> impuestop = new List<ImpuestosPago>();
+
                     if (impuestos.Count > 0)
                     {
                         XmlElement nodoImpuestosDR;
@@ -2015,8 +2096,78 @@ namespace Aprovi.Business.Services
                             trasladoDR.SetAttribute("ImpuestoDR", traslado.codigoImpuesto);
                             trasladoDR.SetAttribute("TasaOCuotaDR", Math.Abs(traslado.valorTasaOCuaota).ToTdCFDI_Importe());
                             trasladoDR.SetAttribute("TipoFactorDR", traslado.codigoTipoFactor);
+
+
+                            bool existe = (from i in impuestop where i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor select i).Count() > 0;
+
+                            if (existe)
+                            {
+                                impuestop.Where(i => i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor).ToList().ForEach(i => i.basep += base_imp.ToDouble());
+                                impuestop.Where(i => i.impuestop == traslado.codigoImpuesto && i.factorp == traslado.codigoTipoFactor).ToList().ForEach(i => i.importep += (base_imp * traslado.valorTasaOCuaota).ToDouble());
+                            }
+                            else
+                            {
+                                impuestop.Add(new ImpuestosPago
+                                {
+                                    basep = base_imp.ToDouble(),
+                                    factorp = traslado.codigoTipoFactor,
+                                    importep = (base_imp * traslado.valorTasaOCuaota).ToDouble(),
+                                    impuestop = traslado.codigoImpuesto,
+                                    tasaCuota = Math.Abs(traslado.valorTasaOCuaota),
+                                    tipo = "Traslado",
+                                });
+                            }
                         }
 
+                        if(impuestop.Count > 0)
+                        {
+                            XmlElement trasladosP;
+
+                            impuestosP = xml.CreateElement("pago20", "ImpuestosP", "http://www.sat.gob.mx/Pagos20");
+                            trasladosP = xml.CreateElement("pago20", "TrasladosP", "http://www.sat.gob.mx/Pagos20");
+                            
+
+                            nodoPago.AppendChild(impuestosP);
+                            impuestosP.AppendChild(trasladosP);
+                            
+
+                            foreach(var traslado in impuestop)
+                            {
+                                XmlElement trasladoP;
+                                trasladoP = xml.CreateElement("pago20", "TrasladoP", "http://www.sat.gob.mx/Pagos20");
+                                trasladosP.AppendChild(trasladoP);
+
+                                trasladoP.SetAttribute("BaseP", traslado.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                trasladoP.SetAttribute("ImpuestoP", traslado.impuestop);
+                                trasladoP.SetAttribute("TipoFactorP", traslado.factorp);
+                                trasladoP.SetAttribute("TasaOCuotaP", traslado.tasaCuota.ToDecimal().ToTdCFDI_Importe());
+                                trasladoP.SetAttribute("ImporteP", traslado.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                            }
+
+                            //var x = impuestop.Where(i => i.impuestop == "002").Select(i => i.tasaCuota).ToList();
+                            foreach (var tasa in impuestop)
+                            {
+                                if(tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.000000" && tasa.impuestop == "002")
+                                {
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA0", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA0", "0");
+                                }
+                                else if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.080000" && tasa.impuestop == "002")
+                                {
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA8", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA8", tasa.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                }
+                                else if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.160000" && tasa.impuestop == "002")
+                                {
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVA16", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosImpuestoIVA16", tasa.importep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                }
+                                else if(tasa.factorp == "Exento")
+                                {
+                                    nodoPagoTotales.SetAttribute("TotalTrasladosBaseIVAExento", tasa.basep.ToDecimal().ToStringRoundedCurrency(facturaOriginal.Moneda));
+                                }
+                            }
+                        }
                     }
 
                 }
@@ -2117,7 +2268,6 @@ namespace Aprovi.Business.Services
                     retenciones.AppendChild(retencion);
                     retencion.SetAttribute("Impuesto", imp.codigo);
                     retencion.SetAttribute("Importe", imp.Importe.ToStringRoundedCurrency(moneda));
-
                 }
                 return retenciones;
             }
