@@ -1566,7 +1566,15 @@ namespace Aprovi.Business.Services
                     receptor.SetAttribute("ResidenciaFiscal", cliente.Domicilio.Pais.codigo);
                 receptor.SetAttribute("UsoCFDI", uso.codigo);
                 receptor.SetAttribute("DomicilioFiscalReceptor", domicilio.codigoPostal);
-                receptor.SetAttribute("RegimenFiscalReceptor", regimene.codigo);
+
+                if (regimene != null && regimene.codigo != null)
+                {
+                    receptor.SetAttribute("RegimenFiscalReceptor", regimene.codigo);
+                }
+                else
+                {
+                    throw new Exception("El cliente no tiene configurado un regimen fiscal.");
+                }
                 return receptor;
             }
             catch (Exception)
