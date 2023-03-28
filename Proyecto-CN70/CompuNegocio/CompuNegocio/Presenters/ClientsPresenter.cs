@@ -257,6 +257,7 @@ namespace Aprovi.Presenters
 
                 //Se usa la llave primaria
                 client.Usuario = null;
+                client.comentario = ""; //En la tabla de clientes se indica que el campo comentario es obligatorio. JCRV 27/03/23
                 
                 _clients.Add(client);
                 _view.ShowMessage(string.Format("El cliente {0} ha sido agregado exitosamente", client.nombreComercial));
