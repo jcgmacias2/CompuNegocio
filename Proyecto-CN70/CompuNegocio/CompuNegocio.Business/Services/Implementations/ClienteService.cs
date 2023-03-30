@@ -118,6 +118,7 @@ namespace Aprovi.Business.Services
                 local.diasCredito = client.diasCredito;
                 local.idUsoCFDI = client.idUsoCFDI.isValid() ? client.idUsoCFDI : (int?)null;
                 local.idRegimen = (int)(client.idRegimen.isValid() ? client.idRegimen : (int?)null);
+                local.comentario = "";
 
                 _clients.Update(local);
                 _UOW.Save();
