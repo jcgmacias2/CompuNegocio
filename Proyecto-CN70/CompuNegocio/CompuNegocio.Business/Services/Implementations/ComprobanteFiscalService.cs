@@ -764,10 +764,19 @@ namespace Aprovi.Business.Services
                 cadena.AppendFormat("{0}|", payment.fechaHora.ToUTCFormat()); //FechaPago
                 cadena.AppendFormat("{0}|", payment.FormasPago.codigo); //FormaPagoP
                 cadena.AppendFormat("{0}|", payment.Moneda.codigo); //MonedaP
+                /*
                 if (!payment.idMoneda.Equals((int)Monedas.Pesos)) // tipoCambio
                     cadena.AppendFormat("{0}|", payment.tipoDeCambio.ToDecimalString()); //TipoCambioP
                 else
                     cadena.AppendFormat("{0}|", "1"); //TipoCambioP
+                */
+
+                /* JCRV 07/04/23 Se solicito que se pusiera 1 cuando fuera pago en dolares */
+                if (payment.idMoneda.Equals((int)Monedas.Pesos) || payment.idMoneda.Equals((int)Monedas.Dólares)) //Si no es pesos se incluye
+                    cadena.AppendFormat("{0}|", "1");
+                else
+                    cadena.AppendFormat("{0}|", payment.tipoDeCambio.ToDecimalString());
+
                 cadena.AppendFormat("{0}|", payment.monto.ToDecimalString()); //Monto
                 cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                 cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
@@ -882,10 +891,19 @@ namespace Aprovi.Business.Services
                     cadena.AppendFormat("{0}|", p.FormasPago.codigo); //FormaPago
                     cadena.AppendFormat("{0}|", p.Moneda.codigo); //MonedaPago
                     //Aqui se debe agregar el tipo de cambio si es que aplica
+                    /*
                     if (p.idMoneda != (int)Monedas.Pesos)
                         cadena.AppendFormat("{0}|", p.tipoDeCambio); //TipoCambioP
                     else
                         cadena.AppendFormat("{0}|", "1"); //TipoCambioP
+                    */
+
+                    /* JCRV 07/04/23 Se solicito que se pusiera 1 cuando fuera pago en dolares */
+                    if (p.idMoneda == (int)Monedas.Pesos || p.idMoneda == (int)Monedas.Dólares)
+                        cadena.AppendFormat("{0}|", "1"); //TipoCambioP
+                    else
+                        cadena.AppendFormat("{0}|", p.tipoDeCambio); //TipoCambioP
+
                     cadena.AppendFormat("{0}|", p.monto.ToDecimalString()); //Monto
                     cadena.AppendFormat("{0}|", invoice.TimbresDeFactura.UUID); //idDocumentoRelacionado
                     cadena.AppendFormat("{0}|", invoice.serie); //SerieDocumentoRelacionado
@@ -1870,10 +1888,19 @@ namespace Aprovi.Business.Services
                 nodoPago.SetAttribute("FechaPago", abono.fechaHora.ToUTCFormat());
                 nodoPago.SetAttribute("FormaDePagoP", abono.FormasPago.codigo);
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
+                /*
                 if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                     nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
                 else
                     nodoPago.SetAttribute("TipoCambioP", "1");
+                */
+
+                /* JCRV 07/04/23 Se solicito que se pusiera 1 cuando fuera pago en dolares */
+                if (abono.idMoneda.Equals((int)Monedas.Pesos) || abono.idMoneda.Equals((int)Monedas.Dólares)) //Si no es pesos se incluye
+                    nodoPago.SetAttribute("TipoCambioP", "1");
+                else
+                    nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
+
                 nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                 nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                 nodoPago.AppendChild(nodoDoctoRelacionado);
@@ -2052,10 +2079,19 @@ namespace Aprovi.Business.Services
                     nodoPago.SetAttribute("FechaPago", abono.fechaHora.ToUTCFormat());
                     nodoPago.SetAttribute("FormaDePagoP", abono.FormasPago.codigo);
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
+                    /*
                     if (!abono.idMoneda.Equals((int)Monedas.Pesos)) //Si no es pesos se incluye
                         nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
                     else
                         nodoPago.SetAttribute("TipoCambioP", "1");
+                    */
+
+                    /* JCRV 07/04/23 Se solicito que se pusiera 1 cuando fuera pago en dolares */
+                    if (abono.idMoneda.Equals((int)Monedas.Pesos) || abono.idMoneda.Equals((int)Monedas.Dólares)) //Si no es pesos se incluye
+                        nodoPago.SetAttribute("TipoCambioP", "1");
+                    else
+                        nodoPago.SetAttribute("TipoCambioP", abono.tipoDeCambio.ToDecimalString());
+
                     nodoPago.SetAttribute("Monto", abono.monto.ToDecimalString());
                     nodoPago.SetAttribute("MonedaP", abono.Moneda.codigo);
                     nodoPago.AppendChild(nodoDoctoRelacionado);
