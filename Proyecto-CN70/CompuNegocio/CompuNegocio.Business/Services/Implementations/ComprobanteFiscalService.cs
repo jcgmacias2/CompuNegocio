@@ -1875,7 +1875,7 @@ namespace Aprovi.Business.Services
                 XmlElement nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
                 XmlElement impuestosP = xml.CreateElement("pago20", "ImpuestosP", "http://www.sat.gob.mx/Pagos20");
 
-                var totales = abono.monto.ToRoundedCurrency(abono.Moneda);//JCRV Totales
+                var totales = (abono.monto*abono.tipoDeCambio).ToRoundedCurrency(abono.Moneda);//JCRV Totales //26/04/2023 se multiplica el monto del pago por el tipo de cambio
                 nodoPagoTotales.SetAttribute("MontoTotalPagos", totales.ToDecimalString());
                 nodoPagos.AppendChild(nodoPagoTotales);
 
@@ -2059,7 +2059,7 @@ namespace Aprovi.Business.Services
                 XmlElement impuestosP;
 
                 nodoPagoTotales = xml.CreateElement("pago20", "Totales", "http://www.sat.gob.mx/Pagos20");
-                var totales = payment.AbonosDeFacturas.Sum(p => p.monto.ToRoundedCurrency(p.Moneda));//JCRV Totales
+                var totales = payment.AbonosDeFacturas.Sum(p => (p.monto*p.tipoDeCambio).ToRoundedCurrency(p.Moneda));//JCRV Totales
                 nodoPagoTotales.SetAttribute("MontoTotalPagos", totales.ToDecimalString() /*ToStringRoundedCurrency(payment.AbonosDeFacturas.First().Moneda)*/);//JCRV
                 nodoPagos.AppendChild(nodoPagoTotales);
 
