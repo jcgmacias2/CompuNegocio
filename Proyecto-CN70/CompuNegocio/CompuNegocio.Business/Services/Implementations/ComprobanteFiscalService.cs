@@ -2308,6 +2308,11 @@ namespace Aprovi.Business.Services
                                         importep_ += Convert.ToDecimal(tasa.importep);
                                     }
                                 }
+                                else
+                                {
+                                    basep_ += Convert.ToDecimal(tasa.basep);
+                                    importep_ += Convert.ToDecimal(tasa.importep);
+                                }
 
 
                                 if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.000000" && tasa.impuestop == "002")
