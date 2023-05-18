@@ -36,7 +36,16 @@ namespace Aprovi.Business.ViewModels
             IdMoneda = abono.idMoneda;
 
             var invoice = new VMFactura(abono.Factura);
-            var abonoParcial = abono.monto;
+
+            if (invoice.Moneda.codigo != abono.Moneda.codigo)
+            {
+                if (invoice.Moneda.codigo == "MXN" && abono.Moneda.codigo == "USD")
+                    invoice.Abonado = (invoice.Abonado * abono.tipoDeCambio);
+                else if (invoice.Moneda.codigo == "USD" && abono.Moneda.codigo == "MXN")
+                    invoice.Abonado = ((invoice.Abonado * invoice.tipoDeCambio) / abono.tipoDeCambio);
+            }
+
+            var abonoParcial = abono.monto.ToDocumentCurrency(abono.Moneda, invoice.Moneda, abono.tipoDeCambio); ;
             SaldoAnterior = (invoice.Total - invoice.Abonado + abonoParcial - invoice.Acreditado).ToDocumentCurrency(abono.Factura.Moneda,abono.Moneda,abono.tipoDeCambio); 
             SaldoPagado = abono.monto;
             SaldoPendiente = (invoice.Total - invoice.Abonado - invoice.Acreditado).ToDocumentCurrency(abono.Factura.Moneda,abono.Moneda, abono.tipoDeCambio);

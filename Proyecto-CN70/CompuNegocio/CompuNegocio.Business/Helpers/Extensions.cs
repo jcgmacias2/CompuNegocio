@@ -22,21 +22,31 @@ namespace Aprovi
         /// <param name="documentCurrency">Moneda en que esta registrado el documento</param>
         /// <param name="documentExchangeRate">Tipo de cambio del documento</param>
         /// <returns></returns>
-        public static decimal ToDocumentCurrency(this decimal amount, Moneda amountCurrency, Moneda documentCurrency, decimal documentExchangeRate)
+        public static decimal ToDocumentCurrency(this decimal amount, Moneda amountCurrency, Moneda documentCurrency, decimal documentExchangeRate, bool redondea = true)
         {
             try
             {
                 //Si son iguales la cantidad es la misma
+                /*
                 if (documentCurrency.idMoneda.Equals(amountCurrency.idMoneda))
                     return amount;
 
                 //Si el documento esta en Pesos, cambio los dolares a pesos
-                if (documentCurrency.idMoneda.Equals((int)Monedas.Pesos))
+                if (documentCurrency.idMoneda.Equals((int)Monedas.Pesos) || amountCurrency.idMoneda.Equals((int)Monedas.Pesos))
                     return amount * documentExchangeRate;
 
                 //Si el documento esta en Dolares, cambios los pesos a dolares
                 if (documentCurrency.idMoneda.Equals((int)Monedas.Dólares))
                     return amount / documentExchangeRate;
+                */
+
+                if (documentCurrency.idMoneda != amountCurrency.idMoneda)
+                {
+                    if (documentCurrency.idMoneda.Equals((int)Monedas.Pesos) && amountCurrency.idMoneda.Equals((int)Monedas.Dólares))
+                        return redondea ? Math.Round(amount * documentExchangeRate, 2, MidpointRounding.AwayFromZero) : (amount * documentExchangeRate);
+                    else if (documentCurrency.idMoneda.Equals((int)Monedas.Dólares) && amountCurrency.idMoneda.Equals((int)Monedas.Pesos))
+                        return redondea ? Math.Round(amount / documentExchangeRate, 2, MidpointRounding.AwayFromZero) : (amount / documentExchangeRate);
+                }
 
                 //Si se anexa otra moneda podría darse el caso de que ningún if se cumpla, para ese caso y por el momento regreso la misma cantidad
                 return amount;
@@ -417,7 +427,7 @@ namespace Aprovi
 
                 //Calculo lo abonado (ignoro los cancelados)
                 var x = invoice.AbonosDeFacturas.Where(a => a.idEstatusDeAbono.Equals((int)StatusDeAbono.Registrado));
-                invoice.Abonado = Math.Round(x.Sum(a => a.monto.ToDocumentCurrency(a.Moneda, invoice.Moneda, invoice.tipoDeCambio)),2,MidpointRounding.AwayFromZero);
+                invoice.Abonado = x.Sum(a => a.monto.ToDocumentCurrency(a.Moneda, invoice.Moneda, invoice.tipoDeCambio, false));
                 //invoice.Abonado = invoice.AbonosDeFacturas.Where(a => a.idEstatusDeAbono.Equals((int)StatusDeAbono.Registrado)).Sum(a => a.monto.ToDocumentCurrency(a.Moneda, invoice.Moneda, invoice.tipoDeCambio));
 
                 return invoice;
