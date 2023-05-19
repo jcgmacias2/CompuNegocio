@@ -2066,6 +2066,19 @@ namespace Aprovi.Business.Services
                                     importep_ += Convert.ToDecimal(tasa.importep);
                                 }
                             }
+                            else
+                            {
+                                if (abono.Moneda.codigo == "USD")
+                                {
+                                    basep_ += (Convert.ToDecimal(tasa.basep) * abono.tipoDeCambio);
+                                    importep_ += (Convert.ToDecimal(tasa.importep) * abono.tipoDeCambio);
+                                }
+                                else
+                                {
+                                    basep_ += Convert.ToDecimal(tasa.basep);
+                                    importep_ += Convert.ToDecimal(tasa.importep);
+                                }
+                            }
 
                             if (tasa.tasaCuota.ToDecimal().ToTdCFDI_Importe() == "0.000000" && tasa.impuestop == "002")
                             {
@@ -2310,8 +2323,16 @@ namespace Aprovi.Business.Services
                                 }
                                 else
                                 {
-                                    basep_ += Convert.ToDecimal(tasa.basep);
-                                    importep_ += Convert.ToDecimal(tasa.importep);
+                                    if (abono.Moneda.codigo == "USD")
+                                    {
+                                        basep_ += (Convert.ToDecimal(tasa.basep) * abono.tipoDeCambio);
+                                        importep_ += (Convert.ToDecimal(tasa.importep) * abono.tipoDeCambio);
+                                    }
+                                    else
+                                    {
+                                        basep_ += Convert.ToDecimal(tasa.basep);
+                                        importep_ += Convert.ToDecimal(tasa.importep);
+                                    }
                                 }
 
 
